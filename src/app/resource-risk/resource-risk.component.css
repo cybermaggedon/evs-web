@@ -1,0 +1,72 @@
+.resources {
+    list-style-type: none;
+}
+
+.resources li {
+    margin: 0.4em;
+}
+
+.resource {
+    display: flex;
+    margin: 0;
+}
+
+.resource a {
+    text-decoration: none;
+}
+
+.score {
+    border: 1px solid black;
+    margin: 0;
+    background-color: #405060;
+    color: white;
+    padding: 0.6em;
+    border-radius: 4px 0 0 4px;
+}
+
+.name {
+    border: 1px solid #999;
+    background-color: #eee;
+    margin: 0;
+    padding: 0.6em;
+    color: #405060;
+    width: 20em;
+    height: 1.4em;
+    overflow: hidden;
+}
+
+.risks {
+    margin: 0;
+    padding: 0;
+    width: 525px;
+    display: flex;
+}
+
+.risks .category {
+    border: 1px solid blue;
+    white-space: nowrap;
+    background-color: blue;
+    height: 1.4em;
+    padding: 0.6em;
+    color: white;
+    overflow: hidden;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-color: white;
+    display: flex;
+}
+
+.resources a:hover {
+  color:  #ffffff;
+}
+
+.resources li:hover .name {
+  color: #6080a0;
+  background-color: #ccc;
+}
+
+.resources li:hover .score {
+  color: #6080a0;
+  background-color: #ccc;
+  border: 1px solid #888;
+}

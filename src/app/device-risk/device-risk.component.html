@@ -1,0 +1,27 @@
+<div>
+  <h2>High-risk devices</h2>
+  <div *ngIf="windowed.length == 0">
+    <i>No devices.</i>
+  </div>
+  <ul class="devices">
+    <li *ngFor="let device of windowed.slice(0, maxItems)">
+      <div class="device">
+        <a class="score" [routerLink]="['/device', device.device]">
+	  {{device.getRiskScore().toFixed(2)}}
+	</a>
+        <a class="name" [routerLink]="['/device', device.device]">
+	  {{device.device}}
+	</a>
+        <div class="risks">
+          <div *ngFor="let risk of device.risks">
+            <a class="category"
+	       [routerLink]="['/category', risk.category]"
+	       style="width: {{risk.risk * 300}}px; background-color: {{risk.colourName()}}; border: 1px solid {{risk.colourName()}};">
+	      {{risk.category}}
+	    </a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

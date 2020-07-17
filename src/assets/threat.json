@@ -1,0 +1,4013 @@
+[
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "",
+    "properties": {
+      "count": 26,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "",
+    "destination": "",
+    "directed": true,
+    "properties": {
+      "count": 13,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "10.0.2.15",
+    "properties": {
+      "count": 3173,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "10.0.2.2",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "151.80.124.104",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "162.159.200.123",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "192.179.1.72",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "192.179.1.73",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "204.44.192.24",
+    "directed": true,
+    "properties": {
+      "count": 27,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "209.132.190.2",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.233.251",
+    "directed": true,
+    "properties": {
+      "count": 50,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.233.253",
+    "directed": true,
+    "properties": {
+      "count": 10,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.233.254",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.237.251",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.237.253",
+    "directed": true,
+    "properties": {
+      "count": 20,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.237.254",
+    "directed": true,
+    "properties": {
+      "count": 10,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.244.56",
+    "directed": true,
+    "properties": {
+      "count": 36,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.244.57",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "212.58.249.145",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "8.8.8.8",
+    "directed": true,
+    "properties": {
+      "count": 118,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "88.150.161.54",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "10.0.2.15",
+    "destination": "88.99.86.9",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "HDRedirect-LB5-1afb6e2973825a56.elb.us-east-1.amazonaws.com",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "uses",
+    "source": "10.0.2.15",
+    "destination": "Wget/1.20.3 (linux-gnu)",
+    "directed": true,
+    "properties": {
+      "count": 47,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "dns.tunnel.ru",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "fedoraproject.org",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "requests",
+    "source": "10.0.2.15",
+    "destination": "fedoraproject.org",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "malware.org",
+    "directed": true,
+    "properties": {
+      "count": 14,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "news.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "requests",
+    "source": "10.0.2.15",
+    "destination": "news.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 15,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "requests",
+    "source": "10.0.2.15",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.google.com",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.hackers.ru",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.malware.com",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.malware.com.localdomain",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 9,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "requests",
+    "source": "10.0.2.15",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.phreaker.org",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.siamhost.com",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.tunnel.ru",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsquery",
+    "source": "10.0.2.15",
+    "destination": "www.twistedcheese.com",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "10.0.2.2",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "151.80.124.104",
+    "properties": {
+      "count": 14,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "151.80.124.104",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "162.159.200.123",
+    "properties": {
+      "count": 14,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "162.159.200.123",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "192.179.1.72",
+    "properties": {
+      "count": 7,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "192.179.1.73",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "204.44.192.24",
+    "properties": {
+      "count": 85,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "204.44.192.24",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 58,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "204.44.192.24",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "209.132.190.2",
+    "properties": {
+      "count": 6,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "209.132.190.2",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "209.132.190.2",
+    "destination": "fedoraproject.org",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.233.251",
+    "properties": {
+      "count": 895,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.233.251",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 845,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.233.251",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 10,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.233.253",
+    "properties": {
+      "count": 179,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.233.253",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 169,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.233.253",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.233.254",
+    "properties": {
+      "count": 537,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.233.254",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 507,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.233.254",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.237.251",
+    "properties": {
+      "count": 537,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.237.251",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 507,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.237.251",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.237.253",
+    "properties": {
+      "count": 358,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.237.253",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 338,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.237.253",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.237.254",
+    "properties": {
+      "count": 179,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.237.254",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 169,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.237.254",
+    "destination": "www.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.244.56",
+    "properties": {
+      "count": 72,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.244.56",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 36,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.244.56",
+    "destination": "news.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 12,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.244.57",
+    "properties": {
+      "count": 6,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.244.57",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.244.57",
+    "destination": "news.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "212.58.249.145",
+    "properties": {
+      "count": 12,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "212.58.249.145",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "serves",
+    "source": "212.58.249.145",
+    "destination": "news.bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "8.8.8.8",
+    "properties": {
+      "count": 236,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "8.8.8.8",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 118,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "88.150.161.54",
+    "properties": {
+      "count": 14,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "88.150.161.54",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "ip",
+    "vertex": "88.99.86.9",
+    "properties": {
+      "count": 14,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "ipflow",
+    "source": "88.99.86.9",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "HDRedirect-LB5-1afb6e2973825a56.elb.us-east-1.amazonaws.com",
+    "properties": {
+      "count": 6,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "HDRedirect-LB5-1afb6e2973825a56.elb.us-east-1.amazonaws.com",
+    "destination": "23.20.239.12",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "HDRedirect-LB5-1afb6e2973825a56.elb.us-east-1.amazonaws.com",
+    "destination": "amazonaws.com",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "useragent",
+    "vertex": "Wget/1.20.3 (linux-gnu)",
+    "properties": {
+      "count": 47,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "amazonaws.com",
+    "properties": {
+      "count": 6,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "bbc.co.uk",
+    "properties": {
+      "count": 120,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "bbc.net.uk",
+    "properties": {
+      "count": 60,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "com.localdomain",
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "dns.tunnel.ru",
+    "properties": {
+      "count": 1,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "dns.tunnel.ru",
+    "destination": "tunnel.ru",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "fedoraproject.org",
+    "properties": {
+      "count": 33,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "fedoraproject.org",
+    "properties": {
+      "count": 33,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "server",
+    "vertex": "fedoraproject.org",
+    "properties": {
+      "count": 1,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "140.211.169.206",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "152.19.134.142",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "152.19.134.198",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "18.185.136.17",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "185.141.165.254",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2001:4178:2:1269::fed2",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "209.132.190.2",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2604:1580:fe00:0:dead:beef:cafe:fed1",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2605:bc80:3010:600:dead:beef:cafe:fed9",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2605:bc80:3010:600:dead:beef:cafe:feda",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2610:28:3090:3001:dead:beef:cafe:fed3",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2620:52:3:1:dead:beef:cafe:fed6",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "2620:52:3:1:dead:beef:cafe:fed7",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "38.145.60.20",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "38.145.60.21",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "67.219.144.68",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "8.43.85.67",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "fedoraproject.org",
+    "destination": "85.236.55.6",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "fedoraproject.org",
+    "destination": "fedoraproject.org",
+    "directed": true,
+    "properties": {
+      "count": 33,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "google.com",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "hackers.ru",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "device",
+    "vertex": "louise-mac",
+    "properties": {
+      "count": 386,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "network": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "hasip",
+    "source": "louise-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 386,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "malware.com",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "malware.org",
+    "properties": {
+      "count": 46,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "malware.org",
+    "properties": {
+      "count": 23,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "malware.org",
+    "destination": "204.44.192.24",
+    "directed": true,
+    "properties": {
+      "count": 9,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "malware.org",
+    "destination": "malware.org",
+    "directed": true,
+    "properties": {
+      "count": 28,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "device",
+    "vertex": "mark-android",
+    "properties": {
+      "count": 472,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "network": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "hasip",
+    "source": "mark-android",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 472,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "device",
+    "vertex": "mark-ipad",
+    "properties": {
+      "count": 205,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "network": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "hasip",
+    "source": "mark-ipad",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 205,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "device",
+    "vertex": "mark-mac",
+    "properties": {
+      "count": 1336,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "network": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "hasip",
+    "source": "mark-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 1336,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "news.bbc.co.uk",
+    "properties": {
+      "count": 30,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "server",
+    "vertex": "news.bbc.co.uk",
+    "properties": {
+      "count": 15,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "news.bbc.co.uk",
+    "destination": "bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 60,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "newswww.bbc.net.uk",
+    "properties": {
+      "count": 30,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "newswww.bbc.net.uk",
+    "destination": "212.58.244.56",
+    "directed": true,
+    "properties": {
+      "count": 12,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "newswww.bbc.net.uk",
+    "destination": "212.58.244.57",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "newswww.bbc.net.uk",
+    "destination": "212.58.249.144",
+    "directed": true,
+    "properties": {
+      "count": 12,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "newswww.bbc.net.uk",
+    "destination": "212.58.249.145",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "newswww.bbc.net.uk",
+    "destination": "bbc.net.uk",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "device",
+    "vertex": "phil-mac",
+    "properties": {
+      "count": 774,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "network": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "hasip",
+    "source": "phil-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 774,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "phreaker.org",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "siamhost.com",
+    "properties": {
+      "count": 1,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "tunnel.ru",
+    "properties": {
+      "count": 9,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "domain",
+    "vertex": "twistedcheese.com",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.bbc.co.uk",
+    "properties": {
+      "count": 30,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "server",
+    "vertex": "www.bbc.co.uk",
+    "properties": {
+      "count": 30,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.bbc.co.uk",
+    "destination": "bbc.co.uk",
+    "directed": true,
+    "properties": {
+      "count": 60,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.bbc.net.uk",
+    "properties": {
+      "count": 30,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.233.251",
+    "directed": true,
+    "properties": {
+      "count": 8,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.233.253",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.233.254",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.237.251",
+    "directed": true,
+    "properties": {
+      "count": 8,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.237.253",
+    "directed": true,
+    "properties": {
+      "count": 3,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.bbc.net.uk",
+    "destination": "212.58.237.254",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.bbc.net.uk",
+    "destination": "bbc.net.uk",
+    "directed": true,
+    "properties": {
+      "count": 30,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.google.com",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.google.com",
+    "destination": "216.58.204.36",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.google.com",
+    "destination": "2a00:1450:4009:808::2004",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.google.com",
+    "destination": "google.com",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.hackers.ru",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.hackers.ru",
+    "destination": "194.58.112.165",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.hackers.ru",
+    "destination": "2a00:f940:4::152",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.hackers.ru",
+    "destination": "hackers.ru",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.malware.com",
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.malware.com",
+    "destination": "malware.com",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.malware.com.localdomain",
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.malware.com.localdomain",
+    "destination": "com.localdomain",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.malware.org",
+    "properties": {
+      "count": 9,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "server",
+    "vertex": "www.malware.org",
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.malware.org",
+    "destination": "malware.org",
+    "directed": true,
+    "properties": {
+      "count": 18,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.phreaker.org",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.phreaker.org",
+    "destination": "phreaker.org",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.siamhost.com",
+    "properties": {
+      "count": 1,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.siamhost.com",
+    "destination": "siamhost.com",
+    "directed": true,
+    "properties": {
+      "count": 1,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.tunnel.ru",
+    "properties": {
+      "count": 8,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "dnsresolve",
+    "source": "www.tunnel.ru",
+    "destination": "148.251.9.245",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.tunnel.ru",
+    "destination": "tunnel.ru",
+    "directed": true,
+    "properties": {
+      "count": 8,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "hostname",
+    "vertex": "www.twistedcheese.com",
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "indomain",
+    "source": "www.twistedcheese.com",
+    "destination": "twistedcheese.com",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "action": "",
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": ""
+    }
+  }
+]

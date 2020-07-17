@@ -1,0 +1,28 @@
+<div>
+  <h2>High-risk resources</h2>
+  <div *ngIf="windowed.length == 0">
+    <i>No resources.</i>
+  </div>
+  <ul class="resources">
+    <li *ngFor="let resource of windowed.slice(0, maxItems)">
+      <div class="resource">
+        <a class="score"
+	   [routerLink]="['/resource', resource.resource]">
+	  {{resource.getRiskScore().toFixed(2)}}
+	</a>
+        <a class="name" [routerLink]="['/resource', resource.resource]">
+	  {{resource.resource}}
+	</a>
+        <div class="risks">
+	  <div *ngFor="let risk of resource.risks">
+            <a class="category"
+	       [routerLink]="['/category', risk.category]"
+	       style="width: {{risk.risk * 300}}px; background-color: {{risk.colourName()}}; border: 1px solid {{risk.colourName()}};">
+	      {{risk.category}}
+	    </a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

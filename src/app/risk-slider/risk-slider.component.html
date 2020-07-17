@@ -1,0 +1,9 @@
+<div>
+  Window:
+  <mat-slider #slider thumbLabel min="1" max="504" step="1"
+              [value]="sliderValue"  [displayWith]="formatHours"
+              (input)="sliderChange(slider.value)">
+  </mat-slider>
+  {{sliderTime(slider.value)}}
+</div>
+

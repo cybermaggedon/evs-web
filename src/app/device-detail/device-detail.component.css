@@ -1,0 +1,80 @@
+
+.threats {
+}
+
+.threat {
+    display: flex;
+    padding: 0;
+    margin: 0.4em;
+    float: left;
+    text-decoration: none;
+}
+
+.threat * {
+    padding: 0.4em;
+    margin: 0;
+}
+
+.threat .kind {
+    color: white;
+    border-radius: 4px 0 0 4px;
+}
+
+.threat .id {
+    border-radius: 0 4px 4px 0;
+    color: black;
+}
+
+.threat .age {
+    color: black;
+}
+
+.threat .kind.dnsquery {
+    background: #1f2041;
+}
+
+.threat .id.dnsquery {
+    border: 1px solid #1f2041;
+    background: #bfc0e1;
+}
+
+.threat .kind.uses {
+    background: #4b3f72;
+}
+
+.threat .id.uses{
+    border: 1px solid #4b3f72;
+    background: #cbbff2;
+}
+
+.threat .kind.requests {
+    background: #119da4;
+}
+
+.threat .id.requests {
+    border: 1px solid #119da4;
+    background: #b1ede4
+}
+
+.threat .kind.connects {
+    background: #19647e;
+}
+
+.threat .id.connects {
+    border: 1px solid #19647e;
+    background: #99c4fe;
+}
+
+.threat .kind.hasip {
+    background: #804028;
+}
+
+.threat .id.hasip {
+    border: 1px solid #704028;
+    background: #f0c0b8;
+}
+
+.bottom {
+    margin: 10px;
+    clear: left;
+}

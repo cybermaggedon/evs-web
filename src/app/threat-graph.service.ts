@@ -1,0 +1,138 @@
+import { Injectable } from '@angular/core';
+import { Edge, Entity, Graph } from './graph';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { toGraph } from './graph';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ThreatGraphService {
+
+    constructor(
+        private http : HttpClient
+    ) { }
+
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    edges : Edge[];
+    entities : Entity[];
+
+    rest = "/gaffer-threat/rest/v2";
+
+    getDeviceThreats(dev : string, from : Date, to : Date) :
+    Observable<Graph> {
+
+	const predicates = [
+	    {
+		"selection" : [ "time" ],
+		"predicate" : {
+		    "class" : "RBMBackedTimestampSetInRange",
+		    "startTime" : from.getTime(),
+		    "endTime" : to.getTime(),
+		    "timeUnit": "MILLISECOND"
+		}
+            }
+        ];
+
+	const request = {
+	    "class" : "OperationChain",
+	    "operations" : [
+  		{
+		    "class": "GetElements",
+		    "includeIncomingOutGoing": "OUTGOING",
+		    "input": [
+			{
+			    "class": "EntitySeed",
+			    "vertex": dev
+			}
+		    ],
+		    "view": {
+			"edges": {
+			    "hasip": {},
+			    "connects": {},
+			    "dnsquery": {},
+			    "requests": {},
+			    "uses": {}
+			},
+			"globalEdges": [
+			    {
+				"postAggregationFilterFunctions": predicates
+			    }
+			]
+		    }
+		}
+	    ]
+	};
+
+	const graphify = map(g => toGraph(g));
+
+        let obs = this.http.post(this.rest + "/graph/operations/execute",
+				 JSON.stringify(request),
+				 this.httpOptions);
+	return graphify(obs);
+
+    }
+
+    getResourceThreats(dev : string, from : Date, to : Date) :
+    Observable<Graph> {
+
+	const predicates = [
+	    {
+		"selection" : [ "time" ],
+		"predicate" : {
+		    "class" : "RBMBackedTimestampSetInRange",
+		    "startTime" : from.getTime(),
+		    "endTime" : to.getTime(),
+		    "timeUnit": "MILLISECOND"
+		}
+            }
+        ];
+
+	const request = {
+	    "class" : "OperationChain",
+	    "operations" : [
+  		{
+		    "class": "GetElements",
+		    "includeIncomingOutGoing": "EITHER",
+		    "input": [
+			{
+			    "class": "EntitySeed",
+			    "vertex": dev
+			}
+		    ],
+		    "view": {
+			"edges": {
+			    "hasip": {},
+			    "connects": {},
+			    "dnsquery": {},
+			    "requests": {},
+			    "uses": {},
+			    "indomain": {},
+			    "dnsresolve": {},
+			    "serves": {}
+			},
+			"globalEdges": [
+			    {
+				"postAggregationFilterFunctions": predicates
+			    }
+			]
+		    }
+		}
+	    ]
+	};
+
+	const graphify = map(g => toGraph(g));
+
+        let obs = this.http.post(this.rest + "/graph/operations/execute",
+				 JSON.stringify(request),
+				 this.httpOptions);
+	return graphify(obs);
+
+    }
+
+}
+

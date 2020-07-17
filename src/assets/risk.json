@@ -1,0 +1,824 @@
+[
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "resource",
+    "vertex": "10.0.2.15",
+    "properties": {
+      "count": 3173,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": "ipv4"
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "resourcerisk",
+    "source": "10.0.2.15",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 3173,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "resource",
+    "vertex": "192.179.1.72",
+    "properties": {
+      "count": 7,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": "ipv4"
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "resourcerisk",
+    "source": "192.179.1.72",
+    "destination": "tor-exit",
+    "directed": true,
+    "properties": {
+      "count": 7,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "resource",
+    "vertex": "192.179.1.73",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": "ipv4"
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "resourcerisk",
+    "source": "192.179.1.73",
+    "destination": "credential-theft",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "risk",
+    "vertex": "apt/apt-37",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "risk",
+    "vertex": "credential-theft",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "actor",
+    "vertex": "louise-mac",
+    "properties": {
+      "count": 386,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "group": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "louise-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 386,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "louise-mac",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 386,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "risk",
+    "vertex": "malware",
+    "properties": {
+      "count": 3191,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "actor",
+    "vertex": "mark-android",
+    "properties": {
+      "count": 478,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "group": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-android",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 472,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-android",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 478,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-android",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 6,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "actor",
+    "vertex": "mark-ipad",
+    "properties": {
+      "count": 209,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "group": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-ipad",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 205,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-ipad",
+    "destination": "192.179.1.72",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-ipad",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 207,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-ipad",
+    "destination": "tor-exit",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-ipad",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 2,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "actor",
+    "vertex": "mark-mac",
+    "properties": {
+      "count": 1359,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "group": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 1336,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-mac",
+    "destination": "192.179.1.72",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-mac",
+    "destination": "192.179.1.73",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-mac",
+    "destination": "apt/apt-37",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-mac",
+    "destination": "credential-theft",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-mac",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 1346,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "mark-mac",
+    "destination": "tor-exit",
+    "directed": true,
+    "properties": {
+      "count": 5,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-mac",
+    "destination": "www.malware.org",
+    "directed": true,
+    "properties": {
+      "count": 10,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "mark-mac",
+    "destination": "www.phreaker.org",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "actor",
+    "vertex": "phil-mac",
+    "properties": {
+      "count": 774,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "group": ""
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorresource",
+    "source": "phil-mac",
+    "destination": "10.0.2.15",
+    "directed": true,
+    "properties": {
+      "count": 774,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "actorrisk",
+    "source": "phil-mac",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 774,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "risk",
+    "vertex": "tor-exit",
+    "properties": {
+      "count": 7,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "resource",
+    "vertex": "www.malware.org",
+    "properties": {
+      "count": 18,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": "hostname"
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "resourcerisk",
+    "source": "www.malware.org",
+    "destination": "malware",
+    "directed": true,
+    "properties": {
+      "count": 18,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Entity",
+    "group": "resource",
+    "vertex": "www.phreaker.org",
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      },
+      "type": "hostname"
+    }
+  },
+  {
+    "class": "uk.gov.gchq.gaffer.data.element.Edge",
+    "group": "resourcerisk",
+    "source": "www.phreaker.org",
+    "destination": "apt/apt-37",
+    "directed": true,
+    "properties": {
+      "count": 4,
+      "time": {
+        "uk.gov.gchq.gaffer.time.RBMBackedTimestampSet": {
+          "earliest": 1594717200.0,
+          "latest": 1594717200.0,
+          "numberOfTimestamps": 1,
+          "timeBucket": "HOUR",
+          "timestamps": [
+            1594717200.0
+          ]
+        }
+      }
+    }
+  }
+]
