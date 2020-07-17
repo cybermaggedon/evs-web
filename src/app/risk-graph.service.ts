@@ -32,7 +32,7 @@ export class RiskGraphService {
 	    "class": "uk.gov.gchq.gaffer.operation.impl.get.GetAllElements"
 	};
 
-	this.http.post("/gaffer-risk/rest/v2/graph/operations/execute",
+	this.http.post("/risk-graph/rest/v2/graph/operations/execute",
 		       request,
 		       this.httpOptions).subscribe(g => {
 			   this.subject.next(toGraph(g));

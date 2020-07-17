@@ -21,7 +21,7 @@ export class ThreatGraphService {
     edges : Edge[];
     entities : Entity[];
 
-    rest = "/gaffer-threat/rest/v2";
+    rest = "/threat-graph/rest/v2";
 
     getDeviceThreats(dev : string, from : Date, to : Date) :
     Observable<Graph> {
