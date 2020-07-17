@@ -1,7 +1,7 @@
 
 VERSION=$(shell git describe | sed 's/^v//')
 
-REPO=github.io/cybermaggedon/evs-web
+REPO=docker.io/cybermaggedon/evs-web
 
 all: container
 
