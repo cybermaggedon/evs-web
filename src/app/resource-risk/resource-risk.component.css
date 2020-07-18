@@ -1,17 +1,17 @@
-.resources {
+.targets {
     list-style-type: none;
 }
 
-.resources li {
+.targets li {
     margin: 0.4em;
 }
 
-.resource {
+.target {
     display: flex;
     margin: 0;
 }
 
-.resource a {
+.target a {
     text-decoration: none;
 }
 
@@ -56,16 +56,16 @@
     display: flex;
 }
 
-.resources a:hover {
+.targets a:hover {
   color:  #ffffff;
 }
 
-.resources li:hover .name {
+.targets li:hover .name {
   color: #6080a0;
   background-color: #ccc;
 }
 
-.resources li:hover .score {
+.targets li:hover .score {
   color: #6080a0;
   background-color: #ccc;
   border: 1px solid #888;

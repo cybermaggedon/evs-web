@@ -1,18 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ResourcesService, Resource } from '../resources.service';
+import { TargetSet, Target } from '../risks.service';
 import { RiskWindowService } from '../risk-window.service';
 
 @Component({
-  selector: 'resource-risk',
-  templateUrl: './resource-risk.component.html',
-  styleUrls: ['./resource-risk.component.css']
+    selector: 'resource-risk',
+    templateUrl: './resource-risk.component.html',
+    styleUrls: ['./resource-risk.component.css']
 })
 export class ResourceRiskComponent implements OnInit {
 
 
-    constructor(private resourcesService : ResourcesService,
+    constructor(private risksSvc : TargetSet,
                 private window : RiskWindowService) {
-        this.resources = [];
+        this.targets = [];
         this.thence = new Date();
         this.windowed = [];
     }
@@ -21,11 +21,11 @@ export class ResourceRiskComponent implements OnInit {
     maxItems : number = 20;
 
     // Data input
-    resources : Resource[];
+    targets : Target[];
     thence : Date;
 
-    // Window on resources
-    windowed : Resource[];
+    // Window on targets
+    windowed : Target[];
 
     minRisk = 0.05;
 
@@ -34,10 +34,10 @@ export class ResourceRiskComponent implements OnInit {
         this.windowed.length = 0;
         const now = new Date();
 
-        for (let resource of this.resources) {
-            let wd = resource.applyWindow(this.thence, now);
-            if (wd.getRiskScore() > this.minRisk) {
-                this.windowed.push(wd);
+        for (let target of this.targets) {
+            let wt = target.applyWindow(this.thence, now);
+            if (wt.getRiskScore() > this.minRisk) {
+                this.windowed.push(wt);
             }
             
         }
@@ -47,8 +47,8 @@ export class ResourceRiskComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.resourcesService.subscribe(d => {
-            this.resources = d;
+        this.risksSvc.subscribe("resourcerisk", d => {
+            this.targets = d;
             this.updateWindowed();
         });
         this.window.subscribe(w => {

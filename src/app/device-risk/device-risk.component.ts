@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DevicesService, Device } from '../devices.service';
+import { TargetSet, Target } from '../risks.service';
 import { RiskWindowService } from '../risk-window.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { RiskWindowService } from '../risk-window.service';
 export class DeviceRiskComponent implements OnInit {
 
 
-    constructor(private devicesService : DevicesService,
+    constructor(private risksSvc : TargetSet,
                 private window : RiskWindowService) {
-        this.devices = [];
+        this.targets = [];
         this.thence = new Date();
         this.windowed = [];
     }
@@ -21,11 +21,11 @@ export class DeviceRiskComponent implements OnInit {
     maxItems : number = 20;
 
     // Data input
-    devices : Device[];
+    targets : Target[];
     thence : Date;
 
-    // Window on devices
-    windowed : Device[];
+    // Window on targets
+    windowed : Target[];
 
     minRisk = 0.05;
 
@@ -34,10 +34,10 @@ export class DeviceRiskComponent implements OnInit {
         this.windowed.length = 0;
         const now = new Date();
 
-        for (let device of this.devices) {
-            let wd = device.applyWindow(this.thence, now);
-            if (wd.getRiskScore() > this.minRisk) {
-                this.windowed.push(wd);
+        for (let target of this.targets) {
+            let wt = target.applyWindow(this.thence, now);
+            if (wt.getRiskScore() > this.minRisk) {
+                this.windowed.push(wt);
             }
             
         }
@@ -47,8 +47,8 @@ export class DeviceRiskComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.devicesService.subscribe(d => {
-            this.devices = d;
+        this.risksSvc.subscribe("actorrisk", d => {
+            this.targets = d;
             this.updateWindowed();
         });
         this.window.subscribe(w => {

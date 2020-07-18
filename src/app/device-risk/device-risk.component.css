@@ -1,17 +1,17 @@
-.devices {
+.targets {
     list-style-type: none;
 }
 
-.devices li {
+.targets li {
     margin: 0.4em;
 }
 
-.device {
+.target {
     display: flex;
     margin: 0;
 }
 
-.device a {
+.target a {
     text-decoration: none;
 }
 
@@ -56,16 +56,16 @@
     display: flex;
 }
 
-.devices a:hover {
+.targets a:hover {
   color:  #ffffff;
 }
 
-.devices li:hover .name {
+.targets li:hover .name {
   color: #6080a0;
   background-color: #ccc;
 }
 
-.devices li:hover .score {
+.targets li:hover .score {
   color: #6080a0;
   background-color: #ccc;
   border: 1px solid #888;

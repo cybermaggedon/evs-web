@@ -4,7 +4,7 @@ import { Graph } from './graph';
 import { getRiskValue } from './risk';
 import { nameToCssColour } from './colours';
 
-export class DeviceRisk {
+export class Risk {
     category : string;
     risk : number;
     earliest : Date;
@@ -16,9 +16,10 @@ export class DeviceRisk {
 
 };
 
-export class Device {
-    device : string;
-    risks : DeviceRisk[];
+export class Target {
+
+    id : string;
+    risks : Risk[];
 
     getRiskScore() : number {
 
@@ -32,16 +33,17 @@ export class Device {
 
     }
 
-    applyWindow(start : Date, end : Date) : Device {
+    applyWindow(start : Date, end : Date) : Target {
 
-        let dev = new Device();
-        dev.device = this.device;
-        dev.risks = [];
+        let tgt = new Target();
+        tgt.id = this.id;
+        tgt.risks = [];
         for (let r of this.risks) {
+	
             if (r.earliest > end) continue;
             if (r.latest < start) continue;
 
-            let wr = new DeviceRisk();
+            let wr = new Risk();
 
             wr.category = r.category;
 
@@ -59,13 +61,13 @@ export class Device {
                 (end.getTime() - start.getTime());
             wr.risk *= r.risk;
 
-            dev.risks.push(wr);
+            tgt.risks.push(wr);
 
         }
 
-        dev.risks.sort((a, b) => (b.risk - a.risk));
+        tgt.risks.sort((a, b) => (b.risk - a.risk));
 
-        return dev;
+        return tgt;
     }
 
 }
@@ -73,39 +75,39 @@ export class Device {
 @Injectable({
   providedIn: 'root'
 })
-export class DevicesService {
+export class TargetSet {
 
     constructor(private riskGraph : RiskGraphService) {
         this.lastValue = [];
     }
 
-    toDevices(graph : Graph) : Device[] {
+    toTargetSet(graph : Graph, edge : string) : Target[] {
 
-        let devices = {};
+        let targets = {};
 
         for (let e of graph.edges) {
 
-            if (e.group != "actorrisk") continue;
+            if (e.group != edge) continue;
 
-            if (!(e.source in devices)) {
-                let dev = new Device();
-                dev.device = e.source;
-                dev.risks = [];
-                devices[e.source] = dev;
+            if (!(e.source in targets)) {
+                let tgt = new Target();
+                tgt.id = e.source;
+                tgt.risks = [];
+                targets[e.source] = tgt;
             }
 
-            let dr = new DeviceRisk();
-            dr.category = e.destination;
-            dr.earliest = e.earliest;
-            dr.latest = e.latest;
-            dr.risk = getRiskValue(dr.category);
-            devices[e.source].risks.push(dr);
+            let r = new Risk();
+            r.category = e.destination;
+            r.earliest = e.earliest;
+            r.latest = e.latest;
+            r.risk = getRiskValue(r.category);
+            targets[e.source].risks.push(r);
 
         }
 
         let rtn = [];
-        for (var d in devices) {
-            rtn.push(devices[d]);
+        for (var t in targets) {
+            rtn.push(targets[t]);
         }
 
         // Sort in overall risk order.
@@ -115,11 +117,11 @@ export class DevicesService {
 
     }
 
-    lastValue : Device[];
+    lastValue : Target[];
 
-    subscribe(f : any) {
+    subscribe(edge : string, f : any) {
         this.riskGraph.subscribe(g => {
-            this.lastValue = this.toDevices(g)
+            this.lastValue = this.toTargetSet(g, edge)
             f(this.lastValue);
         });
         // Give subscribers last value.

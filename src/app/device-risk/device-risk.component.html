@@ -3,17 +3,17 @@
   <div *ngIf="windowed.length == 0">
     <i>No devices.</i>
   </div>
-  <ul class="devices">
-    <li *ngFor="let device of windowed.slice(0, maxItems)">
-      <div class="device">
-        <a class="score" [routerLink]="['/threat', device.device]">
-	  {{device.getRiskScore().toFixed(2)}}
+  <ul class="targets">
+    <li *ngFor="let target of windowed.slice(0, maxItems)">
+      <div class="target">
+        <a class="score" [routerLink]="['/threat', target.id]">
+	  {{target.getRiskScore().toFixed(2)}}
 	</a>
-        <a class="name" [routerLink]="['/threat', device.device]">
-	  {{device.device}}
+        <a class="name" [routerLink]="['/threat', target.id]">
+	  {{target.id}}
 	</a>
         <div class="risks">
-          <div *ngFor="let risk of device.risks">
+          <div *ngFor="let risk of target.risks">
             <a class="category"
 	       [routerLink]="['/category', risk.category]"
 	       style="width: {{risk.risk * 300}}px; background-color: {{risk.colourName()}}; border: 1px solid {{risk.colourName()}};">
