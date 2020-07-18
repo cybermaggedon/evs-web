@@ -39,7 +39,7 @@ export class Target {
         tgt.id = this.id;
         tgt.risks = [];
         for (let r of this.risks) {
-	
+	    
             if (r.earliest > end) continue;
             if (r.latest < start) continue;
 
@@ -73,12 +73,12 @@ export class Target {
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TargetSet {
 
     constructor(private riskGraph : RiskGraphService) {
-        this.lastValue = [];
+        this.lastValue = {};
     }
 
     toTargetSet(graph : Graph, edge : string) : Target[] {
@@ -117,15 +117,16 @@ export class TargetSet {
 
     }
 
-    lastValue : Target[];
+    lastValue : Object;
 
     subscribe(edge : string, f : any) {
         this.riskGraph.subscribe(g => {
-            this.lastValue = this.toTargetSet(g, edge)
-            f(this.lastValue);
+            this.lastValue[edge] = this.toTargetSet(g, edge)
+            f(this.lastValue[edge]);
         });
         // Give subscribers last value.
-        f(this.lastValue);
+	if (edge in this.lastValue)
+            f(this.lastValue[edge]);
     }
 
 }
