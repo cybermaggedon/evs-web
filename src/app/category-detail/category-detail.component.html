@@ -1,4 +1,14 @@
-<p>category-detail {{id}} works!</p>
+<h2>Category {{id}}</h2>
 
-<button (click)="goBack()">go back</button>
+<div class="threats">
+  <a class="threat" *ngFor="let threat of threats"
+       [routerLink]="['/threat', threat.id]">
+    <div class="kind {{threat.kind}}">{{threat.kind}}</div>
+    <div class="id {{threat.kind}}">{{threat.id}}</div>
+    <div class="age {{threat.kind}}">{{threat.age}}</div>
+  </a>
+</div>
 
+<div class="bottom">
+  <button (click)="goBack()">go back</button>
+</div>

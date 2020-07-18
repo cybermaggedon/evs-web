@@ -46,33 +46,10 @@ export class ThreatDetailComponent implements OnInit {
     
     ngOnInit(): void {
 
-//	this.id = this.route.snapshot.paramMap.get('id');
-
   	  this.route.params.subscribe(res => {
 	      this.id = res.id;
 	      this.update();
 	  })
-/*
-
-console.log("BUNCHY: ", this.id);
-         
-        this.threatSvc.getThreats(this.id, from, to).subscribe(
-	    dt => {
-		let thr = [];
-		for (let kind of this.threatkinds) {
-		    if (dt.threats.has(kind)) {
-			for (let threat of dt.threats.get(kind)) {
-			    thr.push({
-				"kind": kind, "id": threat.id,
-				"age": this.age(threat.age)
-			    });
-			}
-		    }
-		}
-		this.threats = thr;
-	    }
-	);
-	*/
 
     }
 

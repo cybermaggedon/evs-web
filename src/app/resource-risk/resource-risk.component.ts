@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RiskGraphService } from '../risk-graph.service';
 import { ResourcesService, Resource } from '../resources.service';
 import { RiskWindowService } from '../risk-window.service';
 
@@ -11,8 +10,7 @@ import { RiskWindowService } from '../risk-window.service';
 export class ResourceRiskComponent implements OnInit {
 
 
-    constructor(private riskGraph: RiskGraphService,
-                private resourcesService : ResourcesService,
+    constructor(private resourcesService : ResourcesService,
                 private window : RiskWindowService) {
         this.resources = [];
         this.thence = new Date();

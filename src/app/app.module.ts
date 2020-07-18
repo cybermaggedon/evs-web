@@ -13,7 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RiskSliderComponent } from './risk-slider/risk-slider.component';
 import { DeviceRiskComponent } from './device-risk/device-risk.component';
 import { ResourceRiskComponent } from './resource-risk/resource-risk.component';
-import { DeviceDetailComponent } from './device-detail/device-detail.component';
 import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
@@ -24,7 +23,6 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
     RiskSliderComponent,
     DeviceRiskComponent,
     ResourceRiskComponent,
-    DeviceDetailComponent,
     ThreatDetailComponent,
     CategoryDetailComponent,
   ],
