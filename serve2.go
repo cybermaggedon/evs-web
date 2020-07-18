@@ -38,8 +38,8 @@ func main() {
 	var s http.ServeMux
 
 	var esPath = regexp.MustCompile("^/elasticsearch/")
-	var grPath = regexp.MustCompile("^/gaffer-risk/")
-	var gtPath = regexp.MustCompile("^/gaffer-threat/")
+	var grPath = regexp.MustCompile("^/risk-graph/")
+	var gtPath = regexp.MustCompile("^/threat-graph/")
 
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		
@@ -74,7 +74,7 @@ func main() {
 
 		if m := grPath.FindStringSubmatch(r.URL.Path); m != nil {
 
-			path := r.URL.Path[12:]
+			path := r.URL.Path[11:]
 
 			fmt.Println(path)
 
@@ -101,7 +101,7 @@ func main() {
 
 		if m := gtPath.FindStringSubmatch(r.URL.Path); m != nil {
 
-			path := r.URL.Path[14:]
+			path := r.URL.Path[13:]
 
 			fmt.Println(path)
 

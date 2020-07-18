@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceDetailComponent } from './resource-detail.component';
+import { ThreatDetailComponent } from './threat-detail.component';
 
-describe('ResourceDetailComponent', () => {
-  let component: ResourceDetailComponent;
-  let fixture: ComponentFixture<ResourceDetailComponent>;
+describe('ThreatDetailComponent', () => {
+  let component: ThreatDetailComponent;
+  let fixture: ComponentFixture<ThreatDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceDetailComponent ]
+      declarations: [ ThreatDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceDetailComponent);
+    fixture = TestBed.createComponent(ThreatDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

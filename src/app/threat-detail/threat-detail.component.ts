@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ResourceService, ResourceThreats } from '../resource.service';
+import { ThreatService, Threats } from '../threat.service';
 
 @Component({
-    selector: 'resource-detail',
-    templateUrl: './resource-detail.component.html',
-    styleUrls: ['./resource-detail.component.css']
+    selector: 'threat-detail',
+    templateUrl: './threat-detail.component.html',
+    styleUrls: ['./threat-detail.component.css']
 })
-export class ResourceDetailComponent implements OnInit {
+export class ThreatDetailComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
 		private location: Location,
- 		private resSvc : ResourceService
+ 		private threatSvc : ThreatService
 		) { }
 
     id : string;
@@ -25,7 +25,7 @@ export class ResourceDetailComponent implements OnInit {
 	const to = new Date();
 	const from = new Date(to.getTime() - 1000 * 60 * 60 * 1200);
 
-        this.resSvc.getThreats(this.id, from, to).subscribe(
+        this.threatSvc.getThreats(this.id, from, to).subscribe(
 	    dt => {
 		let thr = [];
 		for (let kind of this.threatkinds) {
@@ -56,7 +56,7 @@ export class ResourceDetailComponent implements OnInit {
 
 console.log("BUNCHY: ", this.id);
          
-        this.resSvc.getThreats(this.id, from, to).subscribe(
+        this.threatSvc.getThreats(this.id, from, to).subscribe(
 	    dt => {
 		let thr = [];
 		for (let kind of this.threatkinds) {
@@ -97,6 +97,8 @@ console.log("BUNCHY: ", this.id);
 	this.location.back();
     }
 
-    threatkinds = ['dnsquery', 'uses', 'requests', 'hasip', 'connects'];
+    threatkinds = ['dnsquery', 'dnsresolve', 'serves', 'uses', 'requests',
+		   'indomain', 'hasip', 'connects'
+    ];
 
 }

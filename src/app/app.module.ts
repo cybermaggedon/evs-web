@@ -14,7 +14,7 @@ import { RiskSliderComponent } from './risk-slider/risk-slider.component';
 import { DeviceRiskComponent } from './device-risk/device-risk.component';
 import { ResourceRiskComponent } from './resource-risk/resource-risk.component';
 import { DeviceDetailComponent } from './device-detail/device-detail.component';
-import { ResourceDetailComponent } from './resource-detail/resource-detail.component';
+import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 @NgModule({
@@ -25,7 +25,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
     DeviceRiskComponent,
     ResourceRiskComponent,
     DeviceDetailComponent,
-    ResourceDetailComponent,
+    ThreatDetailComponent,
     CategoryDetailComponent,
   ],
   imports: [

@@ -77,7 +77,7 @@ export class ThreatGraphService {
 
     }
 
-    getResourceThreats(dev : string, from : Date, to : Date) :
+    getThreats(id : string, from : Date, to : Date) :
     Observable<Graph> {
 
 	const predicates = [
@@ -101,7 +101,7 @@ export class ThreatGraphService {
 		    "input": [
 			{
 			    "class": "EntitySeed",
-			    "vertex": dev
+			    "vertex": id
 			}
 		    ],
 		    "view": {

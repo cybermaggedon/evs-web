@@ -18,10 +18,13 @@
 .threat .kind {
     color: white;
     border-radius: 4px 0 0 4px;
+    background: #404040;
 }
 
 .threat .id {
     border-radius: 0 4px 4px 0;
+    border: 1px solid #808080;
+    background: #c0c0c0;
     color: black;
 }
 
@@ -35,7 +38,7 @@
 
 .threat .id.dnsquery {
     border: 1px solid #1f2041;
-    background: #bfc0e1;
+    background: #cfd0f1;
 }
 
 .threat .kind.uses {
@@ -72,6 +75,33 @@
 .threat .id.hasip {
     border: 1px solid #704028;
     background: #f0c0b8;
+}
+
+.threat .kind.indomain {
+    background: #408028;
+}
+
+.threat .id.indomain {
+    border: 1px solid #408028;
+    background: #c0f0b8;
+}
+
+.threat .kind.dnsresolve {
+    background: #a04060;
+}
+
+.threat .id.dnsresolve {
+    border: 1px solid #a04060;
+    background: #f8d8e8;
+}
+
+.threat .kind.serves {
+    background: #c08020;
+}
+
+.threat .id.serves {
+    border: 1px solid #c08020;
+    background: #f8d880;
 }
 
 .bottom {
