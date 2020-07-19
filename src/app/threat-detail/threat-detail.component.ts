@@ -26,9 +26,7 @@ export class ThreatDetailComponent implements OnInit {
 
     update() {
 
-	//FIXME: Hard-coded.
 	const to = new Date();
-	//	const from = this.window.new Date(to.getTime() - 1000 * 60 * 60 * 1200);
 	const from = this.window.earliest;
 
         this.threatSvc.getThreats(this.id, from, to).subscribe(
