@@ -16,8 +16,6 @@ export class ThreatDetailComponent implements OnInit {
  		private threatSvc : ThreatService,
 		private riskWindow : RiskWindowService
 	       ) {
-	// Initial value, will be changed on subscription.
-	this.window = new Window(0, new Date());
     }
 
     id : string;
@@ -25,6 +23,9 @@ export class ThreatDetailComponent implements OnInit {
     window : Window;
 
     update() {
+
+	if (this.window == undefined) return;
+	if (this.id == undefined) return;
 
 	const to = new Date();
 	const from = this.window.earliest;
@@ -50,13 +51,13 @@ export class ThreatDetailComponent implements OnInit {
     
     ngOnInit(): void {
 
-  	  this.route.params.subscribe(res => {
-	      this.id = res.id;
+  	  this.riskWindow.subscribe(w => {
+	      this.window = w;
 	      this.update();
 	  })
 
-  	  this.riskWindow.subscribe(w => {
-	      this.window = w;
+  	this.route.params.subscribe(res => {
+	      this.id = res.id;
 	      this.update();
 	  })
 
