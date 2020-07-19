@@ -38,17 +38,11 @@ export class DashboardComponent implements OnInit {
             });
 
 
-// FIXME: This causes navigation events unexpectedly.
-/*
-
-
-
         this.window.subscribe(w => {
             if (w == undefined) return;
 
             this.router.navigate(
                 [
-                    '/dashboard'
                 ],
                 {
                     queryParams: { window: w.value },
@@ -58,8 +52,6 @@ export class DashboardComponent implements OnInit {
             );
             
         });
-
-*/
 
     }
 
