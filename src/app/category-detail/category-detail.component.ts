@@ -22,9 +22,6 @@ export class CategoryDetailComponent implements OnInit {
 
     update() {
 
-	console.log("UPDATE: ", this.id);
-	console.log(this.model);
-
 	if (this.id == undefined || this.model == undefined) return;
 
 	let thr = [];
@@ -52,8 +49,6 @@ export class CategoryDetailComponent implements OnInit {
 		}
 	    }
 	}
-
-	console.log("NEW: ", thr);
 
         this.threats = thr;
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
+import { RiskWindowService, Window } from '../risk-window.service';
 
 @Component({
     selector: 'threat-detail',
@@ -12,18 +13,23 @@ export class ThreatDetailComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
 		private location: Location,
- 		private threatSvc : ThreatService
-		) { }
+ 		private threatSvc : ThreatService,
+		private riskWindow : RiskWindowService
+	       ) {
+	// Initial value, will be changed on subscription.
+	this.window = new Window(0, new Date());
+    }
 
     id : string;
-
     threats : Object;
+    window : Window;
 
     update() {
 
 	//FIXME: Hard-coded.
 	const to = new Date();
-	const from = new Date(to.getTime() - 1000 * 60 * 60 * 1200);
+	//	const from = this.window.new Date(to.getTime() - 1000 * 60 * 60 * 1200);
+	const from = this.window.earliest;
 
         this.threatSvc.getThreats(this.id, from, to).subscribe(
 	    dt => {
@@ -48,6 +54,11 @@ export class ThreatDetailComponent implements OnInit {
 
   	  this.route.params.subscribe(res => {
 	      this.id = res.id;
+	      this.update();
+	  })
+
+  	  this.riskWindow.subscribe(w => {
+	      this.window = w;
 	      this.update();
 	  })
 

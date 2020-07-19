@@ -36,6 +36,13 @@ export class DashboardComponent implements OnInit {
                     this.setSlider(window);
                 }
             });
+
+
+// FIXME: This causes navigation events unexpectedly.
+/*
+
+
+
         this.window.subscribe(w => {
             if (w == undefined) return;
 
@@ -51,6 +58,8 @@ export class DashboardComponent implements OnInit {
             );
             
         });
+
+*/
 
     }
 
