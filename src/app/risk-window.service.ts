@@ -32,7 +32,8 @@ export class RiskWindowService {
         this.subject.subscribe(f);
 
         // Give subscribers last value.
-        f(this.lastValue);
+	if (this.lastValue != undefined)
+	    f(this.lastValue);
     }
 
 }

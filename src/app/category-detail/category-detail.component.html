@@ -2,7 +2,8 @@
 
 <div class="threats">
   <a class="threat" *ngFor="let threat of threats"
-       [routerLink]="['/threat', threat.id]">
+     [routerLink]="['/threat', threat.id]"
+		   queryParamsHandling="preserve">
     <div class="kind {{threat.kind}}">{{threat.kind}}</div>
     <div class="id {{threat.kind}}">{{threat.id}}</div>
     <div class="age {{threat.kind}}">{{threat.age}}</div>
