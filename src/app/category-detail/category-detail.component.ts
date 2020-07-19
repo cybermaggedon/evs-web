@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { RiskService } from '../risks.service';
+import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
 
 @Component({

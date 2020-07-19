@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RiskService } from '../risks.service';
+import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
-import { RiskWindowService } from '../risk-window.service';
 
 @Component({
     selector: 'device-risk',
