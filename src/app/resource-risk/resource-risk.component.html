@@ -1,20 +1,19 @@
 <div>
   <h2>High-risk resources</h2>
-  <div *ngIf="windowed.length == 0">
+  <div *ngIf="model.resources.length == 0">
     <i>No resources.</i>
   </div>
   <ul class="targets">
-    <li *ngFor="let target of windowed.slice(0, maxItems)">
+    <li *ngFor="let target of model.resources.slice(0, maxItems)">
       <div class="target">
-        <a class="score"
-	   [routerLink]="['/threat', target.id]">
+        <a class="score" [routerLink]="['/threat', target.id]">
 	  {{target.getRiskScore().toFixed(2)}}
 	</a>
         <a class="name" [routerLink]="['/threat', target.id]">
 	  {{target.id}}
 	</a>
         <div class="risks">
-	  <div *ngFor="let risk of target.risks">
+          <div *ngFor="let risk of target.risks">
             <a class="category"
 	       [routerLink]="['/category', risk.category]"
 	       style="width: {{risk.risk * 300}}px; background-color: {{risk.colourName()}}; border: 1px solid {{risk.colourName()}};">

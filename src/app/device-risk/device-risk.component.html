@@ -1,10 +1,10 @@
 <div>
   <h2>High-risk devices</h2>
-  <div *ngIf="windowed.length == 0">
+  <div *ngIf="model.devices.length == 0">
     <i>No devices.</i>
   </div>
   <ul class="targets">
-    <li *ngFor="let target of windowed.slice(0, maxItems)">
+    <li *ngFor="let target of model.devices.slice(0, maxItems)">
       <div class="target">
         <a class="score" [routerLink]="['/threat', target.id]">
 	  {{target.getRiskScore().toFixed(2)}}

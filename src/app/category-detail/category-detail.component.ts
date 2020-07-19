@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ThreatService, Threats } from '../threat.service';
+import { RiskService } from '../risks.service';
+import { RiskModel } from '../risk';
 
 @Component({
     selector: 'category-detail',
@@ -12,68 +13,61 @@ export class CategoryDetailComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
 		private location: Location,
- 		private threatSvc : ThreatService
-		) { }
+ 		private riskSvc : RiskService) { }
 
     id : string;
-
+    model : RiskModel;
+    
     threats : Object;
 
     update() {
 
-	//FIXME: Hard-coded.
-	const to = new Date();
-	const from = new Date(to.getTime() - 1000 * 60 * 60 * 1200);
+	console.log("UPDATE: ", this.id);
+	console.log(this.model);
 
-        this.threatSvc.getThreats(this.id, from, to).subscribe(
-	    dt => {
-		let thr = [];
-		for (let kind of this.threatkinds) {
-		    if (dt.threats.has(kind)) {
-			for (let threat of dt.threats.get(kind)) {
-			    thr.push({
-				"kind": kind, "id": threat.id,
-				"age": this.age(threat.age)
-			    });
-			}
-		    }
+	if (this.id == undefined || this.model == undefined) return;
+
+	let thr = [];
+	
+	for (let asset of this.model.devices) {
+	    for (let risk of asset.risks) {
+		if (risk.category == this.id) {
+		    thr.push({
+			"kind": "device",
+			"id": asset.id,
+			"age": this.age(risk.earliest)
+		    });
 		}
-		this.threats = thr;
 	    }
-	);
+	}
+	
+	for (let asset of this.model.resources) {
+	    for (let risk of asset.risks) {
+		if (risk.category == this.id) {
+		    thr.push({
+			"kind": "resource",
+			"id": asset.id,
+			"age": this.age(risk.earliest)
+		    });
+		}
+	    }
+	}
+
+	console.log("NEW: ", thr);
+
+        this.threats = thr;
 
     }
     
     ngOnInit(): void {
-
-//	this.id = this.route.snapshot.paramMap.get('id');
-
-  	  this.route.params.subscribe(res => {
-	      this.id = res.id;
-	      this.update();
-	  })
-/*
-
-console.log("BUNCHY: ", this.id);
-         
-        this.threatSvc.getThreats(this.id, from, to).subscribe(
-	    dt => {
-		let thr = [];
-		for (let kind of this.threatkinds) {
-		    if (dt.threats.has(kind)) {
-			for (let threat of dt.threats.get(kind)) {
-			    thr.push({
-				"kind": kind, "id": threat.id,
-				"age": this.age(threat.age)
-			    });
-			}
-		    }
-		}
-		this.threats = thr;
-	    }
-	);
-	*/
-
+    	this.riskSvc.subscribe(m => {
+	    this.model = m;
+	    this.update();
+	});
+  	this.route.params.subscribe(res => {
+	    this.id = res.id;
+	    this.update();
+	})
     }
 
     age(then : Date) : string {
@@ -96,9 +90,5 @@ console.log("BUNCHY: ", this.id);
     goBack(): void {
 	this.location.back();
     }
-
-    threatkinds = ['dnsquery', 'dnsresolve', 'serves', 'uses', 'requests',
-		   'indomain', 'hasip', 'connects'
-    ];
 
 }
