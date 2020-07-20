@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
@@ -20,36 +21,51 @@ export class ThreatDetailComponent implements OnInit {
     }
 
     id : string;
-    threats : Object;
     window : Window;
+
+    allThreats : Threats;
+    threats : Object;
 
     // Update strategy...
     // - ID set or changed => Fetch new threat graph, update threats
     // - Periodically => fetch new threat graph, update threats
     // - Change window => update threats
 
-    update() {
+    updateThreats() {
 
 	if (this.window == undefined) return;
+	if (this.allThreats == undefined) return;
+
+	let thr = [];
+
+	for (let kind of this.threatkinds) {
+	    if (this.allThreats.threats.has(kind)) {
+		for (let threat of this.allThreats.threats.get(kind)) {
+		    if (threat.age < this.window.earliest) continue;
+		    thr.push({
+			"kind": kind, "id": threat.id,
+			"age": age(threat.age)
+		    });
+		}
+	    }
+	}
+
+	this.threats = thr;
+
+    }
+
+    fetchThreats() {
+
 	if (this.id == undefined) return;
 
+	// Ignore window, just fetching 21 days' of date.
 	const to = new Date();
-	const from = this.window.earliest;
+	const from = new Date(to.getTime() - 3 * 7 * 86400 * 1000);
 
-        this.threatSvc.getThreats(this.id, from, to).subscribe(
+        this.threatSvc.getThreats(this.id, from, to, 50).subscribe(
 	    dt => {
-		let thr = [];
-		for (let kind of this.threatkinds) {
-		    if (dt.threats.has(kind)) {
-			for (let threat of dt.threats.get(kind)) {
-			    thr.push({
-				"kind": kind, "id": threat.id,
-				"age": age(threat.age)
-			    });
-			}
-		    }
-		}
-		this.threats = thr;
+		this.allThreats = dt;
+		this.updateThreats();
 	    }
 	);
 
@@ -57,19 +73,23 @@ export class ThreatDetailComponent implements OnInit {
     
     ngOnInit(): void {
 
-  	  this.windowService.subscribe(w => {
-	      if (this.window == undefined || w.value != this.window.value) {
-   	          this.window = w;
-   	          this.update();
-              }
-	  })
+  	this.windowService.subscribe(w => {
+	    if (this.window == undefined || w.value != this.window.value) {
+   	        this.window = w;
+		this.updateThreats();
+            }
+	})
 
-  	  this.route.params.subscribe(res => {
-              if (res.id != this.id) {
-		  this.id = res.id;
-		  this.update();
-              }
-	  })
+  	this.route.params.subscribe(res => {
+            if (res.id != this.id) {
+		this.id = res.id;
+		this.fetchThreats();
+            }
+	})
+
+	interval(5000).subscribe(e => {
+	    this.fetchThreats();
+	});
 
     }
 
