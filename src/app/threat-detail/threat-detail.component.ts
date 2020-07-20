@@ -52,13 +52,17 @@ export class ThreatDetailComponent implements OnInit {
     ngOnInit(): void {
 
   	  this.riskWindow.subscribe(w => {
-	      this.window = w;
-	      this.update();
+	      if (this.window == undefined || w.value != this.window.value) {
+   	          this.window = w;
+   	          this.update();
+              }
 	  })
 
-  	this.route.params.subscribe(res => {
-	      this.id = res.id;
-	      this.update();
+  	  this.route.params.subscribe(res => {
+              if (res.id != this.id) {
+		  this.id = res.id;
+		  this.update();
+              }
 	  })
 
     }

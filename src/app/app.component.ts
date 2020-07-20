@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
                 if (window == undefined) {
 		    // Do nothing, slider initialises with 120 value.
                 } else {
-                    this.setSlider(window);
+                    this.setSlider(parseInt(window));
                 }
             });
 	
