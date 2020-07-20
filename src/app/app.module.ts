@@ -10,7 +10,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RiskSliderComponent } from './risk-slider/risk-slider.component';
+import { SliderComponent } from './slider/slider.component';
 import { DeviceRiskComponent } from './device-risk/device-risk.component';
 import { ResourceRiskComponent } from './resource-risk/resource-risk.component';
 import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
@@ -20,7 +20,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
   declarations: [
     AppComponent,
     DashboardComponent,
-    RiskSliderComponent,
+    SliderComponent,
     DeviceRiskComponent,
     ResourceRiskComponent,
     ThreatDetailComponent,

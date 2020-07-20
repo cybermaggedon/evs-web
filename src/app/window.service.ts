@@ -12,7 +12,7 @@ export class Window {
 @Injectable({
     providedIn: 'root'
 })
-export class RiskWindowService {
+export class WindowService {
 
     subject : Subject<Window>;
 

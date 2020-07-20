@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RiskGraphService } from './risk-graph.service';
 import { Graph } from './graph';
 import { toRiskModel, RiskModel } from './risk';
-import { RiskWindowService, Window } from './risk-window.service';
+import { WindowService, Window } from './window.service';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class RiskService {
     subject : Subject<RiskModel>;
 
     constructor(private riskGraph : RiskGraphService,
-		private windowService : RiskWindowService) {
+		private windowService : WindowService) {
 
 	this.subject = new Subject<RiskModel>();
 

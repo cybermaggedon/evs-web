@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
+import { age } from '../age';
 
 @Component({
     selector: 'category-detail',
@@ -32,7 +33,7 @@ export class CategoryDetailComponent implements OnInit {
 		    thr.push({
 			"kind": "device",
 			"id": asset.id,
-			"age": this.age(risk.earliest)
+			"age": age(risk.earliest)
 		    });
 		}
 	    }
@@ -44,7 +45,7 @@ export class CategoryDetailComponent implements OnInit {
 		    thr.push({
 			"kind": "resource",
 			"id": asset.id,
-			"age": this.age(risk.earliest)
+			"age": age(risk.earliest)
 		    });
 		}
 	    }
@@ -63,23 +64,6 @@ export class CategoryDetailComponent implements OnInit {
 	    this.id = res.id;
 	    this.update();
 	})
-    }
-
-    age(then : Date) : string {
-
-	let duration = (new Date().getTime() - then.getTime()) / 1000;
-
-	let hrs = duration / 60 / 60;
-	if (hrs < 48) {
-	    return hrs.toFixed(0) + "h";
-	}
-
-	if (hrs < (24 * 7)) {
-	    return (hrs/24).toFixed(0) + "d";
-	}
-
-	return (hrs/24/7).toFixed(0) + "w";
-
     }
 
     goBack(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RiskWindowService, Window } from '../risk-window.service';
+import { WindowService, Window } from '../window.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -10,7 +10,7 @@ import { RiskWindowService, Window } from '../risk-window.service';
 export class DashboardComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
-                private window : RiskWindowService,
+                private window : WindowService,
                 private router: Router) {
         
     }
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() : void {
 
-
+/*
         this.route.queryParams.subscribe(
             params => {
                 const window = params.window;
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
             );
             
         });
-
+*/
     }
 
 }

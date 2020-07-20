@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RiskWindowService, Window } from './risk-window.service';
+import { WindowService, Window } from './window.service';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
     title = 'Eventstream analytics';
     
     constructor(private route: ActivatedRoute,
-                private window : RiskWindowService,
+                private window : WindowService,
                 private router: Router) {
     }
 

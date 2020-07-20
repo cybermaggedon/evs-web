@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
-import { RiskWindowService, Window } from '../risk-window.service';
+import { WindowService, Window } from '../window.service';
+import { age } from '../age';
 
 @Component({
     selector: 'threat-detail',
@@ -14,13 +15,18 @@ export class ThreatDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
 		private location: Location,
  		private threatSvc : ThreatService,
-		private riskWindow : RiskWindowService
+		private windowService : WindowService
 	       ) {
     }
 
     id : string;
     threats : Object;
     window : Window;
+
+    // Update strategy...
+    // - ID set or changed => Fetch new threat graph, update threats
+    // - Periodically => fetch new threat graph, update threats
+    // - Change window => update threats
 
     update() {
 
@@ -38,7 +44,7 @@ export class ThreatDetailComponent implements OnInit {
 			for (let threat of dt.threats.get(kind)) {
 			    thr.push({
 				"kind": kind, "id": threat.id,
-				"age": this.age(threat.age)
+				"age": age(threat.age)
 			    });
 			}
 		    }
@@ -51,7 +57,7 @@ export class ThreatDetailComponent implements OnInit {
     
     ngOnInit(): void {
 
-  	  this.riskWindow.subscribe(w => {
+  	  this.windowService.subscribe(w => {
 	      if (this.window == undefined || w.value != this.window.value) {
    	          this.window = w;
    	          this.update();
@@ -64,23 +70,6 @@ export class ThreatDetailComponent implements OnInit {
 		  this.update();
               }
 	  })
-
-    }
-
-    age(then : Date) : string {
-
-	let duration = (new Date().getTime() - then.getTime()) / 1000;
-
-	let hrs = duration / 60 / 60;
-	if (hrs < 48) {
-	    return hrs.toFixed(0) + "h";
-	}
-
-	if (hrs < (24 * 7)) {
-	    return (hrs/24).toFixed(0) + "d";
-	}
-
-	return (hrs/24/7).toFixed(0) + "w";
 
     }
 

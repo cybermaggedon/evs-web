@@ -1,14 +1,14 @@
 import { Component, OnInit, Inject,  LOCALE_ID, Input } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { RiskWindowService, Window } from '../risk-window.service';
+import { WindowService, Window } from '../window.service';
 @Component({
-    selector: 'risk-slider',
-    templateUrl: './risk-slider.component.html',
-    styleUrls: ['./risk-slider.component.css']
+    selector: 'slider',
+    templateUrl: './slider.component.html',
+    styleUrls: ['./slider.component.css']
 })
-export class RiskSliderComponent implements OnInit {
+export class SliderComponent implements OnInit {
 
-    constructor(private window : RiskWindowService,
+    constructor(private window : WindowService,
                 @Inject(LOCALE_ID) private locale: string) {
 
         //FIXME: Const.  Hopefully this value gets over-ridden by the
