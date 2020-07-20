@@ -23,60 +23,6 @@ export class ThreatGraphService {
 
     rest = "/threat-graph/rest/v2";
 
-    getDeviceThreats(dev : string, from : Date, to : Date) :
-    Observable<Graph> {
-
-	const predicates = [
-	    {
-		"selection" : [ "time" ],
-		"predicate" : {
-		    "class" : "RBMBackedTimestampSetInRange",
-		    "startTime" : from.getTime(),
-		    "endTime" : to.getTime(),
-		    "timeUnit": "MILLISECOND"
-		}
-            }
-        ];
-
-	const request = {
-	    "class" : "OperationChain",
-	    "operations" : [
-  		{
-		    "class": "GetElements",
-		    "includeIncomingOutGoing": "OUTGOING",
-		    "input": [
-			{
-			    "class": "EntitySeed",
-			    "vertex": dev
-			}
-		    ],
-		    "view": {
-			"edges": {
-			    "hasip": {},
-			    "connects": {},
-			    "dnsquery": {},
-			    "requests": {},
-			    "uses": {}
-			},
-			"globalEdges": [
-			    {
-				"postAggregationFilterFunctions": predicates
-			    }
-			]
-		    }
-		}
-	    ]
-	};
-
-	const graphify = map(g => toGraph(g));
-
-        let obs = this.http.post(this.rest + "/graph/operations/execute",
-				 JSON.stringify(request),
-				 this.httpOptions);
-	return graphify(obs);
-
-    }
-
     getThreats(id : string, from : Date, to : Date) :
     Observable<Graph> {
 
@@ -105,16 +51,6 @@ export class ThreatGraphService {
 			}
 		    ],
 		    "view": {
-			"edges": {
-			    "hasip": {},
-			    "connects": {},
-			    "dnsquery": {},
-			    "requests": {},
-			    "uses": {},
-			    "indomain": {},
-			    "dnsresolve": {},
-			    "serves": {}
-			},
 			"globalEdges": [
 			    {
 				"postAggregationFilterFunctions": predicates
