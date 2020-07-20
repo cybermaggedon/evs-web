@@ -9,6 +9,11 @@ export class Window {
     earliest : Date;
 }
 
+export function windowFromValue(value : number) : Window {
+    let then = new Date(new Date().getTime() - value * 3600 * 1000);
+    return new Window(value, then);
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -19,22 +24,27 @@ export class WindowService {
     constructor(
     ) {
         this.subject = new Subject<Window>();
+	this.lastValue = undefined;
     }
 
     lastValue : Window;
 
     update(value : Window) : void {
-        this.lastValue = value;
-        this.subject.next(value);
+	if (this.lastValue == undefined || value != this.lastValue) {
+            this.lastValue = value;
+            this.subject.next(value);
+	}
     }
 
     subscribe(f : any) {
         this.subject.subscribe(f);
 
         // Give subscribers last value.
-	if (this.lastValue != undefined)
-	    f(this.lastValue);
-    }
+	if (this.lastValue != undefined) {
 
+	    f(this.lastValue);
+	}
+    }
+    
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WindowService, Window } from './window.service';
+import { ActivatedRoute, Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { WindowService, Window, windowFromValue } from './window.service';
 
 @Component({
     selector: 'app-root',
@@ -15,20 +15,26 @@ export class AppComponent implements OnInit {
                 private router: Router) {
     }
 
+    lastWindow : Window;
+
     ngOnInit() {
 
-        this.route.queryParams.subscribe(
-            params => {
-                const window = params.window;
-                if (window == undefined) {
-		    // Do nothing, slider initialises with 120 value.
-                } else {
-                    this.setSlider(parseInt(window));
-                }
-            });
-	
+	this.lastWindow = windowFromValue(120);
+	this.window.update(this.lastWindow);
+
+	this.route.queryParams.subscribe(
+	    params => {
+		let window = params.window;
+		if (window != undefined) {
+		    this.setWindow(windowFromValue(window));
+		}
+	    }
+	);
+
         this.window.subscribe(w => {
-            if (w == undefined) return;
+            if (w == undefined || w == this.lastWindow) {
+		return;
+	    }
 	    
             this.router.navigate(
                 [
@@ -44,11 +50,10 @@ export class AppComponent implements OnInit {
 
     }
 
-    setSlider(value : number) {
-        const hour = 1000 * 60 * 60;
-        const now = new Date();
-        const thence = new Date(now.getTime() - hour * value);
-        this.window.update(new Window(value, thence));
+    setWindow(w : Window) {
+	if (w != this.lastWindow) {
+            this.window.update(w);
+	}
 
     }
     
