@@ -56,6 +56,56 @@
     display: flex;
 }
 
+.risks .category0 {
+    background-color: #4b3f72;
+    border: 1px solid #4b3f72;
+}
+
+.risks .category1 {
+    background-color: #119da4;
+    border: 1px solid #119da4;
+}
+
+.risks .category2 {
+    background-color: #19647e;
+    border: 1px solid #19647e;
+}
+
+.risks .category3 {
+    background-color: #804028;
+    border: 1px solid #804028;
+}
+
+.risks .category4 {
+    background-color: #408028;
+    border: 1px solid #408028;
+}
+
+.risks .category5 {
+    background-color: #a04060;
+    border: 1px solid #a04060;
+}
+
+.risks .category6 {
+    background-color: #c08020;
+    border: 1px solid #c08020;
+}
+
+.risks .category7 {
+    background-color: #2080c0;
+    border: 1px solid #2080c0;
+}
+
+.risks .category8 {
+    background-color: #80a020;
+    border: 1px solid #80a020;
+}
+
+.risks .category9 {
+    background-color: #4040a0;
+    border: 1px solid #4040a0;
+}
+
 .targets a:hover {
   color:  #ffffff;
 }

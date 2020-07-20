@@ -16,10 +16,10 @@
 	</a>
         <div class="risks">
           <div *ngFor="let risk of target.risks">
-            <a class="category"
+            <a class="category {{risk.className()}}"
 	       [routerLink]="['/category', risk.category]"
 	       queryParamsHandling="preserve"
-	       style="width: {{risk.risk * 300}}px; background-color: {{risk.colourName()}}; border: 1px solid {{risk.colourName()}};">
+	       style="width: {{risk.risk * 300}}px">
 	      {{risk.category}}
 	    </a>
           </div>

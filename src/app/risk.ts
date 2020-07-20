@@ -13,22 +13,14 @@ function getCategoryRiskValue(category : string) : number {
     return 0.3;
 }
 
-export function nameToCssColour(name : string, kind : string) : string {
+export function nameToCssClass(name : string) : string {
     let a = 0;
-    for (let c of (name + kind)) {
+    for (let c of name) {
         let code = c.charCodeAt(0) % 127;
         a = (a ^ code) & 127;
     }
-    let r = (a % 7) * 16;
-    let g = ((a >> 3) % 7) * 16;
-    let b = ((a >> 6) % 7) * 16;
-    g ^= r;
-    b ^= g;
-
-    r = 4 + 2 * r; g = 4 + 2 * g; b = 4 + 2 * b;
-
-    let rgb  = `rgb(${r},${g},${b})`;
-    return rgb;
+    let c = (a % 11);
+    return "category" + c;
 }
 
 export class Risk {
@@ -37,8 +29,8 @@ export class Risk {
     earliest : Date;
     latest : Date;
 
-    colourName() : string {
-        return nameToCssColour(this.category, "category");
+    className() : string {
+        return nameToCssClass(this.category);
     }
 
 };
