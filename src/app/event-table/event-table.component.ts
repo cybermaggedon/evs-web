@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventSearchService, SearchTerms } from '../event-search.service';
+import { ElasticSearchService } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { WindowService, Window } from '../window.service';
 })
 export class EventTableComponent implements OnInit {
 
-    constructor(private http : HttpClient,
-		private eventSearch : EventSearchService,
-		private windowService : WindowService) {
+    constructor(private eventSearch : EventSearchService,
+		private windowService : WindowService,
+		private es : ElasticSearchService) {
     }
 
     terms : SearchTerms;
@@ -38,64 +38,9 @@ export class EventTableComponent implements OnInit {
 	if (this.terms == undefined) return;
 	if (this.window == undefined) return;
 
-	const start = 'now-' + this.window.value + 'h';
-
-	console.log(start);
-
-	const qry = {
-	    query: {
-		bool: {
-		    must: [
-			{
-			    multi_match: {
-				query: this.terms.id
-			    }
-			},
-			{
-			    range: {
-				time: {
-				    // FIXME: Use window
-				    gte: start,
-				    lt: 'now'
-				}
-			    }
-			}
-		    ]
-		}
-	    },
-	    sort: [
-		{ time: { order: "desc" } }
-	    ]
-	};
-
-	console.log(qry);
-
-	const httpOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
-
-	const index = "cyberprobe";
-	this.http.post("/elasticsearch/" + index + "/_search",
-		       JSON.stringify(qry),
-		       httpOptions).subscribe((r : Object) => {
-			   let e = [];
-			   if ("hits" in r) {
-			       let res : Object[] = r["hits"]["hits"];
-			       for (let r of res) {
-				   let s = r["_source"];
-				   e.push({
-				       id: s["id"],
-				       device: s["device"],
-				       action: s["action"],
-				       time: s["time"],
-				   });
-			       }
-
-
-			   }
-			   this.esData = e;
-			   console.log(this.esData);
-		       });
+	this.es.search(this.terms, this.window).subscribe(r => {
+	    this.esData = r;
+	});
 
     }
 
