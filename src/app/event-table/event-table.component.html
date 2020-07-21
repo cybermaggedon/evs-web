@@ -5,11 +5,14 @@
   <table>
     <tr *ngFor="let row of esData">
       <td>{{row.time}}</td>
-      <td>{{row.id}}</td>
       <td>{{row.device}}</td>
-      <td>{{row.action}}</td>
       <td>{{row.network}}</td>
-      <td>{{row.asdlknetwork}}</td>
+      <td>{{row.action}}</td>
+      <td>{{row.srcip}}</td>
+      <td>{{row.destip}}</td>
+      <td>{{row.srcport}}</td>
+      <td>{{row.destport}}</td>
+      <td>{{row.protocol}}</td>
     </tr>
   </table>
 </div>
