@@ -6,6 +6,7 @@ import { LOCALE_ID } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,8 @@ import { EventTableComponent } from './event-table/event-table.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTableModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent]
