@@ -1,4 +1,6 @@
 
+// Converts a time to human-readable tag describing the age, which is a
+// number followed by 'h', 'd' or 'w' for hours, dates, weeks.
 export function age(then : Date) : string {
 
     let duration = (new Date().getTime() - then.getTime()) / 1000;

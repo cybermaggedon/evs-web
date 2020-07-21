@@ -1,11 +1,14 @@
 <body>
-  <h1>{{title}}</h1>
+  <h1>Eventstream dashboard</h1>
 
   <nav>
     <a [routerLink]="['/dashboard']"
        queryParamsHandling="preserve">
       Dashboard
     </a>
+    <a href="/kibana">Kibana</a>
+    <a href="/grafana">Metrics</a>
+    <a href="/prometheus">Prometheus</a>
   </nav>
 
   <slider></slider>

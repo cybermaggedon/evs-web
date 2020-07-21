@@ -51,6 +51,25 @@
 }
 
 .bottom {
-    margin: 10px;
+    padding: 10px;
     clear: left;
+}
+
+.threat a:hover {
+  color:  #ffffff;
+}
+
+.threat:hover .kind {
+  color: #6080a0;
+  background-color: #ccc;
+}
+
+.threat:hover .id {
+  color: #6080a0;
+  background-color: #ccc;
+  border: 1px solid #888;
+}
+
+.threat:hover .age {
+  color: #6080a0;
 }
