@@ -106,17 +106,20 @@
     border: 1px solid #4040a0;
 }
 
-.targets a:hover {
-  color:  #ffffff;
-}
-
-.targets li:hover .name {
+.targets li .name:hover {
   color: #6080a0;
   background-color: #ccc;
 }
 
-.targets li:hover .score {
+.targets li .score:hover {
   color: #6080a0;
   background-color: #ccc;
   border: 1px solid #888;
 }
+
+.targets li .category:hover {
+  color: #6080a0;
+  background-color: #ccc;
+  border: 1px solid #888;
+}
+
