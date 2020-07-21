@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventSearchService, SearchTerms } from '../event-search.service';
 import { ElasticSearchService } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
-import { MatTable } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 
 export interface Event {
     time : string;
@@ -30,11 +28,6 @@ export class EventTableComponent implements OnInit {
 	this.data = [];
     }
 
-    @ViewChild('table')
-    table : MatTable<Event>;
-
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
-
     terms : SearchTerms;
     window : Window;
 
@@ -53,9 +46,14 @@ export class EventTableComponent implements OnInit {
 
     data : any;
 
+//     columns = [
+//  	"time", "device", "network", "action",
+//  	"srcip", "destip", "srcport", "destport", "protocol"
+//      ];
     columns = [
-	"time", "device", "network", "action",
-	"srcip", "destip", "srcport", "destport", "protocol"
+	{name: "time"}, {name: "device"}, {name: "network"},
+	{name: "action"}, {name: "srcip"}, {name: "destip"},
+	{name: "srcport"}, {name: "destport"}, {name: "protocol"}
     ];
 
     updateEs() {
@@ -65,7 +63,6 @@ export class EventTableComponent implements OnInit {
 
 	this.es.search(this.terms, this.window).subscribe(r => {
 	    this.data = r;
-	    this.table.renderRows();
 	});
 
     }

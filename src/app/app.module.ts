@@ -6,7 +6,7 @@ import { LOCALE_ID } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatTableModule } from '@angular/material/table';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +35,7 @@ import { EventTableComponent } from './event-table/event-table.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatTableModule
+    NgxDatatableModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent]
