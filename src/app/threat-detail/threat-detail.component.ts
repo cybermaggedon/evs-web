@@ -4,6 +4,7 @@ import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
+import { EventSearchService, SearchTerms } from '../event-search.service';
 import { age } from '../age';
 
 @Component({
@@ -16,8 +17,8 @@ export class ThreatDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
 		private location: Location,
  		private threatSvc : ThreatService,
-		private windowService : WindowService
-	       ) {
+		private windowService : WindowService,
+		private eventSearch : EventSearchService) {
     }
 
     id : string;
@@ -43,8 +44,9 @@ export class ThreatDetailComponent implements OnInit {
 		for (let threat of this.allThreats.threats.get(kind)) {
 		    if (threat.age < this.window.earliest) continue;
 		    thr.push({
-			"kind": kind, "id": threat.id,
-			"age": age(threat.age)
+			kind: kind,
+			id: threat.id,
+			age: age(threat.age)
 		    });
 		}
 	    }
@@ -84,6 +86,8 @@ export class ThreatDetailComponent implements OnInit {
             if (res.id != this.id) {
 		this.id = res.id;
 		this.fetchThreats();
+		console.log("SEARCHING");
+		this.eventSearch.update(new SearchTerms(this.id));
             }
 	})
 

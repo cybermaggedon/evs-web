@@ -1,5 +1,7 @@
 <h2>{{id}}</h2>
 
+<event-table></event-table>
+
 <div class="threats">
   <a class="threat" *ngFor="let threat of threats"
      [routerLink]="['/threat', threat.id]"
