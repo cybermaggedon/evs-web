@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventSearchService, SearchTerms } from '../event-search.service';
 import { ElasticSearchService } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 export interface Event {
     time : string;
@@ -13,6 +14,13 @@ export interface Event {
     srcport : string;
     destport : string;
     protocol : string;
+};
+
+export class Page {
+    pageSize : number = 0;
+    numItems : number = 0;
+    numPages : number = 0;
+    pageNum : number = 0;
 };
 
 @Component({
@@ -31,6 +39,8 @@ export class EventTableComponent implements OnInit {
     terms : SearchTerms;
     window : Window;
 
+    ColumnMode = ColumnMode;
+
     ngOnInit(): void {
 
 	this.eventSearch.subscribe(s => {
@@ -45,11 +55,8 @@ export class EventTableComponent implements OnInit {
     }
 
     data : any;
+    page : Page;
 
-//     columns = [
-//  	"time", "device", "network", "action",
-//  	"srcip", "destip", "srcport", "destport", "protocol"
-//      ];
     columns = [
 	{name: "time"}, {name: "device"}, {name: "network"},
 	{name: "action"}, {name: "srcip"}, {name: "destip"},

@@ -1,18 +1,9 @@
 
-<ngx-datatable [rows]="data" [columns]="columns" class="material table"></ngx-datatable>
-<!--
-<table datatable class="row-border hover">
-  <thead>
-    <tr>
-      <th *ngFor="let col of columns">{{col}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of data">
-      <td *ngFor="let col of columns">
-	{{row[col]}}
-      </td>
-    </tr>
-  </tbody>
-</table>
--->
+<ngx-datatable [rows]="data" [columns]="columns"
+	       [columnMode]="ColumnMode.force"
+	       [headerHeight]="40"
+	       [footerHeight]="40"
+	       rowHeight="3em"
+	       class="material table">
+</ngx-datatable>
+
