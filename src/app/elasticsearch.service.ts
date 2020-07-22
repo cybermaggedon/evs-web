@@ -112,8 +112,6 @@ export class ElasticSearchService {
 	    ]
 	};
 
-	console.log(qry);
-
 	let obs = this.http.post("/elasticsearch/" + this.index + "/_search",
 				 JSON.stringify(qry),
 				 this.httpOptions);

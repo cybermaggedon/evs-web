@@ -41,6 +41,7 @@ export class EventTableComponent implements OnInit {
 
 	this.eventSearch.subscribe(s => {
 	    this.terms = s;
+	    this.pageNum = 0;
 	    this.updateTable();
 	});
 
@@ -55,9 +56,15 @@ export class EventTableComponent implements OnInit {
     pageNum : number;
 
     columns = [
-	{name: "time"}, {name: "device"}, {name: "network"},
-	{name: "action"}, {name: "srcip"}, {name: "destip"},
-	{name: "srcport"}, {name: "destport"}, {name: "protocol"}
+	{name: "time", minWidth: "200"},
+	{name: "device"},
+	{name: "network"},
+	{name: "action"},
+	{name: "srcip"},
+	{name: "destip"},
+	{name: "srcport"},
+	{name: "destport"},
+	{name: "protocol"}
     ];
 
     updateTable() {
@@ -75,7 +82,12 @@ export class EventTableComponent implements OnInit {
 
 	obs.subscribe(r => {
 	    this.data = r;
-	    console.log(r);
+	    if (this.data.numPages > 0 && this.pageNum > this.data.numPages) {
+		this.pageNum = 0;
+		// FIXME: Recursive?  The above conditions should make this
+		// safe.
+		this.updateTable();
+	    }
 	});
 
     }
