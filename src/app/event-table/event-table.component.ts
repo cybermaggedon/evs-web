@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventSearchService, SearchTerms } from '../event-search.service';
-import { ElasticSearchService } from '../elasticsearch.service';
+import { ElasticSearchService, Filter, Page } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 
@@ -16,13 +16,6 @@ export interface Event {
     protocol : string;
 };
 
-export class Page {
-    pageSize : number = 0;
-    numItems : number = 0;
-    numPages : number = 0;
-    pageNum : number = 0;
-};
-
 @Component({
     selector: 'event-table',
     templateUrl: './event-table.component.html',
@@ -33,7 +26,10 @@ export class EventTableComponent implements OnInit {
     constructor(private eventSearch : EventSearchService,
 		private windowService : WindowService,
 		private es : ElasticSearchService) {
-	this.data = [];
+	this.pageSize = 8;
+	this.pageNum = 0;
+	this.data = new Page();
+	this.data.data = [];
     }
 
     terms : SearchTerms;
@@ -45,17 +41,18 @@ export class EventTableComponent implements OnInit {
 
 	this.eventSearch.subscribe(s => {
 	    this.terms = s;
-	    this.updateEs();
+	    this.updateTable();
 	});
 
 	this.windowService.subscribe(w => {
 	    this.window = w;
-	    this.updateEs();
+	    this.updateTable();
 	});
     }
 
-    data : any;
-    page : Page;
+    data : Page;
+    pageSize : number;
+    pageNum : number;
 
     columns = [
 	{name: "time"}, {name: "device"}, {name: "network"},
@@ -63,15 +60,29 @@ export class EventTableComponent implements OnInit {
 	{name: "srcport"}, {name: "destport"}, {name: "protocol"}
     ];
 
-    updateEs() {
+    updateTable() {
 
 	if (this.terms == undefined) return;
 	if (this.window == undefined) return;
 
-	this.es.search(this.terms, this.window).subscribe(r => {
+	const fixmes = [
+	    new Filter()
+	];
+
+	let obs = this.es.search(this.terms, this.window, "time",
+				 fixmes, this.pageSize * this.pageNum,
+				 this.pageSize);
+
+	obs.subscribe(r => {
 	    this.data = r;
+	    console.log(r);
 	});
 
+    }
+
+    setPage(pageInfo) {
+	this.pageNum = pageInfo.offset;
+	this.updateTable();
     }
 
 }

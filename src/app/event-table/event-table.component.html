@@ -1,9 +1,15 @@
 
-<ngx-datatable [rows]="data" [columns]="columns"
+<ngx-datatable class="material table"
+	       [rows]="data.data"
+	       [columns]="columns"
 	       [columnMode]="ColumnMode.force"
 	       [headerHeight]="40"
 	       [footerHeight]="40"
 	       rowHeight="3em"
-	       class="material table">
+	       [externalPaging]="true"
+	       [count]="data.total"
+	       [offset]="data.pageNum"
+	       [limit]="data.size"
+	       (page)="setPage($event)">
 </ngx-datatable>
 

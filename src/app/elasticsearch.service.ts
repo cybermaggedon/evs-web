@@ -1,8 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SearchTerms } from './event-search.service';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Window } from './window.service';
+
+export class Filter {
+    fixme: string;
+};
+
+export class Page {
+    from : number;
+    to : number;
+    size : number;
+    data : Object[];
+    total : number;
+    pageNum : number;
+    numPages : number;
+};
 
 @Injectable({
     providedIn: 'root'
@@ -44,7 +59,7 @@ export class ElasticSearchService {
 	return rtn;
     }
 
-    parseResults(r : any) : any {
+    parseResults(r : any, from : number, size : number) : Page {
 
 	let e = [];
 
@@ -54,14 +69,23 @@ export class ElasticSearchService {
 		e.push(this.parseSource(r["_source"]));
 	    }
 	}
-	console.log(e);
-	return e;
+	
+	return {
+	    from: from, size: size, to: from + size,
+	    total: r.hits.total.value,
+	    pageNum: Math.ceil(from / size),
+	    numPages: Math.ceil(r.hits.total.value / size),
+	    data: e
+	};
     };
 
-    search(terms : SearchTerms, window : Window) {
+    search(terms : SearchTerms, window : Window,
+	   sort : string, filters : Filter[],
+	   from : number, size : number) : Observable<Page> {
 
-	const start = 'now-' + window.value + 'h';
+	const start = `now-${window.value}h`;
 
+	// FIXME: Filters not used.
 	const qry = {
 	    query: {
 		bool: {
@@ -74,7 +98,6 @@ export class ElasticSearchService {
 			{
 			    range: {
 				time: {
-				    // FIXME: Use window
 				    gte: start,
 				    lt: 'now'
 				}
@@ -83,18 +106,19 @@ export class ElasticSearchService {
 		    ]
 		}
 	    },
+	    from: from, size: size,
 	    sort: [
-		{ time: { order: "desc" } }
+		{ [sort]: { order: "desc" } }
 	    ]
 	};
 
-//	console.log(qry);
+	console.log(qry);
 
 	let obs = this.http.post("/elasticsearch/" + this.index + "/_search",
 				 JSON.stringify(qry),
 				 this.httpOptions);
 
-	const parse = map(r => this.parseResults(r));
+	const parse = map(r => this.parseResults(r, from, size));
 
 	return parse(obs);
 
