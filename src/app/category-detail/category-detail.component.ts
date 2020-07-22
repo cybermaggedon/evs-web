@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
+import { EventSearchService, SearchTerms } from '../event-search.service';
 import { age } from '../age';
 
 @Component({
@@ -12,9 +13,11 @@ import { age } from '../age';
 })
 export class CategoryDetailComponent implements OnInit {
 
-    constructor(private route: ActivatedRoute,
-		private location: Location,
- 		private riskSvc : RiskService) { }
+    constructor(private route : ActivatedRoute,
+		private location : Location,
+ 		private riskSvc : RiskService,
+		private eventSearch : EventSearchService) {
+    }
 
     id : string;
     model : RiskModel;
@@ -55,15 +58,20 @@ export class CategoryDetailComponent implements OnInit {
 
     }
     
-    ngOnInit(): void {
+    ngOnInit() : void {
+
     	this.riskSvc.subscribe(m => {
 	    this.model = m;
 	    this.update();
 	});
+
   	this.route.params.subscribe(res => {
 	    this.id = res.id;
 	    this.update();
+	    console.log("ID is ", this.id);
+            this.eventSearch.update(new SearchTerms(this.id));
 	})
+
     }
 
     goBack(): void {
