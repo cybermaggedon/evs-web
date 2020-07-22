@@ -86,7 +86,6 @@ export class ThreatDetailComponent implements OnInit {
             if (res.id != this.id) {
 		this.id = res.id;
 		this.fetchThreats();
-		console.log("SEARCHING");
 		this.eventSearch.update(new SearchTerms(this.id));
             }
 	})
