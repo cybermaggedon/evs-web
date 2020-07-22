@@ -9,10 +9,8 @@ export interface Event {
     device : string;
     network : string;
     action : string;
-    srcip : string;
-    destip : string;
-    srcport : string;
-    destport : string;
+    src : string;
+    dest : string;
     protocol : string;
 };
 
@@ -28,12 +26,16 @@ export class EventTableComponent implements OnInit {
 		private es : ElasticSearchService) {
 	this.pageSize = 8;
 	this.pageNum = 0;
+	this.sortField = "time";
+	this.sortAsc = false;
 	this.data = new Page();
 	this.data.data = [];
+	this.loading = false;
     }
 
     terms : SearchTerms;
     window : Window;
+    loading : boolean;
 
     ColumnMode = ColumnMode;
 
@@ -54,16 +56,16 @@ export class EventTableComponent implements OnInit {
     data : Page;
     pageSize : number;
     pageNum : number;
+    sortField : string;
+    sortAsc : boolean;
 
     columns = [
 	{name: "time", minWidth: "200"},
 	{name: "device"},
 	{name: "network"},
 	{name: "action"},
-	{name: "srcip"},
-	{name: "destip"},
-	{name: "srcport"},
-	{name: "destport"},
+	{name: "src"},
+	{name: "dest"},
 	{name: "protocol"}
     ];
 
@@ -76,12 +78,15 @@ export class EventTableComponent implements OnInit {
 	    new Filter()
 	];
 
-	let obs = this.es.search(this.terms, this.window, "time",
-				 fixmes, this.pageSize * this.pageNum,
-				 this.pageSize);
+//	this.loading = true;
+
+	let obs = this.es.search(this.terms, this.window,
+				 this.sortField, this.sortAsc,
+				 fixmes, 0, 1000);
 
 	obs.subscribe(r => {
 	    this.data = r;
+//	    this.loading = false;
 	    if (this.data.numPages > 0 && this.pageNum > this.data.numPages) {
 		this.pageNum = 0;
 		// FIXME: Recursive?  The above conditions should make this

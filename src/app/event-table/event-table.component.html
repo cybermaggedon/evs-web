@@ -6,10 +6,8 @@
 	       [headerHeight]="40"
 	       [footerHeight]="40"
 	       rowHeight="3em"
-	       [externalPaging]="true"
-	       [count]="data.total"
-	       [offset]="data.pageNum"
-	       [limit]="data.size"
+	       [loadingIndicator]="loading"
+	       [limit]="10"
 	       (page)="setPage($event)">
 </ngx-datatable>
 
