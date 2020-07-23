@@ -19,7 +19,7 @@ export class RiskGraphService {
     ) {
         this.subject = new Subject<Graph>();
         timer(0, 10000).subscribe(g => {
-            this.subject.next(toGraph(g));
+	    this.update();
         });
     }
 
