@@ -1,10 +1,15 @@
 
+// Miscellaneous risk structures.
+
 import { Graph } from './graph';
+
+// Risk table, maps risk category to risk score.
 const risks = {
     'malware': 0.1,
     'tor-exit': 0.7
 };
 
+// Returns risk score, using a default if risk score is not known.
 function getCategoryRiskValue(category : string) : number {
 
     if (category in risks) {
@@ -13,6 +18,8 @@ function getCategoryRiskValue(category : string) : number {
     return 0.3;
 }
 
+// Translate a name (risk category / threat type) to a CSS class.
+// The name is hashed to a suffix which is added to the string 'category'.
 export function nameToCssClass(name : string) : string {
     let a = 0;
     for (let c of name) {
@@ -23,23 +30,37 @@ export function nameToCssClass(name : string) : string {
     return "category" + c;
 }
 
+// Risk category attribution.  Includes category name, time period over
+// which observation takes place.
 export class Risk {
+
+    // Risk category ID
     category : string;
+
+    // Risk score
     risk : number;
+
+    // Period of observation
     earliest : Date;
     latest : Date;
 
+    // Return CSS class name
     className() : string {
         return nameToCssClass(this.category);
     }
 
 };
 
+// Risk description for an asset (device or resource).
 export class Asset {
 
+    // Asset ID
     id : string;
+
+    // Associated risks.
     risks : Risk[];
 
+    // Return combined risk score.
     getRiskScore() : number {
 
         let score = 1;
@@ -52,6 +73,7 @@ export class Asset {
 
     }
 
+    // Return new asset description, windowed.
     applyWindow(start : Date, end : Date) : Asset {
 
         let asset = new Asset();
@@ -93,6 +115,7 @@ export class Asset {
 
 }
 
+// Apply time window to an asset array, returning new asset array.
 function windowAssets(assets : Asset[], start : Date, minRisk) : Asset[] {
 
     let rtn : Asset[] = [];
@@ -106,12 +129,14 @@ function windowAssets(assets : Asset[], start : Date, minRisk) : Asset[] {
         }
     }
 
+    // Sort by risk score.
     rtn.sort((a, b) => (b.getRiskScore() - a.getRiskScore()));
 
     return rtn
 
 }
 
+// Risk Model, containes risk description for devices and resources.
 export class RiskModel {
     devices : Asset[];
     resources : Asset[];
@@ -132,9 +157,10 @@ export class RiskModel {
 
     }
 
-
 }
 
+// Convert graph to an array of assets.  edge specifies the graph edges
+// to use.
 export function toAssetArray(graph : Graph, edge : string) : Asset[] {
 
     let assets = {};
@@ -171,6 +197,7 @@ export function toAssetArray(graph : Graph, edge : string) : Asset[] {
 
 }
 
+// Convert a graph to a risk model.
 export function toRiskModel(graph : Graph) : RiskModel {
 
     let model = new RiskModel();

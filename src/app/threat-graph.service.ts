@@ -1,3 +1,7 @@
+
+// Threat graph service.  Executes queries against threat graph, returning
+// results as observations.
+
 import { Injectable } from '@angular/core';
 import { Edge, Entity, Graph } from './graph';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,18 +18,21 @@ export class ThreatGraphService {
         private http : HttpClient
     ) { }
 
+    // HTTP headers.
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    edges : Edge[];
-    entities : Entity[];
-
+    // Gaffer REST endpoint
     rest = "/threat-graph/rest/v2";
 
+    // Execute a Gaffer query for threats
     getThreats(id : string, from : Date, to : Date) :
     Observable<Graph> {
 
+        // Query predicates, searches on the basis that observations occur
+        // in a time period.  Such a restriction is useful because the
+        // graph can be quite big.
 	const predicates = [
 	    {
 		"selection" : [ "time" ],
@@ -38,6 +45,9 @@ export class ThreatGraphService {
             }
         ];
 
+        // Construct the request.  GetElements gets all edges from the
+        // search seed, filtering out those which don't occur within our
+        // time window.
 	const request = {
 	    "class" : "OperationChain",
 	    "operations" : [
@@ -61,12 +71,12 @@ export class ThreatGraphService {
 	    ]
 	};
 
-	const graphify = map(g => toGraph(g));
-
-        let obs = this.http.post(this.rest + "/graph/operations/execute",
-				 JSON.stringify(request),
-				 this.httpOptions);
-	return graphify(obs);
+        // Execute query, pipe results through converstion to simple
+        // graph structure.
+        return this.http.post(this.rest + "/graph/operations/execute",
+		       JSON.stringify(request),
+		       this.httpOptions).
+                pipe(map(g => toGraph(g)));
 
     }
 
