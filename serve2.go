@@ -40,6 +40,7 @@ func main() {
 	var esPath = regexp.MustCompile("^/elasticsearch/")
 	var grPath = regexp.MustCompile("^/risk-graph/")
 	var gtPath = regexp.MustCompile("^/threat-graph/")
+	var fairPath = regexp.MustCompile("^/fair/")
 
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		
@@ -107,6 +108,33 @@ func main() {
 
 			r.URL.Path = path
 			r.URL.Host = "localhost:8081"
+			r.URL.Scheme = "http"
+
+			resp, err := http.DefaultTransport.RoundTrip(r)
+
+			if err != nil {
+				log.Printf("503: %s", err.Error())
+				http.Error(w, err.Error(),
+					http.StatusServiceUnavailable)
+				return
+			}
+
+			defer resp.Body.Close()
+			copyHeader(w.Header(), resp.Header)
+			w.WriteHeader(resp.StatusCode)
+			io.Copy(w, resp.Body)
+			return
+
+		}
+
+		if m := fairPath.FindStringSubmatch(r.URL.Path); m != nil {
+
+			path := r.URL.Path[6:]
+
+			fmt.Println(path)
+
+			r.URL.Path = path
+			r.URL.Host = "localhost:9876"
 			r.URL.Scheme = "http"
 
 			resp, err := http.DefaultTransport.RoundTrip(r)

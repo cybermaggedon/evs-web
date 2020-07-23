@@ -17,6 +17,7 @@ import { ResourceRiskComponent } from './resource-risk/resource-risk.component';
 import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { EventTableComponent } from './event-table/event-table.component';
+import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EventTableComponent } from './event-table/event-table.component';
     ThreatDetailComponent,
     CategoryDetailComponent,
     EventTableComponent,
+    RiskDashboardComponent,
   ],
   imports: [
     BrowserModule,

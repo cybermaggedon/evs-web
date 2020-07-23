@@ -18,7 +18,6 @@ export class DeviceRiskComponent implements OnInit {
     @Input('max-items')
     maxItems : number = 20;
 
-    // Data input
     model : RiskModel;
 
     ngOnInit(): void {
