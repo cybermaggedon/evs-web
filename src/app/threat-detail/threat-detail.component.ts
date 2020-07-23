@@ -21,15 +21,25 @@ export class ThreatDetailComponent implements OnInit {
 		private eventSearch : EventSearchService) {
     }
 
+    // Current threat identifier
     id : string;
+
+    // Current threat window
     window : Window;
 
+    // Threats
     allThreats : Threats;
+
+    // Summarized threats
     threats : Object;
 
+    // Number of threat elements
     threatCount : number;
 
+    // Number of events in the event table
     tableEvents : number;
+
+    // Called when events are loaded in the table
     onEventsLoaded(e) { this.tableEvents = e; }
 
     // Update strategy...
@@ -65,6 +75,7 @@ export class ThreatDetailComponent implements OnInit {
         this.threatCount = count;
     }
 
+    // Stage 1, fetch threat graph elements
     fetchThreats() {
 
 	if (this.id == undefined) return;

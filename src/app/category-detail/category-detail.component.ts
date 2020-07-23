@@ -19,16 +19,25 @@ export class CategoryDetailComponent implements OnInit {
 		private eventSearch : EventSearchService) {
     }
 
+    // Current threat identifier
     id : string;
+
+    // Risk model
     model : RiskModel;
-    
+
+    // Threats derived from risk model
     threats : Object;
 
+    // Number of threats
     threatCount : number;
 
+    // Number of events in the event table
     tableEvents : number;
+
+    // Called when events are loaded in the table
     onEventsLoaded(e) { this.tableEvents = e; }
 
+    // Called to update
     update() {
 
 	if (this.id == undefined || this.model == undefined) return;
