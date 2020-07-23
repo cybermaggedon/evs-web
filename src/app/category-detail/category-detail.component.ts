@@ -24,11 +24,19 @@ export class CategoryDetailComponent implements OnInit {
     
     threats : Object;
 
+    threatCount : number;
+
+    tableEvents : number;
+    onEventsLoaded(e) { this.tableEvents = e; }
+
     update() {
 
 	if (this.id == undefined || this.model == undefined) return;
 
 	let thr = [];
+
+	let count = 0;
+
 	
 	for (let asset of this.model.devices) {
 	    for (let risk of asset.risks) {
@@ -38,6 +46,7 @@ export class CategoryDetailComponent implements OnInit {
 			"id": asset.id,
 			"age": age(risk.earliest)
 		    });
+		    count++;
 		}
 	    }
 	}
@@ -50,11 +59,13 @@ export class CategoryDetailComponent implements OnInit {
 			"id": asset.id,
 			"age": age(risk.earliest)
 		    });
+		    count++;
 		}
 	    }
 	}
 
         this.threats = thr;
+        this.threatCount = count;
 
     }
     
