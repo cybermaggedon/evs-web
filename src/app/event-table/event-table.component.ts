@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventSearchService, SearchTerms } from '../event-search.service';
 import { ElasticSearchService, Filter, Page } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
@@ -69,6 +69,12 @@ export class EventTableComponent implements OnInit {
 	{name: "protocol"}
     ];
 
+    @Input('max-events')
+    maxEvents : number = 100;
+
+    @Output('events-loaded')
+    eventsLoaded : EventEmitter<number> = new EventEmitter<number>();
+
     updateTable() {
 
 	if (this.terms == undefined) return;
@@ -82,10 +88,11 @@ export class EventTableComponent implements OnInit {
 
 	let obs = this.es.search(this.terms, this.window,
 				 this.sortField, this.sortAsc,
-				 fixmes, 0, 1000);
+				 fixmes, 0, this.maxEvents);
 
 	obs.subscribe(r => {
 	    this.data = r;
+	    this.eventsLoaded.emit(r.total);
 //	    this.loading = false;
 	    if (this.data.numPages > 0 && this.pageNum > this.data.numPages) {
 		this.pageNum = 0;

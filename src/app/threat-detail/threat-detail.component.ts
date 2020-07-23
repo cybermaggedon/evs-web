@@ -27,6 +27,9 @@ export class ThreatDetailComponent implements OnInit {
     allThreats : Threats;
     threats : Object;
 
+    tableEvents : number;
+    onEventsLoaded(e) { this.tableEvents = e; }
+
     // Update strategy...
     // - ID set or changed => Fetch new threat graph, update threats
     // - Periodically => fetch new threat graph, update threats

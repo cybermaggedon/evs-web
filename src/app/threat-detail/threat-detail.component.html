@@ -1,6 +1,28 @@
 <h2>{{id}}</h2>
 
-<event-table></event-table>
+<mat-expansion-panel [expanded]=false>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Event detail
+    </mat-panel-title>
+    <mat-panel-description>
+      {{tableEvents}} events
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <event-table (events-loaded)="onEventsLoaded($event)"></event-table>
+</mat-expansion-panel>
+
+<!--
+<mat-expansion-panel [expanded]=true>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Threat relationships
+    </mat-panel-title>
+    <mat-panel-description>
+      {{threats.length}} relationships
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+-->
 
 <div class="threats">
   <a class="threat" *ngFor="let threat of threats"
@@ -11,7 +33,11 @@
     <div class="age {{threat.kind}}">{{threat.age}}</div>
   </a>
 </div>
+<!--
+</mat-expansion-panel>
+-->
 
 <div class="bottom">
   <button (click)="goBack()">go back</button>
 </div>
+
