@@ -1,3 +1,5 @@
+
+// root module
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
@@ -22,28 +24,34 @@ import { EventTableComponent } from './event-table/event-table.component';
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    SliderComponent,
-    DeviceRiskComponent,
-    ResourceRiskComponent,
-    ThreatDetailComponent,
-    CategoryDetailComponent,
-    EventTableComponent,
-    RiskDashboardComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatTabsModule,
-    MatExpansionModule,
-    NgxDatatableModule
-  ],
-  providers: [{provide: LOCALE_ID, useValue: 'en-GB' }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        SliderComponent,
+        DeviceRiskComponent,
+        ResourceRiskComponent,
+        ThreatDetailComponent,
+        CategoryDetailComponent,
+        EventTableComponent,
+        RiskDashboardComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSliderModule,
+        MatTabsModule,
+        MatExpansionModule,
+        NgxDatatableModule
+    ],
+    providers: [
+        {
+            provide: LOCALE_ID, useValue: 'en-GB'
+        }
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }

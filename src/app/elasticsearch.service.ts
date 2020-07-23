@@ -1,3 +1,5 @@
+
+// Service provides access to forensic events on ElasticSearch.
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SearchTerms } from './event-search.service';
@@ -5,10 +7,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Window } from './window.service';
 
+// This isn't used. FIXME:
 export class Filter {
     fixme: string;
 };
 
+// Page information, partially used since we're not paging properly.
 export class Page {
     from : number;
     to : number;
@@ -19,6 +23,7 @@ export class Page {
     numPages : number;
 };
 
+// ElasticSearch service
 @Injectable({
     providedIn: 'root'
 })
@@ -26,15 +31,21 @@ export class ElasticSearchService {
 
     constructor(private http : HttpClient) { }
 
+    // HTTP headers.
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
+    // Hard-coded ES index name.
     index = "cyberprobe";
 
+    // Parse a ES result _source document.
     parseSource(r : any) {
+
+        // Map all _source fields across.
 	let rtn = r;
 
+        // Also add src/dest fields of the form ip:port.
 	if ("src" in r && "dest" in r) {
 	    const srcip = ("ipv4" in r["src"]) ? r["src"]["ipv4"][0] :
 		  (("ipv6" in r["src"]) ? r["src"]["ipv6"][0] :
@@ -61,6 +72,7 @@ export class ElasticSearchService {
 	
     }
 
+    // Parse ES search results.
     parseResults(r : any, from : number, size : number) : Page {
 
 	let e = [];
@@ -81,13 +93,17 @@ export class ElasticSearchService {
 	};
     };
 
+    // Initiate an ES search.
     search(terms : SearchTerms, window : Window,
 	   sort : string, sortAsc : boolean, filters : Filter[],
-	   from : number, size : number) : Observable<Page> {
+	   from : number, size : number) : Observable<Page>
+    {
 
-	const start = `now-${window.value}h`;
+        const start = `now-${window.value}h`;
 
 	// FIXME: Filters not used.
+
+        // Produce ElasticSearch query
 	const qry = {
 	    query: {
 		bool: {
@@ -114,13 +130,11 @@ export class ElasticSearchService {
 	    ]
 	};
 
-	let obs = this.http.post("/elasticsearch/" + this.index + "/_search",
-				 JSON.stringify(qry),
-				 this.httpOptions);
-
-	const parse = map(r => this.parseResults(r, from, size));
-
-	return parse(obs);
+        // Submit query, pipe through results parser.
+	return this.http.post("/elasticsearch/" + this.index + "/_search",
+			      JSON.stringify(qry),
+			      this.httpOptions).
+            pipe(map(r => this.parseResults(r, from, size)));
 
     };
 
