@@ -6,6 +6,7 @@ import { LOCALE_ID } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.componen
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatTabsModule,
     NgxDatatableModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'en-GB' }],

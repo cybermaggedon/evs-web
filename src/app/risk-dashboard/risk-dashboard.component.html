@@ -1,10 +1,8 @@
-<!--
-<mat-tab-group> mat-align-tabs="start">
+
+<mat-tab-group mat-align-tabs="start">
 
   <mat-tab label="Risk categories">
--->
     <div>
-      <h2>Risk types</h2>
       <div *ngIf="categoryReport['distribution'] == ''">
 	<i>No risks to report.</i>
       </div>
@@ -13,13 +11,10 @@
 	<img class="fair" src="{{categoryReport['exceedence']}}">
       </div>
     </div>
-<!--
   </mat-tab>
 
-  <mat-tab> label="Device risks">
--->
+  <mat-tab label="Device risks">
     <div>
-      <h2>Device risks</h2>
       <div *ngIf="model.devices.length == 0">
 	<i>No risks to report.</i>
       </div>
@@ -28,13 +23,10 @@
 	<img class="fair" src="{{deviceReport['exceedence']}}">
       </div>
     </div>
-<!--
   </mat-tab>
 
   <mat-tab label="Resource risks">
--->
     <div>
-      <h2>Resource risks</h2>
       <div *ngIf="model.resources.length == 0">
 	<i>No risks to report.</i>
       </div>
@@ -43,8 +35,6 @@
 	<img class="fair" src="{{resourceReport['exceedence']}}">
       </div>
     </div>
-<!--
   </mat-tab>
 
 </mat-tab-group>
--->
