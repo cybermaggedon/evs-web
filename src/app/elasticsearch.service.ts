@@ -38,18 +38,18 @@ export class ElasticSearchService {
 	if ("src" in r && "dest" in r) {
 	    const srcip = ("ipv4" in r["src"]) ? r["src"]["ipv4"][0] :
 		  (("ipv6" in r["src"]) ? r["src"]["ipv6"][0] :
-		   undefined);
+		   "-");
 	    const destip = ("ipv4" in r["dest"]) ? r["dest"]["ipv4"][0] :
 		  (("ipv6" in r["dest"]) ? r["dest"]["ipv6"][0] :
-		   undefined);
+		   "-");
 	    const srcport = ("tcp" in r["src"]) ? r["src"]["tcp"][0] :
 		  (("udp" in r["src"]) ? r["src"]["udp"][0] :
-		   undefined);
+		   "-");
 	    const destport = ("tcp" in r["dest"]) ? r["dest"]["tcp"][0] :
 		  (("udp" in r["dest"]) ? r["dest"]["udp"][0] :
-		   undefined);
+		   "-");
 	    const protocol = ("tcp" in r["src"]) ? "tcp" :
-		  (("udp" in r["src"]) ? "udp" : undefined);
+		  (("udp" in r["src"]) ? "udp" : "-");
 
 	    rtn["src"] = `${srcip}:${srcport}`;
 	    rtn["dest"] = `${destip}:${destport}`;
