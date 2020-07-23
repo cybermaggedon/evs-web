@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
+import { interval } from 'rxjs';
+import { throttle } from 'rxjs/operators';
 
 @Component({
     selector: 'app-risk-dashboard',
@@ -12,21 +14,33 @@ export class RiskDashboardComponent implements OnInit {
     constructor(private riskSvc : RiskService) {
 	// Initialise.
         this.model = new RiskModel();
+	this.deviceReport = this.emptyReport;
+	this.resourceReport = this.emptyReport;
+	this.categoryReport = this.emptyReport;
     }
 
     @Input('max-items')
     maxItems : number = 20;
 
     ngOnInit(): void {
-        this.riskSvc.subscribe(m => {
-	    this.model = m;
-	    this.updateFairModels();
-	});
+
+        this.riskSvc.subject.
+	    pipe(throttle(() => interval(10000))).
+	    subscribe(m => {
+		console.log("UPDATE MODEL");
+		this.model = m;
+		this.updateFairModels();
+	    });
+
     }
 
     deviceReport : any;
     resourceReport : any;
     categoryReport : any;
+
+    emptyReport : Object = {
+	distribution: "", exceedence: ""
+    };
 
     model : RiskModel;
 
@@ -90,13 +104,13 @@ export class RiskDashboardComponent implements OnInit {
 	}
 
 	return {
-	    "name": "Overall",
+	    "name": "Overall risk",
 	    "parameters": models
 	};
 
     }
 
-    getMetaModel(assets) {
+    getMetaModel(assets, name) {
 
 	let models = [];
 
@@ -106,7 +120,7 @@ export class RiskDashboardComponent implements OnInit {
 	}
 
 	return {
-	    "name": "Overall model",
+	    "name": name,
 	    "parameters": models
 	};
 
@@ -114,47 +128,42 @@ export class RiskDashboardComponent implements OnInit {
 
     getReports(model) {
 	return {
-	    "distribution": "/fair/?report=distribution&model=" +
+	    "distribution": "/fair/" + model.name + "?report=distribution&model=" +
 		encodeURIComponent(JSON.stringify(model)),
-	    "exceedence": "/fair/?report=exceedence&model=" +
+	    "exceedence": "/fair/" + model.name + "?report=exceedence&model=" +
 		encodeURIComponent(JSON.stringify(model))
 	};
     }
 
     updateFairModels() {
 
+	console.log("UPDATINGGGGG");
+
         if (this.model.devices.length == 0) {
-	    this.deviceReport = {
-		"distribution": "",
-		"exceedence": ""
-	    };
+	    this.deviceReport = this.emptyReport;
 	} else {
 	    const assets = this.model.devices.slice(0, this.maxItems);
-	    const model = this.getMetaModel(assets);
+	    const model = this.getMetaModel(assets, "Overall devices");
 	    this.deviceReport = this.getReports(model);
 	}
 
         if (this.model.resources.length == 0) {
-	    this.resourceReport = {
-		"distribution": "",
-		"exceedence": ""
-	    };
+	    this.resourceReport = this.emptyReport;
 	} else {
 	    const assets = this.model.resources.slice(0, this.maxItems);
-	    const model = this.getMetaModel(assets);
+	    const model = this.getMetaModel(assets, "Overall resources");
 	    this.resourceReport = this.getReports(model);
 	}
 
 	if ((this.model.devices.length == 0) &&
 	    (this.model.resources.length == 0)) {
-	    this.categoryReport = {
-		"distribution": "",
-		"exceedence": ""
-	    }
+	    this.categoryReport = this.emptyReport;
 	} else {
 	    const model = this.getCatModel();
 	    this.categoryReport = this.getReports(model);
 	}
+
+	console.log("UPDATE COMPLETTTT");
 
     }
 
