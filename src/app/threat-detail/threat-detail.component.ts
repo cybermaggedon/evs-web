@@ -27,6 +27,8 @@ export class ThreatDetailComponent implements OnInit {
     allThreats : Threats;
     threats : Object;
 
+    threatCount : number;
+
     tableEvents : number;
     onEventsLoaded(e) { this.tableEvents = e; }
 
@@ -42,6 +44,9 @@ export class ThreatDetailComponent implements OnInit {
 
 	let thr = [];
 
+	let count = 0;
+
+	
 	for (let kind of this.threatkinds) {
 	    if (this.allThreats.threats.has(kind)) {
 		for (let threat of this.allThreats.threats.get(kind)) {
@@ -51,12 +56,13 @@ export class ThreatDetailComponent implements OnInit {
 			id: threat.id,
 			age: age(threat.age)
 		    });
+		    count++;
 		}
 	    }
 	}
 
 	this.threats = thr;
-
+        this.threatCount = count;
     }
 
     fetchThreats() {
