@@ -1,3 +1,7 @@
+
+// The risk service abstracts the risk graph, providing a device/resource
+// summary.  The slider window is applied internally to the risk service.
+// The device/resource summary has a minimal risk value applied.
 import { Injectable } from '@angular/core';
 import { RiskGraphService } from './risk-graph.service';
 import { Graph } from './graph';

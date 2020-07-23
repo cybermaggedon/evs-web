@@ -1,5 +1,9 @@
+
+// Risk graph service, periodically downloads the entire risk graph
+// (it's a small graph, this is manageable)
+
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, timer } from 'rxjs';
 import { Edge, Entity, Graph, toGraph } from './graph';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -8,14 +12,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RiskGraphService {
 
-    running : boolean;
     subject : Subject<Graph>;
 
     constructor(
         private http : HttpClient
     ) {
-	this.running = false;
         this.subject = new Subject<Graph>();
+        timer(0, 10000).subscribe(g => {
+            this.subject.next(toGraph(g));
+        });
     }
 
     httpOptions = {
@@ -38,17 +43,9 @@ export class RiskGraphService {
 			   this.subject.next(toGraph(g));
 		       });
 
-	var that = this;
-	setTimeout(function() { that.update() }, 10000);
-
     }
 
     subscribe(f : any) {
-        if (!this.running) {
-            this.running = true;
-            // This is asynchronous.
-            this.update();
-        }
         this.subject.subscribe(f);
     }
 
