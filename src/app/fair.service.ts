@@ -18,9 +18,11 @@ export class FairService {
 
 	this.subject = new Subject<any>();
 
+	console.log("START RISKSERVICE");
         this.riskService.subject.
-	    pipe(throttle(() => interval(10000))).
+	    pipe(throttle(() => interval(2000))).
 	    subscribe(m => {
+		console.log("GOT RISKSERVICE");
 		this.riskModel = m;
 		this.updateFairModels();
 	    });
@@ -52,6 +54,7 @@ export class FairService {
 		"?report=curves&model=" +
 		encodeURIComponent(JSON.stringify(devModel));
 	    this.http.get(devCurvesUrl).subscribe(curves => {
+		console.log("GOT DEV");
 		this.fairModel.devices = curves;
 		this.subject.next(this.fairModel);
 	    });
@@ -70,6 +73,7 @@ export class FairService {
 	    var rptUrl = "/fair/" + resModel.name + "?report=curves&model=" +
 		encodeURIComponent(JSON.stringify(resModel));
 	    this.http.get(rptUrl).subscribe(curves => {
+		console.log("GOT RES");
 		this.fairModel.resources = curves;
 		this.subject.next(this.fairModel);
 	    });
@@ -88,6 +92,7 @@ export class FairService {
 	    var rptUrl = "/fair/" + catModel.name + "?report=curves&model=" +
 		encodeURIComponent(JSON.stringify(catModel));
 	    this.http.get(rptUrl).subscribe(curves => {
+		console.log("GOT CAT");
 		this.fairModel.categories = curves;
 		this.subject.next(this.fairModel);
 	    });

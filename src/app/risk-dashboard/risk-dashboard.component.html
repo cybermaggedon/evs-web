@@ -5,38 +5,94 @@
     <div>
 
       <h2>Loss exceedence</h2>
-      <canvas id="categoryloss" width="800" height="400"></canvas>
+      <canvas baseChart id="categoryloss" width="800" height="400"
+	      [datasets]="chart.category.loss.datasets"
+	      [options]="chart.category.loss.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Probability distribution</h2>
-      <canvas id="categorypdf" width="800" height="400"></canvas>
+      <canvas baseChart id="categorypdf" width="800" height="400"
+	      [datasets]="chart.category.pdf.datasets"
+	      [options]="chart.category.pdf.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Risk distribution</h2>
-      <canvas id="categoryrisk" width="800" height="400"></canvas>
+      <canvas baseChart id="categoryrisk" width="800" height="400"
+	      [datasets]="chart.category.risk.datasets"
+	      [options]="chart.category.risk.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
 
     </div>
 
   </mat-tab>
 
   <mat-tab label="Device risks">
+
     <div>
 
       <h2>Loss exceedence</h2>
-      <canvas id="deviceloss" width="800" height="400"></canvas>
+      <canvas baseChart id="deviceloss" width="800" height="400"
+	      [datasets]="chart.device.loss.datasets"
+	      [options]="chart.device.loss.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Probability distribution</h2>
-      <canvas id="devicepdf" width="800" height="400"></canvas>
+      <canvas baseChart id="devicepdf" width="800" height="400"
+	      [datasets]="chart.device.pdf.datasets"
+	      [options]="chart.device.pdf.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Risk distribution</h2>
-      <canvas id="devicerisk" width="800" height="400"></canvas>
+      <canvas baseChart id="devicerisk" width="800" height="400"
+	      [datasets]="chart.device.risk.datasets"
+	      [options]="chart.device.risk.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
 
     </div>
+
   </mat-tab>
 
   <mat-tab label="Resource risks">
     <div>
 
       <h2>Loss exceedence</h2>
-      <canvas id="resourceloss" width="800" height="400"></canvas>
+      <canvas baseChart id="resourceloss" width="800" height="400"
+	      [datasets]="chart.resource.loss.datasets"
+	      [options]="chart.resource.loss.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Probability distribution</h2>
-      <canvas id="resourcepdf" width="800" height="400"></canvas>
+      <canvas baseChart id="resourcepdf" width="800" height="400"
+	      [datasets]="chart.resource.pdf.datasets"
+	      [options]="chart.resource.pdf.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
       <h2>Risk distribution</h2>
-      <canvas id="resourcerisk" width="800" height="400"></canvas>
+      <canvas baseChart id="resourcerisk" width="800" height="400"
+	      [datasets]="chart.resource.risk.datasets"
+	      [options]="chart.resource.risk.options"
+	      [legend]="'true'"
+	      [chartType]="'line'"
+	      >
+      </canvas>
 
     </div>
   </mat-tab>

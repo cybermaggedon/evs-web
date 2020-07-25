@@ -1,37 +1,33 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FairService } from '../fair.service';
-import { interval } from 'rxjs';
-import { throttle } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Chart } from 'chart.js';
 
-export      function currencyTick(value, index, values) {
-	  if (value > 1000000000000){
-	      return '$' + (value / 1000000000000).toFixed(1) + 'T';
-	  }
-	  if (value > 1000000000){
-	      return '$' + (value / 1000000000).toFixed(1) + 'B';
-	  }
-	  if (value > 1000000){
-	      return '$' + (value / 1000000).toFixed(1) + 'M';
-	  }
-	  if (value > 1000){
-	      return '$' + (value / 1000).toFixed(1) + 'k';
-	  }
-	  
-	  return '$' + value;
-      }
+export function currencyTick(value, index, values) {
+
+    if (value > 1000000000000){
+	return '$' + (value / 1000000000000).toFixed(1) + 'T';
+    }
+    if (value > 1000000000){
+	return '$' + (value / 1000000000).toFixed(1) + 'B';
+    }
+    if (value > 1000000){
+	return '$' + (value / 1000000).toFixed(1) + 'M';
+    }
+    if (value > 1000){
+	return '$' + (value / 1000).toFixed(1) + 'k';
+    }
+    
+    return '$' + value;
+}
 
 
-      export function toxy(ds) {
-	  var data = [];
-	  for (let v in ds) {
-	      var datum = ds[v];
-	      data.push({x:datum[0], y:datum[1]});
-	  }
-	  return data;
-      }
+export function toxy(ds) {
+    var data = [];
+    for (let v in ds) {
+	var datum = ds[v];
+	data.push({x:datum[0], y:datum[1]});
+    }
+    return data;
+}
 
 @Component({
     selector: 'app-risk-dashboard',
@@ -40,15 +36,11 @@ export      function currencyTick(value, index, values) {
 })
 export class RiskDashboardComponent {
 
-    constructor(private fairSvc : FairService,
-		private http : HttpClient) {
-    }
+    constructor(private fairSvc : FairService) {}
 
+    // FIXME: Should implement this.
 //    @Input('max-items')
 //    maxItems : number = 20;
-
-//    @ViewChild('resourceloss')
-    //    resourceLossCanvas: ElementRef<HTMLCanvasElement>;
 
     fairModel : any;
 
@@ -94,11 +86,17 @@ export class RiskDashboardComponent {
 	"rgba(15, 30, 45, 0.2)",
     ];
 
+    blankChart : any = { datasets: [{}], options: {} };
+    blankKind : any = { loss: this.blankChart, pdf: this.blankChart,
+			risk: this.blankChart };
+    chart : any = {
+	category: this.blankKind, devices: this.blankKind,
+	resources: this.blankKind
+    };
 
-    drawLossChart(canvasId, data) {
-	var canvas = document.getElementById(canvasId);
-	if (canvas == null) return;
-	if (data == undefined) return;
+    createLossChart(data) {
+
+	if (data == undefined) return { datasets: [{}], options: {} };
 
 	let datasets = [];
 	let count = 0;
@@ -108,53 +106,47 @@ export class RiskDashboardComponent {
 		data: toxy(data[v]["loss"]),
 		pointRadius: 1,
 		borderColor: this.colours[count],
-		fill: false,
+		backgroundColor: this.bgColours[count],
 		pointBorderColor: this.colours[count],
 		borderWidth: 2
 	    });
 	    count += 1;
 	}
 
-	var chart = new Chart(canvas, {
-	    type: 'line',
-	    data: {
-		datasets: datasets
-	    },
-	    options: {
-		animation: { duration: 0 },
-		responsive: false,
-		maintainAspectRatio: false,
-		scales: {
-		    xAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 5,
-				callback: currencyTick
-			    }
+	let options = {
+	    animation: { duration: 0 },
+	    responsive: false,
+	    maintainAspectRatio: false,
+	    scales: {
+		xAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 5,
+			    callback: currencyTick
 			}
-		    ],
-		    yAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 6,
-			  }
+		    }
+		],
+		yAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 6,
 			}
-		    ]
-		}
+		    }
+		]
 	    }
-	});
+	};
+
+	return {datasets: datasets, options: options};
 
     }
 
-    drawPdfChart(canvasId, data) {
-	var canvas = document.getElementById(canvasId);
-	console.log("pdf on ", canvas);
-	if (canvas == null) return;
-	if (data == undefined) return;
+    createPdfChart(data) {
+
+	if (data == undefined) return { datasets: [{}], options: {} };
 
 	let datasets = [];
 	let count = 0;
@@ -163,53 +155,48 @@ export class RiskDashboardComponent {
 		label: v,
 		data: toxy(data[v]["pdf"]),
 		pointRadius: 1,
-		backgroundColor: this.bgColours[count],
 		borderColor: this.colours[count],
+		backgroundColor: this.bgColours[count],
 		pointBorderColor: this.colours[count],
-		borderWidth: 1
+		borderWidth: 2
 	    });
 	    count += 1;
 	}
 
-	var chart = new Chart(canvas, {
-	    type: 'line',
-	    data: {
-		datasets: datasets
-	    },
-	    options: {
-		animation: { duration: 0 },
-		responsive: false,
-		maintainAspectRatio: false,
-		scales: {
-		    xAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 5,
-				callback: currencyTick
-			    }
+	let options = {
+	    animation: { duration: 0 },
+	    responsive: false,
+	    maintainAspectRatio: false,
+	    scales: {
+		xAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 5,
+			    callback: currencyTick
 			}
-		    ],
-		    yAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 6,
-			  }
+		    }
+		],
+		yAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 6,
 			}
-		    ]
-		}
+		    }
+		]
 	    }
-	});
+	};
+
+	return {datasets: datasets, options: options};
 
     }
 
-    drawRiskChart(canvasId, data) {
-	var canvas = document.getElementById(canvasId);
-	if (canvas == null) return;
-	if (data == undefined) return;
+    createRiskChart(data) {
+
+	if (data == undefined) return { datasets: [{}], options: {} };
 
 	let datasets = [];
 	let count = 0;
@@ -218,46 +205,42 @@ export class RiskDashboardComponent {
 		label: v,
 		data: toxy(data[v]["risk"]),
 		pointRadius: 1,
-		backgroundColor: this.bgColours[count],
 		borderColor: this.colours[count],
+		backgroundColor: this.bgColours[count],
 		pointBorderColor: this.colours[count],
-		borderWidth: 1
+		borderWidth: 2
 	    });
 	    count += 1;
 	}
 
-	var chart = new Chart(canvas, {
-	    type: 'line',
-	    data: {
-		datasets: datasets
-	    },
-	    options: {
-		animation: { duration: 0 },
-		responsive: false,
-		maintainAspectRatio: false,
-		scales: {
-		    xAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 5,
-				callback: currencyTick
-			    }
+	let options = {
+	    animation: { duration: 0 },
+	    responsive: false,
+	    maintainAspectRatio: false,
+	    scales: {
+		xAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 5,
+			    callback: currencyTick
 			}
-		    ],
-		    yAxes: [
-			{
-			    type: 'linear',
-			    display: true,
-			    ticks: {
-				maxTicksLimit: 6,
-			  }
+		    }
+		],
+		yAxes: [
+		    {
+			type: 'linear',
+			display: true,
+			ticks: {
+			    maxTicksLimit: 6,
 			}
-		    ]
-		}
+		    }
+		]
 	    }
-	});
+	};
+
+	return {datasets: datasets, options: options};
 
     }
 
@@ -265,249 +248,32 @@ export class RiskDashboardComponent {
 
         this.fairSvc.subscribe(m => {
 
-	    console.log(">>>>>");
-	    console.log(m);
-
 	    this.fairModel = m;
 
-	    this.drawLossChart("categoryloss", this.fairModel.categories);
-	    this.drawLossChart("deviceloss", this.fairModel.devices);
-	    this.drawLossChart("resourceloss", this.fairModel.resources);
+	    this.chart = {
 
-	    this.drawPdfChart("categorypdf", this.fairModel.categories);
-	    this.drawPdfChart("devicepdf", this.fairModel.devices);
-	    this.drawPdfChart("resourcepdf", this.fairModel.resources);
-
-	    this.drawRiskChart("categoryrisk", this.fairModel.categories);
-	    this.drawRiskChart("devicerisk", this.fairModel.devices);
-	    this.drawRiskChart("resourcerisk", this.fairModel.resources);
-
-	});
-
-	    /*
-
-       var catPdfChart = new Chart(canvas, {
-	  type: 'line',
-	  data: {
-	      datasets: [
-		  {
-		      label: "tor-exit",
-		      data: toxy(curves["tor-exit"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(100, 0, 0, 0.2)',
-		      borderColor: 'rgb(100,0,0)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(100,0,0)'
-		  },
-		  {
-		      label: "malware",
-		      data: toxy(curves["malware"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(0, 100, 0, 0.2)',
-		      borderColor: 'rgb(0,100,0)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(0,100,0)'
-		  },
-		  {
-		      label: "Overall resources",
-		      data: toxy(curves["Overall risk"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(0, 0, 100, 0.2)',
-		      borderColor: 'rgb(0,0,100)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(0,0,100)'
-		  }
-	      ]
-	  },
-	  options: {
-	      animation: { duration: 0 },
-	      responsive: false,
-	      maintainAspectRatio: false,
-	      scales: {
-		  xAxes: [
-		      {
-			  type: 'linear',
-			  display: true,
-			  ticks: {
-			      maxTicksLimit: 5,
-			      callback: currencyTick
-			  }
-		      }
-		  ],
-		  yAxes: [
-		      {
-			  type: 'linear',
-			  display: true,
-			  ticks: {
-			      maxTicksLimit: 6,
-			  }
-		      }
-		  ]
-	      }
-	  }
-       });
-
-	});
-*/
-
-    }
-
-/*
-    public context: CanvasRenderingContext2D;
-
-    ngAfterViewInit(): void {
-	console.log("CONTEXT INIT");
-
-	var canvas=document.getElementById("resourceloss");
-	console.log("canvas is ", canvas);
-
-	
-	console.log("ASD", this.resourceLossCanvas);
-	if (this.resourceLossCanvas == undefined) {
-	    return;
-	}
-	console.log("x", this.resourceLossCanvas);
-	if (this.resourceLossCanvas == null) {
-	    return;
-	}
-	console.log("xx", this.resourceLossCanvas.nativeElement);
-	this.context = this.resourceLossCanvas.nativeElement.getContext('2d');
-	console.log("CONTEXT INIT", this.context);
-    }
-*/
-    /*
-    deviceReport : any;
-    resourceReport : any;
-    categoryReport : any;
-
-    emptyReport : Object = {
-	distribution: "", exceedence: ""
-    };
-
-    model : RiskModel;
-
-    getReports(model) {
-	return {
-	    "distribution": "/fair/" + model.name + "?report=distribution&model=" +
-		encodeURIComponent(JSON.stringify(model)),
-	    "exceedence": "/fair/" + model.name + "?report=exceedence&model=" +
-		encodeURIComponent(JSON.stringify(model))
-	};
-    }
-
-    updateFairModels() {
-
-	console.log("UPDATINGGGGG");
-
-        if (this.model.devices.length == 0) {
-	    this.deviceReport = this.emptyReport;
-	} else {
-	    const assets = this.model.devices.slice(0, this.maxItems);
-	    const model = this.getMetaModel(assets, "Overall devices");
-//	    this.deviceReport = this.getReports(model);
-	}
-
-        if (this.model.resources.length == 0) {
-	    this.resourceReport = this.emptyReport;
-	} else {
-	    const assets = this.model.resources.slice(0, this.maxItems);
-	    const model = this.getMetaModel(assets, "Overall resources");
-	    //	    this.resourceReport = this.getReports(model);
-
-	    var rptUrl = "/fair/" + model.name + "?report=curves&model=" +
-		encodeURIComponent(JSON.stringify(model));
-	    this.http.get(rptUrl).subscribe(curves => {
-		console.log(curves);
-
-
-		console.log("CTX", this.context);
-		var canvas=document.getElementById("resourceloss");
-		console.log("canvas is ", canvas);
-
-		if (this.context == undefined || this.context == null) {
-		    console.log("IIIIIIIITTTTTTT IS NULL");
-		    return;
+		category: {
+		    loss: this.createLossChart(this.fairModel.categories),
+		    pdf: this.createPdfChart(this.fairModel.categories),
+		    risk: this.createRiskChart(this.fairModel.categories)
+		},
+		
+		device: {
+		    loss: this.createLossChart(this.fairModel.devices),
+		    pdf: this.createPdfChart(this.fairModel.devices),
+		    risk: this.createRiskChart(this.fairModel.devices)
+		},
+		resource: {
+		    loss: this.createLossChart(this.fairModel.resources),
+		    pdf: this.createPdfChart(this.fairModel.resources),
+		    risk: this.createRiskChart(this.fairModel.resources)
 		}
 
-      var myChart = new Chart(this.context, {
-	  type: 'line',
-	  data: {
-	      datasets: [
-		  {
-		      label: "192.179.1.72",
-		      data: toxy(curves["192.179.1.72"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(100, 0, 0, 0.2)',
-		      borderColor: 'rgb(100,0,0)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(100,0,0)'
-		  },
-		  {
-		      label: "www.malware.org",
-		      data: toxy(curves["www.malware.org"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(0, 100, 0, 0.2)',
-		      borderColor: 'rgb(0,100,0)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(0,100,0)'
-		  },
-		  {
-		      label: "Overall resources",
-		      data: toxy(curves["Overall resources"]["loss"]),
-		      pointRadius: 1,
-		      backgroundColor: 'rgba(0, 0, 100, 0.2)',
-		      borderColor: 'rgb(0,0,100)',
-		      borderWidth: 1,
-		      pointBorderColor: 'rgb(0,0,100)'
-		  }
-	      ]
-	  },
-	  options: {
-	      animation: { duration: 0 },
-	      responsive: false,
-	      maintainAspectRatio: false,
-	      scales: {
-		  xAxes: [
-		      {
-			  type: 'linear',
-			  display: true,
-			  ticks: {
-			      maxTicksLimit: 5,
-			      callback: currencyTick
-			  }
-		      }
-		  ],
-		  yAxes: [
-		      {
-			  type: 'linear',
-			  display: true,
-			  ticks: {
-			      maxTicksLimit: 6,
-			  }
-		      }
-		  ]
-	      }
-	  }
-      });
-		
+	    };
 
-
-
-	    })
-
-	}
-
-	if ((this.model.devices.length == 0) &&
-	    (this.model.resources.length == 0)) {
-	    this.categoryReport = this.emptyReport;
-	} else {
-	    const model = this.getCatModel();
-//	    this.categoryReport = this.getReports(model);
-	}
-
-	console.log("UPDATE COMPLETTTT");
+	});
 
     }
-*/
+
 }
 

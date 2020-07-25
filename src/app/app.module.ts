@@ -22,6 +22,7 @@ import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { EventTableComponent } from './event-table/event-table.component';
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.componen
         MatSliderModule,
         MatTabsModule,
         MatExpansionModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+	ChartsModule
     ],
     providers: [
         {
