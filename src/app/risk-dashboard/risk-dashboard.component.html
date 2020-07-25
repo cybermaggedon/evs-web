@@ -3,37 +3,41 @@
 
   <mat-tab label="Risk categories">
     <div>
-      <div *ngIf="categoryReport['distribution'] == ''">
-	<i>No risks to report.</i>
-      </div>
-      <div *ngIf="categoryReport['distribution'] != ''">
-	<img class="fair" src="{{categoryReport['distribution']}}">
-	<img class="fair" src="{{categoryReport['exceedence']}}">
-      </div>
+
+      <h2>Loss exceedence</h2>
+      <canvas id="categoryloss" width="800" height="400"></canvas>
+      <h2>Probability distribution</h2>
+      <canvas id="categorypdf" width="800" height="400"></canvas>
+      <h2>Risk distribution</h2>
+      <canvas id="categoryrisk" width="800" height="400"></canvas>
+
     </div>
+
   </mat-tab>
 
   <mat-tab label="Device risks">
     <div>
-      <div *ngIf="model.devices.length == 0">
-	<i>No risks to report.</i>
-      </div>
-      <div *ngIf="model.devices.length > 0">
-	<img class="fair" src="{{deviceReport['distribution']}}">
-	<img class="fair" src="{{deviceReport['exceedence']}}">
-      </div>
+
+      <h2>Loss exceedence</h2>
+      <canvas id="deviceloss" width="800" height="400"></canvas>
+      <h2>Probability distribution</h2>
+      <canvas id="devicepdf" width="800" height="400"></canvas>
+      <h2>Risk distribution</h2>
+      <canvas id="devicerisk" width="800" height="400"></canvas>
+
     </div>
   </mat-tab>
 
   <mat-tab label="Resource risks">
     <div>
-      <div *ngIf="model.resources.length == 0">
-	<i>No risks to report.</i>
-      </div>
-      <div *ngIf="model.resources.length > 0">
-	<img class="fair" src="{{resourceReport['distribution']}}">
-	<img class="fair" src="{{resourceReport['exceedence']}}">
-      </div>
+
+      <h2>Loss exceedence</h2>
+      <canvas id="resourceloss" width="800" height="400"></canvas>
+      <h2>Probability distribution</h2>
+      <canvas id="resourcepdf" width="800" height="400"></canvas>
+      <h2>Risk distribution</h2>
+      <canvas id="resourcerisk" width="800" height="400"></canvas>
+
     </div>
   </mat-tab>
 
