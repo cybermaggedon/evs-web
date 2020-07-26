@@ -23,6 +23,10 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { EventTableComponent } from './event-table/event-table.component';
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { LossExceedenceChartComponent } from './loss-exceedence-chart/loss-exceedence-chart.component';
+import { ProbabilityDistributionChartComponent } from './probability-distribution-chart/probability-distribution-chart.component';
+import { RiskDistributionChartComponent } from './risk-distribution-chart/risk-distribution-chart.component';
+import { RiskReportComponent } from './risk-report/risk-report.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +39,10 @@ import { ChartsModule } from 'ng2-charts';
         CategoryDetailComponent,
         EventTableComponent,
         RiskDashboardComponent,
+        LossExceedenceChartComponent,
+        ProbabilityDistributionChartComponent,
+        RiskDistributionChartComponent,
+        RiskReportComponent,
     ],
     imports: [
         BrowserModule,
