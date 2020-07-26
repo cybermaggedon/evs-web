@@ -1,0 +1,23 @@
+<div *ngIf="summary.length > 0">
+  <table>
+    <thead>
+      <tr>
+	<th>Risk</th>
+	<th>Min</th>
+	<th>Max</th>
+	<th>Mean</th>
+	<th>Std-dev</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asset of summary">
+	<td class="name {{asset.class}}">{{asset.name}}</td>
+	<td class="number int {{asset.class}}">{{asset.min | number:'1.0-0':locale}}</td>
+	<td class="number int {{asset.class}}">{{asset.max | number:'1.0-0':locale}}</td>
+	<td class="number int {{asset.class}}">{{asset.mean | number:'1.0-0':locale}}</td>
+	<td class="number float {{asset.class}}">{{asset.stddev | number:'1.0-0':locale}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

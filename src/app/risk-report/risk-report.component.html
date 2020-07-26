@@ -1,51 +1,51 @@
 <div>
 
-<mat-expansion-panel [expanded]=true>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Loss exceedence
-    </mat-panel-title>
-    <mat-panel-description>
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <loss-exceedence-chart kind="{{kind}}">
-  </loss-exceedence-chart>
-</mat-expansion-panel>
+  <mat-expansion-panel [expanded]=true>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+	Risk summary
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <risk-summary kind="{{kind}}">
+    </risk-summary>
+  </mat-expansion-panel>
 
-<mat-expansion-panel [expanded]=false>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Probability distribution
-    </mat-panel-title>
-    <mat-panel-description>
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <probability-distribution-chart kind="{{kind}}">
-  </probability-distribution-chart>
-</mat-expansion-panel>
+  <mat-expansion-panel [expanded]=true>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+	Loss exceedence
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <loss-exceedence-chart kind="{{kind}}">
+    </loss-exceedence-chart>
+  </mat-expansion-panel>
 
-<mat-expansion-panel [expanded]=false>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Risk distribution
-    </mat-panel-title>
-    <mat-panel-description>
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <risk-distribution-chart kind="{{kind}}">
-  </risk-distribution-chart>
-</mat-expansion-panel>
+  <mat-expansion-panel [expanded]=false>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+	Probability distribution
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <probability-distribution-chart kind="{{kind}}">
+    </probability-distribution-chart>
+  </mat-expansion-panel>
 
+  <mat-expansion-panel [expanded]=false>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+	Risk distribution
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <risk-distribution-chart kind="{{kind}}">
+    </risk-distribution-chart>
+  </mat-expansion-panel>
 
-<!--
-  <h2>Loss exceedence</h2>
-
-  <h2>Probability distribution</h2>
-  <probability-distribution-chart kind="{{kind}}">
-  </probability-distribution-chart>
-
-  <h2>Risk distribution</h2>
-  <risk-distribution-chart kind="{{kind}}">
-  </risk-distribution-chart>
--->
 </div>

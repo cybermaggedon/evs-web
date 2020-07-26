@@ -27,6 +27,7 @@ import { LossExceedenceChartComponent } from './loss-exceedence-chart/loss-excee
 import { ProbabilityDistributionChartComponent } from './probability-distribution-chart/probability-distribution-chart.component';
 import { RiskDistributionChartComponent } from './risk-distribution-chart/risk-distribution-chart.component';
 import { RiskReportComponent } from './risk-report/risk-report.component';
+import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { RiskReportComponent } from './risk-report/risk-report.component';
         ProbabilityDistributionChartComponent,
         RiskDistributionChartComponent,
         RiskReportComponent,
+        RiskSummaryComponent,
     ],
     imports: [
         BrowserModule,

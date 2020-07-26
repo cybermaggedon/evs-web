@@ -83,14 +83,14 @@ export class FairService {
     updateFairModels() : void {
 
 	const devModel = this.getMetaModel(this.riskModel.devices,
-					   "Overall devices");
+					   "All risks");
 	this.updateLossModel("device", devModel);
 	this.updatePdfModel("device", devModel);
 	this.updateSummaryModel("device", devModel);
 	this.updateRiskModel("device", devModel);
 
 	const resModel = this.getMetaModel(this.riskModel.resources,
-					   "Overall resources");
+					   "All risks");
 	this.updateLossModel("resource", resModel);
 	this.updatePdfModel("resource", resModel);
 	this.updateSummaryModel("resource", resModel);
@@ -164,7 +164,7 @@ export class FairService {
 	}
 
 	return {
-	    "name": "Overall risk",
+	    "name": "All risks",
 	    "parameters": models
 	};
 
@@ -187,10 +187,8 @@ export class FairService {
     }
 
     subscribe(key : string, f : any) {
-	console.log("GOT SOMETHING FOR", key);
         this.subject.subscribe(rep => {
 	    if (key == rep.key) {
-		console.log("SOMETHING FOR", key);
 		f(rep.report);
 	    }
 	});
