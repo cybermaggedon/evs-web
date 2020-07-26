@@ -8,6 +8,17 @@ import { RiskModel } from './risk';
 
 // FIXME: Add some type safety information
 
+const report_type : string[] = [
+    'category-loss', 'category-pdf', 'category-summary', 'category-risk',
+    'device-loss', 'device-pdf', 'device-summary', 'device-risk',
+    'resource-loss', 'resource-pdf', 'resource-summary', 'resource-risk'
+];
+
+export interface FairReport {
+    key : string;
+    report : any;
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,86 +29,78 @@ export class FairService {
 
 	this.subject = new Subject<any>();
 
-	console.log("START RISKSERVICE");
         this.riskService.subject.
-	    pipe(throttle(() => interval(2000))).
+	    pipe(throttle(() => interval(10000))).
 	    subscribe(m => {
-		console.log("GOT RISKSERVICE");
 		this.riskModel = m;
 		this.updateFairModels();
 	    });
 
     }
 
-    subject : Subject<any>;
+    subject : Subject<FairReport>;
 
     riskModel : RiskModel;
 
-    fairModel : any = {};
+    lastValue : any = {};
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
+    updateModel(kind : string, report_type : string, model : any) : void {
+
+	const report_key = kind + "-" + report_type;
+
+	var url = "/fair/" + model.name + "?report=" + report_type + "&model=" +
+	    encodeURIComponent(JSON.stringify(model));
+
+	this.http.get(url).subscribe(report => {
+	    this.lastValue[report_key] = report;
+	    this.subject.next({
+		key: report_key, report: report
+	    })
+	});
+
+    }
+
+    updateLossModel(kind : string, model : any) : void {
+	this.updateModel(kind, "loss", model);
+    }
+
+    updatePdfModel(kind : string, model : any) : void {
+	this.updateModel(kind, "pdf", model);
+    }
+
+    updateSummaryModel(kind : string, model : any) : void {
+	this.updateModel(kind, "summary", model);
+    }
+
+    updateRiskModel(kind : string, model : any) : void {
+	this.updateModel(kind, "risk", model);
+    }
+
     updateFairModels() : void {
 
-	if (this.riskModel.devices.length == 0) {
+	const devModel = this.getMetaModel(this.riskModel.devices,
+					   "Overall devices");
+	this.updateLossModel("device", devModel);
+	this.updatePdfModel("device", devModel);
+	this.updateSummaryModel("device", devModel);
+	this.updateRiskModel("device", devModel);
 
-	    this.fairModel.devices = {};
-	    this.subject.next(this.fairModel);
+	const resModel = this.getMetaModel(this.riskModel.resources,
+					   "Overall resources");
+	this.updateLossModel("resource", resModel);
+	this.updatePdfModel("resource", resModel);
+	this.updateSummaryModel("resource", resModel);
+	this.updateRiskModel("resource", resModel);
 
-	} else {
-
-	    const devModel = this.getMetaModel(this.riskModel.devices,
-					       "Overall devices");
-	    var devCurvesUrl = "/fair/" + devModel.name +
-		"?report=curves&model=" +
-		encodeURIComponent(JSON.stringify(devModel));
-	    this.http.get(devCurvesUrl).subscribe(curves => {
-		console.log("GOT DEV");
-		this.fairModel.devices = curves;
-		this.subject.next(this.fairModel);
-	    });
-
-	}
-
-	if (this.riskModel.resources.length == 0) {
-
-	    this.fairModel.resources = {};
-	    this.subject.next(this.fairModel);
-
-	} else {
-
-	    const resModel = this.getMetaModel(this.riskModel.resources,
-					       "Overall resources");
-	    var rptUrl = "/fair/" + resModel.name + "?report=curves&model=" +
-		encodeURIComponent(JSON.stringify(resModel));
-	    this.http.get(rptUrl).subscribe(curves => {
-		console.log("GOT RES");
-		this.fairModel.resources = curves;
-		this.subject.next(this.fairModel);
-	    });
-
-	}
-
-	if (this.riskModel.devices.length == 0 &&
-	   this.riskModel.resources.length == 0) {
-
-	    this.fairModel.categories = {};
-	    this.subject.next(this.fairModel);
-
-	} else {
-
-	    const catModel = this.getCatModel();
-	    var rptUrl = "/fair/" + catModel.name + "?report=curves&model=" +
-		encodeURIComponent(JSON.stringify(catModel));
-	    this.http.get(rptUrl).subscribe(curves => {
-		console.log("GOT CAT");
-		this.fairModel.categories = curves;
-		this.subject.next(this.fairModel);
-	    });
-
-	}
+	const catModel = this.getCatModel();
+	this.updateLossModel("category", catModel);
+	this.updatePdfModel("category", catModel);
+	this.updateSummaryModel("category", catModel);
+	this.updateRiskModel("category", catModel);
 
     }
 
@@ -183,9 +186,17 @@ export class FairService {
 
     }
 
-    subscribe(f : any) {
-        this.subject.subscribe(f);
-	f(this.fairModel);
+    subscribe(key : string, f : any) {
+	console.log("GOT SOMETHING FOR", key);
+        this.subject.subscribe(rep => {
+	    if (key == rep.key) {
+		console.log("SOMETHING FOR", key);
+		f(rep.report);
+	    }
+	});
+	if (key in this.lastValue) {
+	    f(this.lastValue[key]);
+	}
     }
 
 }

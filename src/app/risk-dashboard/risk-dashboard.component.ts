@@ -19,7 +19,6 @@ export function currencyTick(value, index, values) {
     return '$' + value;
 }
 
-
 export function toxy(ds) {
     var data = [];
     for (let v in ds) {
@@ -41,8 +40,6 @@ export class RiskDashboardComponent {
     // FIXME: Should implement this.
 //    @Input('max-items')
 //    maxItems : number = 20;
-
-    fairModel : any;
 
     colours = [
 	"rgb(100, 0, 0)",
@@ -86,12 +83,22 @@ export class RiskDashboardComponent {
 	"rgba(15, 30, 45, 0.2)",
     ];
 
-    blankChart : any = { datasets: [{}], options: {} };
-    blankKind : any = { loss: this.blankChart, pdf: this.blankChart,
-			risk: this.blankChart };
     chart : any = {
-	category: this.blankKind, devices: this.blankKind,
-	resources: this.blankKind
+	category: { 
+	    loss: { datasets: [{data: []}], options: {} }, 
+	    pdf: { datasets: [{data: []}], options: {} },
+	    risk: { datasets: [{data: []}], options: {} }
+	},
+	device: { 
+	    loss: { datasets: [{data: []}], options: {} }, 
+	    pdf: { datasets: [{data: []}], options: {} },
+	    risk: { datasets: [{data: []}], options: {} }
+	},
+	resource: { 
+	    loss: { datasets: [{data: []}], options: {} }, 
+	    pdf: { datasets: [{data: []}], options: {} },
+	    risk: { datasets: [{data: []}], options: {} }
+	}
     };
 
     createLossChart(data) {
@@ -108,7 +115,8 @@ export class RiskDashboardComponent {
 		borderColor: this.colours[count],
 		backgroundColor: this.bgColours[count],
 		pointBorderColor: this.colours[count],
-		borderWidth: 2
+		borderWidth: 2,
+		fill: false
 	    });
 	    count += 1;
 	}
@@ -246,33 +254,35 @@ export class RiskDashboardComponent {
 
     ngOnInit(): void {
 
-        this.fairSvc.subscribe(m => {
-
-	    this.fairModel = m;
-
-	    this.chart = {
-
-		category: {
-		    loss: this.createLossChart(this.fairModel.categories),
-		    pdf: this.createPdfChart(this.fairModel.categories),
-		    risk: this.createRiskChart(this.fairModel.categories)
-		},
-		
-		device: {
-		    loss: this.createLossChart(this.fairModel.devices),
-		    pdf: this.createPdfChart(this.fairModel.devices),
-		    risk: this.createRiskChart(this.fairModel.devices)
-		},
-		resource: {
-		    loss: this.createLossChart(this.fairModel.resources),
-		    pdf: this.createPdfChart(this.fairModel.resources),
-		    risk: this.createRiskChart(this.fairModel.resources)
-		}
-
-	    };
-
+	this.fairSvc.subscribe('device-loss', rep => {
+	    this.chart.device.loss = this.createLossChart(rep);
 	});
-
+	this.fairSvc.subscribe('device-pdf', rep => {
+	    this.chart.device.pdf = this.createPdfChart(rep);
+	});
+	this.fairSvc.subscribe('device-risk', rep => {
+	    this.chart.device.risk = this.createRiskChart(rep);
+	});
+	this.fairSvc.subscribe('resource-loss', rep => {
+	    this.chart.resource.loss = this.createLossChart(rep);
+	    console.log("RESOURCE LOSS UPDATE");
+	});
+	this.fairSvc.subscribe('resource-pdf', rep => {
+	    this.chart.resource.pdf = this.createPdfChart(rep);
+	});
+	this.fairSvc.subscribe('resource-risk', rep => {
+	    this.chart.resource.risk = this.createRiskChart(rep);
+	});
+	this.fairSvc.subscribe('category-loss', rep => {
+	    console.log("CATEGORY LOSS UPDATE");
+	    this.chart.category.loss = this.createLossChart(rep);
+	});
+	this.fairSvc.subscribe('category-pdf', rep => {
+	    this.chart.category.pdf = this.createPdfChart(rep);
+	});
+	this.fairSvc.subscribe('category-risk', rep => {
+	    this.chart.category.risk = this.createRiskChart(rep);
+	});
     }
 
 }
