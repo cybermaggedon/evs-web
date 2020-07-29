@@ -13,21 +13,55 @@
 
 // Hierarchy
 
-type HierarchyObject<T> = {
+export type HierarchyObject<T> = {
     kind : "entry";
     name : string;
     value : T;
 }
 
-type HierarchyFolder<T> = {
+export type HierarchyFolder<T> = {
     kind : "folder";
     name : string;
     entries : HierarchyEntry<T>[];
 }
 
-type HierarchyEntry<T> = HierarchyObject<T> | HierarchyFolder<T>;
+export type FlatItem<T> = {
+    name : string;
+    value : T;
+}
 
-type Hierarchy<T> = HierarchyEntry<T>[];
+export type HierarchyEntry<T> = HierarchyObject<T> | HierarchyFolder<T>;
+
+export type Hierarchy<T> = HierarchyEntry<T>[];
+
+export function flattenHierarchy<T>(h: Hierarchy<T>) : FlatItem<T>[] {
+    let l = [];
+
+    console.log("FLATTEN CALLED ", h);
+    for(let ent of h) {
+	switch (ent.kind) {
+	case "entry":
+	    console.log("entry ", ent.name);
+	    l.push(ent);
+	    continue;
+	case "folder":
+	    let folder = <HierarchyFolder<T>>ent;
+	    console.log("folder ", folder.name);
+	    let sublist = flattenHierarchy<T>(folder.entries);
+//	    let sublist = [];
+	    console.log("GOT BACK ", sublist);
+	    for (let subent of sublist) {
+		l.push({
+		    name: ent.name + " / " + subent.name,
+		    value: subent.value
+		});
+	    }
+	    console.log("RESULT LOOKS LIKE ", l);
+	}
+    }
+    console.log("END OF LOOP");
+    return l;
+}
 
 // Risk
 
@@ -62,7 +96,7 @@ export interface Risk {
 
 // Model
 
-interface Model {
+export interface Model {
     id : string;
 
     // Maps risk to risk profile.
@@ -71,7 +105,7 @@ interface Model {
 
 // Model set
 
-type ModelSet = Hierarchy<Model>;
+export type ModelSet = Hierarchy<Model>;
 
 export const modelSet : ModelSet = [
     {
