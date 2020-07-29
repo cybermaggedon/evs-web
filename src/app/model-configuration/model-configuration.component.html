@@ -1,0 +1,67 @@
+<!--
+<mat-form-field appearance="fill">
+  <mat-label>Select overall model</mat-label>
+  <mat-select [(value)]="selectedModel">
+    <mat-optgroup *ngFor="let model of modelSet" [label]="group.name">
+      <mat-option *ngFor="let model of group.models" [value]="model.id">
+	{{model.name}}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
+-->
+
+<ng-template #entryTemplate let-entry="ent">
+    <mat-option [value]="'insane3'">BUNCHY3</mat-option>
+  <!--
+  <ng-container *ngIf="entry.kind == 'folder'">
+    <mat-optgroup [label]="entry.name">
+      <ng-container *ngFor="let entry2 of entry.entries">
+	<ng-container *ngTemplateOutlet="entryTemplate;context:{ent:entry2}">
+	</ng-container>
+      </ng-container>
+    </mat-optgroup>
+  </ng-container>
+  <ng-container *ngIf="entry.kind == 'entry'">
+    <mat-option [value]="'entry.value.id'">
+      {{entry.name}}
+    </mat-option>
+  </ng-container>-->
+</ng-template>
+
+<ng-template #e>
+    <mat-option [value]="'insane3'">BUNCHY3</mat-option>
+</ng-template>
+
+<mat-form-field appearance="fill">
+  <mat-label>Select overall model</mat-label>
+  <mat-select [(value)]="selectedModel">
+<!--    <mat-option [value]="'insane'">BUNCHY</mat-option>-->
+<!--    <ng-container>
+      <mat-option [value]="'insane2'">BUNCHY2</mat-option>
+    </ng-container>-->
+<!--    <div *ngFor="let model of modelSet">
+      <ng-container *ngTemplateOutlet="entryTemplate;context:{ent:model}">
+      </ng-container>
+    </div>-->
+    <mat-option [value]="'insane3'">BUNCHY3</mat-option>
+<!--      <ng-container *ngTemplateOutlet="e">
+      </ng-container>-->
+  </mat-select>
+</mat-form-field>
+
+<div>
+  Thing: {{selectedModel}}
+</div>
+
+<!--
+<div>
+  <risk-configuration id="malware" name="Malware infection">
+  </risk-configuration>
+</div>
+<div>
+  <risk-configuration id="tor-exit" name="TOR exit node communication">
+  </risk-configuration>
+</div>
+
+-->

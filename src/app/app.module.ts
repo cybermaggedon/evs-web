@@ -10,6 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -29,6 +33,8 @@ import { RiskDistributionChartComponent } from './risk-distribution-chart/risk-d
 import { RiskReportComponent } from './risk-report/risk-report.component';
 import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
 import { AllThreatsComponent } from './all-threats/all-threats.component';
+import { ModelConfigurationComponent } from './model-configuration/model-configuration.component';
+import { RiskConfigurationComponent } from './risk-configuration/risk-configuration.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +53,8 @@ import { AllThreatsComponent } from './all-threats/all-threats.component';
         RiskReportComponent,
         RiskSummaryComponent,
         AllThreatsComponent,
+        ModelConfigurationComponent,
+        RiskConfigurationComponent,
     ],
     imports: [
         BrowserModule,
@@ -55,6 +63,10 @@ import { AllThreatsComponent } from './all-threats/all-threats.component';
         BrowserAnimationsModule,
         MatSliderModule,
         MatTabsModule,
+	MatMenuModule,
+	MatButtonModule,
+	MatSelectModule,
+	MatFormFieldModule,
         MatExpansionModule,
         NgxDatatableModule,
 	ChartsModule
