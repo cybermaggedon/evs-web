@@ -2,25 +2,34 @@
 .risk {
 }
 
-.risk div {
-    float: left;
-    padding: 10px;
-    height: 3em;
+td {
+    padding: 8px;
+    border: 1px solid #e0e0e0;
 }
 
 .riskname {
-    clear: left;
-    width: 13em;
 }
 
 .selector {
-    width: 16em;
 }
 
 .probability {
     width: 4em;
+    text-align: center;
 }
 
-.fair {
+.fair.lef {
     width: 3em;
+    text-align: center;
 }
+
+.fair.pl {
+    width: 4em;
+    text-align: center;
+}
+
+.fair.sl {
+    width: 4em;
+    text-align: center;
+}
+

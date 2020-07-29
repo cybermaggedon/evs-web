@@ -2,3 +2,13 @@
 mat-form-field {
     width: 40em;
 }
+
+table {
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+tr td th {
+    border: 1px solid #e0e0e0;
+}
+

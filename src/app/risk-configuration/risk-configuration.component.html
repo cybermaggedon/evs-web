@@ -1,11 +1,9 @@
 
-<div class="risk">
-
-  <div class="riskname">
+  <td class="riskname">
     <span *ngIf="_risk != undefined">{{_risk.name}}</span>
-  </div>
+  </td>
 
-  <div class="selector">
+  <td class="selector">
     <mat-form-field appearance="fill">
       <mat-label>
 	<span *ngIf="default == undefined">Select risk profile</span>
@@ -19,55 +17,54 @@
 	</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  </td>
 
-  <div class="probability">
+  <td class="probability">
     <span *ngIf="combined != undefined">
       {{combined.value.risk}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair lef">
+  <td class="fair lef">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.lef_low}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair lef">
+  <td class="fair lef">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.lef_mode}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair lef">
+  <td class="fair lef">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.lef_high}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair pl">
+  <td class="fair pl">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.pl_low}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair pl">
+  <td class="fair pl">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.pl_medium}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair pl">
+  <td class="fair pl">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.pl_high}}
     </span>
-  </div>
+  </td>
 
-  <div class="fair sl">
+  <td class="fair sl">
     <span *ngIf="combined != undefined">
       {{combined.value.fair.sl}}
     </span>
-  </div>
+  </td>
 
-</div>
 

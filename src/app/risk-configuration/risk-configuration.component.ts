@@ -3,7 +3,7 @@ import { Risk, RiskProfile, Model } from '../model-defs';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
 
 @Component({
-  selector: 'risk-configuration',
+  selector: '[risk-configuration]',
   templateUrl: './risk-configuration.component.html',
   styleUrls: ['./risk-configuration.component.css']
 })
