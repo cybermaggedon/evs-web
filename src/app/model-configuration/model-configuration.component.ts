@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { modelSet, flattenHierarchy, Model, Hierarchy, FlatItem, ModelSet } from '../model-defs';
+import { modelSet, flattenHierarchy, Model, FlatItem, riskProfiles } from '../model-defs';
 
 @Component({
     selector: 'app-model-configuration',
@@ -18,10 +18,12 @@ export class ModelConfigurationComponent implements OnInit {
     selectedModel : string;
 
     items : FlatItem<Model>[] = [];
+    riskProfiles = riskProfiles;
 
     flatten() : void {
+
 	this.items = flattenHierarchy(modelSet);
-	console.log("GOT.....", this.items);
+
     }
 
 }

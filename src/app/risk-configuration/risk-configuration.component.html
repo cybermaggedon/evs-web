@@ -1,18 +1,17 @@
+
 <div>
-  {{name}}
 
-<mat-form-field appearance="fill">
-  <mat-label>Select overall model</mat-label>
-  <mat-select [(value)]="selectedModel">
-<!--    <mat-optgroup *ngFor="let risk of riskProfiles" [label]="group.name">
-      <mat-option *ngFor="let model of group.models" [value]="model.id">
-	{{model.name}}
+  <mat-form-field appearance="fill">
+    <mat-label>Select risk profile</mat-label>
+    <mat-select [(value)]="selectedProfile">
+      <mat-option *ngFor="let item of items" [value]="item.value">
+	{{item.name}}
       </mat-option>
-      {{risk.id}}
-    </mat-optgroup>-->
-  </mat-select>
-</mat-form-field>
+    </mat-select>
+  </mat-form-field>
 
+  <span *ngIf="selectedProfile != undefined">>
+    Selected: {{selectedProfile.id}}
+  </span>
 
 </div>
-

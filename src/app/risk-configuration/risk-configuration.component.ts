@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { riskProfiles } from '../model-defs';
+import { Risk, flattenHierarchy, FlatItem, RiskProfile } from '../model-defs';
 
 @Component({
   selector: 'risk-configuration',
@@ -10,17 +10,24 @@ export class RiskConfigurationComponent implements OnInit {
 
     constructor() { }
 
-    @Input("id")
-    id : string;
+    @Input("risk")
+    risk : Risk;
 
-    @Input("name")
-    name : string;
+    items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
+	console.log(this.risk);
+    	this.flatten();
+	console.log(this.items);
     }
 
-    selectedModel : string;
 
-    riskProfiles = riskProfiles;
+        selectedProfile : RiskProfile;
+//    selectedProfile : string;
     
+    flatten() : void {
+	this.items = flattenHierarchy(this.risk.profiles);
+    }
+
 }
+

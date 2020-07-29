@@ -8,3 +8,8 @@
   </mat-select>
 </mat-form-field>
 
+<div *ngFor="let risk of riskProfiles">
+  <risk-configuration [risk]="risk">
+  </risk-configuration>
+</div>
+
