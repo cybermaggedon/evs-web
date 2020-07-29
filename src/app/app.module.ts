@@ -28,6 +28,7 @@ import { ProbabilityDistributionChartComponent } from './probability-distributio
 import { RiskDistributionChartComponent } from './risk-distribution-chart/risk-distribution-chart.component';
 import { RiskReportComponent } from './risk-report/risk-report.component';
 import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
+import { AllThreatsComponent } from './all-threats/all-threats.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
         RiskDistributionChartComponent,
         RiskReportComponent,
         RiskSummaryComponent,
+        AllThreatsComponent,
     ],
     imports: [
         BrowserModule,

@@ -26,7 +26,7 @@ export class ThreatService {
 
     constructor(private tgSvc : ThreatGraphService) { }
 
-    groupThreats(g : Graph, id : string, limit : number) : Threats {
+    groupThreatEdges(g : Graph, id : string, limit : number) : Threats {
 
 	let dt = new Threats();  
 
@@ -61,13 +61,54 @@ export class ThreatService {
 
     }
 
+    groupThreatEntities(g : Graph, limit : number) : Threats {
+
+	let dt = new Threats();  
+
+	let threats = new Map();
+
+	for (let elt of g.entities) {
+
+	    if (!threats.has(elt.group)) {
+		threats.set(elt.group, []);
+	    }
+
+	    let c = new Contact();
+
+	    c.id = elt.vertex;
+	    c.age = elt.earliest;
+
+	    threats.get(elt.group).push(c);
+
+	}
+
+	for (let kind of threats.keys()) {
+	    threats.get(kind).sort((a, b) => b.age - a.age);
+	    threats.set(kind, threats.get(kind).slice(0, limit));
+	}
+
+	dt.threats = threats;
+
+	return dt;
+
+    }
+
     // Async threat fetch.  Given a seed, find all threatgraph
     // relationships in a time period.
     getThreats(id : string, from : Date, to : Date, limit=25) :
     Observable<Threats> {
 	
         return this.tgSvc.getThreats(id, from, to).
-            pipe(map(g => this.groupThreats(g, id, limit)));
+            pipe(map(g => this.groupThreatEdges(g, id, limit)));
+
+    }
+
+    // Async threat fetch.  Recent threats in time period.
+    getAllThreats(from : Date, to : Date, limit=25) :
+    Observable<Threats> {
+	
+        return this.tgSvc.getAllThreats(from, to).
+            pipe(map(g => this.groupThreatEntities(g, limit)));
 
     }
     

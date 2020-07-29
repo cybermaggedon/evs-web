@@ -8,11 +8,11 @@ import { EventSearchService, SearchTerms } from '../event-search.service';
 import { age } from '../age';
 
 @Component({
-    selector: 'threat-detail',
-    templateUrl: './threat-detail.component.html',
-    styleUrls: ['./threat-detail.component.css']
+    selector: 'all-threats',
+    templateUrl: './all-threats.component.html',
+    styleUrls: ['./all-threats.component.css']
 })
-export class ThreatDetailComponent implements OnInit {
+export class AllThreatsComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
 		private location: Location,
@@ -20,9 +20,6 @@ export class ThreatDetailComponent implements OnInit {
 		private windowService : WindowService,
 		private eventSearch : EventSearchService) {
     }
-
-    // Current threat identifier
-    id : string;
 
     // Current threat window
     window : Window;
@@ -35,12 +32,6 @@ export class ThreatDetailComponent implements OnInit {
 
     // Number of threat elements
     threatCount : number;
-
-    // Number of events in the event table
-    tableEvents : number;
-
-    // Called when events are loaded in the table
-    onEventsLoaded(e) { this.tableEvents = e; }
 
     // Update strategy...
     // - ID set or changed => Fetch new threat graph, update threats
@@ -78,14 +69,13 @@ export class ThreatDetailComponent implements OnInit {
     // Stage 1, fetch threat graph elements
     fetchThreats() {
 
-	if (this.id == undefined) return;
-
 	// Ignore window, just fetching 21 days' of date.
 	const to = new Date();
 	const from = new Date(to.getTime() - 3 * 7 * 86400 * 1000);
 
-        this.threatSvc.getThreats(this.id, from, to, 50).subscribe(
+        this.threatSvc.getAllThreats(from, to, 50).subscribe(
 	    dt => {
+	    console.log(dt);
 		this.allThreats = dt;
 		this.updateThreats();
 	    }
@@ -102,15 +92,6 @@ export class ThreatDetailComponent implements OnInit {
             }
 	})
 
-  	this.route.params.subscribe(res => {
-            if (res.id != this.id) {
-
-		this.id = res.id;
-		this.fetchThreats();
-		this.eventSearch.update(new SearchTerms(this.id));
-            }
-	})
-
 	interval(5000).subscribe(e => {
 	    this.fetchThreats();
 	});
@@ -121,8 +102,7 @@ export class ThreatDetailComponent implements OnInit {
 	this.location.back();
     }
 
-    threatkinds = ['dnsquery', 'dnsresolve', 'serves', 'uses', 'requests',
-		   'indomain', 'hasip', 'connects'
-    ];
+    threatkinds = ['hostname', 'server', 'useragent', 'domain', 'ip',
+		   'device'];
 
 }

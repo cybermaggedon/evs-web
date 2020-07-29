@@ -11,7 +11,11 @@
        queryParamsHandling="preserve">
       Risk
     </a>
-    <a href="/kibana">Kibana</a>
+    <a [routerLink]="['/all-threats']"
+       queryParamsHandling="preserve">
+      Threats
+    </a>
+     <a href="/kibana">Kibana</a>
     <a href="/grafana">Metrics</a>
     <a href="/prometheus">Prometheus</a>
   </nav>

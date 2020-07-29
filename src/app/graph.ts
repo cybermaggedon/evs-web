@@ -15,6 +15,9 @@ export interface Edge {
 export interface Entity {
     group : string;
     vertex : string;
+    earliest : Date;
+    latest : Date;
+    count : number;
 };
 
 // Simple graph representation

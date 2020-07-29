@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
+import { AllThreatsComponent } from './all-threats/all-threats.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
 
@@ -19,6 +20,9 @@ const routes: Routes = [
 
     // Threat detail view
     { path: 'threat/:id', component: ThreatDetailComponent },
+
+    // Threat detail view
+    { path: 'all-threats', component: AllThreatsComponent },
 
     // Category detail view
     { path: 'category/:id', component: CategoryDetailComponent },

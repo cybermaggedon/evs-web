@@ -80,5 +80,57 @@ export class ThreatGraphService {
 
     }
 
+    // Execute a Gaffer query for threats
+    getAllThreats(from : Date, to : Date) :
+    Observable<Graph> {
+
+        // Query predicates, searches on the basis that observations occur
+        // in a time period.  Such a restriction is useful because the
+        // graph can be quite big.
+	const predicates = [
+	    {
+		"selection" : [ "time" ],
+		"predicate" : {
+		    "class" : "RBMBackedTimestampSetInRange",
+		    "startTime" : from.getTime(),
+		    "endTime" : to.getTime(),
+		    "timeUnit": "MILLISECOND"
+		}
+            }
+        ];
+
+        // Construct the request.  GetElements gets all edges from the
+        // search seed, filtering out those which don't occur within our
+        // time window.
+	const request = {
+	    "class" : "OperationChain",
+	    "operations" : [
+  		{
+		    "class": "GetAllElements",
+		    "includeIncomingOutGoing": "EITHER",
+		    "view": {
+			"globalEdges": [
+			    {
+				"postAggregationFilterFunctions": predicates
+			    }
+			]
+		    }
+		},
+		{
+		    "class": "Limit",
+		    "resultLimit": 500
+		}
+	    ]
+	};
+
+        // Execute query, pipe results through converstion to simple
+        // graph structure.
+        return this.http.post(this.rest + "/graph/operations/execute",
+		       JSON.stringify(request),
+		       this.httpOptions).
+                pipe(map(g => toGraph(g)));
+
+    }
+
 }
 
