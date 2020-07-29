@@ -33,10 +33,13 @@ export class RiskConfigurationComponent implements OnInit {
 
     }
 
-    selected : RiskProfile;
+    selected : FlatItem<RiskProfile>;
 
     // Model-specified default.
     default : FlatItem<RiskProfile>;
+
+    // Combined is the selected, or the default if nothing is selected.
+    combined: FlatItem<RiskProfile>;
     
     flatten() : void {
 
@@ -56,9 +59,26 @@ export class RiskConfigurationComponent implements OnInit {
 		    }
 		}
 
+
 	    }
 
 	}
+
+	this.updateCombined();
+
+    }
+
+    updateCombined() : void {
+	
+	if (this.selected != null)
+	    this.combined = this.selected;
+	else
+	    this.combined = this.default;
+
+    }
+
+    onChange() : void {
+	this.updateCombined();
 
     }
 

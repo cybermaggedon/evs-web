@@ -1,33 +1,73 @@
 
-<div>
+<div class="risk">
 
-  <div>
-    <span *ngIf="risk != undefined">{{risk.name}}</span>
+  <div class="riskname">
+    <span *ngIf="_risk != undefined">{{_risk.name}}</span>
   </div>
-  
-  <mat-form-field appearance="fill">
-    <mat-label>
-      <span *ngIf="default == undefined">Select risk profile</span>
-      <span *ngIf="default != undefined">Default: {{default.name}}</span>
-    </mat-label>
-    <mat-select [(value)]="selected">
-      <mat-option [value]="undefined"><i>model default</i></mat-option>
-      <mat-option *ngFor="let item of items" [value]="item.value">
-	{{item.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
 
-  <span *ngIf="selected != undefined">
-    Selected: {{selected.id}}
-  </span>
+  <div class="selector">
+    <mat-form-field appearance="fill">
+      <mat-label>
+	<span *ngIf="default == undefined">Select risk profile</span>
+	<span *ngIf="default != undefined">Default: {{default.name}}</span>
+      </mat-label>
+      <mat-select [(value)]="selected"
+		  (selectionChange)="onChange()">
+	<mat-option [value]="undefined"><i>model default</i></mat-option>
+	<mat-option *ngFor="let item of items" [value]="item">
+	  {{item.name}}
+	</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-  <span *ngIf="overallModel != undefined">
-    Model: {{overallModel.id}}
-  </span>
+  <div class="probability">
+    <span *ngIf="combined != undefined">
+      {{combined.value.risk}}
+    </span>
+  </div>
 
-  <span *ngIf="default != undefined">
-    Default: {{default.id}}
-  </span>
+  <div class="fair lef">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.lef_low}}
+    </span>
+  </div>
+
+  <div class="fair lef">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.lef_mode}}
+    </span>
+  </div>
+
+  <div class="fair lef">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.lef_high}}
+    </span>
+  </div>
+
+  <div class="fair pl">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.pl_low}}
+    </span>
+  </div>
+
+  <div class="fair pl">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.pl_medium}}
+    </span>
+  </div>
+
+  <div class="fair pl">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.pl_high}}
+    </span>
+  </div>
+
+  <div class="fair sl">
+    <span *ngIf="combined != undefined">
+      {{combined.value.fair.sl}}
+    </span>
+  </div>
 
 </div>
+

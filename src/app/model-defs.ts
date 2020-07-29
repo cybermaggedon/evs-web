@@ -292,7 +292,7 @@ export const riskProfiles : Risk[] = [
 			    risk: 0.7,
 			    fair: {
 				lef_low: 0.5, lef_mode: 1, lef_high: 2,
-				pl_low: 20000, pl_medium: 50000, pl_high: 100000,
+				pl_low: 80000, pl_medium: 120000, pl_high: 200000,
 				sl: 50000
 			    }
 			}
@@ -305,7 +305,7 @@ export const riskProfiles : Risk[] = [
 			    risk: 0.8,
 			    fair: {
 				lef_low: 0.5, lef_mode: 1, lef_high: 2,
-				pl_low: 20000, pl_medium: 50000, pl_high: 100000,
+				pl_low: 160000, pl_medium: 240000, pl_high: 600000,
 				sl: 50000
 			    }
 			}			    
