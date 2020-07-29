@@ -81,7 +81,7 @@ export class ThreatGraphService {
     }
 
     // Execute a Gaffer query for threats
-    getAllThreats(from : Date, to : Date) :
+    getAllThreats(from : Date, to : Date, limit : number = 500) :
     Observable<Graph> {
 
         // Query predicates, searches on the basis that observations occur
@@ -118,7 +118,7 @@ export class ThreatGraphService {
 		},
 		{
 		    "class": "Limit",
-		    "resultLimit": 500
+		    "resultLimit": limit
 		}
 	    ]
 	};

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { interval } from 'rxjs';
+import { timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
@@ -75,7 +75,6 @@ export class AllThreatsComponent implements OnInit {
 
         this.threatSvc.getAllThreats(from, to, 50).subscribe(
 	    dt => {
-	    console.log(dt);
 		this.allThreats = dt;
 		this.updateThreats();
 	    }
@@ -92,7 +91,7 @@ export class AllThreatsComponent implements OnInit {
             }
 	})
 
-	interval(5000).subscribe(e => {
+	timer(0, 10000).subscribe(e => {
 	    this.fetchThreats();
 	});
 
