@@ -1,17 +1,33 @@
 
 <div>
 
+  <div>
+    <span *ngIf="risk != undefined">{{risk.name}}</span>
+  </div>
+  
   <mat-form-field appearance="fill">
-    <mat-label>Select risk profile</mat-label>
-    <mat-select [(value)]="selectedProfile">
+    <mat-label>
+      <span *ngIf="default == undefined">Select risk profile</span>
+      <span *ngIf="default != undefined">Default: {{default.name}}</span>
+    </mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option [value]="undefined"><i>model default</i></mat-option>
       <mat-option *ngFor="let item of items" [value]="item.value">
 	{{item.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <span *ngIf="selectedProfile != undefined">
-    Selected: {{selectedProfile.id}}
+  <span *ngIf="selected != undefined">
+    Selected: {{selected.id}}
+  </span>
+
+  <span *ngIf="overallModel != undefined">
+    Model: {{overallModel.id}}
+  </span>
+
+  <span *ngIf="default != undefined">
+    Default: {{default.id}}
   </span>
 
 </div>

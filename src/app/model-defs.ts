@@ -11,50 +11,7 @@
 // The model set is a hierarchy of models to permit organisation and
 // navigation of the models.
 
-// Hierarchy
-
-export type HierarchyObject<T> = {
-    kind : "entry";
-    name : string;
-    value : T;
-}
-
-export type HierarchyFolder<T> = {
-    kind : "folder";
-    name : string;
-    entries : HierarchyEntry<T>[];
-}
-
-export type FlatItem<T> = {
-    name : string;
-    value : T;
-}
-
-export type HierarchyEntry<T> = HierarchyObject<T> | HierarchyFolder<T>;
-
-export type Hierarchy<T> = HierarchyEntry<T>[];
-
-export function flattenHierarchy<T>(h: Hierarchy<T>) : FlatItem<T>[] {
-    let l = [];
-
-    for(let ent of h) {
-	switch (ent.kind) {
-	case "entry":
-	    l.push(ent);
-	    continue;
-	case "folder":
-	    let folder = <HierarchyFolder<T>>ent;
-	    let sublist = flattenHierarchy<T>(folder.entries);
-	    for (let subent of sublist) {
-		l.push({
-		    name: ent.name + " / " + subent.name,
-		    value: subent.value
-		});
-	    }
-	}
-    }
-    return l;
-}
+import { Hierarchy } from './hierarchy';
 
 // Risk
 
@@ -93,7 +50,7 @@ export interface Model {
     id : string;
 
     // Maps risk to risk profile.
-    models : Object;
+    profiles : Object;
 }
 
 // Model set
@@ -101,6 +58,19 @@ export interface Model {
 export type ModelSet = Hierarchy<Model>;
 
 export const modelSet : ModelSet = [
+    {
+	kind: "entry",
+	name: "default",
+	default: true,
+	value: {
+	    id: "default",
+	    profiles: {
+		"cred-stuffing": "cred-stuff-low",
+		"malware": "malware-low",
+		"tor-exit": "tor-exit-low",
+	    }
+	}
+    },
     {
 	kind: "folder",
 	name: "Transport",
@@ -110,9 +80,10 @@ export const modelSet : ModelSet = [
 		name: "Small business",
 		value: {
 		    id: "transport-small",
-		    models: {
-			"cred-stuffing": "cred-stuf-low",
-			"malware": "malw-low"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-low",
+			"malware": "malware-low",
+			"tor-exit": "tor-exit-low"
 		    }
 		}
 	    },
@@ -121,9 +92,10 @@ export const modelSet : ModelSet = [
 		name: "Medium business",
 		value: {
 		    id: "transport-medium",
-		    models: {
-			"cred-stuffing": "cred-stuf-med",
-			"malware": "malw-med"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-med",
+			"malware": "malware-med",
+			"tor-exit": "tor-exit-med"
 		    }
 		}
 	    },
@@ -132,9 +104,10 @@ export const modelSet : ModelSet = [
 		name: "Large enterprise",
 		value: {
 		    id: "transport-large",
-		    models: {
-			"cred-stuffing": "cred-stuf-high",
-			"malware": "malw-high"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-high",
+			"malware": "malware-high",
+			"tor-exit": "tor-exit-high"
 		    }
 		}
 	    }
@@ -149,9 +122,10 @@ export const modelSet : ModelSet = [
 		name: "Small business",
 		value: {
 		    id: "transport-small",
-		    models: {
-			"cred-stuffing": "cred-stuf-low",
-			"malware": "malw-low"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-low",
+			"malware": "malware-low",
+			"tor-exit": "tor-exit-low"
 		    }
 		}
 	    },
@@ -160,9 +134,10 @@ export const modelSet : ModelSet = [
 		name: "Medium business",
 		value: {
 		    id: "transport-medium",
-		    models: {
-			"cred-stuffing": "cred-stuf-med",
-			"malware": "malw-med"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-med",
+			"malware": "malware-med",
+			"tor-exit": "tor-exit-med"
 		    }
 		}
 	    },
@@ -171,9 +146,10 @@ export const modelSet : ModelSet = [
 		name: "Large business",
 		value: {
 		    id: "transport-large",
-		    models: {
-			"cred-stuffing": "cred-stuf-high",
-			"malware": "malw-high"
+		    profiles: {
+			"cred-stuffing": "cred-stuff-high",
+			"malware": "malware-high",
+			"tor-exit": "tor-exit-high"
 		    }
 		}
 	    }
@@ -183,7 +159,7 @@ export const modelSet : ModelSet = [
 
 export const riskProfiles : Risk[] = [
     {
-	id: "cred-stuf",
+	id: "cred-stuffing",
 	name: "Credential stuffing",
 	profiles: [
 	    {
@@ -192,7 +168,8 @@ export const riskProfiles : Risk[] = [
 		entries: [
 		    {
 			kind: "entry",
-			name: "Baseline (small)",
+			name: "Low",
+			default: true,
 			value: {
 			    id: "cred-stuff-low",
 			    risk: 0.5,
@@ -205,7 +182,7 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (med)",
+			name: "Medium",
 			value: {
 			    id: "cred-stuff-med",
 			    risk: 0.6,
@@ -218,7 +195,7 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (high)",
+			name: "High",
 			value: {
 			    id: "cred-stuff-high",
 			    risk: 0.7,
@@ -234,7 +211,7 @@ export const riskProfiles : Risk[] = [
 	]
     },
     {
-	id: "malw",
+	id: "malware",
 	name: "Malware infection",
 	profiles: [
 	    {
@@ -243,9 +220,10 @@ export const riskProfiles : Risk[] = [
 		entries: [
 		    {
 			kind: "entry",
-			name: "Baseline (small)",
+			name: "Low",
+			default: true,
 			value: {
-			    id: "malw-low",
+			    id: "malware-low",
 			    risk: 0.2,
 			    fair: {
 				lef_low: 0.5, lef_mode: 1, lef_high: 2,
@@ -256,9 +234,9 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (med)",
+			name: "Medium",
 			value: {
-			    id: "malw-med",
+			    id: "malware-med",
 			    risk: 0.3,
 			    fair: {
 				lef_low: 0.5, lef_mode: 1, lef_high: 2,
@@ -269,9 +247,9 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (high)",
+			name: "High",
 			value: {
-			    id: "malw-high",
+			    id: "malware-high",
 			    risk: 0.4,
 			    fair: {
 				lef_low: 0.5, lef_mode: 1, lef_high: 2,
@@ -294,7 +272,8 @@ export const riskProfiles : Risk[] = [
 		entries: [
 		    {
 			kind: "entry",
-			name: "Baseline (small)",
+			name: "Low",
+			default: true,
 			value: {
 			    id: "tor-exit-low",
 			    risk: 0.6,
@@ -307,7 +286,7 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (med)",
+			name: "Medium",
 			value: {
 			    id: "tor-exit-med",
 			    risk: 0.7,
@@ -320,7 +299,7 @@ export const riskProfiles : Risk[] = [
 		    },
 		    {
 			kind: "entry",
-			name: "Baseline (high)",
+			name: "High",
 			value: {
 			    id: "tor-exit-high",
 			    risk: 0.8,
