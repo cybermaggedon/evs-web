@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import { Risk, RiskProfile, Model } from '../model';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
 
@@ -10,7 +10,7 @@ import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy'
 })
 export class RiskConfigurationComponent implements OnInit {
 
-    constructor() { }
+    constructor(@Inject(LOCALE_ID) private locale: string) { }
 
     _risk : Risk;
 
@@ -32,6 +32,7 @@ export class RiskConfigurationComponent implements OnInit {
     items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
+	console.log("LOCALE is ", this.locale);
     }
 
     selected : FlatItem<RiskProfile>;

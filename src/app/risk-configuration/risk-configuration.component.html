@@ -45,25 +45,25 @@
 
   <td class="fair pl">
     <span *ngIf="combined != undefined">
-      {{combined.value.fair.pl_low}}
+      {{combined.value.fair.pl_low | currency:'GBP':'symbol':'1.0-0':locale}}
     </span>
   </td>
 
   <td class="fair pl">
     <span *ngIf="combined != undefined">
-      {{combined.value.fair.pl_medium}}
+      {{combined.value.fair.pl_medium | currency:'GBP':'symbol':'1.0-0':locale}}
     </span>
   </td>
 
   <td class="fair pl">
     <span *ngIf="combined != undefined">
-      {{combined.value.fair.pl_high}}
+      {{combined.value.fair.pl_high | currency:'GBP':'symbol':'1.0-0':locale}}
     </span>
   </td>
 
   <td class="fair sl">
     <span *ngIf="combined != undefined">
-      {{combined.value.fair.sl}}
+      {{combined.value.fair.sl | currency:'GBP':'symbol':'1.0-0':locale}}
     </span>
   </td>
 
