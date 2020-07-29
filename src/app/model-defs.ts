@@ -123,7 +123,7 @@ export const modelSet : ModelSet = [
 		value: {
 		    id: "transport-small",
 		    profiles: {
-			"cred-stuffing": "cred-stuff-low",
+			"cred-stuffing": "cred-stuff-pii-low",
 			"malware": "malware-low",
 			"tor-exit": "tor-exit-low"
 		    }
@@ -135,7 +135,7 @@ export const modelSet : ModelSet = [
 		value: {
 		    id: "transport-medium",
 		    profiles: {
-			"cred-stuffing": "cred-stuff-med",
+			"cred-stuffing": "cred-stuff-pii-med",
 			"malware": "malware-med",
 			"tor-exit": "tor-exit-med"
 		    }
@@ -147,7 +147,7 @@ export const modelSet : ModelSet = [
 		value: {
 		    id: "transport-large",
 		    profiles: {
-			"cred-stuffing": "cred-stuff-high",
+			"cred-stuffing": "cred-stuff-pii-high",
 			"malware": "malware-high",
 			"tor-exit": "tor-exit-high"
 		    }
@@ -207,7 +207,53 @@ export const riskProfiles : Risk[] = [
 			}
 		    }
 		]
-	    }   
+	    },
+	    {
+		kind: "folder",
+		name: "PII",
+		entries: [
+		    {
+			kind: "entry",
+			name: "Low",
+			default: true,
+			value: {
+			    id: "cred-stuff-pii-low",
+			    risk: 0.7,
+			    fair: {
+				lef_low: 0.5, lef_mode: 1, lef_high: 2,
+				pl_low: 2000000, pl_medium: 5000000, pl_high: 10000000,
+				sl: 500000
+			    }
+			}
+		    },
+		    {
+			kind: "entry",
+			name: "Medium",
+			value: {
+			    id: "cred-stuff-pii-med",
+			    risk: 0.9,
+			    fair: {
+				lef_low: 0.5, lef_mode: 1, lef_high: 2,
+				pl_low: 5000000, pl_medium: 25000000, pl_high: 200000000,
+				sl: 500000
+			    }
+			}
+		    },
+		    {
+			kind: "entry",
+			name: "High",
+			value: {
+			    id: "cred-stuff-pii-high",
+			    risk: 0.95,
+			    fair: {
+				lef_low: 0.5, lef_mode: 1, lef_high: 2,
+				pl_low: 100000000, pl_medium: 200000000, pl_high: 500000000,
+				sl: 500000
+			    }
+			}
+		    }
+		]
+	    }
 	]
     },
     {
