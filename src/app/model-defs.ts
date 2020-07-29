@@ -37,29 +37,22 @@ export type Hierarchy<T> = HierarchyEntry<T>[];
 export function flattenHierarchy<T>(h: Hierarchy<T>) : FlatItem<T>[] {
     let l = [];
 
-    console.log("FLATTEN CALLED ", h);
     for(let ent of h) {
 	switch (ent.kind) {
 	case "entry":
-	    console.log("entry ", ent.name);
 	    l.push(ent);
 	    continue;
 	case "folder":
 	    let folder = <HierarchyFolder<T>>ent;
-	    console.log("folder ", folder.name);
 	    let sublist = flattenHierarchy<T>(folder.entries);
-//	    let sublist = [];
-	    console.log("GOT BACK ", sublist);
 	    for (let subent of sublist) {
 		l.push({
 		    name: ent.name + " / " + subent.name,
 		    value: subent.value
 		});
 	    }
-	    console.log("RESULT LOOKS LIKE ", l);
 	}
     }
-    console.log("END OF LOOP");
     return l;
 }
 
