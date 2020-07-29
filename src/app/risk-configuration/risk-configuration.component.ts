@@ -18,11 +18,12 @@ export class RiskConfigurationComponent implements OnInit {
     @Input("risk") set risk(risk : Risk) {
 	this._risk = risk;
 	this.flatten();
+    	this.updateModel();
     }
 
     @Input("overall-model") set overallModel(model : Model) {
 	this._model = model;
-    	this.flatten();
+    	this.updateModel();
     }
 
     get overallModel() : Model { return this._model }
@@ -30,7 +31,6 @@ export class RiskConfigurationComponent implements OnInit {
     items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
-
     }
 
     selected : FlatItem<RiskProfile>;
@@ -42,8 +42,11 @@ export class RiskConfigurationComponent implements OnInit {
     combined: FlatItem<RiskProfile>;
     
     flatten() : void {
-
 	this.items = flattenHierarchy(this._risk.profiles);
+
+    }
+
+    updateModel() {
 
 	if (this._model != undefined && this._risk != undefined) {
 
@@ -79,7 +82,6 @@ export class RiskConfigurationComponent implements OnInit {
 
     onChange() : void {
 	this.updateCombined();
-
     }
 
 }
