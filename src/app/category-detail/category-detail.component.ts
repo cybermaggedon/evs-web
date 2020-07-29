@@ -88,7 +88,6 @@ export class CategoryDetailComponent implements OnInit {
   	this.route.params.subscribe(res => {
 	    this.id = res.id;
 	    this.update();
-	    console.log("ID is ", this.id);
             this.eventSearch.update(new SearchTerms(this.id));
 	})
 

@@ -16,14 +16,11 @@ export class RiskConfigurationComponent implements OnInit {
     items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
-	console.log(this.risk);
     	this.flatten();
-	console.log(this.items);
     }
 
 
-        selectedProfile : RiskProfile;
-//    selectedProfile : string;
+    selectedProfile : RiskProfile;
     
     flatten() : void {
 	this.items = flattenHierarchy(this.risk.profiles);
