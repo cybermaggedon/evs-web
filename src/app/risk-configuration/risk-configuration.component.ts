@@ -1,5 +1,6 @@
+
 import { Component, OnInit, Input } from '@angular/core';
-import { Risk, RiskProfile, Model } from '../model-defs';
+import { Risk, RiskProfile, Model } from '../model';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
 
 @Component({
