@@ -12,10 +12,10 @@
     <tbody>
       <tr *ngFor="let asset of summary">
 	<td class="name {{asset.class}}">{{asset.name}}</td>
-	<td class="number int {{asset.class}}">{{asset.min | number:'1.0-0':locale}}</td>
-	<td class="number int {{asset.class}}">{{asset.max | number:'1.0-0':locale}}</td>
-	<td class="number int {{asset.class}}">{{asset.mean | number:'1.0-0':locale}}</td>
-	<td class="number float {{asset.class}}">{{asset.stddev | number:'1.0-0':locale}}</td>
+	<td class="number int {{asset.class}}">{{asset.min | currency:'':'symbol':'1.0-0'}}</td>
+	<td class="number int {{asset.class}}">{{asset.max | currency:'':'symbol':'1.0-0'}}</td>
+	<td class="number int {{asset.class}}">{{asset.mean | currency:'':'symbol':'1.0-0'}}</td>
+	<td class="number float {{asset.class}}">{{asset.stddev | currency:'':'symbol':'1.0-0'}}</td>
       </tr>
     </tbody>
   </table>
