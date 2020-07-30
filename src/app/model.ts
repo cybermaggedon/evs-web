@@ -20,7 +20,7 @@ export interface FairParameters {
     lef_mode : number;
     lef_high : number;
     pl_low : number;
-    pl_medium : number;
+    pl_mode : number;
     pl_high : number;
     sl : number;
 }

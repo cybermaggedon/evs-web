@@ -106,7 +106,7 @@ export class FairService {
 	this.updateSummaryModel("resource", resModel);
 	this.updateRiskModel("resource", resModel);
 
-	const catModel = this.getCatModel();
+	const catModel = this.getCatMetaModel();
 	this.updateLossModel("category", catModel);
 	this.updatePdfModel("category", catModel);
 	this.updateSummaryModel("category", catModel);
@@ -141,7 +141,41 @@ export class FairService {
 
     }
 
-    getCatModel() {
+    getCatModel(name, risk) {
+
+	if (this.riskProfiles[name] == undefined)
+	    return;
+
+	let fair = this.riskProfiles[name].fair;
+
+	const lef_low = fair.lef_low * risk;
+	const lef_mode = fair.lef_mode * risk;
+	const lef_high = fair.lef_high * risk;
+	const pl_low = fair.pl_low;
+	const pl_mode = fair.pl_mode;
+	const pl_high = fair.pl_high;
+	const sl = fair.sl;
+	    
+	let model = {
+	    "name": name,
+	    "parameters": {
+		"Loss Event Frequency": {
+		    "low": lef_low, "mode": lef_mode, "high": lef_high
+		},
+		"Primary Loss": {
+		    "low": pl_low, "mode": pl_mode, "high": pl_high
+		},
+		"Secondary Loss": {
+		    "constant": sl
+		}
+	    }
+	};
+	console.log(model);
+	return model;
+
+    }
+
+    getCatMetaModel() {
 
 	let cats = {};
 
@@ -170,7 +204,7 @@ export class FairService {
 	let models = [];
 
 	for (let k in cats) {
-	    models.push(this.getModel(k, cats[k]));
+	    models.push(this.getCatModel(k, cats[k]));
 	}
 
 	return {
