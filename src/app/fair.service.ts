@@ -25,12 +25,15 @@ export interface FairReport {
 })
 export class FairService {
 
+    private riskProfiles : Object;
+
     constructor(private http : HttpClient,
 		private riskService : RiskService,
 		private models : ModelStoreService
 	       ) {
 
 	this.subject = new Subject<any>();
+	this.riskProfiles = {};
 
         this.riskService.subject.
 	    pipe(throttle(() => interval(10000))).
@@ -39,8 +42,8 @@ export class FairService {
 		this.updateFairModels();
 	    });
 
-	models.subscribeCombinedRisk(f => {
-	    console.log(f);
+	models.subscribeCombinedRisk(rc => {
+	    this.riskProfiles[rc.id] = rc.risk;
 	});
 
     }

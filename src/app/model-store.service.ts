@@ -107,10 +107,7 @@ export class ModelStoreService {
 
 	    // Set the combined risk from either the selected risk, or
 	    // default if not set.
-	    if (this.selectedRisks[risk.id] != undefined)
-		this.combinedRisks[risk.id] = this.selectedRisks[risk.id];
-	    else 
-		this.combinedRisks[risk.id] = this.defaultRisks[risk.id];
+	    this.updateCombinedRisk(risk.id);
 
 	}
 
@@ -119,6 +116,40 @@ export class ModelStoreService {
 	this.selectedModelSubject = new Subject<Model>();
 	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
 	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
+
+    }
+
+    updateCombinedRisk(id : string) {
+
+	// Set the combined risk from either the selected risk, or
+	// default if not set.
+
+	this.combinedRisks[id] = undefined;
+
+	// If there's a selected risk, just use that.
+	if (this.selectedRisks[id] != undefined) {
+	    this.combinedRisks[id] = this.selectedRisks[id];
+	    return;
+	}
+
+	// If the model specifies a value, use that.
+	if (this.selectedModel != undefined &&
+	    id in this.selectedModel.profiles) {
+	    let profileId = this.selectedModel.profiles[id];
+	    for(let risk of this.riskProfiles) {
+		if (risk.id == id) {
+		    walk(risk.profiles, ent => {
+			if (ent.value.id == profileId) {
+			    this.combinedRisks[id] = ent.value;
+			}
+		    });
+		}
+	    }
+	    if (this.combinedRisks[id] != undefined) return;
+	}
+
+	// Just go with the default specified in the risk profile
+	this.combinedRisks[id] = this.defaultRisks[id];
 
     }
 
@@ -140,6 +171,20 @@ export class ModelStoreService {
 	this.selectedModel = m;
 	this.selectedModelSubject.next(m);
 
+	for(let risk of this.riskProfiles) {
+
+	    let prevVal = this.combinedRisks[risk.id];
+	    this.updateCombinedRisk(risk.id);
+
+	    if (this.combinedRisks[risk.id] != prevVal) {
+		let rc = new SelectedRiskChange();
+		rc.id = risk.id;
+		rc.risk = this.combinedRisks[risk.id];
+		this.combinedRiskSubject.next(rc);
+	    }
+
+	}
+
 	localStorage.setItem("selected-model", m.id);
 
     }
@@ -158,13 +203,15 @@ export class ModelStoreService {
 
 	// Set the combined risk from either the selected risk, or
 	// default if not set.
-	if (this.selectedRisks[id] != undefined)
-	    this.combinedRisks[id] = this.selectedRisks[id];
-	else 
-	    this.combinedRisks[id] = this.defaultRisks[id];
+	let prevVal = this.combinedRisks[id];
+	this.updateCombinedRisk(id);
 
-	rc.risk = this.combinedRisks[id];
-	this.combinedRiskSubject.next(rc);
+	if (this.combinedRisks[id] != prevVal) {
+	    let rc = new SelectedRiskChange();
+	    rc.id = id;
+	    rc.risk = this.combinedRisks[id];
+	    this.combinedRiskSubject.next(rc);
+	}
 
     }
 
