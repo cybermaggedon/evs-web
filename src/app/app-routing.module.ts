@@ -8,6 +8,7 @@ import { ThreatDetailComponent } from './threat-detail/threat-detail.component';
 import { AllThreatsComponent } from './all-threats/all-threats.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
+import { ModelConfigurationComponent } from './model-configuration/model-configuration.component';
 
 // This table maps URLs to views.
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
 
     // Risk dashboard
     { path: 'risk', component: RiskDashboardComponent },
+
+    // Model configuration
+    { path: 'model', component: ModelConfigurationComponent },
 
     // Threat detail view
     { path: 'threat/:id', component: ThreatDetailComponent },

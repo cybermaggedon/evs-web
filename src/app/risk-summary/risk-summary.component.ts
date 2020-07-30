@@ -37,7 +37,6 @@ export class RiskSummaryComponent implements OnInit {
 		}
 	    }
 	    this.summary = summary;
-	    console.log(this.summary);
 	});
     }
 

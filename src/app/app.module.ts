@@ -4,12 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule }    from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -29,6 +33,10 @@ import { RiskDistributionChartComponent } from './risk-distribution-chart/risk-d
 import { RiskReportComponent } from './risk-report/risk-report.component';
 import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
 import { AllThreatsComponent } from './all-threats/all-threats.component';
+import { ModelConfigurationComponent } from './model-configuration/model-configuration.component';
+import { RiskConfigurationComponent } from './risk-configuration/risk-configuration.component';
+import { CustomRiskConfigurationComponent } from './custom-risk-configuration/custom-risk-configuration.component';
+import { ModelSelectionComponent } from './model-selection/model-selection.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +55,10 @@ import { AllThreatsComponent } from './all-threats/all-threats.component';
         RiskReportComponent,
         RiskSummaryComponent,
         AllThreatsComponent,
+        ModelConfigurationComponent,
+        RiskConfigurationComponent,
+        CustomRiskConfigurationComponent,
+        ModelSelectionComponent,
     ],
     imports: [
         BrowserModule,
@@ -55,6 +67,10 @@ import { AllThreatsComponent } from './all-threats/all-threats.component';
         BrowserAnimationsModule,
         MatSliderModule,
         MatTabsModule,
+	MatMenuModule,
+	MatButtonModule,
+	MatSelectModule,
+	MatFormFieldModule,
         MatExpansionModule,
         NgxDatatableModule,
 	ChartsModule
@@ -62,6 +78,8 @@ import { AllThreatsComponent } from './all-threats/all-threats.component';
     providers: [
         {
             provide: LOCALE_ID, useValue: 'en-GB'
+	}, {
+            provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
         }
     ],
     bootstrap: [
