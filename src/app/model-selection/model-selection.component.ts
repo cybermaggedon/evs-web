@@ -15,19 +15,30 @@ export class ModelSelectionComponent implements OnInit {
     constructor(private models : ModelStoreService) { }
 
     ngOnInit(): void {
-	this.flatten();
 
-	for(let model of this.models.getModels()) {
-	    if (model.kind == "entry" && model.value.id == "default") {
-		this.selected = model.value;
-	    }
-	}
+	this.models.subscribeModels(m => {
+	    this.items = flattenHierarchy(this.models.getModels());
+	});
 
-	this.riskProfiles = this.models.getRiskProfiles();
+	this.models.subscribeRisks(r => {
+	    this.riskProfiles = r;
+	});
+
+	this.models.subscribeSelectedModel(m => {
+	    // Defeat recursion
+	    if (m == this.selected) return;
+
+	    this.selected = m;
+	});
 
     }
 
-    selected : Model;
+    _selected : Model;
+    get selected() { return this._selected; }
+    set selected(m : Model) {
+	this._selected = m;
+	this.models.setSelectedModel(m);
+    }
 
     items : FlatItem<Model>[] = [];
     riskProfiles : Risk[];

@@ -2,6 +2,7 @@
 import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import { Risk, RiskProfile, Model } from '../model';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
+import { ModelStoreService } from '../model-store.service';
 
 @Component({
   selector: '[risk-configuration]',
@@ -10,7 +11,8 @@ import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy'
 })
 export class RiskConfigurationComponent implements OnInit {
 
-    constructor(@Inject(LOCALE_ID) private locale: string) { }
+    constructor(private models : ModelStoreService,
+		@Inject(LOCALE_ID) private locale: string) { }
 
     _risk : Risk;
 
@@ -32,9 +34,56 @@ export class RiskConfigurationComponent implements OnInit {
     items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
+	this.models.subscribeSelectedRisk(rc => {
+
+	    // Ignore risks which aren't for this component.
+	    if (rc.id != this._risk.id) return;
+
+	    console.log("INCOMING: ", rc);
+
+	    // Ignore if no change.  This defeats recursion.
+	    if (this._selected != undefined &&
+		this._selected.value == rc.risk) {
+		return;
+	    }
+
+	    // This is no change for the 'model default' case.
+	    if (this._selected == undefined &&
+		rc.risk == undefined)
+		return;
+
+	    // Special 'model default' case.
+	    if (rc.risk == undefined) {
+		this._selected = undefined;
+		this.updateCombined();
+		return;
+	    }
+
+
+	    // Locate the FlatItem corresponding to this risk.
+	    for(let item of this.items) {
+		if (item.value == rc.risk) {
+		    this._selected = item;
+		}
+	    }
+
+	    this.updateCombined();
+	    
+	    console.log("THIS IS A CHANGE");
+	    console.log(this._selected);
+
+	});
     }
 
-    selected : FlatItem<RiskProfile>;
+    _selected : FlatItem<RiskProfile>;
+    get selected() { return this._selected; }
+    set selected(item : FlatItem<RiskProfile>) {
+	this._selected = item;
+	if (this._selected == undefined)
+	    this.models.setSelectedRisk(this._risk.id, undefined);
+	else
+	    this.models.setSelectedRisk(this._risk.id, this._selected.value);
+    }
 
     // Model-specified default.
     default : FlatItem<RiskProfile>;

@@ -47,7 +47,12 @@ export class ModelStoreService {
 	for(let risk of riskProfiles) {
 	    this.selectedRisks[risk.id] = undefined;
 	}
-	
+
+	this.modelSetSubject = new Subject<ModelSet>();
+	this.risksSubject = new Subject<Risk[]>();
+	this.selectedModelSubject = new Subject<Model>();
+	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
+
     }
 
     //
@@ -99,8 +104,13 @@ export class ModelStoreService {
     }
   
     subscribeSelectedRisk(f : any) {
-	this.selectedRiskSubject.subscribe(m => { f(m); });
-	f(this.selectedModel);
+	this.selectedRiskSubject.subscribe(rc => { f(rc); });
+	for(let id in this.selectedRisks) {
+	    let rc = new SelectedRiskChange();
+	    rc.id = id;
+	    rc.risk = this.selectedRisks[id];
+	    f(rc);
+	}
     }
   
 }
