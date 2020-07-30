@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { nameToCssClass } from '../risk';
 
 @Component({
   selector: 'app-threat-model',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThreatModelComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
+
+    threats = {
+	"gsuite-threat-email": {
+	    threats: [
+		{
+		    id: "malware",
+		    score: 0.3
+		},
+		{
+		    id: "credential-theft",
+		    score: 0.2
+		}
+	    ]
+	},
+	"gsuite-threat-auth": {
+	    threats: [
+		{
+		    id: "tor-exit",
+		    score: 0.8
+		}
+	    ]
+	}
+    };
+
+    nameToCssClass = nameToCssClass;
 
 }
+
