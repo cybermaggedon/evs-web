@@ -35,6 +35,8 @@ import { RiskSummaryComponent } from './risk-summary/risk-summary.component';
 import { AllThreatsComponent } from './all-threats/all-threats.component';
 import { ModelConfigurationComponent } from './model-configuration/model-configuration.component';
 import { RiskConfigurationComponent } from './risk-configuration/risk-configuration.component';
+import { CustomRiskConfigurationComponent } from './custom-risk-configuration/custom-risk-configuration.component';
+import { ModelSelectionComponent } from './model-selection/model-selection.component';
 
 @NgModule({
     declarations: [
@@ -55,6 +57,8 @@ import { RiskConfigurationComponent } from './risk-configuration/risk-configurat
         AllThreatsComponent,
         ModelConfigurationComponent,
         RiskConfigurationComponent,
+        CustomRiskConfigurationComponent,
+        ModelSelectionComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,63 +1,12 @@
 
-<mat-form-field appearance="fill">
-  <mat-label>Select overall model</mat-label>
-  <mat-select [(value)]="selected">
-    <mat-option *ngFor="let item of items" [value]="item.value">
-      {{item.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<mat-tab-group mat-align-tabs="start">
 
-<span *ngIf="selected != undefined">
-  Model: {{selected.id}}
-</span>
+  <mat-tab label="Model configuration">
+    <model-selection></model-selection>
+  </mat-tab>
 
-<table>
-  <thead>
-    <tr>
-      <th rowspan="2">
-	Risk
-      </th>
-      <th rowspan="2">
-	Profile
-      </th>
-      <th rowspan="2">
-	Score
-      </th>
-      <th colspan="3">
-	LEF
-      </th>
-      <th colspan="3">
-	PL
-      </th>
-      <th rowspan="2">
-	SL
-      </th>
-    </tr>
-    <tr>
-      <th>
-	low
-      </th>
-      <th>
-	mode
-      </th>
-      <th>
-	high
-      </th>
-      <th>
-	low
-      </th>
-      <th>
-	medium
-      </th>
-      <th>
-	high
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr risk-configuration *ngFor="let risk of riskProfiles" [risk]="risk" [overall-model]="selected">
-    </tr>
-  </tbody>
-</table>
+  <mat-tab label="Custom risks">
+    <custom-risk-configuration></custom-risk-configuration>
+  </mat-tab>
 
+</mat-tab-group>
