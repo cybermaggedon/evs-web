@@ -32,7 +32,6 @@ export class RiskConfigurationComponent implements OnInit {
     items : FlatItem<RiskProfile>[] = [];
 
     ngOnInit(): void {
-	console.log("LOCALE is ", this.locale);
     }
 
     selected : FlatItem<RiskProfile>;
