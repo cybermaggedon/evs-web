@@ -37,6 +37,7 @@ import { ModelConfigurationComponent } from './model-configuration/model-configu
 import { RiskConfigurationComponent } from './risk-configuration/risk-configuration.component';
 import { CustomRiskConfigurationComponent } from './custom-risk-configuration/custom-risk-configuration.component';
 import { ModelSelectionComponent } from './model-selection/model-selection.component';
+import { ThreatModelComponent } from './threat-model/threat-model.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { ModelSelectionComponent } from './model-selection/model-selection.compo
         RiskConfigurationComponent,
         CustomRiskConfigurationComponent,
         ModelSelectionComponent,
+        ThreatModelComponent,
     ],
     imports: [
         BrowserModule,

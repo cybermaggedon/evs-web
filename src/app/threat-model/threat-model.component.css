@@ -1,0 +1,79 @@
+
+#threatmodel {
+    width: 1052px;
+    height: 754px;
+    background-image: url("/assets/threat-model.png");
+    border: 1px solid black;
+    padding: 0px;
+    position: relative;
+}
+
+#gsuite-threat-email {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 135px;
+    left: 330px;
+    margin: 0px;
+}
+
+#gsuite-threat-auth {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 30px;
+    left: 290px;
+    margin: 0px;
+}
+
+#research-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 40px;
+    left: 480px;
+    margin: 0px;
+}
+
+#office-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 225px;
+    left: 930px;
+    margin: 0px;
+}
+
+#payment-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 650px;
+    left: 90px;
+    margin: 0px;
+}
+
+#prod-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 600px;
+    left: 310px;
+    margin: 0px;
+}
+
+#it-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 600px;
+    left: 520px;
+    margin: 0px;
+}
