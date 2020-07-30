@@ -37,15 +37,50 @@ export class ModelStoreService {
 
 	this.riskProfiles = riskProfiles;
 
-	walk(modelSet, ent => {
-	    if (ent.kind == "entry" && ent.default) {
-		this.selectedModel = ent.value;
-	    }
-	});
+	let modelSetting = localStorage.getItem("selected-model");
+
+	// Set to selected model stored in localStorage, if set.
+	if (modelSetting != null) {
+	    walk(modelSet, ent => {
+		if (ent.kind == "entry" && ent.value.id == modelSetting) {
+		    this.selectedModel = ent.value;
+		}
+	    });
+	}
+
+	// Else, set to default
+	if (this.selectedModel == undefined) {
+	    walk(modelSet, ent => {
+		if (ent.kind == "entry" && ent.default) {
+
+		    // Setting from the default
+		    this.selectedModel = ent.value;
+
+		    // Store this away for next time.
+		    localStorage.setItem("selected-model",
+					 this.selectedModel.id);
+		}
+	    });
+	}
 
 	this.selectedRisks = {};
 	for(let risk of riskProfiles) {
+
+	    let riskSetting = localStorage.getItem("selected-risk:" + risk.id);
+
 	    this.selectedRisks[risk.id] = undefined;
+
+	    if (riskSetting != null && riskSetting != "") {
+
+		walk(risk.profiles, entry => {
+		    if (entry.kind == "entry") {
+			if (riskSetting == entry.value.id)
+			    this.selectedRisks[risk.id] = entry.value;
+		    }
+		});
+
+	    }
+
 	}
 
 	this.modelSetSubject = new Subject<ModelSet>();
@@ -55,7 +90,6 @@ export class ModelStoreService {
 
     }
 
-    //
     setModels(m : ModelSet) {
 	this.modelSet = m;
 	this.modelSetSubject.next(m);
@@ -67,8 +101,15 @@ export class ModelStoreService {
     }
 
     setSelectedModel(m : Model) {
+
+	// Ignore no-op.
+	if (this.selectedModel == m) return;
+
 	this.selectedModel = m;
 	this.selectedModelSubject.next(m);
+
+	localStorage.setItem("selected-model", m.id);
+
     }
 
     setSelectedRisk(id : string, r : RiskProfile) {
@@ -77,6 +118,12 @@ export class ModelStoreService {
 	rc.id = id;
 	rc.risk = r;
 	this.selectedRiskSubject.next(rc);
+
+	// In storage, "" means undefined.
+	if (r == undefined) 
+	    localStorage.setItem("selected-risk:" + id, "");
+	else
+	    localStorage.setItem("selected-risk:" + id, r.id);
     }
 
     // Yeh... but better to do the comms through subscriptions

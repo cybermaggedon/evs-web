@@ -65,7 +65,7 @@ export const modelSet : ModelSet = [
 		kind: "entry",
 		name: "Small business",
 		value: {
-		    id: "transport-small",
+		    id: "healthcare-small",
 		    profiles: {
 			"cred-stuffing": "cred-stuff-pii-low",
 			"malware": "malware-low",
@@ -77,7 +77,7 @@ export const modelSet : ModelSet = [
 		kind: "entry",
 		name: "Medium business",
 		value: {
-		    id: "transport-medium",
+		    id: "healthcare-medium",
 		    profiles: {
 			"cred-stuffing": "cred-stuff-pii-med",
 			"malware": "malware-med",
@@ -89,7 +89,7 @@ export const modelSet : ModelSet = [
 		kind: "entry",
 		name: "Large business",
 		value: {
-		    id: "transport-large",
+		    id: "healthcare-large",
 		    profiles: {
 			"cred-stuffing": "cred-stuff-pii-high",
 			"malware": "malware-high",

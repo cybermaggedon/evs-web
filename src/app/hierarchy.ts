@@ -14,15 +14,28 @@ export type HierarchyFolder<T> = {
     entries : HierarchyEntry<T>[];
 }
 
+export type HierarchyEntry<T> = HierarchyObject<T> | HierarchyFolder<T>;
+
+export type Hierarchy<T> = HierarchyEntry<T>[];
+
+export function walk<T>(h : Hierarchy<T>, f : any) : void {
+    for(let ent of h) {
+	switch (ent.kind) {
+	case "entry":
+	    f(ent);
+	    continue;
+	case "folder":
+	    let folder = <HierarchyFolder<T>>ent;
+	    walk(folder.entries, f);
+	}
+    }
+}
+
 export type FlatItem<T> = {
     name : string;
     default? : boolean;
     value : T;
 }
-
-export type HierarchyEntry<T> = HierarchyObject<T> | HierarchyFolder<T>;
-
-export type Hierarchy<T> = HierarchyEntry<T>[];
 
 export function flattenHierarchy<T>(h: Hierarchy<T>) : FlatItem<T>[] {
 
@@ -51,20 +64,3 @@ export function flattenHierarchy<T>(h: Hierarchy<T>) : FlatItem<T>[] {
     }
     return l;
 }
-
-export function walk<T>(h : Hierarchy<T>, f : any) : void {
-    for(let ent of h) {
-	switch (ent.kind) {
-	case "entry":
-	    f(ent);
-	    continue;
-	case "folder":
-	    let folder = <HierarchyFolder<T>>ent;
-	    let sublist = flattenHierarchy<T>(folder.entries);
-	    for (let subent of sublist) {
-		f(subent);
-	    }
-	}
-    }
-}
-

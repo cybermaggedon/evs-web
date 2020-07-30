@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule }    from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -78,6 +78,8 @@ import { ModelSelectionComponent } from './model-selection/model-selection.compo
     providers: [
         {
             provide: LOCALE_ID, useValue: 'en-GB'
+	}, {
+            provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
         }
     ],
     bootstrap: [
