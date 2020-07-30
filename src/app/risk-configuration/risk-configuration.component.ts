@@ -39,8 +39,6 @@ export class RiskConfigurationComponent implements OnInit {
 	    // Ignore risks which aren't for this component.
 	    if (rc.id != this._risk.id) return;
 
-	    console.log("INCOMING: ", rc);
-
 	    // Ignore if no change.  This defeats recursion.
 	    if (this._selected != undefined &&
 		this._selected.value == rc.risk) {
@@ -69,9 +67,6 @@ export class RiskConfigurationComponent implements OnInit {
 
 	    this.updateCombined();
 	    
-	    console.log("THIS IS A CHANGE");
-	    console.log(this._selected);
-
 	});
     }
 
