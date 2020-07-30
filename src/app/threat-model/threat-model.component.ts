@@ -13,9 +13,10 @@ export class ThreatModelComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    threats = {
-	"gsuite-threat-email": {
-	    threats: [
+    threats = [
+	{
+	    id: "gsuite-threat-email",
+	    risks: [
 		{
 		    id: "malware",
 		    score: 0.3
@@ -26,15 +27,45 @@ export class ThreatModelComponent implements OnInit {
 		}
 	    ]
 	},
-	"gsuite-threat-auth": {
-	    threats: [
+	{
+	    id: "gsuite-threat-auth",
+	    risks: [
 		{
 		    id: "tor-exit",
 		    score: 0.8
 		}
 	    ]
+	},
+	{
+	    id: "research-threat",
+	    risks: [
+		{
+		    id: "tor-exit",
+		    score: 0.2
+		}
+	    ]
+	},
+	{
+	    id: "office-threat",
+	    risks: [
+	    ]
+	},
+	{
+	    id: "payment-threat",
+	    risks: [
+	    ]
+	},
+	{
+	    id: "prod-threat",
+	    risks: [
+	    ]
+	},
+	{
+	    id: "it-threat",
+	    risks: [
+	    ]
 	}
-    };
+    ];
 
     nameToCssClass = nameToCssClass;
 

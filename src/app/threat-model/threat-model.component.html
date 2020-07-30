@@ -1,27 +1,13 @@
 
 <div id="threatmodel">
-  <div class="threat" id="gsuite-threat-email">
-    <div *ngFor="let threat of threats['gsuite-threat-email'].threats"
-	 class="risk {{nameToCssClass(threat.id)}}"
-	 style="width: {{threat.score * 98}}px">
-      {{threat.id}}
-    </div>
-  </div>
-  <div id="gsuite-threat-auth">
-    <div *ngFor="let threat of threats['gsuite-threat-auth'].threats"
-	 class="risk {{nameToCssClass(threat.id)}}"
-	 style="width: {{threat.score * 98}}px">
-      {{threat.id}}
-    </div>
-  </div>
-  <div id="research-threat">
-  </div>
-  <div id="office-threat">
-  </div>
-  <div id="payment-threat">
-  </div>
-  <div id="prod-threat">
-  </div>
-  <div id="it-threat">
+  <div class="threat" id="{{threat.id}}"
+       *ngFor="let threat of threats">
+    <a *ngFor="let risk of threat.risks"
+	 class="risk {{nameToCssClass(risk.id)}}"
+       style="width: {{risk.score * 98}}px"
+       [routerLink]="['/category', risk.id]"
+       queryParamsHandling="preserve">
+      {{risk.id}}
+    </a>
   </div>
 </div>

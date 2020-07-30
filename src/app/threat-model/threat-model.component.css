@@ -85,62 +85,58 @@
     display: flex;
 }
 
-.risk {
+A.risk {
     white-space: nowrap;
     height: 2.0em;
     padding: 0px;
     color: white;
     overflow: hidden;
     margin: 0px;
-    display: flex;
+    display: block;
+    text-decoration: none;
+}
+
+a.risk:hover {
+    background-color: #ccc;
+    color: #6080a0;
 }
 
 .risk.category0 {
     background-color: #4b3f72;
-    border: 1px solid #4b3f72;
 }
 
 .risk.category1 {
     background-color: #119da4;
-    border: 1px solid #119da4;
 }
 
 .risk.category2 {
     background-color: #19647e;
-    border: 1px solid #19647e;
 }
 
 .risk.category3 {
     background-color: #804028;
-    border: 1px solid #804028;
 }
 
 .risk.category4 {
     background-color: #408028;
-    border: 1px solid #408028;
 }
 
 .risk.category5 {
     background-color: #a04060;
-    border: 1px solid #a04060;
 }
 
 .risk.category6 {
     background-color: #c08020;
-    border: 1px solid #c08020;
 }
 
 .risk.category7 {
     background-color: #2080c0;
-    border: 1px solid #2080c0;
 }
 
 .risk.category8 {
     background-color: #80a020;
-    border: 1px solid #80a020;
 }
 
 .risk.category9 {
     background-color: #4040a0;
-    border: 1px solid #4040a0;
 }
