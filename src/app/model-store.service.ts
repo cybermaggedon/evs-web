@@ -16,7 +16,8 @@ export class ModelStoreService {
 
     // The model definitions
     private modelSet : ModelSet;
-
+    private defaultModel : Model;
+    
     // Risk profile definitions
     private riskProfiles : Risk[];
 
@@ -26,17 +27,33 @@ export class ModelStoreService {
     // Risks which are selected
     private selectedRisks : Object;
 
+    // Default profiles settings for risk.
+    private defaultRisks : Object;
+
+    // For each risk, either the selected profile, or the default profile if
+    // none selected.
+    private combinedRisks : Object;
+
+    // A bunch of subjects to push information out on.
     private modelSetSubject : Subject<ModelSet>;
     private risksSubject : Subject<Risk[]>;
     private selectedModelSubject : Subject<Model>;
     private selectedRiskSubject : Subject<SelectedRiskChange>;
-    
+    private combinedRiskSubject : Subject<SelectedRiskChange>;
 
     constructor() {
-	this.modelSet = modelSet;
 
+	// Get the settings from model-defs
+	this.modelSet = modelSet;
 	this.riskProfiles = riskProfiles;
 
+	// Find default model
+	walk(modelSet, ent => {
+	    if (ent.kind == "entry" && ent.default)
+		this.defaultModel = ent.value;
+	});
+
+	// Get model setting from localstorage
 	let modelSetting = localStorage.getItem("selected-model");
 
 	// Set to selected model stored in localStorage, if set.
@@ -49,37 +66,51 @@ export class ModelStoreService {
 	}
 
 	// Else, set to default
-	if (this.selectedModel == undefined) {
-	    walk(modelSet, ent => {
-		if (ent.kind == "entry" && ent.default) {
+	if (this.selectedModel == undefined &&
+	    this.defaultModel != undefined) {
 
-		    // Setting from the default
-		    this.selectedModel = ent.value;
+	    this.selectedModel = this.defaultModel;
 
-		    // Store this away for next time.
-		    localStorage.setItem("selected-model",
-					 this.selectedModel.id);
-		}
-	    });
+	    // Store this away for next time.
+	    localStorage.setItem("selected-model", this.selectedModel.id);
+
 	}
 
 	this.selectedRisks = {};
+	this.defaultRisks = {};
+	this.combinedRisks = {};
+
+	// Loop over all risks...
 	for(let risk of riskProfiles) {
 
+	    // Get the localStorage setting for this risk
 	    let riskSetting = localStorage.getItem("selected-risk:" + risk.id);
 
 	    this.selectedRisks[risk.id] = undefined;
 
-	    if (riskSetting != null && riskSetting != "") {
-
+	    if (riskSetting != null) {
 		walk(risk.profiles, entry => {
 		    if (entry.kind == "entry") {
 			if (riskSetting == entry.value.id)
 			    this.selectedRisks[risk.id] = entry.value;
 		    }
 		});
-
 	    }
+
+	    // Get the default for this risk
+	    this.defaultRisks[risk.id] = undefined;
+	    walk(risk.profiles, entry => {
+		if (entry.kind == "entry")
+		    if (entry.default)
+			this.defaultRisks[risk.id] = entry.value;
+	    });
+
+	    // Set the combined risk from either the selected risk, or
+	    // default if not set.
+	    if (this.selectedRisks[risk.id] != undefined)
+		this.combinedRisks[risk.id] = this.selectedRisks[risk.id];
+	    else 
+		this.combinedRisks[risk.id] = this.defaultRisks[risk.id];
 
 	}
 
@@ -87,6 +118,7 @@ export class ModelStoreService {
 	this.risksSubject = new Subject<Risk[]>();
 	this.selectedModelSubject = new Subject<Model>();
 	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
+	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
 
     }
 
@@ -119,11 +151,21 @@ export class ModelStoreService {
 	rc.risk = r;
 	this.selectedRiskSubject.next(rc);
 
-	// In storage, "" means undefined.
 	if (r == undefined) 
-	    localStorage.setItem("selected-risk:" + id, "");
+	    localStorage.removeItem("selected-risk:" + id);
 	else
 	    localStorage.setItem("selected-risk:" + id, r.id);
+
+	// Set the combined risk from either the selected risk, or
+	// default if not set.
+	if (this.selectedRisks[id] != undefined)
+	    this.combinedRisks[id] = this.selectedRisks[id];
+	else 
+	    this.combinedRisks[id] = this.defaultRisks[id];
+
+	rc.risk = this.combinedRisks[id];
+	this.combinedRiskSubject.next(rc);
+
     }
 
     // Yeh... but better to do the comms through subscriptions
@@ -156,6 +198,16 @@ export class ModelStoreService {
 	    let rc = new SelectedRiskChange();
 	    rc.id = id;
 	    rc.risk = this.selectedRisks[id];
+	    f(rc);
+	}
+    }
+  
+    subscribeCombinedRisk(f : any) {
+	this.combinedRiskSubject.subscribe(rc => { f(rc); });
+	for(let id in this.combinedRisks) {
+	    let rc = new SelectedRiskChange();
+	    rc.id = id;
+	    rc.risk = this.combinedRisks[id];
 	    f(rc);
 	}
     }
