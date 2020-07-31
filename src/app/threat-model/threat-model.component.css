@@ -78,11 +78,15 @@
     margin: 0px;
 }
 
-.threat {
+.threat .risks {
     height: 2.0em;
     padding: 0px;
     margin: 0px;
     display: flex;
+}
+
+.threat .description {
+    font-size: small;
 }
 
 A.risk {

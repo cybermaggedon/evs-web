@@ -4,12 +4,15 @@
 <div id="threatmodel">
   <div class="threat" id="{{threat.id}}"
        *ngFor="let threat of threats">
-    <a *ngFor="let risk of threat.risks"
+    <div class="risks">
+      <a *ngFor="let risk of threat.risks"
 	 class="risk {{nameToCssClass(risk.id)}}"
-       style="width: {{risk.score * 98}}px"
-       [routerLink]="['/category', risk.id]"
-       queryParamsHandling="preserve">
-      {{risk.id}}
-    </a>
+	 style="width: {{risk.score * 98}}px"
+	 [routerLink]="['/category', risk.id]"
+	 queryParamsHandling="preserve">
+	{{risk.id}}
+      </a>
+    </div>
+    <div class="description">{{threat.description}}</div>
   </div>
 </div>
