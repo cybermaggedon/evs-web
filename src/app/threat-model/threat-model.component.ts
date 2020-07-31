@@ -52,9 +52,9 @@ export class ThreatModelComponent implements OnInit {
 
 	    for(let k in risks) {
 		this.risks[k] = 1 - risks[k];
-		console.log(k, this.risks[k]);
 	    }
 
+	    // FIXME: This is fairly random.
 	    this.threats[0].risks = [
 		{ id: "tor-exit", score: this.risks["tor-exit"] },
 		{ id: "credential-theft", score: this.risks["credential-theft"] * 0.4 }
