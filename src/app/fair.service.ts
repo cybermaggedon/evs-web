@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RiskService } from './risk.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throttle } from 'rxjs/operators';
-import { interval, Subject } from 'rxjs';
+import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
 import { ModelStoreService } from './model-store.service';
@@ -27,6 +27,8 @@ export class FairService {
 
     private riskProfiles : Object;
 
+    updateCatEvent : Observable<void>;
+
     constructor(private http : HttpClient,
 		private riskService : RiskService,
 		private models : ModelStoreService
@@ -36,14 +38,21 @@ export class FairService {
 	this.riskProfiles = {};
 
         this.riskService.subject.
-	    pipe(throttle(() => interval(10000))).
+	    pipe(throttle(() => interval(1000))).
 	    subscribe(m => {
 		this.riskModel = m;
 		this.updateFairModels();
 	    });
 
-	models.subscribeCombinedRisk(rc => {
-	    this.riskProfiles[rc.id] = rc.risk;
+	this.updateCatEvent = new Observable(obs => {
+	    models.subscribeCombinedRisk(rc => {
+		this.riskProfiles[rc.id] = rc.risk;
+		obs.next();
+	    });
+	});
+
+	this.updateCatEvent.subscribe(obs => {
+	    this.updateCatModels();
 	});
 
     }
@@ -90,23 +99,11 @@ export class FairService {
 	this.updateModel(kind, "risk", model);
     }
 
-    updateFairModels() : void {
-
-	const devModel = this.getMetaModel(this.riskModel.devices,
-					   "All risks");
-	this.updateLossModel("device", devModel);
-	this.updatePdfModel("device", devModel);
-	this.updateSummaryModel("device", devModel);
-	this.updateRiskModel("device", devModel);
-
-	const resModel = this.getMetaModel(this.riskModel.resources,
-					   "All risks");
-	this.updateLossModel("resource", resModel);
-	this.updatePdfModel("resource", resModel);
-	this.updateSummaryModel("resource", resModel);
-	this.updateRiskModel("resource", resModel);
+    updateCatModels() : void {
 
 	const catModel = this.getCatMetaModel();
+	if (catModel == undefined) return;
+
 	this.updateLossModel("category", catModel);
 	this.updatePdfModel("category", catModel);
 	this.updateSummaryModel("category", catModel);
@@ -114,15 +111,43 @@ export class FairService {
 
     }
 
+    updateFairModels() : void {
+
+	const devModel = this.getMetaModel(this.riskModel.devices,
+					   "All risks");
+	if (devModel != undefined) {
+
+	    this.updateLossModel("device", devModel);
+	    this.updatePdfModel("device", devModel);
+	    this.updateSummaryModel("device", devModel);
+	    this.updateRiskModel("device", devModel);
+
+	}
+
+	const resModel = this.getMetaModel(this.riskModel.resources,
+					   "All risks");
+	if (resModel != undefined) {
+	    this.updateLossModel("resource", resModel);
+	    this.updatePdfModel("resource", resModel);
+	    this.updateSummaryModel("resource", resModel);
+	    this.updateRiskModel("resource", resModel);
+	}
+
+	this.updateCatModels();
+
+    }
+
     getModel(name, risk) {
 
-	const lef_low = risk / 2.0
-	const lef_mode = risk;
-	const lef_high = risk * 2.0;
-	const pl_low = 3000000 * risk;
-	const pl_mode = 3500000 * risk;
-	const pl_high = 4000000 * risk;
-	const sl = 5000000 * risk;
+// Risk is rounded to 2 places to allow FAIR service to cache.
+    // FIXME: hard-coded, should use a stddev input?
+	const lef_low = this.round(risk / 1.4, 2);
+	const lef_mode = this.round(risk, 2);
+	const lef_high = this.round(risk * 1.4, 2);
+	const pl_low = 100000;
+	const pl_mode = 200000;
+	const pl_high = 250000;
+	const sl = 200000;
 	    
 	return {
 	    "name": name,
@@ -141,6 +166,10 @@ export class FairService {
 
     }
 
+    round(n : number, places : number) {
+        return parseFloat(n.toFixed(places));
+    }
+
     getCatModel(name, risk) {
 
 	if (this.riskProfiles[name] == undefined)
@@ -148,9 +177,9 @@ export class FairService {
 
 	let fair = this.riskProfiles[name].fair;
 
-	const lef_low = fair.lef_low * risk;
-	const lef_mode = fair.lef_mode * risk;
-	const lef_high = fair.lef_high * risk;
+	const lef_low = this.round(fair.lef_low * risk, 2);
+	const lef_mode = this.round(fair.lef_mode * risk, 2);
+	const lef_high = this.round(fair.lef_high * risk, 2);
 	const pl_low = fair.pl_low;
 	const pl_mode = fair.pl_mode;
 	const pl_high = fair.pl_high;
@@ -170,12 +199,14 @@ export class FairService {
 		}
 	    }
 	};
-	console.log(model);
+
 	return model;
 
     }
 
     getCatMetaModel() {
+
+	if (this.riskModel == undefined) return;
 
 	let cats = {};
 
