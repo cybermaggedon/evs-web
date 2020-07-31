@@ -101,6 +101,13 @@ export class ThreatModelComponent implements OnInit {
 	    ]
 	},
 	{
+	    id: "internet-threat",
+	    description: "IP threats",
+	    risks: [
+		{ id: "tor-exit", score: 0.2 }
+	    ]
+	},
+	{
 	    id: "office-threat",
 	    description: "network threats",
 	    risks: [

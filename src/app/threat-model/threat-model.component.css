@@ -1,8 +1,17 @@
 
-#threatmodel {
+#overview {
     width: 1052px;
-    height: 754px;
+    height: 744px;
     background-image: url("/assets/threat-model.png");
+    border: 1px solid black;
+    padding: 0px;
+    position: relative;
+}
+
+#production {
+    width: 1052px;
+    height: 744px;
+    background-image: url("/assets/threat-model-prod.png");
     border: 1px solid black;
     padding: 0px;
     position: relative;
@@ -13,8 +22,18 @@
     height: 2em;
     position: absolute;
     border: 1px solid black;
-    top: 135px;
-    left: 330px;
+    top: 110px;
+    left: 285px;
+    margin: 0px;
+}
+
+#internet-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 185px;
+    left: 285px;
     margin: 0px;
 }
 
@@ -33,7 +52,7 @@
     height: 2em;
     position: absolute;
     border: 1px solid black;
-    top: 40px;
+    top: 73px;
     left: 480px;
     margin: 0px;
 }
@@ -43,8 +62,8 @@
     height: 2em;
     position: absolute;
     border: 1px solid black;
-    top: 225px;
-    left: 930px;
+    top: 395px;
+    left: 860px;
     margin: 0px;
 }
 
@@ -53,8 +72,8 @@
     height: 2em;
     position: absolute;
     border: 1px solid black;
-    top: 650px;
-    left: 90px;
+    top: 660px;
+    left: 105px;
     margin: 0px;
 }
 
@@ -73,7 +92,7 @@
     height: 2em;
     position: absolute;
     border: 1px solid black;
-    top: 600px;
+    top: 645px;
     left: 520px;
     margin: 0px;
 }

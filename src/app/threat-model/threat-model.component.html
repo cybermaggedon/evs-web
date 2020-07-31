@@ -1,18 +1,47 @@
 
 <h2>Threat Model</h2>
 
-<div id="threatmodel">
-  <div class="threat" id="{{threat.id}}"
-       *ngFor="let threat of threats">
-    <div class="risks">
-      <a *ngFor="let risk of threat.risks"
-	 class="risk {{nameToCssClass(risk.id)}}"
-	 style="width: {{risk.score * 98}}px"
-	 [routerLink]="['/category', risk.id]"
-	 queryParamsHandling="preserve">
-	{{risk.id}}
-      </a>
+<mat-tab-group mat-align-tabs="start">
+
+  <mat-tab label="Overview">
+
+    <div id="overview">
+      <div class="threat" id="{{threat.id}}"
+	   *ngFor="let threat of threats">
+	<div class="risks">
+	  <a *ngFor="let risk of threat.risks"
+	     class="risk {{nameToCssClass(risk.id)}}"
+	     style="width: {{risk.score * 98}}px"
+	     [routerLink]="['/category', risk.id]"
+	     queryParamsHandling="preserve">
+	    {{risk.id}}
+	  </a>
+	</div>
+	<div class="description">{{threat.description}}</div>
+      </div>
     </div>
-    <div class="description">{{threat.description}}</div>
-  </div>
-</div>
+
+  </mat-tab>
+
+  <mat-tab label="Production">
+
+    <div id="production">
+      <div class="threat" id="{{threat.id}}"
+	   *ngFor="let threat of threats">
+	<div class="risks">
+	  <a *ngFor="let risk of threat.risks"
+	     class="risk {{nameToCssClass(risk.id)}}"
+	     style="width: {{risk.score * 98}}px"
+	     [routerLink]="['/category', risk.id]"
+	     queryParamsHandling="preserve">
+	    {{risk.id}}
+	  </a>
+	</div>
+	<div class="description">{{threat.description}}</div>
+      </div>
+    </div>
+
+  </mat-tab>
+
+</mat-tab-group>
+
