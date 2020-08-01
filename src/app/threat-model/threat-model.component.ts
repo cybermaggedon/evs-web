@@ -43,8 +43,6 @@ export class ThreatModelComponent implements OnInit {
 	}
 
     }
-
-    name : string;
     
     constructor(private threatModelService : ThreatModelService,
 		private location: Location,
@@ -56,9 +54,9 @@ export class ThreatModelComponent implements OnInit {
 	});
 
   	this.route.params.subscribe(res => {
-	    if (res.name == "overview")
+	    if (res.view == "overview")
 		this.selectedTabIndex = 0;
-	    if (res.name == "prod")
+	    if (res.view == "prod")
 		this.selectedTabIndex = 1;
 	})
 
