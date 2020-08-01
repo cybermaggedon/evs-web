@@ -97,6 +97,36 @@
     margin: 0px;
 }
 
+#prod-payment-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 660px;
+    left: 105px;
+    margin: 0px;
+}
+
+#prod-flyte-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 115px;
+    left: 765px;
+    margin: 0px;
+}
+
+#prod-accumulo-threat {
+    width: 100px;
+    height: 2em;
+    position: absolute;
+    border: 1px solid black;
+    top: 540px;
+    left: 810px;
+    margin: 0px;
+}
+
 .threat .risks {
     height: 2.0em;
     padding: 0px;
@@ -106,6 +136,14 @@
 
 .threat .description {
     font-size: small;
+}
+
+#link-to-prod {
+    position: absolute;
+    top: 420px;
+    left: 290px;
+    width: 220px;
+    height: 140px;
 }
 
 A.risk {

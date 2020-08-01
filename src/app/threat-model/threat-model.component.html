@@ -6,39 +6,47 @@
   <mat-tab label="Overview">
 
     <div id="overview">
-      <div class="threat" id="{{threat.id}}"
-	   *ngFor="let threat of threats">
-	<div class="risks">
-	  <a *ngFor="let risk of threat.risks"
-	     class="risk {{nameToCssClass(risk.id)}}"
-	     style="width: {{risk.score * 98}}px"
-	     [routerLink]="['/category', risk.id]"
-	     queryParamsHandling="preserve">
-	    {{risk.id}}
-	  </a>
+      <ng-container *ngFor="let threat of threats">
+	<div class="threat" id="{{threat.element}}"
+	     *ngIf="threat.partition == 'overview'">
+	  <div class="risks">
+	    <a *ngFor="let risk of threat.risks"
+	       class="risk {{nameToCssClass(risk.id)}}"
+	       style="width: {{risk.score * 98}}px"
+	       [routerLink]="['/category', risk.id]"
+	       queryParamsHandling="preserve">
+	      {{risk.id}}
+	    </a>
+	  </div>
+	  <div class="description">{{threat.description}}</div>
 	</div>
-	<div class="description">{{threat.description}}</div>
-      </div>
-    </div>
+      </ng-container>
+ 
+      <a id="link-to-prod" href="/asd">
+      </a>
+
+   </div>
 
   </mat-tab>
 
   <mat-tab label="Production">
 
     <div id="production">
-      <div class="threat" id="{{threat.id}}"
-	   *ngFor="let threat of threats">
-	<div class="risks">
-	  <a *ngFor="let risk of threat.risks"
-	     class="risk {{nameToCssClass(risk.id)}}"
-	     style="width: {{risk.score * 98}}px"
-	     [routerLink]="['/category', risk.id]"
-	     queryParamsHandling="preserve">
-	    {{risk.id}}
-	  </a>
+      <ng-container *ngFor="let threat of threats">
+	<div class="threat" id="{{threat.element}}"
+	     *ngIf="threat.partition == 'production'">
+	  <div class="risks">
+	    <a *ngFor="let risk of threat.risks"
+	       class="risk {{nameToCssClass(risk.id)}}"
+	       style="width: {{risk.score * 98}}px"
+	       [routerLink]="['/category', risk.id]"
+	       queryParamsHandling="preserve">
+	      {{risk.id}}
+	    </a>
+	  </div>
+	  <div class="description">{{threat.description}}</div>
 	</div>
-	<div class="description">{{threat.description}}</div>
-      </div>
+      </ng-container>
     </div>
 
   </mat-tab>
