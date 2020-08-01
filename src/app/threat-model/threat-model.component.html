@@ -1,7 +1,7 @@
 
 <h2>Threat Model</h2>
 
-<mat-tab-group mat-align-tabs="start">
+<mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex">
 
   <mat-tab label="Overview">
 
@@ -22,7 +22,8 @@
 	</div>
       </ng-container>
  
-      <a id="link-to-prod" href="/asd">
+      <a id="link-to-prod" [routerLink]="['/threat-model']"
+	 queryParamsHandling="preserve" fragment="prod">
       </a>
 
    </div>

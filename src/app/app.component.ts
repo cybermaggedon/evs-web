@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
                 ],
                 {
                     queryParams: { window: w.value },
+		    preserveFragment: true,
                     relativeTo: this.route,
                     replaceUrl: true
                 }
