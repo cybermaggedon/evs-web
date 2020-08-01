@@ -1,8 +1,17 @@
+
+
+// State changes:
+// If loading a new modelSet, and the existing modelSet is undefined, this
+//   is the initial load.  Initialise selectedModel from persistence.
+// If loading a new riskProfiles, and the existing riskProfiles is undefined,
+//   this is initial load.  Initialise 
+
+
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { modelSet, riskProfiles } from './model-defs';
 import { ModelSet, Model, Risk, RiskProfile } from './model';
 import { walk } from './hierarchy';
+import { HttpClient } from '@angular/common/http';
 
 export class SelectedRiskChange {
     id : string;
@@ -41,14 +50,36 @@ export class ModelStoreService {
     private selectedRiskSubject : Subject<SelectedRiskChange>;
     private combinedRiskSubject : Subject<SelectedRiskChange>;
 
-    constructor() {
+    constructor(private http : HttpClient) {
+
+	this.modelSetSubject = new Subject<ModelSet>();
+	this.risksSubject = new Subject<Risk[]>();
+	this.selectedModelSubject = new Subject<Model>();
+	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
+	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
 
 	// Get the settings from model-defs
-	this.modelSet = modelSet;
-	this.riskProfiles = riskProfiles;
+	this.http.get<ModelSet>("/assets/model-defs.json").subscribe(ms => {
+	    this.setModels(ms);
+	    this.modelSetSubject.next(ms);
+	});
+
+	// Get the settings from risk-profiles
+	this.http.get<Risk[]>("/assets/risk-profiles.json").subscribe(rp => {
+	    this.riskProfiles = rp;
+	    if (this.modelSet == undefined) return;
+	    this.updateModel();
+	});
+
+    }
+
+    updateModel() {
+
+	if (this.modelSet == undefined) return;
+	if (this.riskProfiles == undefined) return;
 
 	// Find default model
-	walk(modelSet, ent => {
+	walk(this.modelSet, ent => {
 	    if (ent.kind == "entry" && ent.default)
 		this.defaultModel = ent.value;
 	});
@@ -58,9 +89,10 @@ export class ModelStoreService {
 
 	// Set to selected model stored in localStorage, if set.
 	if (modelSetting != null) {
-	    walk(modelSet, ent => {
+	    walk(this.modelSet, ent => {
 		if (ent.kind == "entry" && ent.value.id == modelSetting) {
 		    this.selectedModel = ent.value;
+		    this.selectedModelSubject.next(this.selectedModel);
 		}
 	    });
 	}
@@ -70,6 +102,7 @@ export class ModelStoreService {
 	    this.defaultModel != undefined) {
 
 	    this.selectedModel = this.defaultModel;
+	    this.selectedModelSubject.next(this.selectedModel);
 
 	    // Store this away for next time.
 	    localStorage.setItem("selected-model", this.selectedModel.id);
@@ -81,7 +114,7 @@ export class ModelStoreService {
 	this.combinedRisks = {};
 
 	// Loop over all risks...
-	for(let risk of riskProfiles) {
+	for(let risk of this.riskProfiles) {
 
 	    // Get the localStorage setting for this risk
 	    let riskSetting = localStorage.getItem("selected-risk:" + risk.id);
@@ -93,6 +126,8 @@ export class ModelStoreService {
 		    if (entry.kind == "entry") {
 			if (riskSetting == entry.value.id)
 			    this.selectedRisks[risk.id] = entry.value;
+			//			ASD
+			// FIXME: Subject push here.
 		    }
 		});
 	    }
@@ -111,11 +146,11 @@ export class ModelStoreService {
 
 	}
 
-	this.modelSetSubject = new Subject<ModelSet>();
-	this.risksSubject = new Subject<Risk[]>();
-	this.selectedModelSubject = new Subject<Model>();
-	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
-	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
+	console.log(this.modelSet);
+//	console.log(this.modelSet);
+
+	this.modelSetSubject.next(this.modelSet);
+	this.risksSubject.next(this.riskProfiles);
 
     }
 
@@ -155,7 +190,7 @@ export class ModelStoreService {
 
     setModels(m : ModelSet) {
 	this.modelSet = m;
-	this.modelSetSubject.next(m);
+	this.updateModel();
     }
 
     setRiskProfile(r : Risk[]) {
@@ -226,17 +261,20 @@ export class ModelStoreService {
 
     subscribeModels(f : any) {
 	this.modelSetSubject.subscribe(m => { f(m); });
-	f(this.modelSet);
+	if (this.modelSet != undefined)
+	    f(this.modelSet);
     }
   
     subscribeRisks(f : any) {
 	this.risksSubject.subscribe(rc => { f(rc); });
-	f(this.riskProfiles);
+	if (this.riskProfiles != undefined)
+	    f(this.riskProfiles);
     }
   
     subscribeSelectedModel(f : any) {
 	this.selectedModelSubject.subscribe(m => { f(m); });
-	f(this.selectedModel);
+	if (this.selectedModel != undefined)
+	    f(this.selectedModel);
     }
   
     subscribeSelectedRisk(f : any) {

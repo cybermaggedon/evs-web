@@ -1,0 +1,99 @@
+[
+    {
+	"kind": "entry",
+	"name": "default",
+	"default": true,
+	"value": {
+	    "id": "default",
+	    "profiles": {
+                "credential-theft": "cred-theft-low",
+                "malware": "malware-low",
+                "tor-exit": "tor-exit-low"
+            }
+        }
+    },
+    {
+	"kind": "folder",
+	"name": "Transport",
+	"entries": [
+            {
+		"kind": "entry",
+		"name": "Small business",
+		"value": {
+		    "id": "transport-small",
+		    "profiles": {
+                        "credential-theft": "cred-theft-low",
+                        "malware": "malware-low",
+                        "tor-exit": "tor-exit-low"
+                    }
+                }
+            },
+            {
+		"kind": "entry",
+		"name": "Medium business",
+		"value": {
+		    "id": "transport-medium",
+		    "profiles": {
+                        "credential-theft": "cred-theft-med",
+                        "malware": "malware-med",
+                        "tor-exit": "tor-exit-med"
+                    }
+                }
+            },
+            {
+		"kind": "entry",
+		"name": "Large enterprise",
+		"value": {
+		    "id": "transport-large",
+		    "profiles": {
+                        "credential-theft": "cred-theft-high",
+                        "malware": "malware-high",
+                        "tor-exit": "tor-exit-high"
+                    }
+                }
+            }
+        ]
+    },
+    {
+	"kind": "folder",
+	"name": "Healthcare",
+	"entries": [
+            {
+		"kind": "entry",
+		"name": "Small business",
+		"value": {
+		    "id": "healthcare-small",
+		    "profiles": {
+                        "credential-theft": "cred-theft-pii-low",
+                        "malware": "malware-low",
+                        "tor-exit": "tor-exit-low"
+                    }
+                }
+            },
+            {
+		"kind": "entry",
+		"name": "Medium business",
+		"value": {
+		    "id": "healthcare-medium",
+		    "profiles": {
+                        "credential-theft": "cred-theft-pii-med",
+                        "malware": "malware-med",
+                        "tor-exit": "tor-exit-med"
+                    }
+                }
+            },
+            {
+		"kind": "entry",
+		"name": "Large business",
+		"value": {
+		    "id": "healthcare-large",
+		    "profiles": {
+                        "credential-theft": "cred-theft-pii-high",
+                        "malware": "malware-high",
+                        "tor-exit": "tor-exit-high"
+                    }
+                }
+            }
+        ]
+    }
+]

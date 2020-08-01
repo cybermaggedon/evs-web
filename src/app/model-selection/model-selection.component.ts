@@ -17,7 +17,7 @@ export class ModelSelectionComponent implements OnInit {
     ngOnInit(): void {
 
 	this.models.subscribeModels(m => {
-	    this.items = flattenHierarchy(this.models.getModels());
+	    this.items = flattenHierarchy(m);
 	});
 
 	this.models.subscribeRisks(r => {
@@ -42,12 +42,6 @@ export class ModelSelectionComponent implements OnInit {
 
     items : FlatItem<Model>[] = [];
     riskProfiles : Risk[];
-
-    flatten() : void {
-
-	this.items = flattenHierarchy(this.models.getModels());
-
-    }
 
 }
 
