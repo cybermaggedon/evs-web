@@ -30,7 +30,7 @@ const routes : Routes = [
     { path: 'all-threats', component: AllThreatsComponent },
 
     // Threat detail view
-    { path: 'threat-model', component: ThreatModelComponent },
+    { path: 'threat-model/:name', component: ThreatModelComponent },
 
     // Category detail view
     { path: 'category/:id', component: CategoryDetailComponent },

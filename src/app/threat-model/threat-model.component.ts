@@ -22,10 +22,9 @@ export class ThreatModelComponent implements OnInit {
 
 	if (n == 0) {
             this.router.navigate(
-		[],
+		["/threat-model", "overview"],
 		{
 		    queryParamsHandling: "preserve",
-		    fragment: "overview",
                     relativeTo: this.route,
                     replaceUrl: false
 		}
@@ -34,10 +33,9 @@ export class ThreatModelComponent implements OnInit {
 
 	if (n == 1) {
             this.router.navigate(
-		[],
+		["/threat-model", "prod"],
 		{
 		    queryParamsHandling: "preserve",
-		    fragment: "prod",
                     relativeTo: this.route,
                     replaceUrl: false
 		}
@@ -45,6 +43,8 @@ export class ThreatModelComponent implements OnInit {
 	}
 
     }
+
+    name : string;
     
     constructor(private threatModelService : ThreatModelService,
 		private location: Location,
@@ -55,12 +55,12 @@ export class ThreatModelComponent implements OnInit {
 	    this.threats = tm;
 	});
 
-	this.route.fragment.subscribe(f => {
-	    if (f == "overview")
+  	this.route.params.subscribe(res => {
+	    if (res.name == "overview")
 		this.selectedTabIndex = 0;
-	    if (f == "prod")
+	    if (res.name == "prod")
 		this.selectedTabIndex = 1;
-	});
+	})
 
     }
 
