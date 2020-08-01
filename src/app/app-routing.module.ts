@@ -12,7 +12,7 @@ import { ModelConfigurationComponent } from './model-configuration/model-configu
 import { ThreatModelComponent } from './threat-model/threat-model.component';
 
 // This table maps URLs to views.
-const routes: Routes = [
+const routes : Routes = [
 
     // Primary dashboard
     { path: 'dashboard', component: DashboardComponent },

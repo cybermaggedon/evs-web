@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { nameToCssClass } from '../risk';
 import { ThreatModelService, ThreatModel } from '../threat-model.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-threat-model',
@@ -12,10 +13,44 @@ export class ThreatModelComponent implements OnInit {
 
     threats : ThreatModel;
 
-    selectedTabIndex : number;
+    _selectedTabIndex : number;
+
+    get selectedTabIndex() { return this._selectedTabIndex; }
+    
+    set selectedTabIndex(n : number) {
+	this._selectedTabIndex = n;
+	console.log("TAB ", n);
+
+	if (n == 0) {
+            this.router.navigate(
+		[],
+		{
+		    queryParamsHandling: "preserve",
+		    fragment: "overview",
+                    relativeTo: this.route,
+                    replaceUrl: false
+		}
+            );
+	}
+
+	if (n == 1) {
+            this.router.navigate(
+		[],
+		{
+		    queryParamsHandling: "preserve",
+		    fragment: "prod",
+                    relativeTo: this.route,
+                    replaceUrl: false
+		}
+            );
+	}
+
+    }
     
     constructor(private threatModelService : ThreatModelService,
-		private route : ActivatedRoute) {
+		private location: Location,
+		private route : ActivatedRoute,
+		private router : Router) {
 
 	threatModelService.subscribe(tm => {
 	    this.threats = tm;
@@ -37,6 +72,10 @@ export class ThreatModelComponent implements OnInit {
 
     viewProd() {
 	this.selectedTabIndex = 1;
+    }
+
+    goBack(): void {
+	this.location.back();
     }
 
 }

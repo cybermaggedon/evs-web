@@ -201,3 +201,8 @@ a.risk:hover {
 .risk.category9 {
     background-color: #4040a0;
 }
+
+.bottom {
+    padding: 10px;
+    clear: left;
+}
