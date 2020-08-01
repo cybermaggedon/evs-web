@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { Model, Risk } from '../model';
+import { Model, Risk } from '../model-types';
 import { flattenHierarchy, FlatItem } from '../hierarchy';
 import { ModelStoreService } from '../model-store.service';
 

@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
-import { Risk, RiskProfile, Model } from '../model';
+import { Risk, RiskProfile, Model } from '../model-types';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
 import { ModelStoreService } from '../model-store.service';
 

@@ -1,17 +1,15 @@
 
-
 // State changes:
 // If loading a new modelSet, and the existing modelSet is undefined, this
 //   is the initial load.  Initialise selectedModel from persistence.
 // If loading a new riskProfiles, and the existing riskProfiles is undefined,
 //   this is initial load.  Initialise 
 
-
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ModelSet, Model, Risk, RiskProfile } from './model';
+import { ModelSet, Model, Risk, RiskProfile } from './model-types';
 import { walk } from './hierarchy';
-import { HttpClient } from '@angular/common/http';
+import { ModelLoaderService } from './model-loader.service';
 
 export class SelectedRiskChange {
     id : string;
@@ -50,7 +48,7 @@ export class ModelStoreService {
     private selectedRiskSubject : Subject<SelectedRiskChange>;
     private combinedRiskSubject : Subject<SelectedRiskChange>;
 
-    constructor(private http : HttpClient) {
+    constructor(private modelLoader : ModelLoaderService) {
 
 	this.modelSetSubject = new Subject<ModelSet>();
 	this.risksSubject = new Subject<Risk[]>();
@@ -58,25 +56,17 @@ export class ModelStoreService {
 	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
 	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
 
-	// Get the settings from model-defs
-	this.http.get<ModelSet>("/assets/model-defs.json").subscribe(ms => {
-	    this.setModels(ms);
-	    this.modelSetSubject.next(ms);
-	});
-
-	// Get the settings from risk-profiles
-	this.http.get<Risk[]>("/assets/risk-profiles.json").subscribe(rp => {
-	    this.riskProfiles = rp;
-	    if (this.modelSet == undefined) return;
+	this.modelLoader.subscribe(ms => {
+	    this.modelSet = ms.models;
+	    this.riskProfiles = ms.risks;
 	    this.updateModel();
+	    this.modelSetSubject.next(this.modelSet);
+	    this.risksSubject.next(this.riskProfiles);
 	});
 
     }
 
     updateModel() {
-
-	if (this.modelSet == undefined) return;
-	if (this.riskProfiles == undefined) return;
 
 	// Find default model
 	walk(this.modelSet, ent => {
@@ -145,9 +135,6 @@ export class ModelStoreService {
 	    this.updateCombinedRisk(risk.id);
 
 	}
-
-	console.log(this.modelSet);
-//	console.log(this.modelSet);
 
 	this.modelSetSubject.next(this.modelSet);
 	this.risksSubject.next(this.riskProfiles);
