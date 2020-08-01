@@ -28,7 +28,6 @@ export class ModelLoaderService {
 		this.spec.risks == undefined)
 		return;
 
-	    console.log("PUSHED SPEC");
 	    this.subject.next(this.spec);
 
 	});
@@ -42,7 +41,6 @@ export class ModelLoaderService {
 		this.spec.risks == undefined)
 		return;
 
-	    console.log("PUSHED SPEC3");
 	    this.subject.next(this.spec);
 
 	});
@@ -58,8 +56,6 @@ export class ModelLoaderService {
 	if (this.spec.models == undefined ||
 	    this.spec.risks == undefined)
 	    return;
-
-	    console.log("PUSHED SPEC2");
 
 	f(this.spec);
 	

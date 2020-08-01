@@ -5,7 +5,7 @@ import { throttle } from 'rxjs/operators';
 import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
-import { ModelStoreService } from './model-store.service';
+import { ModelStateService } from './model-state.service';
 
 // FIXME: Add some type safety information
 
@@ -31,7 +31,7 @@ export class FairService {
 
     constructor(private http : HttpClient,
 		private riskService : RiskService,
-		private models : ModelStoreService
+		private models : ModelStateService
 	       ) {
 
 	this.subject = new Subject<any>();

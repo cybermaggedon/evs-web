@@ -19,7 +19,7 @@ export class SelectedRiskChange {
 @Injectable({
   providedIn: 'root'
 })
-export class ModelStoreService {
+export class ModelStateService {
 
     // The model definitions
     private modelSet : ModelSet;

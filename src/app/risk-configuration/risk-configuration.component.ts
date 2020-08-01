@@ -2,7 +2,7 @@
 import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import { Risk, RiskProfile, Model } from '../model-types';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
-import { ModelStoreService } from '../model-store.service';
+import { ModelStateService } from '../model-state.service';
 
 @Component({
   selector: '[risk-configuration]',
@@ -11,7 +11,7 @@ import { ModelStoreService } from '../model-store.service';
 })
 export class RiskConfigurationComponent implements OnInit {
 
-    constructor(private models : ModelStoreService,
+    constructor(private models : ModelStateService,
 		@Inject(LOCALE_ID) private locale: string) { }
 
     _risk : Risk;

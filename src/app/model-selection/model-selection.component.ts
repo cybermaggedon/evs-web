@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Model, Risk } from '../model-types';
 import { flattenHierarchy, FlatItem } from '../hierarchy';
-import { ModelStoreService } from '../model-store.service';
+import { ModelStateService } from '../model-state.service';
 
 @Component({
     selector: 'model-selection',
@@ -12,7 +12,7 @@ import { ModelStoreService } from '../model-store.service';
 })
 export class ModelSelectionComponent implements OnInit {
 
-    constructor(private models : ModelStoreService) { }
+    constructor(private models : ModelStateService) { }
 
     ngOnInit(): void {
 
