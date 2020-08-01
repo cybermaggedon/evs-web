@@ -19,7 +19,6 @@ export class ThreatModelComponent implements OnInit {
     
     set selectedTabIndex(n : number) {
 	this._selectedTabIndex = n;
-	console.log("TAB ", n);
 
 	if (n == 0) {
             this.router.navigate(
