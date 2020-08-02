@@ -50,21 +50,19 @@ export class FairService {
         this.riskService.subject.
 	    pipe(throttle(() => interval(1000))).
 	    subscribe(m => {
-//		console.log("RISK MODEL", m);
 		this.riskModel = m;
 		this.updateFairModels();
+		this.updateCatModels();
 	    });
 
 	this.updateCatEvent = new Observable(obs => {
-	    this.riskService.subscribe(frc => {
-//		console.log("final risk ", frc.id);
-		this.riskProfiles[frc.id] = frc.risk;
+	    this.finalRisk.subscribe(frc => {
+		this.riskProfiles[frc.id] = frc.profile;
 		obs.next();
 	    });
 	});
 
 	this.updateCatEvent.subscribe(obs => {
-//	    console.log(obs);
 	    this.updateCatModels();
 	});
 
@@ -143,14 +141,14 @@ export class FairService {
 	    this.updateRiskModel("resource", resModel);
 	}
 
-	this.updateCatModels();
-
     }
 
     getModel(name, risk) {
 
-// Risk is rounded to 2 places to allow FAIR service to cache.
-    // FIXME: hard-coded, should use a stddev input?
+	// This stuff isn't grounded in the FAIR config, and should be.
+	
+	// Risk is rounded to 2 places to allow FAIR service to cache.
+	// FIXME: hard-coded, should use a stddev input?
 	const lef_low = this.round(risk / 1.4, 2);
 	const lef_mode = this.round(risk, 2);
 	const lef_high = this.round(risk * 1.4, 2);
