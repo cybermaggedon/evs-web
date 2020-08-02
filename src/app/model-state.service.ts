@@ -1,401 +1,52 @@
 
-// State changes:
-// If loading a new modelSet, and the existing modelSet is undefined, this
-//   is the initial load.  Initialise selectedModel from persistence.
-// If loading a new riskProfiles, and the existing riskProfiles is undefined,
-//   this is initial load.  Initialise 
-
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ModelSet, Model, Risk, RiskProfile } from './model-types';
-import { walk } from './hierarchy';
+import { walk, FlatItem, flattenHierarchy } from './hierarchy';
 import { ModelLoaderService } from './model-loader.service';
+import { RiskStateService } from './risk-state.service';
 
-export class SelectedRiskChange {
-    id : string;
-    risk : RiskProfile;
-}
+export interface ModelIndex {
+    [key : string] : Model;
+};
+
+export class ModelState {
+    models : FlatItem<Model>[];
+    default : Model;
+    index : ModelIndex;
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelStateService {
 
-    firstLoad = true;
+    subject : BehaviorSubject<ModelState>;
 
-    // The model definitions
-    private modelSet : ModelSet;
-    private defaultModel : Model;
-    
-    // Risk profile definitions
-    private riskProfiles : Risk[];
+    constructor(private loader : ModelLoaderService) {
 
-    // Which model is selected
-    //    private selectedModel : Model;
-    private selectedModel : string;
+	this.subject = new BehaviorSubject<ModelState>(new ModelState());
 
-    // Risks which are selected
-    //    private selectedRisks : Object;
-    private selectedRisks = {};
+	this.loader.subscribe(ms => {
 
-    // Default profiles settings for risk.
-    private defaultRisks : Object;
-
-    // For each risk, either the selected profile, or the default profile if
-    // none selected.
-    private combinedRisks : Object;
-
-    // A bunch of subjects to push information out on.
-    private modelSetSubject : Subject<ModelSet>;
-    private risksSubject : Subject<Risk[]>;
-    private selectedModelSubject : Subject<Model>;
-    private selectedRiskSubject : Subject<SelectedRiskChange>;
-    private combinedRiskSubject : Subject<SelectedRiskChange>;
-
-    constructor(private modelLoader : ModelLoaderService) {
-
-	this.modelSetSubject = new Subject<ModelSet>();
-	this.risksSubject = new Subject<Risk[]>();
-	this.selectedModelSubject = new Subject<Model>();
-	this.selectedRiskSubject = new Subject<SelectedRiskChange>();
-	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
-
-	this.modelLoader.subscribe(ms => {
-
-	    this.modelSet = ms.models;
-	    this.riskProfiles = ms.risks;
-
-	    this.updateIndex();
-
-	    if (this.firstLoad) {
-		this.loadSelections();
-		this.firstLoad = false;
+	    let state = new ModelState();
+	    state.models = flattenHierarchy(ms);
+	    state.index = {};
+	    for(let model of state.models) {
+		if (model.default)
+		    state.default = model.value;
+		state.index[model.value.id] = model.value;
 	    }
 
-	    this.updateModel();
+	    this.subject.next(state);
 
 	});
 
     }
 
-    modelIndex : Object;
-    riskIndex : Object;
-    profileIndex : Object;
-
-    updateIndex() {
-
-	// Find default model
-	walk(this.modelSet, ent => {
-	    if (ent.kind == "entry" && ent.default)
-		this.defaultModel = ent.value;
-	});
-
-	this.modelIndex = {};
-	walk(this.modelSet, ent => {
-	    if (ent.kind = "entry")
-		this.modelIndex[ent.value.id] = ent.value;
-	});
-
-	this.riskIndex = {};
-	this.profileIndex = {};
-	this.defaultRisks = {};
-	for(let risk of this.riskProfiles) {
-
-	    this.riskIndex[risk.id] = risk;
-	    this.profileIndex[risk.id] = {};
-
-	    for(let profile of risk.profiles) {
-
-		walk(risk.profiles, ent => {
-		    if (ent.kind == "entry") 
-			this.profileIndex[risk.id][ent.value.id] = profile;
-		    if (ent.default)
-			this.defaultRisks[risk.id] = ent.value.id;
-		});
-
-	    }
-
-	}
-
+    subscribe(f : (ms : ModelState) => void) {
+	this.subject.subscribe(ms => { f(ms); });
     }
 
-    loadSelections() {
-
-	let sel = localStorage.getItem("selected-model");
-	if (sel in this.modelIndex)
-	    this.selectedModel = sel;
-
-	for(let risk of this.riskProfiles) {
-	    let sel = localStorage.getItem("selected-risk:" + risk.id);
-	    if (sel in this.riskIndex[risk.id]) {
-		this.selectedRisks[risk.id] = sel;
-	    }
-	}
-	
-//	if (!this.selec this.m
-
-	/*
-	// Can assume index is in place.
-	
-	// Get model setting from localstorage
-	let modelSetting = localStorage.getItem("selected-model");
-
-	if (modelSetting in this.modelIndex)
-	    this.selectedModel = this.modelIndex[modelSetting];
-
-	// Set to selected model stored in localStorage, if set.
-	if (modelSetting != null) {
-	    walk(this.modelSet, ent => {
-		if (ent.kind == "entry" && ent.value.id == modelSetting) {
-		    this.selectedModel = ent.value;
-		    this.selectedModelSubject.next(this.selectedModel);
-		}
-	    });
-	}
-	*/
-    }
-
-    updateModel() {
-/*
-	// Get model setting from localstorage
-	let modelSetting = localStorage.getItem("selected-model");
-
-	// Set to selected model stored in localStorage, if set.
-	if (modelSetting != null) {
-	    walk(this.modelSet, ent => {
-		if (ent.kind == "entry" && ent.value.id == modelSetting) {
-		    this.selectedModel = ent.value;
-		    this.selectedModelSubject.next(this.selectedModel);
-		}
-	    });
-	}
-
-	// Else, set to default
-	if (this.selectedModel == undefined &&
-	    this.defaultModel != undefined) {
-
-	    this.selectedModel = this.defaultModel;
-	    this.selectedModelSubject.next(this.selectedModel);
-
-	    // Store this away for next time.
-	    localStorage.setItem("selected-model", this.selectedModel.id);
-
-	}
-*/
-
-
-	this.modelSetSubject.next(this.modelSet);
-	this.risksSubject.next(this.riskProfiles);
-
-	this.selectedModelSubject.next(this.modelIndex[this.selectedModel]);
-
-	for(let risk of this.riskProfiles) {
-
-	    // If there is a selection, push it.
-	    if (risk.id in this.selectedRisk) {
-		let sel = this.selectedRisk[risk.id]
-		if (sel in this.profileIndex[risk.id]) {
-		    let rc = new SelectedRiskChange();
-		    rc.id = risk.id;
-		    rc.risk = this.profileIndex[risk.id][sel];
-		    this.selectedRiskSubject.next(rc);
-		}
-	    }
-
-	    // Push combined risk.
-	    let rc = new SelectedRiskChange();
-	    rc.id = risk.id;
-	    rc.risk = this.getCombinedRisk(risk.id);
-	    this.selectedRiskSubject.next(rc);
-
-	}
-
-	/*
-
-	this.selectedRisks = {};
-	this.defaultRisks = {};
-	this.combinedRisks = {};
-
-	// Loop over all risks...
-	for(let risk of this.riskProfiles) {
-
-	    // Get the localStorage setting for this risk
-	    let riskSetting = localStorage.getItem("selected-risk:" + risk.id);
-
-	    this.selectedRisks[risk.id] = undefined;
-
-	    if (riskSetting != null) {
-		walk(risk.profiles, entry => {
-		    if (entry.kind == "entry") {
-			if (riskSetting == entry.value.id)
-			    this.selectedRisks[risk.id] = entry.value;
-			//			ASD
-			// FIXME: Subject push here.
-		    }
-		});
-	    }
-
-	    // Get the default for this risk
-	    this.defaultRisks[risk.id] = undefined;
-	    walk(risk.profiles, entry => {
-		if (entry.kind == "entry")
-		    if (entry.default)
-			this.defaultRisks[risk.id] = entry.value;
-	    });
-
-	    // Set the combined risk from either the selected risk, or
-	    // default if not set.
-	    this.updateCombinedRisk(risk.id);
-
-	}
-
-	this.modelSetSubject.next(this.modelSet);
-	this.risksSubject.next(this.riskProfiles);
-*/
-    }
-
-    updateCombinedRisk(id : string) {
-
-	// Set the combined risk from either the selected risk, or
-	// default if not set.
-
-	this.combinedRisks[id] = undefined;
-
-	// If there's a selected risk, just use that.
-	if (this.selectedRisks[id] != undefined) {
-	    this.combinedRisks[id] = this.selectedRisks[id];
-	    return;
-	}
-
-	// If the model specifies a value, use that.
-	if (this.selectedModel != undefined &&
-	    id in this.selectedModel.profiles) {
-	    let profileId = this.selectedModel.profiles[id];
-	    for(let risk of this.riskProfiles) {
-		if (risk.id == id) {
-		    walk(risk.profiles, ent => {
-			if (ent.value.id == profileId) {
-			    this.combinedRisks[id] = ent.value;
-			}
-		    });
-		}
-	    }
-	    if (this.combinedRisks[id] != undefined) return;
-	}
-
-	// Just go with the default specified in the risk profile
-	this.combinedRisks[id] = this.defaultRisks[id];
-
-    }
-
-    setModels(m : ModelSet) {
-	this.modelSet = m;
-	this.updateModel();
-    }
-
-    setRiskProfile(r : Risk[]) {
-	this.riskProfiles = r;
-	this.risksSubject.next(r);
-    }
-
-    setSelectedModel(m : Model) {
-
-	// Ignore no-op.
-	if (this.selectedModel == m) return;
-
-	this.selectedModel = m;
-	this.selectedModelSubject.next(m);
-
-	for(let risk of this.riskProfiles) {
-
-	    let prevVal = this.combinedRisks[risk.id];
-	    this.updateCombinedRisk(risk.id);
-
-	    if (this.combinedRisks[risk.id] != prevVal) {
-		let rc = new SelectedRiskChange();
-		rc.id = risk.id;
-		rc.risk = this.combinedRisks[risk.id];
-		this.combinedRiskSubject.next(rc);
-	    }
-
-	}
-
-	localStorage.setItem("selected-model", m.id);
-
-    }
-
-    setSelectedRisk(id : string, r : RiskProfile) {
-	this.selectedRisks[id] = r;
-	let rc = new SelectedRiskChange();
-	rc.id = id;
-	rc.risk = r;
-	this.selectedRiskSubject.next(rc);
-
-	if (r == undefined) 
-	    localStorage.removeItem("selected-risk:" + id);
-	else
-	    localStorage.setItem("selected-risk:" + id, r.id);
-
-	// Set the combined risk from either the selected risk, or
-	// default if not set.
-	let prevVal = this.combinedRisks[id];
-	this.updateCombinedRisk(id);
-
-	if (this.combinedRisks[id] != prevVal) {
-	    let rc = new SelectedRiskChange();
-	    rc.id = id;
-	    rc.risk = this.combinedRisks[id];
-	    this.combinedRiskSubject.next(rc);
-	}
-
-    }
-
-    // Yeh... but better to do the comms through subscriptions
-    getModels() : ModelSet { return this.modelSet; }
-    getRiskProfiles() : any { return this.riskProfiles; }
-    getSelectedRisk(id : string) {
-	if (id in this.selectedRisks) return this.selectedRisks[id];
-	return undefined;
-    }
-    getSelectedModel() { return this.selectedModel; }
-
-    subscribeModels(f : any) {
-	this.modelSetSubject.subscribe(m => { f(m); });
-	if (this.modelSet != undefined)
-	    f(this.modelSet);
-    }
-  
-    subscribeRisks(f : any) {
-	this.risksSubject.subscribe(rc => { f(rc); });
-	if (this.riskProfiles != undefined)
-	    f(this.riskProfiles);
-    }
-  
-    subscribeSelectedModel(f : any) {
-	this.selectedModelSubject.subscribe(m => { f(m); });
-	if (this.selectedModel != undefined)
-	    f(this.selectedModel);
-    }
-  
-    subscribeSelectedRisk(f : any) {
-	this.selectedRiskSubject.subscribe(rc => { f(rc); });
-	for(let id in this.selectedRisks) {
-	    let rc = new SelectedRiskChange();
-	    rc.id = id;
-	    rc.risk = this.selectedRisks[id];
-	    f(rc);
-	}
-    }
-  
-    subscribeCombinedRisk(f : any) {
-	this.combinedRiskSubject.subscribe(rc => { f(rc); });
-	for(let id in this.combinedRisks) {
-	    let rc = new SelectedRiskChange();
-	    rc.id = id;
-	    rc.risk = this.combinedRisks[id];
-	    f(rc);
-	}
-    }
-  
 }
 
