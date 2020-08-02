@@ -14,6 +14,8 @@ import { FairService } from '../fair.service';
 })
 export class RiskDistributionChartComponent implements OnInit {
 
+    loading = true;
+    
     constructor(private fairSvc : FairService) { }
     
     chart : any = {
@@ -81,7 +83,12 @@ export class RiskDistributionChartComponent implements OnInit {
 
     ngOnInit(): void {
 
+	this.fairSvc.subscribeRecalcEvent(this.kind + '-risk', rep => {
+	    this.loading = true;
+	});
+
 	this.fairSvc.subscribe(this.kind + '-risk', rep => {
+	    this.loading = false;
 	    this.chart = this.createRiskChart(rep);
 	});
 

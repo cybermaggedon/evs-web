@@ -1,6 +1,4 @@
-<div *ngIf="showSpinner" class="spinner-container">
-  <mat-spinner></mat-spinner>
-</div>
+<spinner *ngIf="loading"></spinner>
 <div *ngIf="summary.length > 0">
   <table>
     <thead>

@@ -14,6 +14,8 @@ import { FairService } from '../fair.service';
 })
 export class LossExceedenceChartComponent implements OnInit {
 
+    loading = true;
+    
     constructor(private fairSvc : FairService) { }
     
     chart : any = {
@@ -83,7 +85,12 @@ export class LossExceedenceChartComponent implements OnInit {
     ngOnInit(): void {
 
 	this.fairSvc.subscribe(this.kind + '-loss', rep => {
+	    this.loading = false;
 	    this.chart = this.createLossChart(rep);
+	});
+
+	this.fairSvc.subscribeRecalcEvent(this.kind + '-loss', rep => {
+	    this.loading = true;
 	});
 
     }

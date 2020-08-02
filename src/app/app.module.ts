@@ -39,6 +39,7 @@ import { RiskConfigurationComponent } from './risk-configuration/risk-configurat
 import { CustomRiskConfigurationComponent } from './custom-risk-configuration/custom-risk-configuration.component';
 import { ModelSelectionComponent } from './model-selection/model-selection.component';
 import { ThreatModelComponent } from './threat-model/threat-model.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
     declarations: [
@@ -62,6 +63,7 @@ import { ThreatModelComponent } from './threat-model/threat-model.component';
         CustomRiskConfigurationComponent,
         ModelSelectionComponent,
         ThreatModelComponent,
+        SpinnerComponent,
     ],
     imports: [
         BrowserModule,
