@@ -36,6 +36,7 @@ export class RiskConfigurationComponent implements OnInit {
     @Input("risk") _risk : string;
 
     items : FlatItem<RiskProfile>[] = [];
+    name : string;
 
     get risk() : string { return this._risk; }
     set risk(r : string) {
@@ -67,6 +68,8 @@ export class RiskConfigurationComponent implements OnInit {
 	if (this.risk in this.risks.riskIndex) {
 	    this.items = this.risks.riskIndex[this.risk].profiles;
 	}
+
+	this.name = this.risks.riskIndex[this.risk].risk.name;
 
 	let model = this.models.currentModel(this.selectedModel);
  	let modelDefault = this.models.defaultProfile(this.selectedModel,
@@ -111,6 +114,12 @@ export class RiskConfigurationComponent implements OnInit {
 	    if (srp.risk == this.risk) {
 		this.selectedRiskProfile = srp.profile;
 		this.update();
+	    }
+	});
+
+	this.finalRisk.subscribe(frc => {
+	    if (frc.id == this.risk) {
+		this.final = frc.profile;
 	    }
 	});
 
