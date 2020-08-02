@@ -1,4 +1,38 @@
 
+<td class="riskname">
+   {{risks.riskIndex[risk].risk.name}}
+
+</td>
+
+  <td class="selector">
+    <mat-form-field appearance="fill">
+      <mat-label>
+	<span *ngIf="modelDefault == undefined">Select risk profile</span>
+	<span *ngIf="modelDefault != undefined">Default: {{modelDefault}}</span>
+      </mat-label>
+      <mat-select [(value)]="selected"
+		  (selectionChange)="onChange()">
+	<mat-option [value]="undefined"><i>model default</i></mat-option>
+	<mat-option *ngFor="let item of items" [value]="item.value.id">
+	  {{item.name}}
+	</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </td>
+
+<!--
+<td>
+  {{risk}}
+</td>
+
+<td>
+  {{riskState.riskIndex[risk].risk.name}}
+</td>
+<td>
+</td>
+-->
+
+<!--
   <td class="riskname">
     <span *ngIf="_risk != undefined">{{_risk.name}}</span>
   </td>
@@ -67,4 +101,4 @@
     </span>
   </td>
 
-
+-->

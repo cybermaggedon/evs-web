@@ -5,20 +5,37 @@ import { RiskLoaderService } from './risk-loader.service';
 import { Risk, RiskProfile } from './model-types';
 import { walk, FlatItem, flattenHierarchy } from './hierarchy';
 
-export interface RiskIndex {
-    [key : string] : Risk;
-};
-
-export interface RiskProfileIndex {
-    [key : string] : {
-	[key : string] : RiskProfile;
-    }
-};
-
 export class RiskState {
-    risks : { [key : string]: FlatItem<RiskProfile>[]; };
-    default : { [key : string] : RiskProfile };
-    riskProfileIndex : RiskProfileIndex;
+    risk : Risk;
+    profiles : FlatItem<RiskProfile>[];
+    default : RiskProfile;
+    profileIndex : { [key : string] : RiskProfile; };
+    nameIndex : { [key : string] : string };
+};
+
+export class AllRisksState {
+    risks : RiskState[];
+    riskIndex : { [key : string] : RiskState };
+    currentProfile(risk : string, def : string, sel : string) : RiskProfile {
+
+	if (risk == undefined || !(risk in this.riskIndex))
+	    return undefined;
+
+	if (sel != undefined && sel in this.riskIndex[risk].profileIndex) {
+	    return this.riskIndex[risk].profileIndex[sel];
+	}
+
+	if (def != undefined && def in this.riskIndex[risk].profileIndex) {
+	    return this.riskIndex[risk].profileIndex[def];
+	}
+
+	return undefined;
+
+    }
+    constructor() {
+	this.risks = [];
+	this.riskIndex = {};
+    }
 };
 
 @Injectable({
@@ -26,44 +43,48 @@ export class RiskState {
 })
 export class RiskStateService {
 
-    subject : BehaviorSubject<RiskState>;
+    subject : BehaviorSubject<AllRisksState>;
     
     constructor(private loader : RiskLoaderService) {
 
-	this.subject = new BehaviorSubject<RiskState>(new RiskState());
+	this.subject = new BehaviorSubject<AllRisksState>(new AllRisksState());
 
 
 	this.loader.subscribe(rs => {
 
-	    let state = new RiskState();
-	    state.risks = {};
-	    state.default = {};
-	    state.riskProfileIndex = {};
+	    let allstate = new AllRisksState();
+	    allstate.risks = [];
+	    allstate.riskIndex = {};
 
 	    for (let risk of rs) {
 
-		state.risks[risk.id] = flattenHierarchy(risk.profiles);
-		state.riskProfileIndex[risk.id] = {};
-		for(let profile of state.risks[risk.id]) {
+		let state = new RiskState();
+		state.risk = risk;
+		state.profiles = flattenHierarchy(risk.profiles);
+		state.profileIndex = {};
+		state.nameIndex = {};
 
-		    state.riskProfileIndex[risk.id][profile.value.id] =
-			profile.value;
+		for(let profile of state.profiles) {
 
-		    if (profile.default) {
-			state.default[risk.id] = profile.value
-		    }
+		    state.profileIndex[profile.value.id] = profile.value;
+		    state.nameIndex[profile.value.id] = profile.name;
 
+		    if (profile.default)
+			state.default = profile.value;
 		}
+
+		allstate.risks.push(state);
+		allstate.riskIndex[risk.id] = state;
 
 	    }
 
-	    this.subject.next(state);
+	    this.subject.next(allstate);
 
 	});
 
     }
 
-    subscribe(f : (rs : RiskState) => void) {
+    subscribe(f : (rs : AllRisksState) => void) {
 	this.subject.subscribe(rs => { f(rs); });
     }
 

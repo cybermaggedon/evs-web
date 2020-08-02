@@ -6,6 +6,7 @@ import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
 import { ModelStateService } from './model-state.service';
+import { FinalRiskService } from './final-risk.service';
 
 // FIXME: Add some type safety information
 
@@ -38,7 +39,8 @@ export class FairService {
 
     constructor(private http : HttpClient,
 		private riskService : RiskService,
-		private models : ModelStateService
+		private models : ModelStateService,
+		private finalRisk : FinalRiskService
 	       ) {
 
 	this.reportSubject = new Subject<FairReport>();
@@ -48,21 +50,21 @@ export class FairService {
         this.riskService.subject.
 	    pipe(throttle(() => interval(1000))).
 	    subscribe(m => {
-		console.log("RISK MODEL", m);
+//		console.log("RISK MODEL", m);
 		this.riskModel = m;
 		this.updateFairModels();
 	    });
 
 	this.updateCatEvent = new Observable(obs => {
-	    models.subscribeCombinedRisk(rc => {
-		console.log("combined risk ", rc.id);
-		this.riskProfiles[rc.id] = rc.risk;
+	    this.riskService.subscribe(frc => {
+//		console.log("final risk ", frc.id);
+		this.riskProfiles[frc.id] = frc.risk;
 		obs.next();
 	    });
 	});
 
 	this.updateCatEvent.subscribe(obs => {
-	    console.log(obs);
+//	    console.log(obs);
 	    this.updateCatModels();
 	});
 

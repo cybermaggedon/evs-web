@@ -1,9 +1,11 @@
 
 <h2>Overall model configuration</h2>
+
+
 <mat-form-field appearance="fill">
   <mat-label>Select overall model</mat-label>
   <mat-select [(value)]="selected">
-    <mat-option *ngFor="let item of items" [value]="item.value">
+    <mat-option *ngFor="let item of modelState.models" [value]="item.value.id">
       {{item.name}}
     </mat-option>
   </mat-select>
@@ -55,7 +57,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr risk-configuration *ngFor="let risk of riskProfiles" [risk]="risk" [overall-model]="selected">
+    <tr risk-configuration *ngFor="let risk of riskState.risks" [risk]="risk.risk.id">
     </tr>
   </tbody>
 </table>
+

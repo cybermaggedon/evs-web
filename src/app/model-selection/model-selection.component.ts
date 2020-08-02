@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Model, Risk } from '../model-types';
 import { flattenHierarchy, FlatItem } from '../hierarchy';
-import { ModelStateService } from '../model-state.service';
+import { ModelStateService, ModelState } from '../model-state.service';
+import { SelectedModelService } from '../selected-model.service';
+import { RiskStateService, AllRisksState } from '../risk-state.service';
 
 @Component({
     selector: 'model-selection',
@@ -12,36 +14,38 @@ import { ModelStateService } from '../model-state.service';
 })
 export class ModelSelectionComponent implements OnInit {
 
-    constructor(private models : ModelStateService) { }
+    modelState : ModelState;
+    selectedModel : string;
+    riskState : AllRisksState;
+
+    constructor(private modelSvc : ModelStateService,
+		private riskSvc : RiskStateService,
+		private selectedModelSvc : SelectedModelService) {
+	this.modelState = new ModelState();
+    }
 
     ngOnInit(): void {
 
-	this.models.subscribeModels(m => {
-	    this.items = flattenHierarchy(m);
+	this.modelSvc.subscribe(ms => {
+	    this.modelState = ms;
 	});
 
-	this.models.subscribeRisks(r => {
-	    this.riskProfiles = r;
+	this.riskSvc.subscribe((rs : AllRisksState) => {
+	    this.riskState = rs;
 	});
 
-	this.models.subscribeSelectedModel(m => {
-	    // Defeat recursion
-	    if (m == this.selected) return;
-
-	    this.selected = m;
+	this.selectedModelSvc.subscribe(m => {
+	    this._selected = m;
 	});
 
     }
 
-    _selected : Model;
+    _selected : string;
     get selected() { return this._selected; }
-    set selected(m : Model) {
+    set selected(m : string) {
 	this._selected = m;
-	this.models.setSelectedModel(m);
+	this.selectedModelSvc.setModel(m);
     }
-
-    items : FlatItem<Model>[] = [];
-    riskProfiles : Risk[];
 
 }
 
