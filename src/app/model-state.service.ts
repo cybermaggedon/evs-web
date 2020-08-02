@@ -21,6 +21,8 @@ export class SelectedRiskChange {
 })
 export class ModelStateService {
 
+    firstLoad = true;
+
     // The model definitions
     private modelSet : ModelSet;
     private defaultModel : Model;
@@ -29,10 +31,12 @@ export class ModelStateService {
     private riskProfiles : Risk[];
 
     // Which model is selected
-    private selectedModel : Model;
+    //    private selectedModel : Model;
+    private selectedModel : string;
 
     // Risks which are selected
-    private selectedRisks : Object;
+    //    private selectedRisks : Object;
+    private selectedRisks = {};
 
     // Default profiles settings for risk.
     private defaultRisks : Object;
@@ -57,16 +61,28 @@ export class ModelStateService {
 	this.combinedRiskSubject = new Subject<SelectedRiskChange>();
 
 	this.modelLoader.subscribe(ms => {
+
 	    this.modelSet = ms.models;
 	    this.riskProfiles = ms.risks;
+
+	    this.updateIndex();
+
+	    if (this.firstLoad) {
+		this.loadSelections();
+		this.firstLoad = false;
+	    }
+
 	    this.updateModel();
-	    this.modelSetSubject.next(this.modelSet);
-	    this.risksSubject.next(this.riskProfiles);
+
 	});
 
     }
 
-    updateModel() {
+    modelIndex : Object;
+    riskIndex : Object;
+    profileIndex : Object;
+
+    updateIndex() {
 
 	// Find default model
 	walk(this.modelSet, ent => {
@@ -74,6 +90,73 @@ export class ModelStateService {
 		this.defaultModel = ent.value;
 	});
 
+	this.modelIndex = {};
+	walk(this.modelSet, ent => {
+	    if (ent.kind = "entry")
+		this.modelIndex[ent.value.id] = ent.value;
+	});
+
+	this.riskIndex = {};
+	this.profileIndex = {};
+	this.defaultRisks = {};
+	for(let risk of this.riskProfiles) {
+
+	    this.riskIndex[risk.id] = risk;
+	    this.profileIndex[risk.id] = {};
+
+	    for(let profile of risk.profiles) {
+
+		walk(risk.profiles, ent => {
+		    if (ent.kind == "entry") 
+			this.profileIndex[risk.id][ent.value.id] = profile;
+		    if (ent.default)
+			this.defaultRisks[risk.id] = ent.value.id;
+		});
+
+	    }
+
+	}
+
+    }
+
+    loadSelections() {
+
+	let sel = localStorage.getItem("selected-model");
+	if (sel in this.modelIndex)
+	    this.selectedModel = sel;
+
+	for(let risk of this.riskProfiles) {
+	    let sel = localStorage.getItem("selected-risk:" + risk.id);
+	    if (sel in this.riskIndex[risk.id]) {
+		this.selectedRisks[risk.id] = sel;
+	    }
+	}
+	
+//	if (!this.selec this.m
+
+	/*
+	// Can assume index is in place.
+	
+	// Get model setting from localstorage
+	let modelSetting = localStorage.getItem("selected-model");
+
+	if (modelSetting in this.modelIndex)
+	    this.selectedModel = this.modelIndex[modelSetting];
+
+	// Set to selected model stored in localStorage, if set.
+	if (modelSetting != null) {
+	    walk(this.modelSet, ent => {
+		if (ent.kind == "entry" && ent.value.id == modelSetting) {
+		    this.selectedModel = ent.value;
+		    this.selectedModelSubject.next(this.selectedModel);
+		}
+	    });
+	}
+	*/
+    }
+
+    updateModel() {
+/*
 	// Get model setting from localstorage
 	let modelSetting = localStorage.getItem("selected-model");
 
@@ -98,6 +181,36 @@ export class ModelStateService {
 	    localStorage.setItem("selected-model", this.selectedModel.id);
 
 	}
+*/
+
+
+	this.modelSetSubject.next(this.modelSet);
+	this.risksSubject.next(this.riskProfiles);
+
+	this.selectedModelSubject.next(this.modelIndex[this.selectedModel]);
+
+	for(let risk of this.riskProfiles) {
+
+	    // If there is a selection, push it.
+	    if (risk.id in this.selectedRisk) {
+		let sel = this.selectedRisk[risk.id]
+		if (sel in this.profileIndex[risk.id]) {
+		    let rc = new SelectedRiskChange();
+		    rc.id = risk.id;
+		    rc.risk = this.profileIndex[risk.id][sel];
+		    this.selectedRiskSubject.next(rc);
+		}
+	    }
+
+	    // Push combined risk.
+	    let rc = new SelectedRiskChange();
+	    rc.id = risk.id;
+	    rc.risk = this.getCombinedRisk(risk.id);
+	    this.selectedRiskSubject.next(rc);
+
+	}
+
+	/*
 
 	this.selectedRisks = {};
 	this.defaultRisks = {};
@@ -138,7 +251,7 @@ export class ModelStateService {
 
 	this.modelSetSubject.next(this.modelSet);
 	this.risksSubject.next(this.riskProfiles);
-
+*/
     }
 
     updateCombinedRisk(id : string) {

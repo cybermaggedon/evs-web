@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -74,6 +75,7 @@ import { ThreatModelComponent } from './threat-model/threat-model.component';
 	MatSelectModule,
 	MatFormFieldModule,
         MatExpansionModule,
+	MatProgressSpinnerModule,
         NgxDatatableModule,
 	ChartsModule
     ],

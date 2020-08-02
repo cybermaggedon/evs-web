@@ -25,6 +25,13 @@ export interface FairReport {
 })
 export class FairService {
 
+    reportSubject : Subject<FairReport>;
+    recalcEventSubject : Subject<string>;
+
+    riskModel : RiskModel;
+
+    lastValue : any = {};
+
     private riskProfiles : Object;
 
     updateCatEvent : Observable<void>;
@@ -34,34 +41,32 @@ export class FairService {
 		private models : ModelStateService
 	       ) {
 
-	this.subject = new Subject<any>();
+	this.reportSubject = new Subject<FairReport>();
+	this.recalcEventSubject = new Subject<string>();
 	this.riskProfiles = {};
 
         this.riskService.subject.
 	    pipe(throttle(() => interval(1000))).
 	    subscribe(m => {
+		console.log("RISK MODEL", m);
 		this.riskModel = m;
 		this.updateFairModels();
 	    });
 
 	this.updateCatEvent = new Observable(obs => {
 	    models.subscribeCombinedRisk(rc => {
+		console.log("combined risk ", rc.id);
 		this.riskProfiles[rc.id] = rc.risk;
 		obs.next();
 	    });
 	});
 
 	this.updateCatEvent.subscribe(obs => {
+	    console.log(obs);
 	    this.updateCatModels();
 	});
 
     }
-
-    subject : Subject<FairReport>;
-
-    riskModel : RiskModel;
-
-    lastValue : any = {};
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -71,12 +76,15 @@ export class FairService {
 
 	const report_key = kind + "-" + report_type;
 
+	// Tell everyone we're recalculating models.
+	this.recalcEventSubject.next(report_key);
+
 	var url = "/fair/" + model.name + "?report=" + report_type + "&model=" +
 	    encodeURIComponent(JSON.stringify(model));
 
 	this.http.get(url).subscribe(report => {
 	    this.lastValue[report_key] = report;
-	    this.subject.next({
+	    this.reportSubject.next({
 		key: report_key, report: report
 	    })
 	});
@@ -262,7 +270,7 @@ export class FairService {
     }
 
     subscribe(key : string, f : any) {
-        this.subject.subscribe(rep => {
+        this.reportSubject.subscribe(rep => {
 	    if (key == rep.key) {
 		f(rep.report);
 	    }
@@ -270,6 +278,14 @@ export class FairService {
 	if (key in this.lastValue) {
 	    f(this.lastValue[key]);
 	}
+    }
+
+    subscribeRecalcEvent(key : string, f : any) {
+        this.recalcEventSubject.subscribe(k => {
+	    if (key == k) {
+		f();
+	    }
+	});
     }
 
 }

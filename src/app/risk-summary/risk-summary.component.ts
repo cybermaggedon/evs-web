@@ -9,8 +9,11 @@ import { FairService } from '../fair.service';
 })
 export class RiskSummaryComponent implements OnInit {
 
+    showSpinner : boolean;
+
     constructor(private fairSvc : FairService,
                 @Inject(LOCALE_ID) private locale: string) {
+	this.showSpinner = true;
     }
 
     @Input('kind')
@@ -19,7 +22,14 @@ export class RiskSummaryComponent implements OnInit {
     summary : Object[] = [];
 
     ngOnInit(): void {
+
+	this.fairSvc.subscribeRecalcEvent(this.kind + '-summary', rep => {
+	    this.showSpinner = true;
+	});
+
 	this.fairSvc.subscribe(this.kind + '-summary', rep => {
+
+	    this.showSpinner = false;
 
 	    let summary = [];
 	    for (let v in rep) {
