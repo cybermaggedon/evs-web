@@ -12,6 +12,8 @@ import { FairService } from '../fair.service';
 })
 export class ProbabilityDistributionChartComponent implements OnInit {
 
+    loading = true;
+    
     constructor(private fairSvc : FairService) { }
     
     chart : any = {
@@ -79,7 +81,12 @@ export class ProbabilityDistributionChartComponent implements OnInit {
 
     ngOnInit(): void {
 
+	this.fairSvc.subscribeRecalcEvent(this.kind + '-pdf', rep => {
+	    this.loading = true;
+	});
+
 	this.fairSvc.subscribe(this.kind + '-pdf', rep => {
+	    this.loading = false;
 	    this.chart = this.createPdfChart(rep);
 	});
 

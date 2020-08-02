@@ -1,8 +1,25 @@
 
+// Update strategy:
+// - Selected model changes => this may change the default risk profile for
+//   a label, find out what that is and update trigger label (may be
+//   undefined).
+// - No selected model & default model changes => this changes the final
+//   model.  Changes the default risk profile, and thus the risk selector
+//   trigger label.
+// - Selected risk profile changes for this risk, change the selector.
+// - Underlying modelset changes => rework everything.
+// - Underlying riskset changes => rework everything
+
+// - The model parameters are all described from the finalrisk.
+
 import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import { Risk, RiskProfile, Model } from '../model-types';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
-import { ModelStateService } from '../model-state.service';
+import { ModelStateService, ModelState } from '../model-state.service';
+import { RiskStateService, AllRisksState } from '../risk-state.service';
+import { SelectedModelService } from '../selected-model.service';
+import { SelectedRiskProfilesService } from '../selected-risk-profiles.service';
+import { FinalRiskService } from '../final-risk.service';
 
 @Component({
   selector: '[risk-configuration]',
@@ -11,122 +28,106 @@ import { ModelStateService } from '../model-state.service';
 })
 export class RiskConfigurationComponent implements OnInit {
 
-    constructor(private models : ModelStateService,
-		@Inject(LOCALE_ID) private locale: string) { }
+    models : ModelState;
+    risks : AllRisksState;
+    selectedModel : string;
+    selectedRiskProfile : string;
 
-    _risk : Risk;
-
-    _model : Model;
-
-    @Input("risk") set risk(risk : Risk) {
-	this._risk = risk;
-	this.flatten();
-    	this.updateModel();
-    }
-
-    @Input("overall-model") set overallModel(model : Model) {
-	this._model = model;
-    	this.updateModel();
-    }
-
-    get overallModel() : Model { return this._model }
+    @Input("risk") _risk : string;
 
     items : FlatItem<RiskProfile>[] = [];
+    name : string;
 
-    ngOnInit(): void {
-	this.models.subscribeSelectedRisk(rc => {
-
-	    // Ignore risks which aren't for this component.
-	    if (rc.id != this._risk.id) return;
-
-	    // Ignore if no change.  This defeats recursion.
-	    if (this._selected != undefined &&
-		this._selected.value == rc.risk) {
-		return;
-	    }
-
-	    // This is no change for the 'model default' case.
-	    if (this._selected == undefined &&
-		rc.risk == undefined)
-		return;
-
-	    // Special 'model default' case.
-	    if (rc.risk == undefined) {
-		this._selected = undefined;
-		this.updateCombined();
-		return;
-	    }
-
-
-	    // Locate the FlatItem corresponding to this risk.
-	    for(let item of this.items) {
-		if (item.value == rc.risk) {
-		    this._selected = item;
-		}
-	    }
-
-	    this.updateCombined();
-	    
-	});
+    get risk() : string { return this._risk; }
+    set risk(r : string) {
+	this._risk = r;
+	this.update();
     }
 
-    _selected : FlatItem<RiskProfile>;
-    get selected() { return this._selected; }
-    set selected(item : FlatItem<RiskProfile>) {
-	this._selected = item;
-	if (this._selected == undefined)
-	    this.models.setSelectedRisk(this._risk.id, undefined);
-	else
-	    this.models.setSelectedRisk(this._risk.id, this._selected.value);
-    }
+    selected : string;
+    modelDefault : string;
+    final : RiskProfile;
 
-    // Model-specified default.
-    default : FlatItem<RiskProfile>;
+    constructor(private modelSvc : ModelStateService,
+		private riskSvc : RiskStateService,
+		private selectedModelSvc : SelectedModelService,
+		private selectedRiskProfilesSvc : SelectedRiskProfilesService,
+		private finalRisk : FinalRiskService,
+		@Inject(LOCALE_ID) private locale: string) {
 
-    // Combined is the selected, or the default if nothing is selected.
-    combined: FlatItem<RiskProfile>;
-    
-    flatten() : void {
-	this.items = flattenHierarchy(this._risk.profiles);
+	this.models = new ModelState();
+	this.risks = new AllRisksState();
 
     }
 
-    updateModel() {
+    update() {
+	
+	if (!(this.risk in this.risks.riskIndex))
+	    return;
 
-	if (this._model != undefined && this._risk != undefined) {
+	if (this.risk in this.risks.riskIndex) {
+	    this.items = this.risks.riskIndex[this.risk].profiles;
+	}
 
-	    if (this._risk.id in this._model.profiles) {
+	this.name = this.risks.riskIndex[this.risk].risk.name;
 
-		this.default = undefined;
+	let model = this.models.currentModel(this.selectedModel);
+ 	let modelDefault = this.models.defaultProfile(this.selectedModel,
+						      this.risk);
 
-		let id = this._model.profiles[this._risk.id];
+	if (modelDefault == undefined)
+	    this.modelDefault = undefined;
+	else {
 
-		for(let item of this.items) {
-		    if (item.value.id == id) {
-			this.default = item;
-		    }
-		}
+	    let profile =
+		this.risks.currentProfile(this.risk, modelDefault,
+					  undefined);
 
+	    let name = this.risks.riskIndex[this.risk].nameIndex[profile.id];
 
-	    }
+	    this.modelDefault = name;
 
 	}
 
-	this.updateCombined();
+	this.selected = this.selectedRiskProfile;
 
-    }
+   }
 
-    updateCombined() : void {
-	
-	if (this.selected != null)
-	    this.combined = this.selected;
-	else
-	    this.combined = this.default;
+    ngOnInit(): void {
+
+	this.modelSvc.subscribe(ms => {
+	    this.models = ms;
+	    this.update();
+	});
+
+	this.riskSvc.subscribe(rs => {
+	    this.risks = rs;
+	    this.update();
+	});
+
+	this.selectedModelSvc.subscribe(m => {
+	    this.selectedModel = m;
+	    this.update();
+	});
+
+	this.selectedRiskProfilesSvc.subscribe(srp => {
+	    if (srp.risk == this.risk) {
+		this.selectedRiskProfile = srp.profile;
+		this.update();
+	    }
+	});
+
+	this.finalRisk.subscribe(frc => {
+	    if (frc.id == this.risk) {
+		this.final = frc.profile;
+	    }
+	});
 
     }
 
     onChange() : void {
-	this.updateCombined();
+	this.selectedRiskProfilesSvc.setRiskProfile(this.risk,
+						   this.selected);
     }
 
 }

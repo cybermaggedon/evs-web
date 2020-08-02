@@ -6,6 +6,7 @@ import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
 import { ModelStateService } from './model-state.service';
+import { FinalRiskService } from './final-risk.service';
 
 // FIXME: Add some type safety information
 
@@ -25,16 +26,25 @@ export interface FairReport {
 })
 export class FairService {
 
+    reportSubject : Subject<FairReport>;
+    recalcEventSubject : Subject<string>;
+
+    riskModel : RiskModel;
+
+    lastValue : any = {};
+
     private riskProfiles : Object;
 
     updateCatEvent : Observable<void>;
 
     constructor(private http : HttpClient,
 		private riskService : RiskService,
-		private models : ModelStateService
+		private models : ModelStateService,
+		private finalRisk : FinalRiskService
 	       ) {
 
-	this.subject = new Subject<any>();
+	this.reportSubject = new Subject<FairReport>();
+	this.recalcEventSubject = new Subject<string>();
 	this.riskProfiles = {};
 
         this.riskService.subject.
@@ -42,11 +52,12 @@ export class FairService {
 	    subscribe(m => {
 		this.riskModel = m;
 		this.updateFairModels();
+		this.updateCatModels();
 	    });
 
 	this.updateCatEvent = new Observable(obs => {
-	    models.subscribeCombinedRisk(rc => {
-		this.riskProfiles[rc.id] = rc.risk;
+	    this.finalRisk.subscribe(frc => {
+		this.riskProfiles[frc.id] = frc.profile;
 		obs.next();
 	    });
 	});
@@ -57,12 +68,6 @@ export class FairService {
 
     }
 
-    subject : Subject<FairReport>;
-
-    riskModel : RiskModel;
-
-    lastValue : any = {};
-
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -71,12 +76,15 @@ export class FairService {
 
 	const report_key = kind + "-" + report_type;
 
+	// Tell everyone we're recalculating models.
+	this.recalcEventSubject.next(report_key);
+
 	var url = "/fair/" + model.name + "?report=" + report_type + "&model=" +
 	    encodeURIComponent(JSON.stringify(model));
 
 	this.http.get(url).subscribe(report => {
 	    this.lastValue[report_key] = report;
-	    this.subject.next({
+	    this.reportSubject.next({
 		key: report_key, report: report
 	    })
 	});
@@ -133,14 +141,14 @@ export class FairService {
 	    this.updateRiskModel("resource", resModel);
 	}
 
-	this.updateCatModels();
-
     }
 
     getModel(name, risk) {
 
-// Risk is rounded to 2 places to allow FAIR service to cache.
-    // FIXME: hard-coded, should use a stddev input?
+	// This stuff isn't grounded in the FAIR config, and should be.
+	
+	// Risk is rounded to 2 places to allow FAIR service to cache.
+	// FIXME: hard-coded, should use a stddev input?
 	const lef_low = this.round(risk / 1.4, 2);
 	const lef_mode = this.round(risk, 2);
 	const lef_high = this.round(risk * 1.4, 2);
@@ -262,7 +270,7 @@ export class FairService {
     }
 
     subscribe(key : string, f : any) {
-        this.subject.subscribe(rep => {
+        this.reportSubject.subscribe(rep => {
 	    if (key == rep.key) {
 		f(rep.report);
 	    }
@@ -270,6 +278,14 @@ export class FairService {
 	if (key in this.lastValue) {
 	    f(this.lastValue[key]);
 	}
+    }
+
+    subscribeRecalcEvent(key : string, f : any) {
+        this.recalcEventSubject.subscribe(k => {
+	    if (key == k) {
+		f();
+	    }
+	});
     }
 
 }

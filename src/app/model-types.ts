@@ -44,6 +44,8 @@ export interface Risk {
     profiles : Hierarchy<RiskProfile>;
 }
 
+export type RiskSet = Risk[];
+
 // Model
 
 export interface Model {
