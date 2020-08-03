@@ -66,7 +66,7 @@ export class FairService {
 	this.riskProfiles = {};
 
         this.riskService.subject.
-	    pipe(throttle(() => interval(1000))).
+	    pipe(throttle(() => interval(2000))).
 	    subscribe(m => {
 		this.riskModel = m;
 		this.updateFairModels();
@@ -80,9 +80,11 @@ export class FairService {
 	    });
 	});
 
-	this.updateCatEvent.subscribe(obs => {
-	    this.updateCatModels();
-	});
+	this.updateCatEvent.
+	    pipe(throttle(() => interval(1000))).
+	    subscribe(obs => {
+		this.updateCatModels();
+	    });
 
     }
 
