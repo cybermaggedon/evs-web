@@ -95,21 +95,43 @@ export class RiskSelectionComponent implements OnInit {
 
     factors : Object = [];
 
-    describeFactors(name, f, output) {
-	if (f.low) output.push({key: name + ".low", value: f.low});
-	if (f.mode) output.push({key: name + ".mode", value: f.mode});
-	if (f.high) output.push({key: name + ".high", value: f.high});
-	if (f.mean) output.push({key: name + ".mean", value: f.mean});
-	if (f.stdev) output.push({key: name + ".stdev", value: f.stdev});
-	if (f.constant) output.push({key: name + ".constant",
-				     value: f.constant});
+    describeFactors(name, f, output, currency=false) {
+	if (f.low && f.mode && f.high) {
+	    output.push(
+		{ key: name + ".low", value: f.low, currency: currency }
+	    );
+	    output.push(
+		{ key: name + ".mode", value: f.mode, currency: currency }
+	    );
+	    output.push(
+		{ key: name + ".high", value: f.high, currency: currency }
+	    );
+	    return
+	}
+	if (f.mean && f.stdev) {
+	    output.push(
+		{ key: name + ".mean", value: f.mean, currency: currency }
+	    );
+	    output.push(
+		{ key: name + ".stdev", value: f.stdev, currency: currency}
+	    );
+	    return
+	}
+	if (f.constant) {
+	    output.push(
+		{ key: name + ".constant", value: f.constant,
+		  currency: currency }
+	    );
+	    return;
+	}
+
     }
 
     describe() {
 	let output = [];
 	let f = this.final.fair;
 
-	if (f.r) this.describeFactors("risk", f.r, output);
+	if (f.r) this.describeFactors("risk", f.r, output, true);
 	if (f.lef) this.describeFactors("lef", f.lef, output);
 	if (f.tef) this.describeFactors("tef", f.tef, output);
 	if (f.c) this.describeFactors("c", f.c, output);
@@ -117,11 +139,11 @@ export class RiskSelectionComponent implements OnInit {
 	if (f.v) this.describeFactors("v", f.v, output);
 	if (f.tc) this.describeFactors("tc", f.tc, output);
 	if (f.cs) this.describeFactors("cs", f.cs, output);
-	if (f.lm) this.describeFactors("lm", f.lm, output);
-	if (f.pl) this.describeFactors("pl", f.pl, output);
-	if (f.sl) this.describeFactors("sl", f.sl, output);
+	if (f.lm) this.describeFactors("lm", f.lm, output, true);
+	if (f.pl) this.describeFactors("pl", f.pl, output, true);
+	if (f.sl) this.describeFactors("sl", f.sl, output, true);
 	if (f.slef) this.describeFactors("slef", f.slef, output);
-	if (f.slem) this.describeFactors("slem", f.slem, output);
+	if (f.slem) this.describeFactors("slem", f.slem, output, true);
 
 	this.factors = output;
     }

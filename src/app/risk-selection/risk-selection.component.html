@@ -26,11 +26,12 @@
   </td>
 
   <td class="fair">
-    <span *ngIf="final != undefined">
-      <span *ngFor="let factor of factors">
-	{{factor.key}}={{factor.value}}
-      </span>
-    </span>
+    <ng-container *ngIf="final != undefined">
+      <div *ngFor="let factor of factors">
+	<span class="factor">{{factor.key.toUpperCase()}}</span>:
+	<span class="value">{{factor.value}}</span>
+      </div>
+    </ng-container>
   </td>
 
 <!--

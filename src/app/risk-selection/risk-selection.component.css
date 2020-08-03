@@ -18,18 +18,15 @@ td {
     text-align: center;
 }
 
-.fair.lef {
-    width: 3em;
-    text-align: center;
+.fair {
 }
 
-.fair.pl {
-    width: 4em;
-    text-align: center;
+.fair .factor {
+    font-weight: bold;
+    color: #a08080;
 }
 
-.fair.sl {
-    width: 4em;
-    text-align: center;
+.fair .value {
+    color: #404040;
 }
 
