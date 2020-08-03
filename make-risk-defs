@@ -64,7 +64,7 @@ with open("risks.csv") as csvfile:
                          },
                          {
                               "kind": "entry",
-                              "name": "Low",
+                              "name": "High",
                               "default": True,
                               "value": {
                                    "id": row["Id"] + "-high",
