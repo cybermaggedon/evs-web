@@ -16,10 +16,9 @@ import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import { Risk, RiskProfile, Model } from '../model-types';
 import { flattenHierarchy, FlatItem, walk, HierarchyObject } from '../hierarchy';
 import { ModelStateService, ModelState } from '../model-state.service';
-import { RiskStateService, AllRisksState } from '../risk-state.service';
-import { SelectedModelService } from '../selected-model.service';
-import { SelectedRiskProfilesService } from '../selected-risk-profiles.service';
+import { RiskStateService, RiskState } from '../risk-state.service';
 import { FinalRiskService } from '../final-risk.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'risk-configuration',
@@ -28,20 +27,27 @@ import { FinalRiskService } from '../final-risk.service';
 })
 export class RiskConfigurationComponent implements OnInit {
 
-    risks : AllRisksState;
+    risks : RiskState[];
+    pageEvent : PageEvent;
+    pageSize = 5;
+    pageSizeOptions = [5, 10, 25, 50];
+    curItem : number = 0;
 
     constructor(private riskSvc : RiskStateService) {
-
-	this.risks = new AllRisksState();
-
+	this.risks = [];
     }
 
     ngOnInit(): void {
 
 	this.riskSvc.subscribe(rs => {
-	    this.risks = rs;
+	    this.risks = rs.risks;
 	});
 
+    }
+
+    onChange(pageEvent) {
+	this.pageSize = pageEvent.pageSize;
+	this.curItem = pageEvent.pageIndex * this.pageSize;
     }
 
 }

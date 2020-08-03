@@ -19,8 +19,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr risk-selection *ngFor="let risk of risks.risks" [risk]="risk.risk.id">
+    <tr risk-selection *ngFor="let risk of risks.slice(curItem, curItem + pageSize)" [risk]="risk.risk.id">
     </tr>
   </tbody>
 </table>
+
+<mat-paginator [length]="risks.length"
+	       [pageSize]="pageSize"
+	       [pageSizeOptions]="pageSizeOptions"
+	       (page)="onChange($event)">
+</mat-paginator>
 

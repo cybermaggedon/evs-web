@@ -14,7 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -79,7 +79,7 @@ import { RiskSelectionComponent } from './risk-selection/risk-selection.componen
 	MatSelectModule,
 	MatFormFieldModule,
         MatExpansionModule,
-	MatProgressSpinnerModule,
+	MatPaginatorModule,
         NgxDatatableModule,
 	ChartsModule
     ],
