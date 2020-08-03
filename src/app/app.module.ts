@@ -2,7 +2,7 @@
 // root module
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -41,6 +43,7 @@ import { ModelSelectionComponent } from './model-selection/model-selection.compo
 import { ThreatModelComponent } from './threat-model/threat-model.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { RiskSelectionComponent } from './risk-selection/risk-selection.component';
+import { RiskConfigurationFilterComponent } from './risk-configuration-filter/risk-configuration-filter.component';
 
 @NgModule({
     declarations: [
@@ -66,10 +69,13 @@ import { RiskSelectionComponent } from './risk-selection/risk-selection.componen
         ThreatModelComponent,
         SpinnerComponent,
         RiskSelectionComponent,
+	RiskConfigurationFilterComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+	FormsModule,
+	ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatSliderModule,
@@ -80,6 +86,8 @@ import { RiskSelectionComponent } from './risk-selection/risk-selection.componen
 	MatFormFieldModule,
         MatExpansionModule,
 	MatPaginatorModule,
+	MatChipsModule,
+	MatIconModule,
         NgxDatatableModule,
 	ChartsModule
     ],

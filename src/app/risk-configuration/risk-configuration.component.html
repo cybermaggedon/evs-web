@@ -1,6 +1,10 @@
 
 <h2>Specific risk configuration</h2>
 
+<risk-configuration-filter
+  (filter)="onFilter($event)">
+</risk-configuration-filter>
+
 <table>
   <thead>
     <tr>
@@ -24,7 +28,7 @@
   </tbody>
 </table>
 
-<mat-paginator [length]="risks.length"
+<mat-paginator #paginator [length]="risks.length"
 	       [pageSize]="pageSize"
 	       [pageSizeOptions]="pageSizeOptions"
 	       (page)="onChange($event)">

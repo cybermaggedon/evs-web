@@ -1,0 +1,15 @@
+<mat-form-field class="filters">
+  <mat-chip-list #chipList aria-label="Filter selection">
+    <mat-chip *ngFor="let filter of filters" [selectable]="true"
+              (removed)="remove(filter)">
+      {{filter}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="Enter risk filters"
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>
+
