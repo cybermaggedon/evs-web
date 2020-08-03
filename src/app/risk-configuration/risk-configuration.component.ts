@@ -91,7 +91,40 @@ export class RiskConfigurationComponent implements OnInit {
 
 	this.selected = this.selectedRiskProfile;
 
-   }
+    }
+
+    factors : Object = [];
+
+    describeFactors(name, f, output) {
+	if (f.low) output.push({key: name + ".low", value: f.low});
+	if (f.mode) output.push({key: name + ".mode", value: f.mode});
+	if (f.high) output.push({key: name + ".high", value: f.high});
+	if (f.mean) output.push({key: name + ".mean", value: f.mean});
+	if (f.stdev) output.push({key: name + ".stdev", value: f.stdev});
+	if (f.constant) output.push({key: name + ".constant",
+				     value: f.constant});
+    }
+
+    describe() {
+	let output = [];
+	let f = this.final.fair;
+
+	if (f.r) this.describeFactors("risk", f.r, output);
+	if (f.lef) this.describeFactors("lef", f.lef, output);
+	if (f.tef) this.describeFactors("tef", f.tef, output);
+	if (f.c) this.describeFactors("c", f.c, output);
+	if (f.a) this.describeFactors("a", f.a, output);
+	if (f.v) this.describeFactors("v", f.v, output);
+	if (f.tc) this.describeFactors("tc", f.tc, output);
+	if (f.cs) this.describeFactors("cs", f.cs, output);
+	if (f.lm) this.describeFactors("lm", f.lm, output);
+	if (f.pl) this.describeFactors("pl", f.pl, output);
+	if (f.sl) this.describeFactors("sl", f.sl, output);
+	if (f.slef) this.describeFactors("slef", f.slef, output);
+	if (f.slem) this.describeFactors("slem", f.slem, output);
+
+	this.factors = output;
+    }
 
     ngOnInit(): void {
 
@@ -120,6 +153,7 @@ export class RiskConfigurationComponent implements OnInit {
 	this.finalRisk.subscribe(frc => {
 	    if (frc.id == this.risk) {
 		this.final = frc.profile;
+		this.describe();
 	    }
 	});
 

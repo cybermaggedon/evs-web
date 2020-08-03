@@ -25,12 +25,15 @@
     </span>
   </td>
 
-  <td class="fair lef">
+  <td class="fair">
     <span *ngIf="final != undefined">
-      {{final.fair.lef_low}}
+      <span *ngFor="let factor of factors">
+	{{factor.key}}={{factor.value}}
+      </span>
     </span>
   </td>
 
+<!--
   <td class="fair lef">
     <span *ngIf="final != undefined">
       {{final.fair.lef_mode}}
@@ -67,3 +70,4 @@
     </span>
   </td>
 
+-->

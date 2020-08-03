@@ -8,18 +8,36 @@ import { RiskModel } from './risk';
 import { ModelStateService } from './model-state.service';
 import { FinalRiskService } from './final-risk.service';
 
-// FIXME: Add some type safety information
-
-const report_type : string[] = [
-    'category-loss', 'category-pdf', 'category-summary', 'category-risk',
-    'device-loss', 'device-pdf', 'device-summary', 'device-risk',
-    'resource-loss', 'resource-pdf', 'resource-summary', 'resource-risk'
-];
-
 export interface FairReport {
     key : string;
     report : any;
 };
+
+function getFactors(params, factor=1.0) : Object {
+    let f = {};
+    if (params.low) f["low"] = params.low * factor;
+    if (params.mode) f["mode"] = params.mode * factor;
+    if (params.high) f["high"] = params.high * factor;
+    if (params.mean) f["mean"] = params.mean * factor;
+    if (params.stdev) f["stdev"] = params.stdev;
+    if (params.constant) f["constant"] = params.constant * factor;
+    return f;
+}
+
+function round(n : number, places : number) {
+    return parseFloat(n.toFixed(places));
+}
+
+function getRiskFactors(params, factor=1.0) : Object {
+    let f = {};
+    if (params.low) f["low"] = round(params.low * factor, 2);
+    if (params.mode) f["mode"] = round(params.mode * factor, 2);
+    if (params.high) f["high"] = round(params.high * factor, 2);
+    if (params.mean) f["mean"] = round(params.mean * factor, 2);
+    if (params.stdev) f["stdev"] = round(params.stdev, 2);
+    if (params.constant) f["constant"] = round(params.constant * factor, 2);
+    return f;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -149,9 +167,9 @@ export class FairService {
 	
 	// Risk is rounded to 2 places to allow FAIR service to cache.
 	// FIXME: hard-coded, should use a stddev input?
-	const lef_low = this.round(risk / 1.4, 2);
-	const lef_mode = this.round(risk, 2);
-	const lef_high = this.round(risk * 1.4, 2);
+	const lef_low = round(risk / 1.4, 2);
+	const lef_mode = round(risk, 2);
+	const lef_high = round(risk * 1.4, 2);
 	const pl_low = 100000;
 	const pl_mode = 200000;
 	const pl_high = 250000;
@@ -174,10 +192,6 @@ export class FairService {
 
     }
 
-    round(n : number, places : number) {
-        return parseFloat(n.toFixed(places));
-    }
-
     getCatModel(name, risk) {
 
 	if (this.riskProfiles[name] == undefined)
@@ -185,28 +199,62 @@ export class FairService {
 
 	let fair = this.riskProfiles[name].fair;
 
-	const lef_low = this.round(fair.lef_low * risk, 2);
-	const lef_mode = this.round(fair.lef_mode * risk, 2);
-	const lef_high = this.round(fair.lef_high * risk, 2);
-	const pl_low = fair.pl_low;
-	const pl_mode = fair.pl_mode;
-	const pl_high = fair.pl_high;
-	const sl = fair.sl;
-	    
 	let model = {
 	    "name": name,
-	    "parameters": {
-		"Loss Event Frequency": {
-		    "low": lef_low, "mode": lef_mode, "high": lef_high
-		},
-		"Primary Loss": {
-		    "low": pl_low, "mode": pl_mode, "high": pl_high
-		},
-		"Secondary Loss": {
-		    "constant": sl
-		}
-	    }
+	    "parameters": {}
 	};
+
+	if (fair.r != undefined)
+	    model.parameters["Risk"] =
+	    getFactors(fair.r, risk);
+
+	if (fair.lef != undefined)
+	    model.parameters["Loss Event Frequency"] =
+	    getFactors(fair.lef, risk);
+
+	if (fair.tef != undefined)
+	    model.parameters["Threat Event Frequency"] =
+	    getFactors(fair.tef, risk);
+
+	if (fair.c != undefined)
+	    model.parameters["Contact Frequency"] =
+	    getFactors(fair.c);
+
+	if (fair.a != undefined)
+	    model.parameters["Probability of Action"] =
+	    getFactors(fair.a, risk);
+
+	if (fair.v != undefined)
+	    model.parameters["Vulnerability"] =
+	    getFactors(fair.v);
+
+	if (fair.tc != undefined)
+	    model.parameters["Threat Capability"] =
+	    getFactors(fair.tc);
+
+	if (fair.cs != undefined)
+	    model.parameters["Control Strength"] =
+	    getFactors(fair.cs);
+
+	if (fair.lm != undefined)
+	    model.parameters["Loss Magnitude"] =
+	    getFactors(fair.lm);
+
+	if (fair.pl != undefined)
+	    model.parameters["Primary Loss"] =
+	    getFactors(fair.pl);
+
+	if (fair.sl != undefined)
+	    model.parameters["Secondary Loss"] =
+	    getFactors(fair.sl);
+
+	if (fair.slef != undefined)
+	    model.parameters["Secondary Loss Event Frequency"] =
+	    getFactors(fair.slef);
+
+	if (fair.slem != undefined)
+	    model.parameters["Secondary Loss Event Magnitude"] =
+	    getFactors(fair.slem);
 
 	return model;
 

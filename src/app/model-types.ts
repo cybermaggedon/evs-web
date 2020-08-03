@@ -15,14 +15,38 @@ import { Hierarchy } from './hierarchy';
 
 // Risk
 
+export interface Factors {
+
+    // Beta PERT
+    low : number;
+    mode : number;
+    high : number;
+
+    // Constant
+    constant : number;
+
+    // Normal distribution
+    mean : number;
+    stdev : number;
+    
+}
+
 export interface FairParameters {
-    lef_low : number;
-    lef_mode : number;
-    lef_high : number;
-    pl_low : number;
-    pl_mode : number;
-    pl_high : number;
-    sl : number;
+
+    r : Factors;        	// Risk (currency)
+      lef : Factors;	    	// Loss Event Frequency (event count)
+        tef : Factors;		// Threat Event Frequency (event count)
+          c : Factors;		// Contact (actor contact count)
+          a : Factors;		// Action (probability)
+        v : Factors;		// Vulnerability (probability)
+          tc : Factors;		// Threat Capability (relative threat score)
+          cs : Factors;		// Control Strength (relative defence score)
+      lm : Factors;		// Loss Magnitude (currency)
+        pl : Factors;		// Primary Loss (currency)
+        sl : Factors;		// Secondary Loss (currency)
+          slef : Factors;	// Secondary Loss Event Frequency (probability)
+          slem : Factors;	// Secondary Loss Event Magnitude (currency)
+
 }
 
 export interface RiskProfile {
