@@ -3,6 +3,13 @@ import { RiskService } from './risk.service';
 import { RiskModel } from './risk';
 import { Subject } from 'rxjs';
 
+function getRisk(all : Object, risk : string) :
+{ id : string, score : number} {
+    if (risk in all)
+	return { id: risk, score: all[risk] };
+    return { id: risk, score: 0 };
+}
+
 export class Threat {
     element : string;
     description : string;
@@ -76,25 +83,22 @@ export class ThreatModelService {
 		description: "email threats",
 		partition: "overview",
 		risks: [
-		    { id: "tor-exit", score: risks2["tor-exit"] },
-		    { id: "malware", score: risks2["malware"] },
-		    { id: "credential-theft", score: risks2["credential-theft"] },
+	
 		]
 	    },
 	    {
 		element: "gsuite-threat-auth",
 		description: "auth threats",
 		partition: "overview",
-		risks: [ {
-		    id: "tor-exit", score: risks2["tor-exit"]
-		} ]
+		risks: [
+		]
 	    },
 	    {
 		element: "research-threat",
 		description: "IP threats",
 		partition: "overview",
 		risks: [
-		    { id: "tor-exit", score: risks2["tor-exit"] }
+		    getRisk(risks2, "abuse-of-system-privileges")
 		]
 	    },
 	    {
@@ -102,8 +106,7 @@ export class ThreatModelService {
 		description: "IP threats",
 		partition: "overview",
 		risks: [
-		    { id: "tor-exit", score: risks2["tor-exit"] }
-	    ]
+		]
 	    },
 	    {
 		element: "office-threat",
@@ -117,7 +120,6 @@ export class ThreatModelService {
 		description: "fraud threats",
 		partition: "overview",
 		risks: [
-		    { id: "credential-theft", score: risks2["credential-theft"] },
 		]
 	    },
 	    {
@@ -125,6 +127,8 @@ export class ThreatModelService {
 		description: "integrity threats",
 		partition: "overview",
 		risks: [
+		    getRisk(risks2, "application-exploitation-via-input-manipulation"),
+		    getRisk(risks2, "capture-of-stored-data")
 		]
 	    },
 	    {
@@ -139,7 +143,7 @@ export class ThreatModelService {
 		description: "payment exploit",
 		partition: "production",
 		risks: [
-		    { id: "credential-theft", score: risks2["credential-theft"] }
+		    getRisk(risks2, "capture-of-stored-data")
 		]
 	    },
 	    {
@@ -147,7 +151,7 @@ export class ThreatModelService {
 		description: "flyte exploit",
 		partition: "production",
 		risks: [
-		    { id: "malware", score: risks2["malware"] }
+		    getRisk(risks2, "application-exploitation-via-input-manipulation")
 		]
 	    },
 	    {
@@ -155,7 +159,6 @@ export class ThreatModelService {
 		description: "accumulo exploit",
 		partition: "production",
 		risks: [
-		    { id: "credential-theft", score: risks2["credential-theft"] }
 		]
 	    }
 	];
