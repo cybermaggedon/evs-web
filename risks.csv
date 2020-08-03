@@ -1,0 +1,76 @@
+Id,Desc,Rating,Risk,LEF_low,LEF_mode,LEF_high,LOW_PL_low,LOW_PL_mode,LOW_PL_high,MED_PL_low,MED_PL_mode,MED_PL_high,HIGH_PL_low,HIGH_PL_mode,HIGH_PL_high,SL
+loss-of-property,Loss of Property,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+theft-of-property,Theft of Property,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+accidental-destruction-of-property,Accidental Destruction of Property,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+natural-destruction-of-property,Natural Destruction of Property,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+intentional-destruction-of-property,Intentional Destruction of Property,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+intentional-sabotage-of-property,Intentional Sabotage of Property,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+intentional-vandalism-of-property,Intentional Vandalism of Property,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+electrical-system-failure,Electrical System Failure,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+"heating,-ventilation,-air-conditioning-hvac-failure","Heating, Ventilation, Air Conditioning (HVAC) Failure",3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+structural-facility-failure,Structural Facility Failure,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+water-distribution-system-failure,Water Distribution System Failure,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+sanitation-system-failure,Sanitation System Failure,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+natural-gas-distribution-failure,Natural Gas Distribution Failure,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+electronic-media-failure,Electronic Media Failure,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+disruption-of-water-resources,Disruption of Water Resources,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+disruption-of-fuel-resources,Disruption of Fuel Resources,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+disruption-of-materials-resources,Disruption of Materials Resources,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+disruption-of-electrical-resources,Disruption of Electrical Resources,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+disruption-of-transportation-services,Disruption of Transportation Services,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+disruption-of-communications-services,Disruption of Communications Services,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+disruption-of-emergency-services,Disruption of Emergency Services,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+disruption-of-governmental-services,Disruption of Governmental Services,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+supplier-viability,Supplier Viability,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+supplier-supply-chain-failure,Supplier Supply Chain Failure,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+logistics-provider-failures,Logistics Provider Failures,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+logistics-route-disruptions,Logistics Route Disruptions,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+technology-services-manipulation,Technology Services Manipulation,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+personnel-labor-skills-shortage,Personnel Labor / Skills Shortage,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+loss-of-personnel-resources,Loss of Personnel Resources,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+disruption-of-personnel-resources,Disruption of Personnel Resources,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+social-engineering-of-personnel-resources,Social Engineering of Personnel Resources,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+negligent-personnel-resources,Negligent Personnel Resources,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+personnel-mistakes-errors,Personnel Mistakes / Errors,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+personnel-inaction,Personnel Inaction,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+organizational-fingerprinting-via-open-sources,Organizational Fingerprinting via Open Sources,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+system-fingerprinting-via-open-sources,System Fingerprinting via Open Sources,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+system-fingerprinting-via-scanning,System Fingerprinting via Scanning,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+system-fingerprinting-via-sniffing,System Fingerprinting via Sniffing,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+credential-discovery-via-open-sources,Credential Discovery via Open Sources,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+credential-discovery-via-scanning,Credential Discovery via Scanning,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+credential-discovery-via-sniffing,Credential Discovery via Sniffing,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+credential-discovery-via-brute-force,Credential Discovery via Brute Force,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+credential-discovery-via-cracking,Credential Discovery via Cracking,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+credential-discovery-via-guessing,Credential Discovery via Guessing,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+credential-discovery-via-pre-computational-attacks,Credential Discovery via Pre-Computational Attacks,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+misuse-of-system-credentials,Misuse of System Credentials,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+escalation-of-privilege,Escalation of Privilege,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+abuse-of-system-privileges,Abuse of System Privileges,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+memory-manipulation,Memory Manipulation,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+cache-poisoning,Cache Poisoning,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+physical-manipulation-of-technical-device,Physical Manipulation of Technical Device,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+manipulation-of-trusted-system,Manipulation of Trusted System,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+cryptanalysis,Cryptanalysis,1,0.32,0.5,1,2,165000,175000,185000,275000,285000,295000,385000,405000,425000,51000
+data-leakage-theft,Data Leakage / Theft,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+denial-of-service,Denial of Service,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+maintaining-system-persistence,Maintaining System Persistence,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+manipulation-of-data-in-transit-use,Manipulation of Data in Transit / Use,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+capture-of-data-in-transit-use-via-sniffing,Capture of Data in Transit / Use via Sniffing,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+capture-of-data-in-transit-use-via-debugging,Capture of Data in Transit / Use via Debugging,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+capture-of-data-in-transit-use-via-keystroke-logging,Capture of Data in Transit / Use via Keystroke Logging,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+replay-of-data-in-transit-use,Replay of Data in Transit / Use,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+misdelivery-of-data,Misdelivery of Data,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+capture-of-stored-data,Capture of Stored Data,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+manipulation-of-stored-data,Manipulation of Stored Data,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-input-manipulation,Application Exploitation via Input Manipulation,5,0.8,0.5,1,2,525000,775000,1025000,875000,1125000,1375000,1225000,1725000,2225000,55000
+application-exploitation-via-parameter-injection,Application Exploitation via Parameter Injection,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+application-exploitation-via-code-injection,Application Exploitation via Code Injection,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+application-exploitation-via-command-injection,Application Exploitation via Command Injection,4,0.68,0.5,1,2,390000,550000,710000,650000,810000,970000,910000,1230000,1550000,54000
+application-exploitation-via-path-traversal,Application Exploitation via Path Traversal,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-api-abuse,Application Exploitation via API Abuse,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-fuzzing,Application Exploitation via Fuzzing,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-reverse-engineering,Application Exploitation via Reverse Engineering,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-resource-location-guessing,Application Exploitation via Resource Location Guessing,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000
+application-exploitation-via-source-code-manipulation,Application Exploitation via Source Code Manipulation,3,0.56,0.5,1,2,285000,375000,465000,475000,565000,655000,665000,845000,1025000,53000
+application-exploitation-via-authentication-bypass,Application Exploitation via Authentication Bypass,2,0.44,0.5,1,2,210000,250000,290000,350000,390000,430000,490000,570000,650000,52000

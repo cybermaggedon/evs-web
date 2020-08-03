@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+import csv
+import json
+
+risks = []
+
+with open("risks.csv") as csvfile:
+     reader = csv.DictReader(csvfile)
+
+     for row in reader:
+     
+          profiles = [
+               {
+                    "kind": "folder",
+                    "name": "Baseline",
+                    "entries": [
+                         {
+                              "kind": "entry",
+                              "name": "Low",
+                              "default": True,
+                              "value": {
+                                   "id": row["Id"] + "-low",
+                                   "risk": row["Risk"],
+			           "fair": {
+                                        "lef": {
+				             "low": float(row["LEF_low"]),
+				             "mode": float(row["LEF_mode"]),
+				             "high": float(row["LEF_high"]),
+                                        },
+                                        "pl": {
+				             "low": int(row["LOW_PL_low"]),
+                                             "mode": int(row["LOW_PL_mode"]),
+                                             "high": int(row["LOW_PL_high"])
+				        },
+				        "sl": {
+				             "constant": int(row["SL"])
+				        }
+                                   }
+                              }
+                         },
+                         {
+                              "kind": "entry",
+                              "name": "Medium",
+                              "value": {
+                                   "id": row["Id"] + "-med",
+                                   "risk": row["Risk"],
+			           "fair": {
+                                        "lef": {
+				             "low": float(row["LEF_low"]),
+				             "mode": float(row["LEF_mode"]),
+				             "high": float(row["LEF_high"]),
+                                        },
+                                        "pl": {
+				             "low": int(row["MED_PL_low"]),
+                                             "mode": int(row["MED_PL_mode"]),
+                                             "high": int(row["MED_PL_high"])
+				        },
+				        "sl": {
+				             "constant": int(row["SL"])
+				        }
+                                   }
+                              }
+                         },
+                         {
+                              "kind": "entry",
+                              "name": "Low",
+                              "default": True,
+                              "value": {
+                                   "id": row["Id"] + "-high",
+                                   "risk": row["Risk"],
+			           "fair": {
+                                        "lef": {
+				             "low": float(row["LEF_low"]),
+				             "mode": float(row["LEF_mode"]),
+				             "high": float(row["LEF_high"]),
+                                        },
+                                        "pl": {
+				             "low": int(row["HIGH_PL_low"]),
+                                             "mode": int(row["HIGH_PL_mode"]),
+                                             "high": int(row["HIGH_PL_high"])
+				        },
+				        "sl": {
+				             "constant": int(row["SL"])
+				        }
+                                   }
+                              }
+                         }
+                    ]
+               }
+          ]
+
+          risk = {
+               "id": row["Id"],
+               "name": row["Desc"],
+               "profiles": profiles
+          }
+
+          risks.append(risk)
+
+print(json.dumps(risks, indent=4))
+
