@@ -25,51 +25,82 @@
     </span>
   </td>
 
-  <td class="fair">
+<td class="fair">
+
     <ng-container *ngIf="final != undefined">
-      <div *ngFor="let factor of factors">
-	<span class="factor">{{factor.key.toUpperCase()}}</span>:
-	<span class="value">{{factor.value}}</span>
+
+      <div *ngIf="final.fair.r">
+	<span class="factor">R</span>:
+	<span class="value">
+	  <span *ngIf="final.fair.r.low">
+	    {{final.fair.r.low}} &lt;
+	    {{final.fair.r.mode}} &lt;
+	    {{final.fair.r.high}}
+	  </span>
+	  <span *ngIf="final.fair.r.mean">
+	    μ={{final.fair.r.mean}}
+	    σ={{final.fair.r.stdev}}
+	  </span>
+	  <span *ngIf="final.fair.r.constant">
+	    {{final.fair.r.constant}}
+	  </span>
+	</span>
       </div>
+
+      <div *ngIf="final.fair.lef">
+	<span class="factor">LEF</span>:
+	<span class="value">
+	  <span *ngIf="final.fair.lef.low">
+	    {{final.fair.lef.low}} &lt;
+	    {{final.fair.lef.mode}} &lt;
+	    {{final.fair.lef.high}}
+	  </span>
+	  <span *ngIf="final.fair.lef.mean">
+	    μ={{final.fair.lef.mean}}
+	    σ={{final.fair.lef.stdev}}
+	  </span>
+	  <span *ngIf="final.fair.lef.constant">
+	    {{final.fair.lef.constant}}
+	  </span>
+	</span>
+      </div>
+
+      <div *ngIf="final.fair.pl">
+	<span class="factor">PL</span>:
+	<span class="value">
+	  <span *ngIf="final.fair.pl.low">
+	    {{final.fair.pl.low | currency:'':'symbol':'1.0-0'}} &lt;
+	    {{final.fair.pl.mode | currency:'':'symbol':'1.0-0'}} &lt;
+	    {{final.fair.pl.high | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	  <span *ngIf="final.fair.pl.mean">
+	    μ={{final.fair.pl.mean | currency:'':'symbol':'1.0-0'}}
+	    σ={{final.fair.pl.stdev | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	  <span *ngIf="final.fair.pl.constant">
+	    {{final.fair.pl.constant | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	</span>
+      </div>
+
+      <div *ngIf="final.fair.sl">
+	<span class="factor">SL</span>:
+	<span class="value">
+	  <span *ngIf="final.fair.sl.low">
+	    {{final.fair.sl.low | currency:'':'symbol':'1.0-0'}} &lt;
+	    {{final.fair.sl.mode | currency:'':'symbol':'1.0-0'}} &lt;
+	    {{final.fair.sl.high | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	  <span *ngIf="final.fair.sl.mean">
+	    μ={{final.fair.sl.mean | currency:'':'symbol':'1.0-0'}}
+	    σ={{final.fair.sl.stdev | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	  <span *ngIf="final.fair.sl.constant">
+	    {{final.fair.sl.constant | currency:'':'symbol':'1.0-0'}}
+	  </span>
+	</span>
+      </div>
+
     </ng-container>
+    
   </td>
-
-<!--
-  <td class="fair lef">
-    <span *ngIf="final != undefined">
-      {{final.fair.lef_mode}}
-    </span>
-  </td>
-
-  <td class="fair lef">
-    <span *ngIf="final != undefined">
-      {{final.fair.lef_high}}
-    </span>
-  </td>
-
-  <td class="fair pl">
-    <span *ngIf="final != undefined">
-      {{final.fair.pl_low | currency:'':'symbol':'1.0-0' }}
-    </span>
-  </td>
-
-  <td class="fair pl">
-    <span *ngIf="final != undefined">
-      {{final.fair.pl_mode | currency:'':'symbol':'1.0-0'}}
-    </span>
-  </td>
-
-  <td class="fair pl">
-    <span *ngIf="final != undefined">
-      {{final.fair.pl_high | currency:'':'symbol':'1.0-0'}}
-    </span>
-  </td>
-
-  <td class="fair sl">
-    <span *ngIf="final != undefined">
-      {{final.fair.sl | currency:'':'symbol':'1.0-0'}}
-    </span>
-  </td>
-
--->
-
