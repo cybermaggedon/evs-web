@@ -1,35 +1,10 @@
 
-.risk {
+table {
+    margin-top: 30px;
+    border-collapse: collapse;
 }
 
-td {
-    padding: 8px;
+tr td th {
     border: 1px solid #e0e0e0;
-}
-
-.riskname {
-}
-
-.selector {
-}
-
-.probability {
-    width: 4em;
-    text-align: center;
-}
-
-.fair.lef {
-    width: 3em;
-    text-align: center;
-}
-
-.fair.pl {
-    width: 4em;
-    text-align: center;
-}
-
-.fair.sl {
-    width: 4em;
-    text-align: center;
 }
 

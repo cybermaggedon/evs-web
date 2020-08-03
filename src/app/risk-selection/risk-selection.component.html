@@ -1,0 +1,74 @@
+
+<td class="riskname">
+   {{name}}
+</td>
+
+  <td class="selector">
+    <mat-form-field appearance="fill">
+      <mat-label>
+	<span *ngIf="modelDefault == undefined">Select risk profile</span>
+	<span *ngIf="modelDefault != undefined">Default: {{modelDefault}}</span>
+      </mat-label>
+      <mat-select [(value)]="selected"
+		  (selectionChange)="onChange()">
+	<mat-option [value]="undefined"><i>model default</i></mat-option>
+	<mat-option *ngFor="let item of items" [value]="item.value.id">
+	  {{item.name}}
+	</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </td>
+
+  <td class="probability">
+    <span *ngIf="final != undefined">
+      {{final.risk}}
+    </span>
+  </td>
+
+  <td class="fair">
+    <span *ngIf="final != undefined">
+      <span *ngFor="let factor of factors">
+	{{factor.key}}={{factor.value}}
+      </span>
+    </span>
+  </td>
+
+<!--
+  <td class="fair lef">
+    <span *ngIf="final != undefined">
+      {{final.fair.lef_mode}}
+    </span>
+  </td>
+
+  <td class="fair lef">
+    <span *ngIf="final != undefined">
+      {{final.fair.lef_high}}
+    </span>
+  </td>
+
+  <td class="fair pl">
+    <span *ngIf="final != undefined">
+      {{final.fair.pl_low | currency:'':'symbol':'1.0-0' }}
+    </span>
+  </td>
+
+  <td class="fair pl">
+    <span *ngIf="final != undefined">
+      {{final.fair.pl_mode | currency:'':'symbol':'1.0-0'}}
+    </span>
+  </td>
+
+  <td class="fair pl">
+    <span *ngIf="final != undefined">
+      {{final.fair.pl_high | currency:'':'symbol':'1.0-0'}}
+    </span>
+  </td>
+
+  <td class="fair sl">
+    <span *ngIf="final != undefined">
+      {{final.fair.sl | currency:'':'symbol':'1.0-0'}}
+    </span>
+  </td>
+
+-->
+
