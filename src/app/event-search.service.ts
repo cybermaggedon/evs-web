@@ -1,109 +1,73 @@
 
 // Service provides access to forensic events on ElasticSearch.
 import { Injectable } from '@angular/core';
-import { SearchTerms } from './event-search-terms.service';
-import { Observable } from 'rxjs';
+import { CollectionViewer, DataSource } from "@angular/cdk/collections";
+
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Window } from './window.service';
+
+import { WindowService, Window } from './window.service';
 import { ElasticSearchService } from './elasticsearch.service';
-
-// This isn't used. FIXME:
-export class Filter {
-    fixme: string;
-};
-
-// Page information, partially used since we're not paging properly.
-export class Page {
-    from : number;
-    to : number;
-    size : number;
-    data : Object[];
-    total : number;
-    pageNum : number;
-    numPages : number;
-};
+import { flattenESEvent, parseESResults, Event, Page } from './event-decode';
+import {
+    EventSearchTermsService, SearchTerms
+} from './event-search-terms.service';
 
 // ElasticSearch service
 @Injectable({
     providedIn: 'root'
 })
-export class EventSearchService {
+export class EventSearchService implements DataSource<Event> {
 
-    constructor(private esSvc : ElasticSearchService) { }
+    private subject = new BehaviorSubject<any[]>([]);
+    public loading = new BehaviorSubject<boolean>(false);
+
+    terms : SearchTerms;
+    window : Window;
+
+    constructor(private esSvc : ElasticSearchService,
+		private searchTermsSvc : EventSearchTermsService,
+		private windowSvc : WindowService) {
+
+	this.searchTermsSvc.subscribe(st => {
+	    this.terms = st;
+	    this.search();
+	});
+
+	this.windowSvc.subscribe(w => {
+	    this.window = w;
+	    this.search();
+	});
+
+    }
 
     // Hard-coded ES index name.
     index = "cyberprobe";
 
-    flatten(data) : any {
-
-        var result = {};
-
-	function recurse (cur, prop) {
-	    if (Object(cur) !== cur) {
-		result[prop] = cur;
-	    } else if (Array.isArray(cur)) {
-                result[prop] = cur.join(",");
-	    } else {
-		var isEmpty = true;
-		for (var p in cur) {
-		    isEmpty = false;
-		    recurse(cur[p], prop ? prop + "." + p : p);
-		}
-		if (isEmpty && prop)
-		    result[prop] = {};
-	    }
-	}
-
-	recurse(data, "");
-
-	return result;
-
+    connect(collectionViewer: CollectionViewer): Observable<any[]> {
+	return this.subject;
     }
 
-    // Parse a ES result _source document.
-
-    parseSource(r : any) {
-
-        // Map all _source fields across.
-	let rtn = this.flatten(r);
-	rtn["time"] = new Date(rtn["time"]);
-	return rtn;
-	
+    disconnect(collectionViewer: CollectionViewer): void {
+        this.subject.complete();
+        this.loading.complete();
     }
-
-    // Parse ES search results.
-    parseResults(r : any, from : number, size : number) : Page {
-
-	let d = [];
-
-	if ("hits" in r) {
-	    let res : Object[] = r["hits"]["hits"];
-	    for (let r of res) {
-		d.push(this.parseSource(r["_source"]));
-	    }
-	}
-	
-	return {
-	    from: from, size: size, to: from + size,
-	    total: r.hits.total.value,
-	    pageNum: Math.ceil(from / size),
-	    numPages: Math.ceil(r.hits.total.value / size),
-	    data: d
-	};
-    };
 
     // Initiate an ES search.
-    search(terms : SearchTerms, window : Window,
-	   sort : string, sortAsc : boolean, 
-	   from : number, size : number) : Observable<Page>
-    {
+    search() {
 
-	if (terms.terms.length == 0) return;
+	let sort = "time";
+	let sortAsc = true;
+	let from = 0;
+	let size = 10;
+	
+	console.log("QUERY");
 
-        const start = `now-${window.value}h`;
+	if (this.terms == undefined) return;
+	if (this.terms.terms.length == 0) return;
 
-	// FIXME: Filters not used.
-
+        const start = `now-${this.window.value}h`;
+	
         // Produce ElasticSearch query
 	const qry = {
 	    query: {
@@ -111,7 +75,7 @@ export class EventSearchService {
 		    must: [
 			{
 			    multi_match: {
-				query: terms.terms[0].value
+				query: this.terms.terms[0].value
 			    }
 			},
 			{
@@ -130,10 +94,14 @@ export class EventSearchService {
 		{ [sort]: { order: (sortAsc ? "asc" : "desc") } }
 	    ]
 	};
-
+	
         // Submit query, pipe through results parser.
 	return this.esSvc.post(this.index + "/_search", qry).
-            pipe(map(r => this.parseResults(r, from, size)));
+            pipe(map(r => parseESResults(r, from, size))).
+	    subscribe(r => {
+		console.log("RESULTS ", r.data);
+		this.subject.next(r.data);
+	    });
 
     };
 

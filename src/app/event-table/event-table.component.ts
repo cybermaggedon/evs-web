@@ -1,5 +1,5 @@
 import {
-    Component, OnInit, Input, Output, EventEmitter, ViewChild
+    Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
@@ -7,7 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
-import { EventSearchService, Page } from '../event-search.service';
+import { Page } from '../event-decode';
+import { EventSearchService } from '../event-search.service';
 import { WindowService, Window } from '../window.service';
 
 /*
@@ -22,42 +23,12 @@ export class Page {
 };
 */
 
-export class EventDataSource implements DataSource<any> {
-
-    private subject = new BehaviorSubject<any[]>([]);
-    private loadingSubject = new BehaviorSubject<boolean>(false);
-
-    constructor(private searchSvc : EventSearchService) {
-    }
-
-    connect(collectionViewer: CollectionViewer): Observable<any[]> {
-	return this.subject;
-    }
-
-    disconnect(collectionViewer: CollectionViewer): void {
-        this.subject.complete();
-        this.loadingSubject.complete();
-    }
-  
-    load(terms : SearchTerms, window : Window,
-         sortDirection: string, pageIndex: number, pageSize: number) {
-        this.loadingSubject.next(true);
-
-	let obs = this.searchSvc.search(terms, window,
-					'time', false,
-					pageIndex, pageSize).
-	    subscribe(p => this.subject.next(p.data));
-
-    }
-
-}
-
 @Component({
     selector: 'event-table',
     templateUrl: './event-table.component.html',
     styleUrls: ['./event-table.component.css']
 })
-export class EventTableComponent implements OnInit {
+export class EventTableComponent implements OnInit, AfterViewInit {
 
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
@@ -79,28 +50,48 @@ export class EventTableComponent implements OnInit {
     window : Window;
 //    loading : boolean;
 
-    dataSource : EventDataSource;
+    dataSource : EventSearchService;
+    
     ngOnInit(): void {
 
+	console.log("BUNCHYYYYY");
+
 	//FIXME:
-//	this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 	
 	this.searchTermsSvc.subscribe(s => {
+	    console.log("TERMS", s);
 	    this.terms = s;
 	    this.pageNum = 0;
 	    this.updateTable();
 	});
 
 	this.windowService.subscribe(w => {
+	    console.log("WINDOW", w);
 	    this.window = w;
 	    this.updateTable();
 	});
 
-	this.dataSource = new EventDataSource(this.searchSvc);
-	this.dataSource.load(
+	console.log("BUNCHY");
+	this.dataSource = this.searchSvc;
+	this.dataSource.search();
+/*	this.dataSource.load();
 	    new SearchTerms([{ field: undefined, value: 'mark-vm' }]),
 	    this.window,
-	    'asc', 0, 10);
+	    'asc', 0, 10);*/
+
+    }
+
+    ngAfterViewInit() {
+
+	this.sort.sortChange.subscribe(e => {
+	    console.log("DIFFERENT SORT");
+	    console.log(e);
+	    this.paginator.pageIndex = 0;
+	});
+
+	this.paginator.page.subscribe(e => {
+	    console.log(e);
+	});
 
     }
 
@@ -139,11 +130,9 @@ export class EventTableComponent implements OnInit {
 	if (this.terms == undefined) return;
 	if (this.window == undefined) return;
 
-	let obs = this.searchSvc.search(this.terms, this.window,
-					this.sortField, this.sortAsc,
-					0, 10);
+	 this.searchSvc.search();
 
-	obs.subscribe(r => {
+//	obs.subscribe(r => {
 //	    this.dataSource = r.data;
 //	    this.page = r;
 
@@ -158,7 +147,7 @@ export class EventTableComponent implements OnInit {
 		this.updateTable();
 	    }
 */
-	});
+//	});
 
     }
 

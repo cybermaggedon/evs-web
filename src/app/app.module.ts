@@ -89,6 +89,7 @@ import { EventViewComponent } from './event-view/event-view.component';
 	MatButtonModule,
 	MatSelectModule,
 	MatFormFieldModule,
+	MatSortModule,
         MatExpansionModule,
 	MatPaginatorModule,
 	MatChipsModule,

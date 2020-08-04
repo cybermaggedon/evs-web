@@ -2,10 +2,10 @@
 <mat-table
   class="mat-elevation-z8"
   [dataSource]="dataSource"
-  matSort matSortActive="time" matSortDirection="asc">
+  matSort matSortActive="time" matSortDirection="asc" matSortDisableClear>
 
   <ng-container matColumnDef="time">
-    <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row['time']}}</mat-cell>
   </ng-container>
 
