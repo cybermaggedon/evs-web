@@ -47,7 +47,7 @@ export class EventSearchService {
 		var isEmpty = true;
 		for (var p in cur) {
 		    isEmpty = false;
-		    recurse(cur[p], prop ? prop + "-" + p : p);
+		    recurse(cur[p], prop ? prop + "." + p : p);
 		}
 		if (isEmpty && prop)
 		    result[prop] = {};
@@ -67,7 +67,6 @@ export class EventSearchService {
         // Map all _source fields across.
 	let rtn = this.flatten(r);
 	rtn["time"] = new Date(rtn["time"]);
-	console.log(rtn);
 	return rtn;
 	
     }
@@ -75,12 +74,12 @@ export class EventSearchService {
     // Parse ES search results.
     parseResults(r : any, from : number, size : number) : Page {
 
-	let e = [];
+	let d = [];
 
 	if ("hits" in r) {
 	    let res : Object[] = r["hits"]["hits"];
 	    for (let r of res) {
-		e.push(this.parseSource(r["_source"]));
+		d.push(this.parseSource(r["_source"]));
 	    }
 	}
 	
@@ -89,13 +88,13 @@ export class EventSearchService {
 	    total: r.hits.total.value,
 	    pageNum: Math.ceil(from / size),
 	    numPages: Math.ceil(r.hits.total.value / size),
-	    data: e
+	    data: d
 	};
     };
 
     // Initiate an ES search.
     search(terms : SearchTerms, window : Window,
-	   sort : string, sortAsc : boolean, filters : Filter[],
+	   sort : string, sortAsc : boolean, 
 	   from : number, size : number) : Observable<Page>
     {
 
@@ -127,9 +126,6 @@ export class EventSearchService {
 		}
 	    },
 	    from: from, size: size,
-//	    _source: [
-//		"src.ipv4,src.tcp,src.udp,dest.ipv4,device,network,time,action"
-//	    ],
 	    sort: [
 		{ [sort]: { order: (sortAsc ? "asc" : "desc") } }
 	    ]

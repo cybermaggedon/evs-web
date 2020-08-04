@@ -1,13 +1,27 @@
 
-<ngx-datatable class="material table"
-	       [rows]="data.data"
-	       [columns]="columns"
-	       [columnMode]="ColumnMode.force"
-	       [headerHeight]="40"
-	       [footerHeight]="40"
-	       rowHeight="3em"
-	       [loadingIndicator]="loading"
-	       [limit]="10"
-	       (page)="setPage($event)">
-</ngx-datatable>
+<mat-table
+  class="mat-elevation-z8"
+  [dataSource]="dataSource"
+  matSort matSortActive="time" matSortDirection="asc">
+
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['time']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['action']}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"
+	   (click)="onRowClicked(row)">
+  </mat-row>
+
+</mat-table>
+
+<mat-paginator [length]="page.total" [pageSize]="pageSize">
+</mat-paginator>
 

@@ -17,7 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -80,6 +82,7 @@ import { EventViewComponent } from './event-view/event-view.component';
 	ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+	MatInputModule,
         MatSliderModule,
         MatTabsModule,
 	MatMenuModule,
@@ -90,7 +93,7 @@ import { EventViewComponent } from './event-view/event-view.component';
 	MatPaginatorModule,
 	MatChipsModule,
 	MatIconModule,
-        NgxDatatableModule,
+        MatTableModule,
 	ChartsModule
     ],
     providers: [
