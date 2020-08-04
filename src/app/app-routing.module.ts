@@ -10,6 +10,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { RiskDashboardComponent } from './risk-dashboard/risk-dashboard.component';
 import { ModelConfigurationComponent } from './model-configuration/model-configuration.component';
 import { ThreatModelComponent } from './threat-model/threat-model.component';
+import { EventViewComponent } from './event-view/event-view.component';
 
 // This table maps URLs to views.
 const routes : Routes = [
@@ -31,6 +32,9 @@ const routes : Routes = [
 
     // Threat detail view
     { path: 'threat-model/:view', component: ThreatModelComponent },
+
+    // Threat detail view
+    { path: 'event-view', component: EventViewComponent },
 
     // Category detail view
     { path: 'category/:id', component: CategoryDetailComponent },

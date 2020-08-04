@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EventSearchService, SearchTerms } from '../event-search.service';
+import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
 import { ElasticSearchService, Filter, Page } from '../elasticsearch.service';
 import { WindowService, Window } from '../window.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
@@ -21,7 +21,7 @@ export interface Event {
 })
 export class EventTableComponent implements OnInit {
 
-    constructor(private eventSearch : EventSearchService,
+    constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
 		private es : ElasticSearchService) {
 	this.pageSize = 8;
@@ -41,7 +41,7 @@ export class EventTableComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.eventSearch.subscribe(s => {
+	this.searchTermsSvc.subscribe(s => {
 	    this.terms = s;
 	    this.pageNum = 0;
 	    this.updateTable();

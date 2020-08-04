@@ -4,7 +4,7 @@ import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
-import { EventSearchService, SearchTerms } from '../event-search.service';
+import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
 import { age } from '../age';
 
 @Component({
@@ -18,7 +18,7 @@ export class ThreatDetailComponent implements OnInit {
 		private location: Location,
  		private threatSvc : ThreatService,
 		private windowService : WindowService,
-		private eventSearch : EventSearchService) {
+		private searchTermsSvc : EventSearchTermsService) {
     }
 
     // Current threat identifier
@@ -107,7 +107,9 @@ export class ThreatDetailComponent implements OnInit {
 
 		this.id = res.id;
 		this.fetchThreats();
-		this.eventSearch.update(new SearchTerms(this.id));
+		this.searchTermsSvc.update(new SearchTerms([
+		    { field: undefined, value: this.id }
+		]));
             }
 	})
 

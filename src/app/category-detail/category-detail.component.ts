@@ -3,7 +3,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
-import { EventSearchService, SearchTerms } from '../event-search.service';
+import {
+    EventSearchTermsService, SearchTerms
+} from '../event-search-terms.service';
 import { age } from '../age';
 
 @Component({
@@ -16,7 +18,7 @@ export class CategoryDetailComponent implements OnInit {
     constructor(private route : ActivatedRoute,
 		private location : Location,
  		private riskSvc : RiskService,
-		private eventSearch : EventSearchService) {
+		private searchTermsSvc : EventSearchTermsService) {
     }
 
     // Current threat identifier
@@ -88,7 +90,9 @@ export class CategoryDetailComponent implements OnInit {
   	this.route.params.subscribe(res => {
 	    this.id = res.id;
 	    this.update();
-            this.eventSearch.update(new SearchTerms(this.id));
+            this.searchTermsSvc.update(new SearchTerms([
+		{ field: undefined, value: this.id }
+	    ]));
 	})
 
     }

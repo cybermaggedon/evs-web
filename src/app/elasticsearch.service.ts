@@ -2,7 +2,7 @@
 // Service provides access to forensic events on ElasticSearch.
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SearchTerms } from './event-search.service';
+import { SearchTerms } from './event-search-terms.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Window } from './window.service';
@@ -99,6 +99,8 @@ export class ElasticSearchService {
 	   from : number, size : number) : Observable<Page>
     {
 
+	if (terms.terms.length == 0) return;
+
         const start = `now-${window.value}h`;
 
 	// FIXME: Filters not used.
@@ -110,7 +112,7 @@ export class ElasticSearchService {
 		    must: [
 			{
 			    multi_match: {
-				query: terms.id
+				query: terms.terms[0].value
 			    }
 			},
 			{
