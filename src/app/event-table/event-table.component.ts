@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
-import { Page } from '../event-decode';
+import { Event, EventPage } from '../event-decode';
 import { EventSearchService } from '../event-search.service';
 import { WindowService, Window } from '../window.service';
 
@@ -30,6 +30,8 @@ export class Page {
 })
 export class EventTableComponent implements OnInit, AfterViewInit {
 
+    total = 0;
+
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
 		private searchSvc : EventSearchService) {
@@ -37,9 +39,13 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	this.pageNum = 0;
 	this.sortField = "time";
 	this.sortAsc = false;
-	this.pageSize = 8;
-	this.page = new Page();
-	this.page.data = [];
+	this.pageSize = 10;
+	this.page = {
+	    from: 0,
+	    to: 0,
+	    total: 0,
+	    events: []
+	};
 //	this.loading = false;
     }
 
@@ -91,11 +97,17 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
 	this.paginator.page.subscribe(e => {
 	    console.log(e);
+	    this.pageNum = e.pageIndex;
+	    this.dataSource.setPageNum(this.pageNum);
+	});
+
+	this.dataSource.total.subscribe(total => {
+	    this.total = total;
 	});
 
     }
 
-    page : Page;
+    page : EventPage;
     pageSize : number;
     pageNum : number;
     sortField : string;
@@ -156,7 +168,6 @@ export class EventTableComponent implements OnInit, AfterViewInit {
     }
 
     setPage(pageInfo) {
-	this.pageNum = pageInfo.offset;
 //	this.updateTable();
     }
 

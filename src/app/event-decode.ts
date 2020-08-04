@@ -1,17 +1,21 @@
 
-// Page information, partially used since we're not paging properly.
-export class Page {
-    from : number;
-    to : number;
-    size : number;
-    data : Object[];
-    total : number;
-    pageNum : number;
-    numPages : number;
+export interface Event {
+    [field : string] : string;
 };
 
-export class Event {
-    [field : string] : string;
+// Page information, partially used since we're not paging properly.
+export interface EventPage {
+
+    from : number;
+    to : number;
+
+//    size : number;
+
+    events : Event[];
+
+    total : number;
+//    pageNum : number;
+//    numPages : number;
 };
 
 export function flattenESEvent(data) : Event {
@@ -41,7 +45,7 @@ export function flattenESEvent(data) : Event {
 }
   
 // Parse a ES result _source document.
-export function parseESSource(r : any) {
+export function parseESSource(r : any) : Event {
 
     // Map all _source fields across.
     let rtn = flattenESEvent(r);
@@ -51,7 +55,9 @@ export function parseESSource(r : any) {
 }
 
     // Parse ES search results.
-export function parseESResults(r : any, from : number, size : number) : Page {
+export function parseESResults(
+    r : any, from : number, size : number
+) : EventPage {
 
     let d = [];
 
@@ -63,10 +69,12 @@ export function parseESResults(r : any, from : number, size : number) : Page {
     }
 	
     return {
-	from: from, size: size, to: from + size,
+	from: from,
+//	size: size,
+	to: from + size,
 	total: r.hits.total.value,
-	pageNum: Math.ceil(from / size),
-	numPages: Math.ceil(r.hits.total.value / size),
-	data: d
+//	pageNum: Math.ceil(from / size),
+//	numPages: Math.ceil(r.hits.total.value / size),
+	events: d
     };
 };

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 import { WindowService, Window } from './window.service';
 import { ElasticSearchService } from './elasticsearch.service';
-import { flattenESEvent, parseESResults, Event, Page } from './event-decode';
+import { flattenESEvent, parseESResults, Event, EventPage } from './event-decode';
 import {
     EventSearchTermsService, SearchTerms
 } from './event-search-terms.service';
@@ -19,11 +19,15 @@ import {
 })
 export class EventSearchService implements DataSource<Event> {
 
-    private subject = new BehaviorSubject<any[]>([]);
+    private subject = new BehaviorSubject<Event[]>([]);
     public loading = new BehaviorSubject<boolean>(false);
-
+    public total = new BehaviorSubject<number>(0);
+    
     terms : SearchTerms;
     window : Window;
+
+    pageNum = 0;
+    pageSize = 10;
 
     constructor(private esSvc : ElasticSearchService,
 		private searchTermsSvc : EventSearchTermsService,
@@ -58,10 +62,10 @@ export class EventSearchService implements DataSource<Event> {
 
 	let sort = "time";
 	let sortAsc = true;
-	let from = 0;
-	let size = 10;
+	let from = this.pageNum * this.pageSize;
+	let size = this.pageSize;
 	
-	console.log("QUERY");
+	
 
 	if (this.terms == undefined) return;
 	if (this.terms.terms.length == 0) return;
@@ -94,16 +98,30 @@ export class EventSearchService implements DataSource<Event> {
 		{ [sort]: { order: (sortAsc ? "asc" : "desc") } }
 	    ]
 	};
+
+	console.log("QUERY", qry);
 	
         // Submit query, pipe through results parser.
 	return this.esSvc.post(this.index + "/_search", qry).
             pipe(map(r => parseESResults(r, from, size))).
 	    subscribe(r => {
-		console.log("RESULTS ", r.data);
-		this.subject.next(r.data);
+		console.log("RESULTS ", r.events);
+		this.subject.next(r.events);
+		this.total.next(r.total);
 	    });
 
     };
+
+    setPageSize(n : number) {
+	this.pageSize = n;
+	this.search();
+    }
+
+    setPageNum(n : number) {
+	this.pageNum = n;
+	console.log("SAERCHING, pagenum is ", this.pageNum);
+	this.search();
+    }
 
 }
 
