@@ -296,6 +296,17 @@ export class FairService {
 	    models.push(this.getCatModel(k, cats[k]));
 	}
 
+	if (models.length == 0) {
+	    return {
+		"name": "All risks",
+		"parameters": {
+		    "Risk": {
+			"constant": 0
+		    }
+		}
+	    }
+	};
+
 	return {
 	    "name": "All risks",
 	    "parameters": models
@@ -304,6 +315,17 @@ export class FairService {
     }
 
     getMetaModel(assets, name) {
+
+	if (assets.length == 0) {
+	    return {
+		"name": name,
+		"parameters": {
+		    "Risk": {
+			"constant": 0
+		    }
+		}
+	    }
+	};
 
 	let models = [];
 
