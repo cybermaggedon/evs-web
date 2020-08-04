@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
-import { ElasticSearchService, Filter, Page } from '../elasticsearch.service';
+import { EventSearchService, Filter, Page } from '../event-search.service';
 import { WindowService, Window } from '../window.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 
@@ -23,7 +23,7 @@ export class EventTableComponent implements OnInit {
 
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
-		private es : ElasticSearchService) {
+		private searchSvc : EventSearchService) {
 	this.pageSize = 8;
 	this.pageNum = 0;
 	this.sortField = "time";
@@ -60,12 +60,14 @@ export class EventTableComponent implements OnInit {
     sortAsc : boolean;
 
     columns = [
-	{name: "time", minWidth: "200"},
+	{name: "time", minWidth: "210"},
 	{name: "device"},
 	{name: "network"},
 	{name: "action"},
-	{name: "src"},
-	{name: "dest"},
+	{name: "src-ipv4"},
+	{name: "src-ipv6"},
+	{name: "dest-ipv4"},
+	{name: "dest-ipv6"},
 	{name: "protocol"}
     ];
 
@@ -86,9 +88,9 @@ export class EventTableComponent implements OnInit {
 
 //	this.loading = true;
 
-	let obs = this.es.search(this.terms, this.window,
-				 this.sortField, this.sortAsc,
-				 fixmes, 0, this.maxEvents);
+	let obs = this.searchSvc.search(this.terms, this.window,
+					this.sortField, this.sortAsc,
+					fixmes, 0, this.maxEvents);
 
 	obs.subscribe(r => {
 	    this.data = r;
