@@ -95,7 +95,7 @@ export class CategoryDetailComponent implements OnInit {
 	    this.id = res.id;
 	    this.update();
             this.searchTermsSvc.update(new SearchTerms([
-		{ field: undefined, value: this.id }
+		{ field: "indicators.category", value: this.id }
 	    ]));
 	})
 
