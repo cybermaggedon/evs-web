@@ -45,9 +45,6 @@ export class EventTableComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
 
 	this.sort.sortChange.subscribe(e => {
-	    // FIXME: NOT IMPLEMENTED
-	    console.log("DIFFERENT SORT");
-	    console.log(e);
 	    this.paginator.pageIndex = 0;
 	    this.eventSvc.setSort(e.active, e.direction);
 	});
@@ -88,7 +85,6 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	for(let field in row) {
 	    this.row.push({field: field, value: row[field]});
 	}
-	console.log(this.row);
     }
 
 }

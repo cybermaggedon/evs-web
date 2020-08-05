@@ -118,7 +118,7 @@ export class EventSourceService implements DataSource<Event> {
 	return this.esSvc.post(this.index + "/_search", qry).
             pipe(map(r => parseESResults(r, from, size))).
 	    subscribe(r => {
-		console.log(r);
+		console.log("RESULT", r);
 		this.subject.next(r.events);
 		this.total.next(r.total);
 	    });

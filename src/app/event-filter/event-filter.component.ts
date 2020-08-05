@@ -24,6 +24,10 @@ export class EventFilterComponent implements OnInit {
     ngOnInit() : void {
 	this.termsSvc.subscribe((st : SearchTerms) => {
 
+	    console.log("HEARD NEW TERMS: ", st);
+
+	    console.log("OLD ", this.terms);
+
 	    if (st == this.terms) return;
 
 	    console.log("TERMS UPDATED: ", st);

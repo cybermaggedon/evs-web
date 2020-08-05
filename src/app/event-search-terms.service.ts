@@ -30,12 +30,30 @@ export class EventSearchTermsService {
     }
 
     // Keep a last value to be pushed out to new subscribers.
-    lastValue : Object;
+    lastValue : SearchTerms;
 
     // Accept a new search term update.
     update(terms : SearchTerms) {
 	this.subject.next(terms);
 	this.lastValue = terms;
+    }
+
+    add(term : SearchTerm) {
+
+	// Deliberately creating new object
+
+	let terms = [];
+
+	for(let it of this.lastValue.terms) {
+	    terms.push(it);
+	}
+
+	terms.push(term);
+
+	this.lastValue = new SearchTerms(terms);
+
+	this.subject.next(this.lastValue);
+
     }
 
     // Subscribe to search terms.
