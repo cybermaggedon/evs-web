@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import {
     EventSearchTermsService, SearchTerms
@@ -9,7 +9,7 @@ import {
   templateUrl: './event-view.component.html',
   styleUrls: ['./event-view.component.css']
 })
-export class EventViewComponent implements OnInit {
+export class EventViewComponent implements OnInit, AfterViewInit {
 
     tableEvents : number;
 
@@ -23,6 +23,17 @@ export class EventViewComponent implements OnInit {
 	this.searchTermsSvc.update(new SearchTerms([
 	    {field: undefined, value: "mark-vm"}
 	]));
+    }
+
+    ngAfterViewInit() : void {
+
+	console.log("DOING SEARCH NOWWWWWW");
+	this.searchTermsSvc.update(
+	    new SearchTerms([
+		{ field: undefined, value: 'mark-vm' }
+	    ])
+	);
+
     }
 
 }

@@ -1,7 +1,7 @@
 
 <mat-table
   class="mat-elevation-z8"
-  [dataSource]="dataSource"
+  [dataSource]="searchSvc"
   matSort matSortActive="time" matSortDirection="asc" matSortDisableClear>
 
   <ng-container matColumnDef="time">
@@ -22,6 +22,7 @@
 
 </mat-table>
 
-<mat-paginator [length]="total" [pageSize]="pageSize">
+<mat-paginator [length]="total" [pageSize]="pageSize"
+	       [pageSizeOptions]="[5,10,25,50]">
 </mat-paginator>
 

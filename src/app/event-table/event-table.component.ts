@@ -31,22 +31,14 @@ export class Page {
 export class EventTableComponent implements OnInit, AfterViewInit {
 
     total = 0;
+    pageSize = 10;
 
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
-		private searchSvc : EventSearchService) {
+		public searchSvc : EventSearchService) {
 
-	this.pageNum = 0;
-	this.sortField = "time";
-	this.sortAsc = false;
-	this.pageSize = 10;
-	this.page = {
-	    from: 0,
-	    to: 0,
-	    total: 0,
-	    events: []
-	};
 //	this.loading = false;
+
     }
 
     @ViewChild(MatPaginator) paginator : MatPaginator;
@@ -55,120 +47,44 @@ export class EventTableComponent implements OnInit, AfterViewInit {
     terms : SearchTerms;
     window : Window;
 //    loading : boolean;
-
-    dataSource : EventSearchService;
     
     ngOnInit(): void {
-
-	console.log("BUNCHYYYYY");
-
-	//FIXME:
-	
-	this.searchTermsSvc.subscribe(s => {
-	    console.log("TERMS", s);
-	    this.terms = s;
-	    this.pageNum = 0;
-	    this.updateTable();
-	});
-
-	this.windowService.subscribe(w => {
-	    console.log("WINDOW", w);
-	    this.window = w;
-	    this.updateTable();
-	});
-
-	console.log("BUNCHY");
-	this.dataSource = this.searchSvc;
-	this.dataSource.search();
-/*	this.dataSource.load();
-	    new SearchTerms([{ field: undefined, value: 'mark-vm' }]),
-	    this.window,
-	    'asc', 0, 10);*/
 
     }
 
     ngAfterViewInit() {
 
 	this.sort.sortChange.subscribe(e => {
+	    // FIXME: NOT IMPLEMENTED
 	    console.log("DIFFERENT SORT");
 	    console.log(e);
 	    this.paginator.pageIndex = 0;
 	});
 
 	this.paginator.page.subscribe(e => {
-	    console.log(e);
-	    this.pageNum = e.pageIndex;
-	    this.dataSource.setPageNum(this.pageNum);
+	    let pageNum = e.pageIndex;
+	    let pageSize = e.pageSize;
+	    this.searchSvc.setPageNum(pageNum);
+	    this.searchSvc.setPageSize(pageSize);
 	});
 
-	this.dataSource.total.subscribe(total => {
+	this.searchSvc.total.subscribe(total => {
 	    this.total = total;
 	});
 
+	this.searchSvc.setPageSize(this.pageSize);
+	this.searchSvc.setPageNum(0);
+
     }
-
-    page : EventPage;
-    pageSize : number;
-    pageNum : number;
-    sortField : string;
-    sortAsc : boolean;
-
-    /*
-    columns = [
-	{name: "time", minWidth: "210"},
-	{name: "device"},
-	{name: "network"},
-	{name: "action"},
-	{name: "src.ipv4"},
-	{name: "src.ipv6"},
-	{name: "dest.ipv4"},
-	{name: "dest.ipv6"},
-	{name: "protocol"}
-    ];
-    */
-
     displayedColumns = ['time', 'action'];
 
-//    @Input('max-events')
     maxEvents : number = 100;
 
     @Output('events-loaded')
     eventsLoaded : EventEmitter<number> = new EventEmitter<number>();
 
-//    dataSource : any;
-    
-    updateTable() {
-
-	if (this.terms == undefined) return;
-	if (this.window == undefined) return;
-
-	 this.searchSvc.search();
-
-//	obs.subscribe(r => {
-//	    this.dataSource = r.data;
-//	    this.page = r;
-
-//	    this.eventsLoaded.emit(r.total);
-//	    this.loading = false;
-
-	    /*
-	    if (this.page.numPages > 0 && this.pageNum > this.page.numPages) {
-		this.pageNum = 0;
-		// FIXME: Recursive?  The above conditions should make this
-		// safe.
-		this.updateTable();
-	    }
-*/
-//	});
-
-    }
-
     onRowClicked(row) {
 	console.log('Row clicked: ', row);
-    }
-
-    setPage(pageInfo) {
-//	this.updateTable();
     }
 
 }

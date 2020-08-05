@@ -53,12 +53,10 @@ export class EventSearchService implements DataSource<Event> {
     }
 
     disconnect(collectionViewer: CollectionViewer): void {
-        this.subject.complete();
-        this.loading.complete();
     }
 
     // Initiate an ES search.
-    search() {
+    private search() {
 
 	let sort = "time";
 	let sortAsc = true;
@@ -99,13 +97,13 @@ export class EventSearchService implements DataSource<Event> {
 	    ]
 	};
 
-	console.log("QUERY", qry);
+	console.log("RUN QUERY", qry);
 	
         // Submit query, pipe through results parser.
 	return this.esSvc.post(this.index + "/_search", qry).
             pipe(map(r => parseESResults(r, from, size))).
 	    subscribe(r => {
-		console.log("RESULTS ", r.events);
+		console.log("GOT RESULTS ", r.events);
 		this.subject.next(r.events);
 		this.total.next(r.total);
 	    });
@@ -113,13 +111,14 @@ export class EventSearchService implements DataSource<Event> {
     };
 
     setPageSize(n : number) {
+	console.log("PAGESIZE CHANGE ", this.pageNum);
 	this.pageSize = n;
 	this.search();
     }
 
     setPageNum(n : number) {
 	this.pageNum = n;
-	console.log("SAERCHING, pagenum is ", this.pageNum);
+	console.log("PAGENUM CHANGE ", this.pageNum);
 	this.search();
     }
 
