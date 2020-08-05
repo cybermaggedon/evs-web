@@ -19,7 +19,6 @@ import { WindowService, Window } from '../window.service';
 export class EventTableComponent implements OnInit, AfterViewInit {
 
     total = 0;
-    pageSize = 10;
 
     row = [];
 
@@ -36,6 +35,11 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
     terms : SearchTerms;
     window : Window;
+
+    pageNum : number = 0;
+    pageSize : number = 10;
+
+
 //    loading : boolean;
     
     ngOnInit(): void {
@@ -50,14 +54,27 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	});
 
 	this.paginator.page.subscribe(e => {
-	    let pageNum = e.pageIndex;
-	    let pageSize = e.pageSize;
-	    this.eventSvc.setPageNum(pageNum);
-	    this.eventSvc.setPageSize(pageSize);
+	    this.pageNum = e.pageIndex;
+	    this.pageSize = e.pageSize;
+	    this.eventSvc.setPageNum(this.pageNum);
+	    this.eventSvc.setPageSize(this.pageSize);
 	});
 
 	this.eventSvc.total.subscribe(total => {
+
 	    this.total = total;
+
+	    if (this.pageSize != undefined && this.pageNum != undefined) {
+
+		// If the page number is beyond the number of events,
+		// it's because a new query got executed.  Back to first page.
+		if (total <= (this.pageSize * this.pageNum)) {
+		    this.pageNum = 0;
+		    this.eventSvc.setPageNum(0);
+		}
+
+	    }
+		
 	});
 
 	this.eventSvc.setPageSize(this.pageSize);
@@ -76,9 +93,6 @@ export class EventTableComponent implements OnInit, AfterViewInit {
     ];
 
     maxEvents : number = 100;
-
-    @Output('events-loaded')
-    eventsLoaded : EventEmitter<number> = new EventEmitter<number>();
 
     onRowClicked(row) {
 	this.row = [];

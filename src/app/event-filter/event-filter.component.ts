@@ -24,13 +24,7 @@ export class EventFilterComponent implements OnInit {
     ngOnInit() : void {
 	this.termsSvc.subscribe((st : SearchTerms) => {
 
-	    console.log("HEARD NEW TERMS: ", st);
-
-	    console.log("OLD ", this.terms);
-
 	    if (st == this.terms) return;
-
-	    console.log("TERMS UPDATED: ", st);
 	    
 	    this.terms = st;
 
@@ -83,7 +77,6 @@ export class EventFilterComponent implements OnInit {
 	for (let filter of this.filters) {
 
 	    let spl = filter.split(":", 2);
-	    console.log("SPLIT", spl);
 	    if (spl.length == 2) {
 		st.push( { field: spl[0], value: spl[1] } );
 	    } else if (spl.length == 1) {
@@ -93,7 +86,6 @@ export class EventFilterComponent implements OnInit {
 	}
 
 	let sts = new SearchTerms(st);
-	console.log("PUBLISH ", sts);
 	this.termsSvc.update(sts);
 
     }
