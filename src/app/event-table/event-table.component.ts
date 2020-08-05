@@ -68,7 +68,7 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
 		// If the page number is beyond the number of events,
 		// it's because a new query got executed.  Back to first page.
-		if (total <= (this.pageSize * this.pageNum)) {
+		if (total > 0 && total <= (this.pageSize * this.pageNum)) {
 		    this.pageNum = 0;
 		    this.eventSvc.setPageNum(0);
 		}
