@@ -1,0 +1,23 @@
+
+.rowdetail {
+    border: 1px solid #a0a0a0;
+    overflow: auto;
+    clear: both;
+    margin: 4px;
+    padding: 8px;
+}
+
+.rowdetail div {
+    float: left;
+    margin-right: 1.3em;
+    font-size: 0.8em;
+}
+
+.field {
+    color: #a04080;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+}
+
+.value {
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+}

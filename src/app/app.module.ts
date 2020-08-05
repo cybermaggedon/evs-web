@@ -47,6 +47,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { RiskSelectionComponent } from './risk-selection/risk-selection.component';
 import { RiskConfigurationFilterComponent } from './risk-configuration-filter/risk-configuration-filter.component';
 import { EventViewComponent } from './event-view/event-view.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import { EventViewComponent } from './event-view/event-view.component';
         SpinnerComponent,
         RiskSelectionComponent,
 	RiskConfigurationFilterComponent,
-	EventViewComponent
+	EventViewComponent,
+	EventDetailComponent
     ],
     imports: [
         BrowserModule,

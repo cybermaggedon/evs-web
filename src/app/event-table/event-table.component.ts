@@ -11,18 +11,6 @@ import { Event, EventPage } from '../event-decode';
 import { EventSearchService } from '../event-search.service';
 import { WindowService, Window } from '../window.service';
 
-/*
-export class Page {
-    from : number;
-    to : number;
-    size : number;
-    data : Object[];
-    total : number;
-    pageNum : number;
-    numPages : number;
-};
-*/
-
 @Component({
     selector: 'event-table',
     templateUrl: './event-table.component.html',
@@ -32,6 +20,8 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
     total = 0;
     pageSize = 10;
+
+    row = [];
 
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
@@ -96,7 +86,12 @@ export class EventTableComponent implements OnInit, AfterViewInit {
     eventsLoaded : EventEmitter<number> = new EventEmitter<number>();
 
     onRowClicked(row) {
-	console.log('Row clicked: ', row);
+	this.row = [];
+	for(let field in row) {
+	    this.row.push({field: field, value: row[field]});
+	}
+	console.log(this.row);
     }
 
 }
+

@@ -5,6 +5,10 @@
     margin-right: 6px;
 }
 
+.mat-row:hover {
+  background: whitesmoke;
+}
+
 .mat-table {
     width: 98%;
     margin-bottom: 2em;
@@ -69,3 +73,4 @@
 .mat-column-action.icmp_message {
     color: #6060c0;
 }
+
