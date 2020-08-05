@@ -5,7 +5,6 @@ import { Model, Risk } from '../model-types';
 import { flattenHierarchy, FlatItem } from '../hierarchy';
 import { ModelStateService, ModelState } from '../model-state.service';
 import { SelectedModelService } from '../selected-model.service';
-import { RiskStateService, AllRisksState } from '../risk-state.service';
 
 @Component({
     selector: 'model-selection',
@@ -16,10 +15,8 @@ export class ModelSelectionComponent implements OnInit {
 
     modelState : ModelState;
     selectedModel : string;
-    riskState : AllRisksState;
 
     constructor(private modelSvc : ModelStateService,
-		private riskSvc : RiskStateService,
 		private selectedModelSvc : SelectedModelService) {
 	this.modelState = new ModelState();
     }
@@ -27,15 +24,32 @@ export class ModelSelectionComponent implements OnInit {
     ngOnInit(): void {
 
 	this.modelSvc.subscribe(ms => {
-	    this.modelState = ms;
-	});
 
-	this.riskSvc.subscribe((rs : AllRisksState) => {
-	    this.riskState = rs;
+	    this.modelState = ms;
+
+	    // Set default, if undefined
+	    if (this._selected == undefined) {
+		if (this.modelState && this.modelState.default) {
+		    let def = this.modelState.default.id;
+		    if (this.selected != def)
+			this.selected = def;
+		}
+	    }
+
 	});
 
 	this.selectedModelSvc.subscribe(m => {
-	    this._selected = m;
+
+	    // Set default, if undefined
+	    if (m == undefined) {
+		if (this.modelState && this.modelState.default) {
+		    m = this.modelState.default.id;
+		}
+	    }
+
+	    if (m != this.selected)
+		this.selected = m;
+
 	});
 
     }
