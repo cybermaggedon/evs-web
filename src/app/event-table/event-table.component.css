@@ -1,5 +1,8 @@
 .mat-header-cell, .mat-cell {
-    font-size: 0.8em;
+    font-size: 0.9em;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 6px;
 }
 
 .mat-table {
@@ -8,20 +11,15 @@
 }
 
 .mat-column-time {
-    flex: 0 0 14em;
-    overflow: hidden;
+    flex: 0 0 12em;
 }
 
 .mat-column-action {
-    flex: 0 0 14em;
-    overflow: hidden;
+    flex: 0 0 12em;
 }
 
 .mat-column-indicators-category {
     flex: 0 0 12em;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-right: 4px;
 }
 
 .mat-column-action.trigger_up {
