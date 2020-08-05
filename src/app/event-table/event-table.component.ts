@@ -59,6 +59,7 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	    console.log("DIFFERENT SORT");
 	    console.log(e);
 	    this.paginator.pageIndex = 0;
+	    this.searchSvc.setSort(e.active, e.direction);
 	});
 
 	this.paginator.page.subscribe(e => {
@@ -76,7 +77,18 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	this.searchSvc.setPageNum(0);
 
     }
-    displayedColumns = ['time', 'action'];
+    displayedColumns = [
+	'time', 'action',
+	'device',
+	'src.ipv4',
+	'src.ipv6',
+	//'src.tcp', 'src.udp',
+	'dest.ipv4',
+	'dest.ipv6',
+	//'dest.tcp', 'dest.udp',
+	'indicators.category', 'indicators.value', 
+	'indicators.description'
+    ];
 
     maxEvents : number = 100;
 

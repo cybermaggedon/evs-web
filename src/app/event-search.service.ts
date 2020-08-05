@@ -29,6 +29,9 @@ export class EventSearchService implements DataSource<Event> {
     pageNum = 0;
     pageSize = 10;
 
+    sortField = "time";
+    sortAsc = false;
+
     constructor(private esSvc : ElasticSearchService,
 		private searchTermsSvc : EventSearchTermsService,
 		private windowSvc : WindowService) {
@@ -58,12 +61,8 @@ export class EventSearchService implements DataSource<Event> {
     // Initiate an ES search.
     private search() {
 
-	let sort = "time";
-	let sortAsc = true;
 	let from = this.pageNum * this.pageSize;
 	let size = this.pageSize;
-	
-	
 
 	if (this.terms == undefined) return;
 	if (this.terms.terms.length == 0) return;
@@ -93,17 +92,14 @@ export class EventSearchService implements DataSource<Event> {
 	    },
 	    from: from, size: size,
 	    sort: [
-		{ [sort]: { order: (sortAsc ? "asc" : "desc") } }
+		{ [this.sortField]: { order: (this.sortAsc ? "asc" : "desc") } }
 	    ]
 	};
-
-	console.log("RUN QUERY", qry);
 	
         // Submit query, pipe through results parser.
 	return this.esSvc.post(this.index + "/_search", qry).
             pipe(map(r => parseESResults(r, from, size))).
 	    subscribe(r => {
-		console.log("GOT RESULTS ", r.events);
 		this.subject.next(r.events);
 		this.total.next(r.total);
 	    });
@@ -111,14 +107,18 @@ export class EventSearchService implements DataSource<Event> {
     };
 
     setPageSize(n : number) {
-	console.log("PAGESIZE CHANGE ", this.pageNum);
 	this.pageSize = n;
 	this.search();
     }
 
     setPageNum(n : number) {
 	this.pageNum = n;
-	console.log("PAGENUM CHANGE ", this.pageNum);
+	this.search();
+    }
+
+    setSort(field : string, dir : string) {
+	this.sortField = field;
+	this.sortAsc = dir == "asc";
 	this.search();
     }
 

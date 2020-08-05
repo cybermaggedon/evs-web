@@ -2,7 +2,7 @@
 <mat-table
   class="mat-elevation-z8"
   [dataSource]="searchSvc"
-  matSort matSortActive="time" matSortDirection="asc" matSortDisableClear>
+  matSort matSortActive="time" matSortDirection="desc" matSortDisableClear>
 
   <ng-container matColumnDef="time">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
@@ -10,8 +10,70 @@
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row['action']}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+    <mat-cell *matCellDef="let row" class="{{row['action']}}">
+      {{row['action']}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="device">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Device</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['device']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="src.ipv4">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>IPv4 src</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['src.ipv4']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="src.ipv6">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>IPv6 src</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['src.ipv6']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="src.tcp">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>TCP src</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['src.tcp']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="src.udp">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>UDP src</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['src.udp']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dest.ipv4">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>IPv4 dest</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['dest.ipv4']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dest.ipv6">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>IPv6 dest</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['dest.ipv6']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dest.tcp">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>TCP dest</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['dest.tcp']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dest.udp">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>UDP dest</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['dest.udp']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="indicators.category">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Risk cat</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['indicators.category']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="indicators.value">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Indicator</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['indicators.value']}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="indicators.description">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Ind desc</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row['indicators.description']}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
