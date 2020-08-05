@@ -17,7 +17,7 @@ import {
 @Injectable({
     providedIn: 'root'
 })
-export class EventSearchService implements DataSource<Event> {
+export class EventSourceService implements DataSource<Event> {
 
     private subject = new BehaviorSubject<Event[]>([]);
     public loading = new BehaviorSubject<boolean>(false);

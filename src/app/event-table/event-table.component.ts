@@ -8,7 +8,7 @@ import { MatSort } from '@angular/material/sort';
 
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
 import { Event, EventPage } from '../event-decode';
-import { EventSearchService } from '../event-search.service';
+import { EventSourceService } from '../event-source.service';
 import { WindowService, Window } from '../window.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
     constructor(private searchTermsSvc : EventSearchTermsService,
 		private windowService : WindowService,
-		public searchSvc : EventSearchService) {
+		public eventSvc : EventSourceService) {
 
 //	this.loading = false;
 
@@ -49,35 +49,33 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 	    console.log("DIFFERENT SORT");
 	    console.log(e);
 	    this.paginator.pageIndex = 0;
-	    this.searchSvc.setSort(e.active, e.direction);
+	    this.eventSvc.setSort(e.active, e.direction);
 	});
 
 	this.paginator.page.subscribe(e => {
 	    let pageNum = e.pageIndex;
 	    let pageSize = e.pageSize;
-	    this.searchSvc.setPageNum(pageNum);
-	    this.searchSvc.setPageSize(pageSize);
+	    this.eventSvc.setPageNum(pageNum);
+	    this.eventSvc.setPageSize(pageSize);
 	});
 
-	this.searchSvc.total.subscribe(total => {
+	this.eventSvc.total.subscribe(total => {
 	    this.total = total;
 	});
 
-	this.searchSvc.setPageSize(this.pageSize);
-	this.searchSvc.setPageNum(0);
+	this.eventSvc.setPageSize(this.pageSize);
+	this.eventSvc.setPageNum(0);
 
     }
     displayedColumns = [
-	'time', 'action',
-	'device',
-	'src.ipv4',
-	'src.ipv6',
-	//'src.tcp', 'src.udp',
-	'dest.ipv4',
-	'dest.ipv6',
-	//'dest.tcp', 'dest.udp',
-	'indicators.category', 'indicators.value', 
-	'indicators.description'
+
+	'time', 'action', 'device',
+
+	'src.ipv4', 'src.ipv6',
+	'dest.ipv4', 'dest.ipv6',
+
+	'indicators.category', 'indicators.value', 'indicators.description'
+
     ];
 
     maxEvents : number = 100;

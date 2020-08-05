@@ -6,7 +6,7 @@ import { RiskModel } from '../risk';
 import {
     EventSearchTermsService, SearchTerms
 } from '../event-search-terms.service';
-import { EventSearchService } from '../event-search.service';
+import { EventSourceService } from '../event-source.service';
 import { age } from '../age';
 
 @Component({
@@ -19,7 +19,7 @@ export class CategoryDetailComponent implements OnInit {
     constructor(private route : ActivatedRoute,
 		private location : Location,
  		private riskSvc : RiskService,
-		private searchSvc : EventSearchService,
+		private eventSvc : EventSourceService,
 		private searchTermsSvc : EventSearchTermsService) {
     }
 
@@ -86,7 +86,7 @@ export class CategoryDetailComponent implements OnInit {
 	    this.update();
 	});
 
-	this.searchSvc.total.subscribe(t => {
+	this.eventSvc.total.subscribe(t => {
 	    console.log("TOTAL ", t);
 	    this.eventsTotal = t;
 	});

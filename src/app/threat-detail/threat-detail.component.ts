@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
-import { EventSearchService } from '../event-search.service';
+import { EventSourceService } from '../event-source.service';
 import { age } from '../age';
 
 @Component({
@@ -18,7 +18,7 @@ export class ThreatDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
 		private location: Location,
  		private threatSvc : ThreatService,
-		private searchSvc : EventSearchService,
+		private eventSvc : EventSourceService,
 		private windowService : WindowService,
 		private searchTermsSvc : EventSearchTermsService) {
     }
@@ -112,7 +112,7 @@ export class ThreatDetailComponent implements OnInit {
             }
 	});
 
-	this.searchSvc.total.subscribe(t => {
+	this.eventSvc.total.subscribe(t => {
 	    console.log("TOTAL ", t);
 	    this.eventsTotal = t;
 	});
