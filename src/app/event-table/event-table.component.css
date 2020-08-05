@@ -2,11 +2,15 @@
     overflow: hidden;
     white-space: nowrap;
     margin-right: 6px;
+    font-size: small;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
 }
 
 .mat-cell {
+/*
     font-size: small;
     font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+*/
 }
 
 .mat-row:hover {
@@ -19,11 +23,11 @@
 }
 
 .mat-column-time {
-    flex: 0 0 12em;
+    flex: 0 0 16em;
 }
 
 .mat-column-action {
-    flex: 0 0 12em;
+    flex: 0 0 16em;
 }
 
 .mat-column-indicators-category {

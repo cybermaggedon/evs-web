@@ -85,8 +85,8 @@ export class EventTableComponent implements OnInit, AfterViewInit {
 
 	'time', 'action', 'device',
 
-	'src.ipv4', 'src.ipv6',
-	'dest.ipv4', 'dest.ipv6',
+	'src.ipv4',// 'src.ipv6',
+	'dest.ipv4', //'dest.ipv6',
 
 	'indicators.category', 'indicators.value', 'indicators.description'
 

@@ -13,26 +13,38 @@
     padding: 2px;
     font-size: small;
     border: 1px solid #f8f8f8;
-}
-
-.rowdetail div:hover {
-    background-color: whitesmoke;
-}
-
-.rowdetail div:hover .field {
-    color: #6080a0;
-}
-
-.rowdetail div:hover .value {
-    color: #6080a0;
+    display: flex;
 }
 
 .field {
-    color: #a04080;
+    color: white;
+    border-radius: 4px 0 0 4px;
+    padding: 2px 6px 2px 6px;
+    display: block;
+    border: 1px solid #202020;
+    background: #202020;
     font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
 }
 
 .value {
+    color: black;
+    border-radius: 0 4px 4px 0;
+    padding: 2px 6px 2px 6px;
+    display: block;
+    border: 1px solid #202020;
+    background: #f0f0d0;
     font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+}
+
+.rowdetail div:hover .field {
+    color: #6080a0;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+}
+
+.rowdetail div:hover .value {
+    color: #6080a0;
+    background-color: #ccc;
+    border: 1px solid #888;
 }
 
