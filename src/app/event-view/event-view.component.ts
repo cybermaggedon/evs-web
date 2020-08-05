@@ -26,14 +26,7 @@ export class EventViewComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() : void {
-
-	console.log("DOING SEARCH NOWWWWWW");
-	this.searchTermsSvc.update(
-	    new SearchTerms([
-		{ field: undefined, value: 'mark-vm' }
-	    ])
-	);
-
     }
 
 }
+

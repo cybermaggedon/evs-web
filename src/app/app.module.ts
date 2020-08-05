@@ -48,6 +48,7 @@ import { RiskSelectionComponent } from './risk-selection/risk-selection.componen
 import { RiskConfigurationFilterComponent } from './risk-configuration-filter/risk-configuration-filter.component';
 import { EventViewComponent } from './event-view/event-view.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventFilterComponent } from './event-filter/event-filter.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
         RiskSelectionComponent,
 	RiskConfigurationFilterComponent,
 	EventViewComponent,
-	EventDetailComponent
+	EventDetailComponent,
+	EventFilterComponent
     ],
     imports: [
         BrowserModule,

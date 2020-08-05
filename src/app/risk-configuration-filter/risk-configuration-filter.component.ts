@@ -2,13 +2,10 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 
-/**
- * @title Chips with input
- */
 @Component({
-  selector: 'risk-configuration-filter',
-  templateUrl: 'risk-configuration-filter.component.html',
-  styleUrls: ['risk-configuration-filter.component.css'],
+    selector: 'risk-configuration-filter',
+    templateUrl: 'risk-configuration-filter.component.html',
+    styleUrls: ['risk-configuration-filter.component.css'],
 })
 export class RiskConfigurationFilterComponent {
 
@@ -36,15 +33,15 @@ export class RiskConfigurationFilterComponent {
 
     }
 
-  remove(filter: string): void {
-    const index = this.filters.indexOf(filter);
+    remove(filter: string): void {
+	const index = this.filters.indexOf(filter);
 
-    if (index >= 0) {
-      this.filters.splice(index, 1);
+	if (index >= 0) {
+	    this.filters.splice(index, 1);
+	}
+
+	this.filter.emit(this.filters);
+
     }
-
-      this.filter.emit(this.filters);
-
-  }
 }
 
