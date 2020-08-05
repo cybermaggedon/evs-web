@@ -20,9 +20,8 @@ export class EventViewComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-	this.searchTermsSvc.update(new SearchTerms([
-	    {field: undefined, value: "mark-vm"}
-	]));
+	// Reset to open search.
+	this.searchTermsSvc.update(new SearchTerms([]));
     }
 
     ngAfterViewInit() : void {

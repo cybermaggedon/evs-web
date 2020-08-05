@@ -65,29 +65,47 @@ export class EventSourceService implements DataSource<Event> {
 	let size = this.pageSize;
 
 	if (this.terms == undefined) return;
-	if (this.terms.terms.length == 0) return;
 
         const start = `now-${this.window.value}h`;
+
+	let matches = [];
+
+	for (let term of this.terms.terms) {
+	    if (term.field) {
+		matches.push({
+		    term: {
+			[term.field]: {
+			    value: term.value
+			}
+		    }
+		});
+	    } else {
+		matches.push({
+		    multi_match: {
+			query: term.value
+		    }
+		});
+	    }
+	}
+
+	matches.push(
+	    {
+		range: {
+		    time: {
+			gte: start,
+			lt: 'now'
+		    }
+		}
+	    }
+	);
+
+	console.log("QUERY: ", matches);
 	
         // Produce ElasticSearch query
 	const qry = {
 	    query: {
 		bool: {
-		    must: [
-			{
-			    multi_match: {
-				query: this.terms.terms[0].value
-			    }
-			},
-			{
-			    range: {
-				time: {
-				    gte: start,
-				    lt: 'now'
-				}
-			    }
-			}
-		    ]
+		    must: matches
 		}
 	    },
 	    from: from, size: size,
@@ -100,6 +118,7 @@ export class EventSourceService implements DataSource<Event> {
 	return this.esSvc.post(this.index + "/_search", qry).
             pipe(map(r => parseESResults(r, from, size))).
 	    subscribe(r => {
+		console.log(r);
 		this.subject.next(r.events);
 		this.total.next(r.total);
 	    });
