@@ -27,25 +27,9 @@ export class ModelSelectionComponent implements OnInit {
 
 	    this.modelState = ms;
 
-	    // Set default, if undefined
-	    if (this._selected == undefined) {
-		if (this.modelState && this.modelState.default) {
-		    let def = this.modelState.default.id;
-		    if (this.selected != def)
-			this.selected = def;
-		}
-	    }
-
 	});
 
 	this.selectedModelSvc.subscribe(m => {
-
-	    // Set default, if undefined
-	    if (m == undefined) {
-		if (this.modelState && this.modelState.default) {
-		    m = this.modelState.default.id;
-		}
-	    }
 
 	    if (m != this.selected)
 		this.selected = m;
