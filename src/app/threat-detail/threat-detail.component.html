@@ -6,10 +6,11 @@
       Event detail
     </mat-panel-title>
     <mat-panel-description>
-      {{tableEvents}} events
+      {{eventsTotal}} events
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <event-table (events-loaded)="onEventsLoaded($event)"></event-table>
+  <event-filter></event-filter>
+  <event-table></event-table>
 </mat-expansion-panel>
 
 <mat-expansion-panel [expanded]=true>

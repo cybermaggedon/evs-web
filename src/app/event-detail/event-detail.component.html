@@ -1,0 +1,8 @@
+<div class="rowdetail" *ngIf="row.length > 0">
+  <ng-container *ngFor="let item of row">
+    <div class="item" *ngIf="item.value != ''" (click)="clicked(item)">
+      <span class="field">{{item.field}}</span>:
+      <span class="value">{{item.value}}</span>
+    </div>
+  </ng-container>
+</div>

@@ -4,7 +4,8 @@ import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
-import { EventSearchService, SearchTerms } from '../event-search.service';
+import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
+import { EventSourceService } from '../event-source.service';
 import { age } from '../age';
 
 @Component({
@@ -17,8 +18,9 @@ export class ThreatDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
 		private location: Location,
  		private threatSvc : ThreatService,
+		private eventSvc : EventSourceService,
 		private windowService : WindowService,
-		private eventSearch : EventSearchService) {
+		private searchTermsSvc : EventSearchTermsService) {
     }
 
     // Current threat identifier
@@ -37,10 +39,7 @@ export class ThreatDetailComponent implements OnInit {
     threatCount : number;
 
     // Number of events in the event table
-    tableEvents : number;
-
-    // Called when events are loaded in the table
-    onEventsLoaded(e) { this.tableEvents = e; }
+    eventsTotal : number;
 
     // Update strategy...
     // - ID set or changed => Fetch new threat graph, update threats
@@ -100,16 +99,23 @@ export class ThreatDetailComponent implements OnInit {
    	        this.window = w;
 		this.updateThreats();
             }
-	})
+	});
 
   	this.route.params.subscribe(res => {
             if (res.id != this.id) {
 
 		this.id = res.id;
 		this.fetchThreats();
-		this.eventSearch.update(new SearchTerms(this.id));
+		this.searchTermsSvc.update(new SearchTerms([
+		    { field: undefined, value: this.id }
+		]));
             }
-	})
+	});
+
+	this.eventSvc.total.subscribe(t => {
+	    console.log("TOTAL ", t);
+	    this.eventsTotal = t;
+	});
 
 	interval(5000).subscribe(e => {
 	    this.fetchThreats();

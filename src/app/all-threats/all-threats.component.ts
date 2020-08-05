@@ -4,7 +4,6 @@ import { timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
-import { EventSearchService, SearchTerms } from '../event-search.service';
 import { age } from '../age';
 
 @Component({
@@ -17,8 +16,7 @@ export class AllThreatsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
 		private location: Location,
  		private threatSvc : ThreatService,
-		private windowService : WindowService,
-		private eventSearch : EventSearchService) {
+		private windowService : WindowService) {
     }
 
     // Current threat window

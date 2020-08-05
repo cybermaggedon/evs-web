@@ -7,15 +7,20 @@ import { Window } from './window.service';
 import { Subject } from 'rxjs';
 
 // Search terms.  Just abstracts an ID currently.
+export interface SearchTerm {
+    field : string;
+    value : string;
+};
+
 export class SearchTerms {
-    constructor(id : string) { this.id = id; };
-    id : string;
+    constructor(terms : SearchTerm[]) { this.terms = terms; };
+    terms : SearchTerm[];
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventSearchService {
+export class EventSearchTermsService {
 
     // Subject provides for search terms to be bussed around.
     subject : Subject<SearchTerms>;
@@ -25,12 +30,30 @@ export class EventSearchService {
     }
 
     // Keep a last value to be pushed out to new subscribers.
-    lastValue : Object;
+    lastValue : SearchTerms;
 
     // Accept a new search term update.
     update(terms : SearchTerms) {
 	this.subject.next(terms);
 	this.lastValue = terms;
+    }
+
+    add(term : SearchTerm) {
+
+	// Deliberately creating new object
+
+	let terms = [];
+
+	for(let it of this.lastValue.terms) {
+	    terms.push(it);
+	}
+
+	terms.push(term);
+
+	this.lastValue = new SearchTerms(terms);
+
+	this.subject.next(this.lastValue);
+
     }
 
     // Subscribe to search terms.

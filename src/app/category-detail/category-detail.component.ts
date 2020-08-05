@@ -3,7 +3,10 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
-import { EventSearchService, SearchTerms } from '../event-search.service';
+import {
+    EventSearchTermsService, SearchTerms
+} from '../event-search-terms.service';
+import { EventSourceService } from '../event-source.service';
 import { age } from '../age';
 
 @Component({
@@ -16,7 +19,8 @@ export class CategoryDetailComponent implements OnInit {
     constructor(private route : ActivatedRoute,
 		private location : Location,
  		private riskSvc : RiskService,
-		private eventSearch : EventSearchService) {
+		private eventSvc : EventSourceService,
+		private searchTermsSvc : EventSearchTermsService) {
     }
 
     // Current threat identifier
@@ -32,10 +36,7 @@ export class CategoryDetailComponent implements OnInit {
     threatCount : number;
 
     // Number of events in the event table
-    tableEvents : number;
-
-    // Called when events are loaded in the table
-    onEventsLoaded(e) { this.tableEvents = e; }
+    eventsTotal : number;
 
     // Called to update
     update() {
@@ -85,10 +86,17 @@ export class CategoryDetailComponent implements OnInit {
 	    this.update();
 	});
 
+	this.eventSvc.total.subscribe(t => {
+	    console.log("TOTAL ", t);
+	    this.eventsTotal = t;
+	});
+
   	this.route.params.subscribe(res => {
 	    this.id = res.id;
 	    this.update();
-            this.eventSearch.update(new SearchTerms(this.id));
+            this.searchTermsSvc.update(new SearchTerms([
+		{ field: "indicators.category", value: this.id }
+	    ]));
 	})
 
     }

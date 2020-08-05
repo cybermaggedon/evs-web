@@ -3,26 +3,37 @@
 
   <!-- Top navigation buttons -->
   <nav>
+    
     <a [routerLink]="['/dashboard']"
        queryParamsHandling="preserve">
       Dashboard
     </a>
+    
     <a [routerLink]="['/risk']"
        queryParamsHandling="preserve">
       Risk reports
     </a>
+    
     <a [routerLink]="['/all-threats']"
        queryParamsHandling="preserve">
       Emerging threats
     </a>
+    
     <a [routerLink]="['/model']"
        queryParamsHandling="preserve">
       Risk configuration
     </a>
+    
     <a [routerLink]="['/threat-model', 'overview']"
        queryParamsHandling="preserve">
       Threat model
     </a>
+    
+    <a [routerLink]="['/event-view']"
+       queryParamsHandling="preserve">
+      Forensic events
+    </a>
+    
     <a href="/kibana">Kibana</a>
     <a href="/grafana">Metrics</a>
     <a href="/prometheus">Prometheus</a>

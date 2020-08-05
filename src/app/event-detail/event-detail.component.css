@@ -1,0 +1,38 @@
+
+.rowdetail {
+    border: 1px solid #a0a0a0;
+    overflow: auto;
+    clear: both;
+    margin: 4px;
+    padding: 8px;
+}
+
+.rowdetail div {
+    float: left;
+    margin: 1px 1.3em 1px 1px;
+    padding: 2px;
+    font-size: 0.8em;
+    border: 1px solid #f8f8f8;
+}
+
+.rowdetail div:hover {
+    background-color: whitesmoke;
+}
+
+.rowdetail div:hover .field {
+    color: #6080a0;
+}
+
+.rowdetail div:hover .value {
+    color: #6080a0;
+}
+
+.field {
+    color: #a04080;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+}
+
+.value {
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+}
+

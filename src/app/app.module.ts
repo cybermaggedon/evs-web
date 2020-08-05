@@ -17,7 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +46,9 @@ import { ThreatModelComponent } from './threat-model/threat-model.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { RiskSelectionComponent } from './risk-selection/risk-selection.component';
 import { RiskConfigurationFilterComponent } from './risk-configuration-filter/risk-configuration-filter.component';
+import { EventViewComponent } from './event-view/event-view.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventFilterComponent } from './event-filter/event-filter.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +74,10 @@ import { RiskConfigurationFilterComponent } from './risk-configuration-filter/ri
         ThreatModelComponent,
         SpinnerComponent,
         RiskSelectionComponent,
-	RiskConfigurationFilterComponent
+	RiskConfigurationFilterComponent,
+	EventViewComponent,
+	EventDetailComponent,
+	EventFilterComponent
     ],
     imports: [
         BrowserModule,
@@ -78,17 +86,19 @@ import { RiskConfigurationFilterComponent } from './risk-configuration-filter/ri
 	ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+	MatInputModule,
         MatSliderModule,
         MatTabsModule,
 	MatMenuModule,
 	MatButtonModule,
 	MatSelectModule,
 	MatFormFieldModule,
+	MatSortModule,
         MatExpansionModule,
 	MatPaginatorModule,
 	MatChipsModule,
 	MatIconModule,
-        NgxDatatableModule,
+        MatTableModule,
 	ChartsModule
     ],
     providers: [
