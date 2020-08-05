@@ -1,8 +1,12 @@
 .mat-header-cell, .mat-cell {
-    font-size: 0.9em;
     overflow: hidden;
     white-space: nowrap;
     margin-right: 6px;
+}
+
+.mat-cell {
+    font-size: small;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
 }
 
 .mat-row:hover {

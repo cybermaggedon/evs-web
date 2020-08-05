@@ -39,6 +39,8 @@
 .threat .id.device {
     border: 1px solid #1f2041;
     background: #cfd0f1;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+    font-size: 0.9em;
 }
 
 .threat .kind.resource {
@@ -47,7 +49,9 @@
 
 .threat .id.resource {
     border: 1px solid #119da4;
-    background: #b1ede4
+    background: #b1ede4;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+    font-size: 0.9em;
 }
 
 .bottom {

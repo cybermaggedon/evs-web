@@ -26,6 +26,8 @@
     border: 1px solid #808080;
     background: #c0c0c0;
     color: black;
+    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+    font-size: 0.9em;
 }
 
 .threat .age {
