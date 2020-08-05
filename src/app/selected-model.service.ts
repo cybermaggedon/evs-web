@@ -12,8 +12,8 @@ export class SelectedModelService {
 	this.subject = new BehaviorSubject<string>(undefined);
 
 	let sel = localStorage.getItem("selected-model");
-	if (sel != undefined)
-	    this.subject.next(sel);
+	if (sel == undefined) sel = "default";
+        this.subject.next(sel);
 
     }
 
