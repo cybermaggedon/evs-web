@@ -4,39 +4,43 @@
   <!-- Top navigation buttons -->
   <nav>
     
-    <a [routerLink]="['/dashboard']"
+    <a mat-raised-button color="primary" [routerLink]="['/dashboard']"
        queryParamsHandling="preserve">
       Dashboard
     </a>
     
-    <a [routerLink]="['/risk']"
+    <a mat-raised-button color="primary" [routerLink]="['/risk']"
        queryParamsHandling="preserve">
       Risk reports
     </a>
     
-    <a [routerLink]="['/all-threats']"
+    <a mat-raised-button color="primary" [routerLink]="['/all-threats']"
        queryParamsHandling="preserve">
       Emerging threats
     </a>
     
-    <a [routerLink]="['/model']"
+    <a mat-raised-button color="primary" [routerLink]="['/model']"
        queryParamsHandling="preserve">
       Risk configuration
     </a>
     
-    <a [routerLink]="['/threat-model', 'overview']"
+    <a mat-raised-button color="primary"
+       [routerLink]="['/threat-model', 'overview']"
        queryParamsHandling="preserve">
       Threat model
     </a>
     
-    <a [routerLink]="['/event-view']"
+    <a mat-raised-button color="primary" [routerLink]="['/event-view']"
        queryParamsHandling="preserve">
       Forensic events
     </a>
     
-    <a href="/kibana">Kibana</a>
-    <a href="/grafana">Metrics</a>
-    <a href="/prometheus">Prometheus</a>
+    <a mat-raised-button color="accent" href="/kibana">Kibana</a>
+    
+    <a  mat-raised-button color="accent"href="/grafana">Metrics</a>
+    
+    <a mat-raised-button color="accent" href="/prometheus">Prometheus</a>
+    
   </nav>
 
   <!-- Slider component -->

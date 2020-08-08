@@ -5,7 +5,7 @@ import { RiskModel } from '../risk';
 @Component({
     selector: 'device-risk',
     templateUrl: './device-risk.component.html',
-    styleUrls: ['./device-risk.component.css']
+    styleUrls: ['./device-risk.component.scss']
 })
 export class DeviceRiskComponent implements OnInit {
 

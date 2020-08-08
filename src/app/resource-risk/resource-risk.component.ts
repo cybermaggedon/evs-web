@@ -5,7 +5,7 @@ import { RiskModel } from '../risk';
 @Component({
     selector: 'resource-risk',
     templateUrl: './resource-risk.component.html',
-    styleUrls: ['./resource-risk.component.css']
+    styleUrls: ['./resource-risk.component.scss']
 })
 export class ResourceRiskComponent implements OnInit {
 
