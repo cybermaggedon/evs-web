@@ -11,7 +11,7 @@ import { age } from '../age';
 @Component({
     selector: 'threat-detail',
     templateUrl: './threat-detail.component.html',
-    styleUrls: ['./threat-detail.component.css']
+    styleUrls: ['./threat-detail.component.scss']
 })
 export class ThreatDetailComponent implements OnInit {
 

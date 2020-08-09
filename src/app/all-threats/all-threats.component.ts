@@ -9,7 +9,7 @@ import { age } from '../age';
 @Component({
     selector: 'all-threats',
     templateUrl: './all-threats.component.html',
-    styleUrls: ['./all-threats.component.css']
+    styleUrls: ['./all-threats.component.scss']
 })
 export class AllThreatsComponent implements OnInit {
 

@@ -12,3 +12,6 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @import "app/resource-risk/resource-risk.component.scss";
 @include resource-risk-component-theme($app-theme);
 
+@import "app/risk-summary/risk-summary.component.scss";
+@include risk-summary-component-theme($app-theme);
+

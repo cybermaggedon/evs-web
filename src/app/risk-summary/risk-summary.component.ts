@@ -5,7 +5,7 @@ import { FairService } from '../fair.service';
 @Component({
   selector: 'risk-summary',
   templateUrl: './risk-summary.component.html',
-  styleUrls: ['./risk-summary.component.css']
+  styleUrls: ['./risk-summary.component.scss']
 })
 export class RiskSummaryComponent implements OnInit {
 

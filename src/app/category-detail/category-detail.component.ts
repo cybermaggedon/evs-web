@@ -12,7 +12,7 @@ import { age } from '../age';
 @Component({
     selector: 'category-detail',
     templateUrl: './category-detail.component.html',
-    styleUrls: ['./category-detail.component.css']
+    styleUrls: ['./category-detail.component.scss']
 })
 export class CategoryDetailComponent implements OnInit {
 

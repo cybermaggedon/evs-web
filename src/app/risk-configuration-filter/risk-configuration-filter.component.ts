@@ -5,7 +5,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 @Component({
     selector: 'risk-configuration-filter',
     templateUrl: 'risk-configuration-filter.component.html',
-    styleUrls: ['risk-configuration-filter.component.css'],
+    styleUrls: ['risk-configuration-filter.component.scss'],
 })
 export class RiskConfigurationFilterComponent {
 

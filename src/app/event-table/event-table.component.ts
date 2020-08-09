@@ -14,7 +14,7 @@ import { WindowService, Window } from '../window.service';
 @Component({
     selector: 'event-table',
     templateUrl: './event-table.component.html',
-    styleUrls: ['./event-table.component.css']
+    styleUrls: ['./event-table.component.scss']
 })
 export class EventTableComponent implements OnInit, AfterViewInit {
 

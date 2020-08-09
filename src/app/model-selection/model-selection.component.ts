@@ -9,7 +9,7 @@ import { SelectedModelService } from '../selected-model.service';
 @Component({
     selector: 'model-selection',
     templateUrl: './model-selection.component.html',
-    styleUrls: ['./model-selection.component.css']
+    styleUrls: ['./model-selection.component.scss']
 })
 export class ModelSelectionComponent implements OnInit {
 

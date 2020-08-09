@@ -10,7 +10,7 @@ import { FairService } from '../fair.service';
 @Component({
   selector: 'risk-distribution-chart',
   templateUrl: './risk-distribution-chart.component.html',
-  styleUrls: ['./risk-distribution-chart.component.css']
+  styleUrls: ['./risk-distribution-chart.component.scss']
 })
 export class RiskDistributionChartComponent implements OnInit {
 

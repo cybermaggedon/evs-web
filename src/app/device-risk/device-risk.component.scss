@@ -86,5 +86,65 @@
 	border: 1px solid mat-color($accent, darker);
     }
 
+    .risks .category.category0 {
+	background-color: mat-color($primary, 100);
+	border-color: mat-color($primary, 300);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category1 {
+	background-color: mat-color($primary, 200);
+	border-color: mat-color($primary, 400);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category2 {
+	background-color: mat-color($primary, 300);
+	border-color: mat-color($primary, 500);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category3 {
+	background-color: mat-color($primary, 400);
+	border-color: mat-color($primary, 600);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category4 {
+	background-color: mat-color($primary, 500);
+	border-color: mat-color($primary, 700);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category5 {
+	background-color: mat-color($primary, 600);
+	border-color: mat-color($primary, 800);
+	color: mat-color($primary, 100);
+    }
+
+    .risks .category.category6 {
+	background-color: mat-color($primary, 700);
+	border-color: mat-color($primary, 900);
+	color: mat-color($primary, 100);
+    }
+
+    .risks .category.category7 {
+	background-color: mat-color($primary, 100);
+	border-color: mat-color($primary, 200);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category8 {
+	background-color: mat-color($primary, 300);
+	border-color: mat-color($primary, 400);
+	color: mat-color($primary, 900);
+    }
+
+    .risks .category.category9 {
+	background-color: mat-color($primary, 500);
+	border-color: mat-color($primary, 700);
+	color: mat-color($primary, 900);
+    }
+
 }
 

@@ -8,7 +8,7 @@ import { FairService } from '../fair.service';
 @Component({
   selector: 'probability-distribution-chart',
   templateUrl: './probability-distribution-chart.component.html',
-  styleUrls: ['./probability-distribution-chart.component.css']
+  styleUrls: ['./probability-distribution-chart.component.scss']
 })
 export class ProbabilityDistributionChartComponent implements OnInit {
 

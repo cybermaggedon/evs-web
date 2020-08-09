@@ -10,7 +10,7 @@ import { FairService } from '../fair.service';
 @Component({
   selector: 'loss-exceedence-chart',
   templateUrl: './loss-exceedence-chart.component.html',
-  styleUrls: ['./loss-exceedence-chart.component.css']
+  styleUrls: ['./loss-exceedence-chart.component.scss']
 })
 export class LossExceedenceChartComponent implements OnInit {
 

@@ -1,5 +1,5 @@
 <spinner *ngIf="loading"></spinner>
-<div *ngIf="summary.length > 0">
+<div class="risk-summary" *ngIf="summary.length > 0">
   <table>
     <thead>
       <tr>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let asset of summary">
-	<td class="name {{asset.class}}">{{asset.name}}</td>
+	<td class="riskname {{asset.class}}">{{asset.name}}</td>
 	<td class="number int {{asset.class}}">{{asset.min | currency:'':'symbol':'1.0-0'}}</td>
 	<td class="number int {{asset.class}}">{{asset.max | currency:'':'symbol':'1.0-0'}}</td>
 	<td class="number int {{asset.class}}">{{asset.mean | currency:'':'symbol':'1.0-0'}}</td>

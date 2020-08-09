@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-   	      "node_modules/@swimlane/ngx-datatable/themes/material.css",
+              "node_modules/@swimlane/ngx-datatable/themes/material.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "evs-web"
+  "defaultProject": "evs-web",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

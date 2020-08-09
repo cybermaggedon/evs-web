@@ -23,7 +23,7 @@ import {PageEvent} from '@angular/material/paginator';
 @Component({
   selector: 'risk-configuration',
   templateUrl: './risk-configuration.component.html',
-  styleUrls: ['./risk-configuration.component.css']
+  styleUrls: ['./risk-configuration.component.scss']
 })
 export class RiskConfigurationComponent implements OnInit {
 

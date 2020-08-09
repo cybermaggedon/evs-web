@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-threat-model',
   templateUrl: './threat-model.component.html',
-  styleUrls: ['./threat-model.component.css']
+  styleUrls: ['./threat-model.component.scss']
 })
 export class ThreatModelComponent implements OnInit {
 

@@ -24,7 +24,7 @@ import { FinalRiskService } from '../final-risk.service';
 @Component({
   selector: '[risk-selection]',
   templateUrl: './risk-selection.component.html',
-  styleUrls: ['./risk-selection.component.css']
+  styleUrls: ['./risk-selection.component.scss']
 })
 export class RiskSelectionComponent implements OnInit {
 

@@ -4,7 +4,7 @@ import { FairService } from '../fair.service';
 @Component({
     selector: 'risk-dashboard',
     templateUrl: './risk-dashboard.component.html',
-    styleUrls: ['./risk-dashboard.component.css']
+    styleUrls: ['./risk-dashboard.component.scss']
 })
 export class RiskDashboardComponent {
 

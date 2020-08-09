@@ -9,7 +9,7 @@ import {
 @Component({
     selector: 'event-filter',
     templateUrl: 'event-filter.component.html',
-    styleUrls: ['event-filter.component.css'],
+    styleUrls: ['event-filter.component.scss'],
 })
 export class EventFilterComponent implements OnInit {
 

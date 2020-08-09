@@ -4,7 +4,7 @@ import { WindowService, Window } from '../window.service';
 @Component({
     selector: 'slider',
     templateUrl: './slider.component.html',
-    styleUrls: ['./slider.component.css']
+    styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
 
