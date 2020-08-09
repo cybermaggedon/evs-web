@@ -1,0 +1,41 @@
+
+@import '~@angular/material/theming';
+
+@mixin risk-summary-component-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    risk-summary {
+
+	.number {
+	    text-align: right;
+	}
+
+	table, th, td {
+	    border: 1px solid #f0f0f0;
+	    border-collapse: collapse;
+	}
+
+	td {
+	    padding: 10px;
+	}
+
+	th {
+	    padding: 10px;
+	    background-color: mat-color($primary);
+	    color: white;
+	}
+
+	td.allrisks {
+	    font-size: large;
+	    color: mat-color($accent, lighter-contrast);
+	    background-color: mat-color($accent, lighter);
+	}
+
+    }
+
+}
+

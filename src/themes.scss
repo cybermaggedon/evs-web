@@ -3,15 +3,16 @@
 @import "theme-defs.scss";
 
 @include mat-core();
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-theme);
+$evs-app-theme: mat-light-theme($evs-app-primary, $evs-app-accent,
+				$evs-app-warn);
+@include angular-material-theme($evs-app-theme);
 
-@import "app/device-risk/device-risk.component.scss";
-@include device-risk-component-theme($app-theme);
+@import "app/device-risk/device-risk.theme.scss";
+@include device-risk-component-theme($evs-app-theme);
 
-@import "app/resource-risk/resource-risk.component.scss";
-@include resource-risk-component-theme($app-theme);
+@import "app/resource-risk/resource-risk.theme.scss";
+@include resource-risk-component-theme($evs-app-theme);
 
-@import "app/risk-summary/risk-summary.component.scss";
-@include risk-summary-component-theme($app-theme);
+@import "app/risk-summary/risk-summary.theme.scss";
+@include risk-summary-component-theme($evs-app-theme);
 

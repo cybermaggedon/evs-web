@@ -2,12 +2,12 @@
 @import '~@angular/material/theming';
 
 // Define the palettes for your theme using the Material Design palettes
-$app-primary: mat-palette($mat-blue, 700, 100, 800);
-$app-accent:  mat-palette($mat-blue-gray, 700, 100, 800);
-$app-warn:    mat-palette($mat-red);
+$evs-app-primary: mat-palette($mat-blue, 700, 100, 800);
+$evs-app-accent:  mat-palette($mat-blue-gray, 700, 100, 800);
+$evs-app-warn:    mat-palette($mat-red);
 
 // Custom Sass colors vars
-$primary: mat-color($app-primary);
-$accent: mat-color($app-accent);
-$warn: mat-color($app-warn);
+$primary: mat-color($evs-app-primary);
+$accent: mat-color($evs-app-accent);
+$warn: mat-color($evs-app-warn);
 
