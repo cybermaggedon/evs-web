@@ -43,9 +43,9 @@
 	}
 
 	.rowdetail div:hover .value {
-	    color: mat-color($accent, darker);
-	    background-color: mat-color($background, card);
-	    border-color: mat-color($accent);
+	    color: mat-color($accent, darker-contrast);
+	    background-color: mat-color($accent);
+	    border-color: #ccc;
 	}
 
     }
