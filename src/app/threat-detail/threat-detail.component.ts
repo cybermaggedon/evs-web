@@ -113,7 +113,6 @@ export class ThreatDetailComponent implements OnInit {
 	});
 
 	this.eventSvc.total.subscribe(t => {
-	    console.log("TOTAL ", t);
 	    this.eventsTotal = t;
 	});
 

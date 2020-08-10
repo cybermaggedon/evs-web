@@ -19,7 +19,6 @@ export class EventDetailComponent implements OnInit {
 
     clicked(item) {
 	this.termsSvc.add({ field: item.field, value: item.value });
-	console.log("CLICKED: ", item);
     }
 
 }

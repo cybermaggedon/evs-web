@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { RiskService } from './risk.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { throttle } from 'rxjs/operators';
+import { throttle, debounceTime, merge } from 'rxjs/operators';
 import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
 import { ModelStateService } from './model-state.service';
-import { FinalRiskService } from './final-risk.service';
+import { FinalRiskService, FinalRiskChange } from './final-risk.service';
 
 export interface FairReport {
     key : string;
@@ -49,11 +49,12 @@ export class FairService {
 
     riskModel : RiskModel;
 
-    lastValue : any = {};
+    lastValue = {};
 
     private riskProfiles : Object;
 
     updateCatEvent : Observable<void>;
+    updateModelEvent : Observable<void>;
 
     constructor(private http : HttpClient,
 		private riskService : RiskService,
@@ -65,24 +66,25 @@ export class FairService {
 	this.recalcEventSubject = new Subject<string>();
 	this.riskProfiles = {};
 
-        this.riskService.subject.
-	    pipe(throttle(() => interval(2000))).
-	    subscribe(m => {
-		this.riskModel = m;
-		this.updateFairModels();
-		this.updateCatModels();
-	    });
-
 	this.updateCatEvent = new Observable(obs => {
-	    this.finalRisk.subscribe(frc => {
+	    this.finalRisk.subscribe((frc : FinalRiskChange) => {
 		this.riskProfiles[frc.id] = frc.profile;
 		obs.next();
 	    });
 	});
 
-	this.updateCatEvent.
-	    pipe(throttle(() => interval(1000))).
+        this.updateModelEvent = new Observable(obs => {
+	    this.riskService.subscribe(m => {
+		this.riskModel = m;
+		obs.next();
+	    });
+	});
+
+	// Update models, but not more often than every 2 seconds.
+	this.updateCatEvent.pipe(merge(this.updateModelEvent)).
+	    pipe(debounceTime(1000)).
 	    subscribe(obs => {
+		this.updateFairModels();
 		this.updateCatModels();
 	    });
 
@@ -130,7 +132,9 @@ export class FairService {
     updateCatModels() : void {
 
 	const catModel = this.getCatMetaModel();
-	if (catModel == undefined) return;
+	if (catModel == undefined) {
+	    return;
+	}
 
 	this.updateLossModel("category", catModel);
 	this.updatePdfModel("category", catModel);
@@ -140,6 +144,8 @@ export class FairService {
     }
 
     updateFairModels() : void {
+
+	if (this.riskModel == undefined) return;
 
 	const devModel = this.getMetaModel(this.riskModel.devices,
 					   "All risks");
@@ -264,7 +270,9 @@ export class FairService {
 
     getCatMetaModel() {
 
-	if (this.riskModel == undefined) return;
+	if (this.riskModel == undefined) {
+	    return;
+	}
 
 	let cats = {};
 

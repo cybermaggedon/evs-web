@@ -15,15 +15,16 @@ import { Observable, Subject } from 'rxjs';
 export class RiskService {
 
     // Subject to push out RiskModel.
-    subject : Subject<RiskModel>;
+    private subject : Subject<RiskModel>;
 
     // Risk service subscribes to the Window service to receive slider
     // updates.
     constructor(private riskGraph : RiskGraphService,
 		private windowService : WindowService) {
 
-	this.subject = new Subject<RiskModel>();
 	this.windowed = new RiskModel();
+
+	this.subject = new Subject<RiskModel>();
 
         // Subscribe to receive periodic riskGraph updates.
 	this.riskGraph.subscribe(rg => {
@@ -63,6 +64,7 @@ export class RiskService {
 
     // Called when slider or risk data are updated.
     updateWindowed() : void {
+
 	if (this.risks == undefined) return;
 	if (this.window == undefined) return;
 
