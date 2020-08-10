@@ -1,54 +1,54 @@
-<body>
-  <h1>Eventstream dashboard</h1>
 
-  <!-- Top navigation buttons -->
-  <nav>
-    
-    <a mat-raised-button color="primary" [routerLink]="['/dashboard']"
-       queryParamsHandling="preserve">
-      Dashboard
-    </a>
-    
-    <a mat-raised-button color="primary" [routerLink]="['/risk']"
-       queryParamsHandling="preserve">
-      Risk reports
-    </a>
-    
-    <a mat-raised-button color="primary" [routerLink]="['/all-threats']"
-       queryParamsHandling="preserve">
-      Emerging threats
-    </a>
-    
-    <a mat-raised-button color="primary" [routerLink]="['/model']"
-       queryParamsHandling="preserve">
-      Risk configuration
-    </a>
-    
-    <a mat-raised-button color="primary"
-       [routerLink]="['/threat-model', 'overview']"
-       queryParamsHandling="preserve">
-      Threat model
-    </a>
-    
-    <a mat-raised-button color="primary" [routerLink]="['/event-view']"
-       queryParamsHandling="preserve">
-      Forensic events
-    </a>
-    
-    <a mat-raised-button color="accent" href="/kibana">Kibana</a>
-    
-    <a  mat-raised-button color="accent"href="/grafana">Metrics</a>
-    
-    <a mat-raised-button color="accent" href="/prometheus">Prometheus</a>
-    
-  </nav>
+<h1>Eventstream dashboard</h1>
 
-  <!-- Slider component -->
-  <slider></slider>
+<!-- Top navigation buttons -->
+<nav>
+  
+  <a mat-raised-button color="primary" [routerLink]="['/dashboard']"
+     queryParamsHandling="preserve">
+    Dashboard
+  </a>
+  
+  <a mat-raised-button color="primary" [routerLink]="['/risk']"
+     queryParamsHandling="preserve">
+    Risk reports
+  </a>
+  
+  <a mat-raised-button color="primary" [routerLink]="['/all-threats']"
+     queryParamsHandling="preserve">
+    Emerging threats
+  </a>
+  
+  <a mat-raised-button color="primary" [routerLink]="['/model']"
+     queryParamsHandling="preserve">
+    Risk configuration
+  </a>
+  
+  <a mat-raised-button color="primary"
+     [routerLink]="['/threat-model', 'overview']"
+     queryParamsHandling="preserve">
+    Threat model
+  </a>
+  
+  <a mat-raised-button color="primary" [routerLink]="['/event-view']"
+     queryParamsHandling="preserve">
+    Forensic events
+  </a>
+  
+  <a mat-raised-button color="accent" href="/kibana">Kibana</a>
+  
+  <a  mat-raised-button color="accent"href="/grafana">Metrics</a>
+  
+  <a mat-raised-button color="accent" href="/prometheus">Prometheus</a>
+  
+</nav>
 
-  <!-- The router component drops different views here. -->
-  <div>
-    <router-outlet></router-outlet>
-  </div>
+<!-- Slider component -->
+<slider></slider>
 
-</body>
+<!-- The router component drops different views here. -->
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+

@@ -3,6 +3,12 @@
 
 @mixin event-table-component-theme($theme) {
 
+    $config: mat-get-color-config($theme);
+    $primary: map-get($config, primary);
+    $accent: map-get($config, accent);
+    $foreground: map-get($config, foreground);
+    $background: map-get($config, background);
+
     event-table {
 
 	.mat-header-cell, .mat-cell {
@@ -17,7 +23,7 @@
 	}
 
 	.mat-row:hover {
-	    background: whitesmoke;
+	    background: mat-color($accent, 900);
 	}
 
 	.mat-table {
@@ -38,27 +44,27 @@
 	}
 
 	.mat-column-action.trigger_up {
-	    color: #808040;
+	    color: #c0c040;
 	}
 
 	.mat-column-action.unrecognised_stream {
-	    color: #408080;
+	    color: #80c080;
 	}
 
 	.mat-column-action.unrecognised_datagram {
-	    color: #408080;
+	    color: #80c0c0;
 	}
 
 	.mat-column-action.tls_change_cipher_spec {
-	    color: #904030;
+	    color: #b08080;
 	}
 
 	.mat-column-action.tls_application_data {
-	    color: #904030;
+	    color: #b08070;
 	}
 
 	.mat-column-action.tls_client_hello {
-	    color: #904030;
+	    color: #c06090;
 	}
 
 	.mat-column-action.tls_server_hello {
@@ -66,7 +72,7 @@
 	}
 
 	.mat-column-action.dns_message {
-	    color: #a02040;
+	    color: #e05060;
 	}
 
 	.mat-column-action.ntp_timestamp {
@@ -74,15 +80,15 @@
 	}
 
 	.mat-column-action.http_request {
-	    color: #4020a0;
+	    color: #8060a0;
 	}
 
 	.mat-column-action.http_response {
-	    color: #4020a0;
+	    color: #8040c0;
 	}
 
 	.mat-column-action.icmp_message {
-	    color: #6060c0;
+	    color: #8080e0;
 	}
 
     }

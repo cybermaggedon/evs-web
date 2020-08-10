@@ -1,8 +1,11 @@
 <spinner *ngIf="loading"></spinner>
-<canvas baseChart width="800" height="400"
-	[datasets]="chart.datasets"
-	[options]="chart.options"
-	[legend]="'true'"
-	[chartType]="'line'"
-	>
-</canvas>
+<div class="chart">
+  <canvas baseChart 
+	  [datasets]="chart.datasets"
+	  [options]="chart.options"
+	  [legend]="'true'"
+	  [chartType]="'line'"
+	  >
+  </canvas>
+</div>
+

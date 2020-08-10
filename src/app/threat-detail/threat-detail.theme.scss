@@ -10,139 +10,119 @@
 
     threat-detail {
 
-	.threats {
+	    .threats {
 
-	    .threat {
-		display: flex;
-		padding: 0;
-		margin: 0.4em;
-		float: left;
-		text-decoration: none;
+		    .threat {
 
-		* {
-		    padding: 0.4em;
-		    margin: 0;
-		}
+			    .kind {
+				color: white;
+				background: #404040;
+			    }
 
-		.kind {
-		    color: white;
-		    border-radius: 4px 0 0 4px;
-		    background: #404040;
-		}
+			    .kind.dnsquery {
+				background: #1f2041;
+			    }
 
-		.kind.dnsquery {
-		    background: #1f2041;
-		}
+			    .kind.uses {
+				background: #4b3f72;
+			    }
 
-		.kind.uses {
-		    background: #4b3f72;
-		}
+			    .kind.requests {
+				background: #119da4;
+			    }
 
-		.kind.requests {
-		    background: #119da4;
-		}
+			    .kind.connects {
+				background: #19647e;
+			    }
 
-		.kind.connects {
-		    background: #19647e;
-		}
+			    .kind.hasip {
+				background: #804028;
+			    }
 
-		.kind.hasip {
-		    background: #804028;
-		}
+			    .kind.indomain {
+				background: #408028;
+			    }
 
-		.kind.indomain {
-		    background: #408028;
-		}
+			    .kind.dnsresolve {
+				background: #a04060;
+			    }
 
-		.kind.dnsresolve {
-		    background: #a04060;
-		}
+			    .kind.serves {
+				background: #c08020;
+			    }
 
-		.kind.serves {
-		    background: #c08020;
-		}
+			    .id {
+				border-color: #808080;
+				background: #c0c0c0;
+				color: black;
+			    }
 
-		.id {
-		    border-radius: 0 4px 4px 0;
-		    border: 1px solid #808080;
-		    background: #c0c0c0;
-		    color: black;
-		    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
-		    font-size: 0.9em;
+			    .id.dnsquery {
+				border-color: #1f2041;
+				background: #cfd0f1;
+			    }
+			
+			    .id.uses{
+				border-color: #4b3f72;
+				background: #cbbff2;
+			    }
 
-		}
+			    .id.requests {
+				border-color: #119da4;
+				background: #b1ede4
+			    }
 
-		.id.dnsquery {
-		    border: 1px solid #1f2041;
-		    background: #cfd0f1;
-		}
-		    
-		.id.uses{
-		    border: 1px solid #4b3f72;
-		    background: #cbbff2;
-		}
+			    .id.connects {
+				border-color: #19647e;
+				background: #99c4fe;
+			    }
 
-		.id.requests {
-		    border: 1px solid #119da4;
-		    background: #b1ede4
-		}
+			    .id.hasip {
+				border-color: #804028;
+				background: #f0c0b8;
+			    }
 
-		.id.connects {
-		    border: 1px solid #19647e;
-		    background: #99c4fe;
-		}
+			    .id.indomain {
+				border-color: #408028;
+				background: #c0f0b8;
+			    }
 
-		.id.hasip {
-		    border: 1px solid #804028;
-		    background: #f0c0b8;
-		}
+			    .id.dnsresolve {
+				border-color: #a04060;
+				background: #f8d8e8;
+			    }
 
-		.id.indomain {
-		    border: 1px solid #408028;
-		    background: #c0f0b8;
-		}
+			    .id.serves {
+				border-color: #c08020;
+				background: #f8d880;
+			    }
 
-		.id.dnsresolve {
-		    border: 1px solid #a04060;
-		    background: #f8d8e8;
-		}
+			    .age {
+				color: mat-color($foreground, text);
+			    }
 
-		.id.serves {
-		    border: 1px solid #c08020;
-		    background: #f8d880;
-		}
+		    }
 
-		.age {
-		    color: black;
-		}
+		    .threat:hover {
+
+			    .kind {
+				color: #6080a0;
+				background-color: #ccc;
+			    }
+
+			    .id {
+				color: #6080a0;
+				background-color: #ccc;
+				border-color: #888;
+			    }
+
+			    .age {
+				color: #6080a0;
+			    }
+
+		    }
 
 	    }
-
-	    .threat a:hover {
-		color:  #ffffff;
-	    }
-
-	    .threat:hover .kind {
-		color: #6080a0;
-		background-color: #ccc;
-	    }
-
-	    .threat:hover .id {
-		color: #6080a0;
-		background-color: #ccc;
-		border: 1px solid #888;
-	    }
-
-	    .threat:hover .age {
-		color: #6080a0;
-	    }
-
-	}
-
-	.bottom {
-	    padding: 10px;
-	    clear: left;
-	}
 
     }
 

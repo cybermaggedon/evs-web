@@ -2,10 +2,11 @@
 @import '~@angular/material/theming';
 @import "theme-defs.scss";
 
-@include mat-core($evs-typography);
-$evs-app-theme: mat-light-theme($evs-app-primary, $evs-app-accent,
+$evs-app-theme: mat-dark-theme($evs-app-primary, $evs-app-accent,
 				$evs-app-warn);
 @include angular-material-theme($evs-app-theme);
+
+@include mat-core($evs-typography);
 
 @import "app/device-risk/device-risk.theme.scss";
 @include device-risk-component-theme($evs-app-theme);

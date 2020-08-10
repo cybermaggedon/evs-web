@@ -4,8 +4,12 @@
 
 html, body { height: 100%; }
 
+    $global-foreground: map-get($evs-app-theme, foreground);
+    $global-background: map-get($evs-app-theme, background);
+
 body {
     margin: 0;
+    padding: 10px;
     font-family: mat-font-family($evs-typography);
 }
 

@@ -26,21 +26,21 @@
 	}
 
 	.value {
-	    color: mat-color($primary, darker);
+	    color: mat-color($primary, lighter-contrast);
 	    border-color: mat-color($primary, darker);
-	    background: mat-color($background, card);
+	    background: mat-color($primary, lighter);
 	}
 
 	.rowdetail div:hover .field {
 	    color: mat-color($accent, darker-contrast);
 	    background-color: mat-color($accent);
-	    border-color: #ccc;
+	    border-color: mat-color($accent, darker-contrast);
 	}
 
 	.rowdetail div:hover .value {
 	    color: mat-color($accent, darker-contrast);
 	    background-color: mat-color($accent);
-	    border-color: #ccc;
+	    border-color: mat-color($accent, darker-contrast);
 	}
 
     }

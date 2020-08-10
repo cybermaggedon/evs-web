@@ -2,10 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { toxy, currencyTick } from '../charts';
 import { colours, bgColours } from '../chart-colours';
-
 import { FairService } from '../fair.service';
-
-//import { createLossChart } 
 
 @Component({
   selector: 'loss-exceedence-chart',
@@ -52,15 +49,22 @@ export class LossExceedenceChartComponent implements OnInit {
 	}
 
 	let options = {
+	    responsive: true,
 	    animation: { duration: 0 },
-	    responsive: false,
-	    maintainAspectRatio: false,
+	    maintainAspectRatio: true,
+	    aspectRatio: 2,
 	    scales: {
 		xAxes: [
 		    {
 			type: 'linear',
 			display: true,
+			scaleLabel: {
+			    display: true,
+			    labelString: 'expected loss',
+			    fontColor: 'rgb(210, 210, 210)',
+			},
 			ticks: {
+			    fontColor: 'rgb(210, 210, 210)',
 			    maxTicksLimit: 5,
 			    callback: currencyTick
 			}
@@ -70,11 +74,23 @@ export class LossExceedenceChartComponent implements OnInit {
 		    {
 			type: 'linear',
 			display: true,
+			scaleLabel: {
+			    display: true,
+			    labelString: 'probability',
+			    fontColor: 'rgb(210, 210, 210)',
+			},
 			ticks: {
+			    fontColor: 'rgb(210, 210, 210)',
 			    maxTicksLimit: 6,
 			}
 		    }
 		]
+	    },
+	    legend: {
+		position: 'right',
+		labels: {
+		    fontColor: 'rgb(210, 210, 210)'
+		}
 	    }
 	};
 
@@ -96,3 +112,4 @@ export class LossExceedenceChartComponent implements OnInit {
     }
 
 }
+

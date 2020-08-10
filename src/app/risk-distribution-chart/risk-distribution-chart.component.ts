@@ -2,10 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { toxy, currencyTick } from '../charts';
 import { colours, bgColours } from '../chart-colours';
-
 import { FairService } from '../fair.service';
-
-//import { createLossChart } 
 
 @Component({
   selector: 'risk-distribution-chart',
@@ -51,17 +48,24 @@ export class RiskDistributionChartComponent implements OnInit {
 	}
 
 	let options = {
+	    responsive: true,
 	    animation: { duration: 0 },
-	    responsive: false,
-	    maintainAspectRatio: false,
+	    maintainAspectRatio: true,
+	    aspectRatio: 2,
 	    scales: {
 		xAxes: [
 		    {
 			type: 'linear',
 			display: true,
+			scaleLabel: {
+			    display: true,
+			    labelString: 'expected loss',
+			    fontColor: 'rgb(210, 210, 210)'
+			},
 			ticks: {
 			    maxTicksLimit: 5,
-			    callback: currencyTick
+			    callback: currencyTick,
+			    fontColor: 'rgb(210, 210, 210)'
 			}
 		    }
 		],
@@ -69,11 +73,23 @@ export class RiskDistributionChartComponent implements OnInit {
 		    {
 			type: 'linear',
 			display: true,
+			scaleLabel: {
+			    display: true,
+			    labelString: 'samples',
+			    fontColor: 'rgb(210, 210, 210)'
+			},
 			ticks: {
 			    maxTicksLimit: 6,
+			    fontColor: 'rgb(210, 210, 210)'
 			}
 		    }
 		]
+	    },
+	    legend:  {
+		position: 'right',
+		labels: {
+		    fontColor: 'rgb(210, 210, 210)'
+		}
 	    }
 	};
 

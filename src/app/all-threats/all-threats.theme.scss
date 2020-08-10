@@ -3,6 +3,11 @@
 
 @mixin all-threats-component-theme($theme) {
 
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     all-threats {
 
 	.threats {
@@ -75,28 +80,29 @@
 		}
 
 		.age {
-		    color: black;
+		    color: mat-color($foreground, text);
 		}
 
 	    }
 
-	    .threat a:hover {
-		color:  #ffffff;
-	    }
+	    .threat:hover {
 
-	    .threat:hover .kind {
-		color: #6080a0;
-		background-color: #ccc;
-	    }
+		.kind {
+		    color: #6080a0;
+		    background-color: #ccc;
+		    border-color: #888;
+		}
 
-	    .threat:hover .id {
-		color: #6080a0;
-		background-color: #ccc;
-		border-color: #888;
-	    }
+		.id {
+		    color: #6080a0;
+		    background-color: #ccc;
+		    border-color: #888;
+		}
 
-	    .threat:hover .age {
-		color: #6080a0;
+		.age {
+		    color: #6080a0;
+		}
+
 	    }
 	    
 	}
