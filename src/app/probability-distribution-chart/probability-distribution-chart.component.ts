@@ -51,7 +51,7 @@ export class ProbabilityDistributionChartComponent implements OnInit {
 	    responsive: true,
 	    animation: { duration: 0 },
 	    maintainAspectRatio: true,
-	    aspectRatio: 2,
+	    aspectRatio: 3,
 	    scales: {
 		xAxes: [
 		    {
