@@ -16,3 +16,15 @@ $evs-app-theme: mat-light-theme($evs-app-primary, $evs-app-accent,
 @import "app/risk-summary/risk-summary.theme.scss";
 @include risk-summary-component-theme($evs-app-theme);
 
+@import "app/threat-detail/threat-detail.theme.scss";
+@include threat-detail-component-theme($evs-app-theme);
+
+@import "app/all-threats/all-threats.theme.scss";
+@include all-threats-component-theme($evs-app-theme);
+
+@import "app/event-table/event-table.theme.scss";
+@include event-table-component-theme($evs-app-theme);
+
+@import "app/event-detail/event-detail.theme.scss";
+@include event-detail-component-theme($evs-app-theme);
+
