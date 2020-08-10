@@ -2,7 +2,7 @@
 @import '~@angular/material/theming';
 @import "theme-defs.scss";
 
-@include mat-core();
+@include mat-core($evs-typography);
 $evs-app-theme: mat-light-theme($evs-app-primary, $evs-app-accent,
 				$evs-app-warn);
 @include angular-material-theme($evs-app-theme);
@@ -34,3 +34,8 @@ $evs-app-theme: mat-light-theme($evs-app-primary, $evs-app-accent,
 @import "app/category-detail/category-detail.theme.scss";
 @include category-detail-component-theme($evs-app-theme);
 
+/*
+@include mat-base-typography($evs-typography);
+@include mat-checkbox-typography($evs-typography);
+@include angular-material-typography($evs-typography);
+*/

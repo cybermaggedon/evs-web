@@ -1,12 +1,13 @@
 
 @import '~@angular/material/theming';
 
-@mixin event-detail-component-theme($theme) {
+@mixin event-detail-component-color($theme) {
 
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
+    $config: mat-get-color-config($theme);
+    $primary: map-get($config, primary);
+    $accent: map-get($config, accent);
+    $foreground: map-get($config, foreground);
+    $background: map-get($config, background);
 
     event-detail {
 
@@ -22,18 +23,12 @@
 	    color: mat-color($primary, darker-contrast);
 	    border-color: mat-color($primary, darker);
 	    background: mat-color($primary, darker);
-/*
-	    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
-*/
 	}
 
 	.value {
 	    color: mat-color($primary, darker);
 	    border-color: mat-color($primary, darker);
 	    background: mat-color($background, card);
-/*
-	    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
-*/
 	}
 
 	.rowdetail div:hover .field {
@@ -50,5 +45,24 @@
 
     }
 
+}
+
+@mixin event-detail-component-typography($theme) {
+    
+    $config: mat-get-typography-config($theme);
+
+    event-detail {
+	font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+    }
+
+}
+
+@mixin event-detail-component-theme($theme) {
+    $color: mat-get-color-config($theme);
+    $typography: mat-get-typography-config($theme);
+/*    @if $color != null {*/
+	@include event-detail-component-color($color);
+/*    }*/
+	@include event-detail-component-typography($typography);
 }
 

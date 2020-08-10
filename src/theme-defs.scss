@@ -11,3 +11,8 @@ $primary: mat-color($evs-app-primary);
 $accent: mat-color($evs-app-accent);
 $warn: mat-color($evs-app-warn);
 
+$evs-typography: mat-typography-config(
+    $font-family: 'Roboto, "Helvetica Neue", sans-serif'
+/*    $font-family: '"Roboto Mono", Consolas, Menlo, Courier, monospace'*/
+);
+
