@@ -8,21 +8,9 @@
 	.threats {
 
 	    .threat {
-		
-		display: flex;
-		padding: 0;
-		margin: 0.4em;
-		float: left;
-		text-decoration: none;
-
-		* {
-		    padding: 0.4em;
-		    margin: 0;
-		}
 
 		.kind {
 		    color: white;
-		    border-radius: 4px 0 0 4px;
 		    background: #404040;
 		}
 
@@ -51,39 +39,38 @@
 		}
 
 		.id {
-		    border-radius: 0 4px 4px 0;
-		    border: 1px solid #808080;
+		    border-color: #808080;
 		    background: #c0c0c0;
 		    color: black;
 		}
 
 		.id.server {
-		    border: 1px solid #119da4;
+		    border-color: #119da4;
 		    background: #b1ede4
 		}
 
 		.id.ip {
-		    border: 1px solid #19647e;
+		    border-color: #19647e;
 		    background: #99c4fe;
 		}
 
 		.id.device {
-		    border: 1px solid #804028;
+		    border-color: #804028;
 		    background: #f0c0b8;
 		}
 
 		.id.domain {
-		    border: 1px solid #408028;
+		    border-color: #408028;
 		    background: #c0f0b8;
 		}
 
 		.id.useragent {
-		    border: 1px solid #a04060;
+		    border-color: #a04060;
 		    background: #f8d8e8;
 		}
 
 		.id.hostname {
-		    border: 1px solid #c08020;
+		    border-color: #c08020;
 		    background: #f8d880;
 		}
 
@@ -105,17 +92,13 @@
 	    .threat:hover .id {
 		color: #6080a0;
 		background-color: #ccc;
-		border: 1px solid #888;
+		border-color: #888;
 	    }
 
 	    .threat:hover .age {
 		color: #6080a0;
 	    }
 	    
-	}
-	
-	.bottom {
-	    padding: 10px;
 	}
 
     }

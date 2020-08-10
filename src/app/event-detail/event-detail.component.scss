@@ -1,0 +1,45 @@
+
+.rowdetail {
+    border-width: 1px;
+    border-style: solid;
+    overflow: auto;
+    clear: both;
+    margin: 4px;
+    padding: 8px;
+}
+
+.rowdetail div {
+    border-width: 1px;
+    border-style: solid;
+    float: left;
+    margin: 1px 1.3em 1px 1px;
+    padding: 2px;
+    font-size: small;
+    display: flex;
+}
+
+.field {
+    border-radius: 4px 0 0 4px;
+    padding: 2px 6px 2px 6px;
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+/*
+	    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+*/
+}
+
+.value {
+    border-radius: 0 4px 4px 0;
+    padding: 2px 6px 2px 6px;
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+/*
+	    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+*/
+}
+
+
+
+

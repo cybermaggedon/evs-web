@@ -11,27 +11,15 @@
     resource-risk {
 
 	.targets {
-	    list-style-type: none;
 
 	    li {
-		margin: 0.4em;
 	
 		.target {
-		    display: flex;
-		    margin: 0;
-		    
-		    a {
-			text-decoration: none;
-		    }
 
 		    .score {
-			border: 1px solid mat-color($primary, darker);
-			margin: 0;
+			border-color: mat-color($primary, darker);
 			background-color: mat-color($primary);
 			color: mat-color($primary, darker-contrast);
-			padding: 0.6em;
-			border-radius: 4px 0 0 4px;
-			height: 1.4em;
 		    }
 
 		    .score:hover {
@@ -41,46 +29,30 @@
 		    }
 
 		    .name {
-			border: 1px solid mat-color($primary, darker);
-			margin: 0;
+			border-color: mat-color($primary, darker);
 			background-color: mat-color($background, card);
 			color: mat-color($primary, darker);
-			padding: 0.6em;
-			width: 20em;
-			height: 1.4em;
-			overflow: hidden;
 		    }
 
 		    .name:hover {
 			color: mat-color($accent, darker-contrast);
 			background-color: mat-color($accent);
-			border: 1px solid mat-color($accent, darker);
+			border-color: mat-color($accent, darker);
 		    }
 
 		    .risks {
-			margin: 0;
-			padding: 0;
-			width: 525px;
-			display: flex;
-		    
+
 			.category {
-			    border: 1px solid  mat-color($primary, darker);
+			    border-color: mat-color($primary, darker);
 			    background-color: mat-color($primary);
 			    color:  mat-color($primary, darker-contrast);
 			    margin-color: mat-color($primary, darker);
-			    white-space: nowrap;
-			    height: 1.4em;
-			    padding: 0.6em;
-			    overflow: hidden;
-			    margin-left: 1px;
-			    margin-right: 1px;
-			    display: flex;
 			}
 
 			.category:hover {
 			    color: mat-color($accent, darker-contrast);
 			    background-color: mat-color($accent);
-			    border: 1px solid mat-color($accent, darker);
+			    border-color: mat-color($accent, darker);
 			}
 
 			.category0 {

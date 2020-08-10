@@ -1,0 +1,62 @@
+
+.threats {
+
+    .threat {
+	display: flex;
+	padding: 0;
+	margin: 0.4em;
+	float: left;
+	text-decoration: none;
+    }
+
+    .threat * {
+	padding: 0.4em;
+	margin: 0;
+    }
+
+    .threat .kind {
+	border-radius: 4px 0 0 4px;
+    }
+
+    .threat .id {
+	border-radius: 0 4px 4px 0;
+	border-width: 1px;
+	border-style: solid;
+    }
+
+    .threat .age {
+	color: black;
+    }
+
+    .threat .kind.device {
+	background: #1f2041;
+    }
+
+    .threat .id.device {
+	border-width: 1px;
+	border-style: solid;
+	background: #cfd0f1;
+/*	font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+	font-size: 0.9em;
+*/
+    }
+
+    .threat .kind.resource {
+	background: #119da4;
+    }
+
+    .threat .id.resource {
+	border-width: 1px;
+	border-style: solid;
+	/*
+	font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
+	font-size: 0.9em;
+*/
+    }
+
+}
+
+.bottom {
+    padding: 10px;
+    clear: left;
+}
