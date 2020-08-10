@@ -28,24 +28,24 @@
 	}
 
 	.value {
-	    color: black;
-	    border-color: #202020;
-	    background: #f0f0d0;
+	    color: mat-color($primary, darker);
+	    border-color: mat-color($primary, darker);
+	    background: mat-color($background, card);
 /*
 	    font-family: "Roboto Mono", Consolas, Menlo, Courier, monospace;
 */
 	}
 
 	.rowdetail div:hover .field {
-	    color: #6080a0;
-	    background-color: #ccc;
+	    color: mat-color($accent, darker-contrast);
+	    background-color: mat-color($accent);
 	    border-color: #ccc;
 	}
 
 	.rowdetail div:hover .value {
-	    color: #6080a0;
-	    background-color: #ccc;
-	    border-color: #888;
+	    color: mat-color($accent, darker);
+	    background-color: mat-color($background, card);
+	    border-color: mat-color($accent);
 	}
 
     }

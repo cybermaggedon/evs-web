@@ -25,7 +25,7 @@
 		    .score:hover {
 			color: mat-color($accent, darker-contrast);
 			background-color: mat-color($accent);
-			border: 1px solid mat-color($accent, darker);
+			border-color: mat-color($accent, darker);
 		    }
 
 		    .name {
