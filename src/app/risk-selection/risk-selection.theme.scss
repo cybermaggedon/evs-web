@@ -1,0 +1,46 @@
+
+@import '~@angular/material/theming';
+
+@mixin risk-selection-component-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    [risk-selection] {
+
+	td {
+	    padding: 8px;
+	    border: 1px solid mat-color($foreground);
+	}
+
+	.riskname {
+	    width: 30em;
+	}
+
+	.selector {
+	}
+
+	.probability {
+	    width: 4em;
+	    text-align: center;
+	}
+
+	.fair {
+
+	    .factor {
+		font-weight: bold;
+		color: mat-color($primary);
+	    }
+
+	    .fair .value {
+		color: mat-color($foreground);
+	    }
+
+	}
+
+    }
+
+}
+
