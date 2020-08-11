@@ -5,7 +5,7 @@
 
   <mat-tab label="Overview">
 
-    <div id="overview">
+    <div id="overview" class="threatmodel">
       <ng-container *ngFor="let threat of threats">
 	<div class="threat" id="{{threat.element}}"
 	     *ngIf="threat.partition == 'overview'">
@@ -32,7 +32,7 @@
 
   <mat-tab label="Production">
 
-    <div id="production">
+    <div id="production" class="threatmodel">
       <ng-container *ngFor="let threat of threats">
 	<div class="threat" id="{{threat.element}}"
 	     *ngIf="threat.partition == 'production'">

@@ -5,7 +5,7 @@ import { ThreatModelService, ThreatModel } from '../threat-model.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-threat-model',
+  selector: 'threat-model',
   templateUrl: './threat-model.component.html',
   styleUrls: ['./threat-model.component.scss']
 })

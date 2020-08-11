@@ -3,7 +3,8 @@
     width: 1052px;
     height: 744px;
     background-image: url("/assets/threat-model.png");
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     padding: 0px;
     position: relative;
 }
@@ -12,7 +13,8 @@
     width: 1052px;
     height: 744px;
     background-image: url("/assets/threat-model-prod.png");
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     padding: 0px;
     position: relative;
 }
@@ -21,7 +23,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 110px;
     left: 285px;
     margin: 0px;
@@ -31,7 +34,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 185px;
     left: 285px;
     margin: 0px;
@@ -41,7 +45,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 30px;
     left: 290px;
     margin: 0px;
@@ -51,7 +56,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 73px;
     left: 480px;
     margin: 0px;
@@ -61,7 +67,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 395px;
     left: 860px;
     margin: 0px;
@@ -71,7 +78,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 660px;
     left: 105px;
     margin: 0px;
@@ -81,7 +89,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 600px;
     left: 310px;
     margin: 0px;
@@ -91,7 +100,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 645px;
     left: 520px;
     margin: 0px;
@@ -101,7 +111,8 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
     top: 660px;
     left: 105px;
     margin: 0px;
@@ -111,7 +122,10 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    color: black;
     top: 115px;
     left: 765px;
     margin: 0px;
@@ -121,7 +135,10 @@
     width: 100px;
     height: 2em;
     position: absolute;
-    border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    color: black;
     top: 540px;
     left: 810px;
     margin: 0px;
@@ -150,56 +167,10 @@ A.risk {
     white-space: nowrap;
     height: 2.0em;
     padding: 0px;
-    color: white;
     overflow: hidden;
     margin: 0px;
     display: block;
     text-decoration: none;
-}
-
-a.risk:hover {
-    background-color: #ccc;
-    color: #6080a0;
-}
-
-.risk.category0 {
-    background-color: #4b3f72;
-}
-
-.risk.category1 {
-    background-color: #119da4;
-}
-
-.risk.category2 {
-    background-color: #19647e;
-}
-
-.risk.category3 {
-    background-color: #804028;
-}
-
-.risk.category4 {
-    background-color: #408028;
-}
-
-.risk.category5 {
-    background-color: #a04060;
-}
-
-.risk.category6 {
-    background-color: #c08020;
-}
-
-.risk.category7 {
-    background-color: #2080c0;
-}
-
-.risk.category8 {
-    background-color: #80a020;
-}
-
-.risk.category9 {
-    background-color: #4040a0;
 }
 
 .bottom {
