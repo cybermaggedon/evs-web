@@ -1,0 +1,24 @@
+
+.number {
+    text-align: right;
+}
+
+table, th, td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+    font-size: small;
+}
+
+th {
+    padding: 10px;
+}
+
+td.allrisks {
+    font-size: x-large;
+}
+

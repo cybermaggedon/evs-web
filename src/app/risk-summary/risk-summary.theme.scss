@@ -10,29 +10,19 @@
 
     risk-summary {
 
-	.number {
-	    text-align: right;
-	}
-
 	table, th, td {
-	    border: 1px solid #f0f0f0;
-	    border-collapse: collapse;
-	}
-
-	td {
-	    padding: 10px;
+	    border-color: mat-color($foreground);
 	}
 
 	th {
 	    padding: 10px;
-	    background-color: mat-color($primary);
-	    color: white;
+	    background-color: mat-color($primary, darker);
+	    color: mat-color($primary, darker-contrast);
 	}
 
 	td.allrisks {
-	    font-size: large;
-	    color: mat-color($accent, lighter-contrast);
-	    background-color: mat-color($accent, lighter);
+	    color: mat-color($accent, darker-contrast);
+	    background-color: mat-color($accent, darker);
 	}
 
     }

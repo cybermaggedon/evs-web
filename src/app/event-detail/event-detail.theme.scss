@@ -26,9 +26,14 @@
 	}
 
 	.value {
+	    /*
 	    color: mat-color($primary, lighter-contrast);
 	    border-color: mat-color($primary, darker);
 	    background: mat-color($primary, lighter);
+*/
+	    color: mat-color($accent, darker-contrast);
+	    border-color: mat-color($primary, darker);
+	    background: mat-color($accent, darker);
 	}
 
 	.rowdetail div:hover .field {
