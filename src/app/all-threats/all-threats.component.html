@@ -1,17 +1,7 @@
 <h2>All threats</h2>
 
-<mat-expansion-panel [expanded]=true>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Threat observations
-    </mat-panel-title>
-    <mat-panel-description>
-      {{threatCount}} observations
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <seeds [seeds]="threats">
-  </seeds>
-</mat-expansion-panel>
+<seeds [seeds]="threats">
+</seeds>
 
 <div class="bottom">
   <button (click)="goBack()">go back</button>
