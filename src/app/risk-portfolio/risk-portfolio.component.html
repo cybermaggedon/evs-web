@@ -1,0 +1,28 @@
+  <div *ngIf="portfolio.length == 0">
+    <i>No assets.</i>
+  </div>
+  <ul class="targets">
+    <li *ngFor="let target of portfolio.slice(0, maxItems)">
+      <div class="target">
+        <a class="score" [routerLink]="['/threat', target.id]"
+	   queryParamsHandling="preserve">
+	  {{target.getRiskScore().toFixed(2)}}
+	</a>
+        <a class="name" [routerLink]="['/threat', target.id]"
+	   queryParamsHandling="preserve">
+	  {{target.id}}
+	</a>
+        <div class="risks">
+          <div *ngFor="let risk of target.risks">
+            <a class="category {{risk.className()}}"
+	       [routerLink]="['/category', risk.category]"
+	       queryParamsHandling="preserve"
+	       style="width: {{risk.risk * 300}}px">
+	      {{risk.category}}
+	    </a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+

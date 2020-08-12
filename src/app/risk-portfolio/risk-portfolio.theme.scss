@@ -1,0 +1,126 @@
+
+@import '~@angular/material/theming';
+
+@mixin risk-portfolio-component-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    risk-portfolio {
+
+	.targets {
+
+	    li {
+	
+		.target {
+
+		    .score {
+			border-color: mat-color($primary, darker);
+			background-color: mat-color($primary);
+			color: mat-color($primary, darker-contrast);
+		    }
+
+		    .score:hover {
+			color: mat-color($accent, darker-contrast);
+			background-color: mat-color($accent);
+			border-color: mat-color($accent, darker);
+		    }
+
+		    .name {
+			border-color: mat-color($primary, darker);
+			background-color: mat-color($background, card);
+			color: mat-color($primary, darker-contrast);
+		    }
+
+		    .name:hover {
+			color: mat-color($accent, darker-contrast);
+			background-color: mat-color($accent);
+			border-color: mat-color($accent, darker);
+		    }
+
+		    .risks {
+
+			.category {
+			    border-color: mat-color($primary, darker);
+			    background-color: mat-color($primary);
+			    color:  mat-color($primary, darker-contrast);
+			    margin-color: mat-color($primary, darker);
+			}
+
+			.category:hover {
+			    color: mat-color($accent, darker-contrast);
+			    background-color: mat-color($accent);
+			    border-color: mat-color($accent, darker);
+			}
+
+			.category0 {
+			    background-color: mat-color($primary, 100);
+			    border-color: mat-color($primary, 300);
+			    color: mat-color($primary, 900);
+			}
+
+			.category1 {
+			    background-color: mat-color($primary, 200);
+			    border-color: mat-color($primary, 400);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category2 {
+			    background-color: mat-color($primary, 300);
+			    border-color: mat-color($primary, 500);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category3 {
+			    background-color: mat-color($primary, 400);
+			    border-color: mat-color($primary, 600);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category4 {
+			    background-color: mat-color($primary, 500);
+			    border-color: mat-color($primary, 700);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category5 {
+			    background-color: mat-color($primary, 600);
+			    border-color: mat-color($primary, 800);
+			    color: mat-color($primary, 100);
+			}
+			
+			.category6 {
+			    background-color: mat-color($primary, 700);
+			    border-color: mat-color($primary, 900);
+			    color: mat-color($primary, 100);
+			}
+			
+			.category7 {
+			    background-color: mat-color($primary, 100);
+			    border-color: mat-color($primary, 200);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category8 {
+			    background-color: mat-color($primary, 300);
+			    border-color: mat-color($primary, 400);
+			    color: mat-color($primary, 900);
+			}
+			
+			.category9 {
+			    background-color: mat-color($primary, 500);
+			    border-color: mat-color($primary, 700);
+			    color: mat-color($primary, 900);
+			}
+
+		    }
+		}
+	    }
+	}
+
+    }
+
+}
+

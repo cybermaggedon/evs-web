@@ -9,7 +9,6 @@ import { RiskModel } from '../risk';
 })
 export class DeviceRiskComponent implements OnInit {
 
-
     constructor(private riskSvc : RiskService) {
         // Initialise.
         this.model = new RiskModel();

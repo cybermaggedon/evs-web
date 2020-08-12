@@ -38,6 +38,9 @@ $evs-app-theme: mat-dark-theme($evs-app-primary, $evs-app-accent,
 @import "app/threat-model/threat-model.theme.scss";
 @include threat-model-component-theme($evs-app-theme);
 
+@import "app/risk-portfolio/risk-portfolio.theme.scss";
+@include risk-portfolio-component-theme($evs-app-theme);
+
 /*
 @include mat-base-typography($evs-typography);
 @include mat-checkbox-typography($evs-typography);
