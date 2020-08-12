@@ -1,20 +1,22 @@
 
-export function currencyTick(value, index, values) {
+import { getCurrencySymbol, formatCurrency } from '@angular/common';
 
-    if (value > 1000000000000){
-	return '€' + (value / 1000000000000).toFixed(1) + 'T';
+export function currencyTick(value, symbol) {
+    
+    if (value >= 1000000000000) {
+	return symbol + (value / 1000000000000).toFixed(1) + 'T';
     }
-    if (value > 1000000000){
-	return '€' + (value / 1000000000).toFixed(1) + 'B';
+    if (value >= 1000000000) {
+	return symbol + (value / 1000000000).toFixed(1) + 'B';
     }
-    if (value > 1000000){
-	return '€' + (value / 1000000).toFixed(1) + 'M';
+    if (value >= 1000000) {
+	return symbol + (value / 1000000).toFixed(1) + 'M';
     }
-    if (value > 1000){
-	return '€' + (value / 1000).toFixed(1) + 'k';
+    if (value >= 1000) {
+	return symbol + (value / 1000).toFixed(1) + 'k';
     }
     
-    return '€' + value;
+    return symbol + value;
 }
 
 export function toxy(ds) {

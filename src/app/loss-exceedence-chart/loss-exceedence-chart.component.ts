@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { formatCurrency, getCurrencySymbol } from '@angular/common';
+import { getCurrencySymbol } from '@angular/common';
 import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
-import { toxy } from '../charts';
+import { toxy, currencyTick } from '../charts';
 import { colours, bgColours } from '../chart-colours';
 import { FairService } from '../fair.service';
 
@@ -56,9 +56,9 @@ export class LossExceedenceChartComponent implements OnInit {
 	let locale = this.locale;
 	let currency = this.currency;
 
-	let fmtCurrency = function(value, index, values) {
+	let fmtCurrency = function(value, index, values) {    
 	    var symbol = getCurrencySymbol(currency, "wide");
-	    return formatCurrency(value, locale, symbol, undefined, "1.0-0");
+	    return currencyTick(value, symbol);
 	}
 
 	let options = {

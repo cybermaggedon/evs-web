@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { getCurrencySymbol } from '@angular/common';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
 import { toxy, currencyTick } from '../charts';
 import { colours, bgColours } from '../chart-colours';
@@ -13,8 +15,11 @@ export class RiskDistributionChartComponent implements OnInit {
 
     loading = true;
     
-    constructor(private fairSvc : FairService) { }
-    
+    constructor(private fairSvc : FairService,
+    		@Inject(LOCALE_ID) private locale: string,
+		@Inject(DEFAULT_CURRENCY_CODE) private currency: string) {
+    }
+
     chart : any = {
 	datasets: [
 	    {
@@ -47,6 +52,14 @@ export class RiskDistributionChartComponent implements OnInit {
 	    count += 1;
 	}
 
+	let locale = this.locale;
+	let currency = this.currency;
+
+	let fmtCurrency = function(value, index, values) {    
+	    var symbol = getCurrencySymbol(currency, "wide");
+	    return currencyTick(value, symbol);
+	}
+
 	let options = {
 	    responsive: true,
 	    animation: { duration: 0 },
@@ -64,7 +77,7 @@ export class RiskDistributionChartComponent implements OnInit {
 			},
 			ticks: {
 			    maxTicksLimit: 5,
-			    callback: currencyTick,
+			    callback: fmtCurrency,
 			    fontColor: 'rgb(210, 210, 210)'
 			}
 		    }
