@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Seed } from '../seed';
+import { age } from '../age';
 
 @Component({
   selector: 'seeds',
@@ -17,4 +18,6 @@ export class SeedsComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    age = age;
+    
 }

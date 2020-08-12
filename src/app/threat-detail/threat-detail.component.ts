@@ -6,7 +6,6 @@ import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
 import { EventSourceService } from '../event-source.service';
-import { age } from '../age';
 
 @Component({
     selector: 'threat-detail',
@@ -63,7 +62,7 @@ export class ThreatDetailComponent implements OnInit {
 		    thr.push({
 			kind: kind,
 			id: threat.id,
-			age: age(threat.age)
+			age: threat.age
 		    });
 		    count++;
 		}

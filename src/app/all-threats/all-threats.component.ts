@@ -4,7 +4,6 @@ import { timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
-import { age } from '../age';
 
 @Component({
     selector: 'all-threats',
@@ -53,7 +52,7 @@ export class AllThreatsComponent implements OnInit {
 		    thr.push({
 			kind: kind,
 			id: threat.id,
-			age: age(threat.age)
+			age: threat.age
 		    });
 		    count++;
 		}

@@ -2,5 +2,5 @@
 export interface Seed {
     kind : string;
     id : string;
-    age: string;
+    age: Date;
 };

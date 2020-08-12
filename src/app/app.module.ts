@@ -50,6 +50,7 @@ import { EventViewComponent } from './event-view/event-view.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventFilterComponent } from './event-filter/event-filter.component';
 import { RiskPortfolioComponent } from './risk-portfolio/risk-portfolio.component';
+import { SeedsComponent } from './seeds/seeds.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { RiskPortfolioComponent } from './risk-portfolio/risk-portfolio.componen
 	EventViewComponent,
 	EventDetailComponent,
 	EventFilterComponent,
-	RiskPortfolioComponent
+	RiskPortfolioComponent,
+	SeedsComponent
     ],
     imports: [
         BrowserModule,
