@@ -105,8 +105,7 @@ import { EventFilterComponent } from './event-filter/event-filter.component';
         {
             provide: LOCALE_ID, useValue: 'en-GB'
 	}, {
-//            provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
-            provide: DEFAULT_CURRENCY_CODE, useValue: 'HKD'
+            provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
         }
     ],
     bootstrap: [
