@@ -29,6 +29,7 @@
 </table>
 
 <mat-paginator #paginator [length]="risks.length"
+	       showFirstLastButtons="true"
 	       [pageSize]="pageSize"
 	       [pageSizeOptions]="pageSizeOptions"
 	       (page)="onChange($event)">
