@@ -1,0 +1,84 @@
+
+@import '~@angular/material/theming';
+
+@mixin threat-model-component-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    threat-model {
+
+	.threatmodel {
+
+	    .threat {
+
+		border-color: mat-color($foreground);
+
+		.risks {
+
+		    .risk {
+			color: mat-color($primary, darker-contrast);
+			background-color: mat-color($primary, darker);
+		    }
+		    
+		    .risk.category0 {
+			background-color: #8b8f82;
+		    }
+
+		    .risk.category1 {
+			background-color: #619da4;
+		    }
+			
+		    .risk.category2 {
+			background-color: #59a47e;
+		    }
+
+		    .risk.category3 {
+			background-color: #a06028;
+		    }
+
+		    .risk.category4 {
+			background-color: #60a028;
+		    }
+
+		    .risk.category5 {
+			background-color: #a04060;
+		    }
+
+		    .risk.category6 {
+			background-color: #c08020;
+		    }
+
+		    .risk.category7 {
+			background-color: #2080c0;
+		    }
+
+		    .risk.category8 {
+			background-color: #80a020;
+		    }
+
+		    .risk.category9 {
+			background-color: #6060a0;
+		    }
+
+		    .risk:hover {
+			background-color: mat-color($accent, darker);
+			color: mat-color($accent, darker-contrast);
+		    }
+
+		}
+
+	    }
+
+	    .description {
+		color: mat-color($foreground);
+	    }
+
+	}
+
+    }
+
+}
+
