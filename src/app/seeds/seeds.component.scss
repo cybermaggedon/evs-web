@@ -1,0 +1,30 @@
+
+.seeds {
+
+    .seed {
+	
+	display: flex;
+	padding: 0;
+	margin: 0.4em;
+	float: left;
+	text-decoration: none;
+
+	* {
+	    padding: 0.4em;
+	    margin: 0;
+	}
+
+	.kind {
+	    border-radius: 4px 0 0 4px;
+	}
+
+	.id {
+	    border-radius: 0 4px 4px 0;
+	    border-width: 1px;
+	    border-style: solid;
+	}
+
+    }
+    
+}
+

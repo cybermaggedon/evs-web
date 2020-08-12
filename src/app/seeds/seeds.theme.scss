@@ -1,0 +1,185 @@
+
+@import '~@angular/material/theming';
+
+@mixin seeds-component-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    seeds {
+
+	.seeds {
+
+	    .seed {
+
+		.kind {
+		    color: white;
+		    background: #404040;
+		}
+
+		.kind.server {
+		    background: #119da4;
+		}
+
+		.kind.ip {
+		    background: #19647e;
+		}
+
+		.kind.device {
+		    background: #804028;
+		}
+
+		.kind.domain {
+		    background: #408028;
+		}
+
+		.kind.useragent {
+		    background: #a04060;
+		}
+
+		.kind.hostname {
+		    background: #c08020;
+		}
+
+			    .kind.dnsquery {
+				background: #1f2041;
+			    }
+
+			    .kind.uses {
+				background: #4b3f72;
+			    }
+
+			    .kind.requests {
+				background: #119da4;
+			    }
+
+			    .kind.connects {
+				background: #19647e;
+			    }
+
+			    .kind.hasip {
+				background: #804028;
+			    }
+
+			    .kind.indomain {
+				background: #408028;
+			    }
+
+			    .kind.dnsresolve {
+				background: #a04060;
+			    }
+
+			    .kind.serves {
+				background: #c08020;
+			    }
+
+		.id {
+		    border-color: #808080;
+		    background: #c0c0c0;
+		    color: black;
+		}
+
+		.id.server {
+		    border-color: #119da4;
+		    background: #b1ede4
+		}
+
+		.id.ip {
+		    border-color: #19647e;
+		    background: #99c4fe;
+		}
+
+		.id.device {
+		    border-color: #804028;
+		    background: #f0c0b8;
+		}
+
+		.id.domain {
+		    border-color: #408028;
+		    background: #c0f0b8;
+		}
+
+		.id.useragent {
+		    border-color: #a04060;
+		    background: #f8d8e8;
+		}
+
+		.id.hostname {
+		    border-color: #c08020;
+		    background: #f8d880;
+		}
+
+			    .id.dnsquery {
+				border-color: #1f2041;
+				background: #cfd0f1;
+			    }
+			
+			    .id.uses{
+				border-color: #4b3f72;
+				background: #cbbff2;
+			    }
+
+			    .id.requests {
+				border-color: #119da4;
+				background: #b1ede4
+			    }
+
+			    .id.connects {
+				border-color: #19647e;
+				background: #99c4fe;
+			    }
+
+			    .id.hasip {
+				border-color: #804028;
+				background: #f0c0b8;
+			    }
+
+			    .id.indomain {
+				border-color: #408028;
+				background: #c0f0b8;
+			    }
+
+			    .id.dnsresolve {
+				border-color: #a04060;
+				background: #f8d8e8;
+			    }
+
+			    .id.serves {
+				border-color: #c08020;
+				background: #f8d880;
+			    }
+
+		.age {
+		    color: mat-color($foreground, text);
+		}
+
+	    }
+
+	    .seed:hover {
+
+		.kind {
+		    color: mat-color($accent, darker-contrast);
+		    background-color: mat-color($accent);
+		    border-color: mat-color($accent, darker);
+		}
+
+		.id {
+		    color: mat-color($accent, darker-contrast);
+		    background-color: mat-color($accent);
+		    border-color: mat-color($accent, darker);
+		}
+
+		.age {
+		    color: mat-color($accent, lighter);
+		}
+
+	    }
+	    
+	}
+
+    }
+
+}
+

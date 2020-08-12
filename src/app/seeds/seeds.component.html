@@ -1,0 +1,9 @@
+<div class="seeds">
+  <a class="seed" *ngFor="let seed of seeds"
+     [routerLink]="['/threat', seed.id]"
+     queryParamsHandling="preserve">
+    <div class="kind {{seed.kind}}">{{seed.kind}}</div>
+    <div class="id {{seed.kind}}">{{seed.id}}</div>
+    <div class="age {{seed.kind}}">{{seed.age}}</div>
+  </a>
+</div>
