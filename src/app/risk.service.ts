@@ -34,30 +34,11 @@ export class RiskService {
 	this.graph = new Graph([], []);
 
 	this.subject = new Subject<RiskModel>();
-/*
-        // Subscribe to receive periodic riskGraph updates.
-	this.riskGraph.subscribe(rg => {
-	    this.graph = rg;
-	    this.risks = toRiskModel(rg, this.fairSummary);
-	    this.updateWindowed();
-	});
 
-        // Subscribe to window service to receive slider updates.
 	this.windowService.subscribe(w => {
 	    this.window = w;
 	    this.updateWindowed();
 	});
-
-	this.fairService.subscribe(fr => {
-	    if (fr.kind == "summary") {
-		if (this.fairSummary[fr.name] != fr.report[fr.name]) {
-		    this.fairSummary[fr.name] = fr.report[fr.name];
-		    this.risks = toRiskModel(this.graph, this.fairSummary);
-		    this.updateWindowed();
-		}
-	    }
-	});
-*/	
 
 	let obs1 = new Observable(obs => {
 	    this.riskGraph.subscribe(rg => {
@@ -66,14 +47,7 @@ export class RiskService {
 	    });
 	});
 
-	let obs2 = new Observable(obs => {
-	    this.windowService.subscribe(w => {
-		this.window = w;
-		obs.next();
-	    });
-	});
-
-	let obs3 =  new Observable(obs => {
+	let obs2 =  new Observable(obs => {
 	    this.fairService.subscribe(fr => {
 		if (fr.kind == "summary") {
 		    this.fairSummary[fr.name] = fr.report[fr.name];
@@ -82,10 +56,9 @@ export class RiskService {
 	    });
 	});
 
-	obs1.pipe(merge(obs2, obs3)).
-	    pipe(debounceTime(50)).
+	obs1.pipe(merge(obs2)).
+	    pipe(debounceTime(100)).
 	    subscribe(obs => {
-		console.log("UPDATE");
 		this.risks = toRiskModel(this.graph, this.fairSummary);
 		this.updateWindowed();
 	    });

@@ -21,7 +21,7 @@
 
   <td class="probability">
     <span *ngIf="final != undefined">
-      {{final.risk}}
+      {{riskScore | number : "1.2-2"}}
     </span>
   </td>
 

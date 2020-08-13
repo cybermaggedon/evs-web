@@ -4,14 +4,23 @@
 import { Graph } from './graph';
 
 // Returns risk score, using a default if risk score is not known.
-function getCategoryRiskValue(category : string, fair : any) : number {
+export function getRiskScoreFromFair(fair : any) : number {
 
     let arbitrary = 2000000;
 
+    let prob = fair["mean"] / arbitrary;
+    if (prob > 1) return 1.0;
+    return prob;
+
+    return 0.0;
+
+}
+
+// Returns risk score, using a default if risk score is not known.
+function getCategoryRiskValue(category : string, fair : any) : number {
+
     if (category in fair) {
-	let prob = fair[category]["mean"] / arbitrary;
-	if (prob > 1) return 1.0;
-	return prob;
+	return getRiskScoreFromFair(fair[category]);
     }
 
     return 0.0;

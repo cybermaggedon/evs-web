@@ -20,7 +20,8 @@ import { RiskStateService, AllRisksState } from '../risk-state.service';
 import { SelectedModelService } from '../selected-model.service';
 import { SelectedRiskProfilesService } from '../selected-risk-profiles.service';
 import { FinalRiskService } from '../final-risk.service';
-
+import { FairService } from '../fair.service';
+import { getRiskScoreFromFair } from '../risk';
 @Component({
   selector: '[risk-selection]',
   templateUrl: './risk-selection.component.html',
@@ -33,6 +34,8 @@ export class RiskSelectionComponent implements OnInit {
     selectedModel : string;
     selectedRiskProfile : string;
 
+    riskScore = 0.0;
+    
     @Input("risk") _risk : string;
 
     items : FlatItem<RiskProfile>[] = [];
@@ -50,6 +53,7 @@ export class RiskSelectionComponent implements OnInit {
 
     constructor(private modelSvc : ModelStateService,
 		private riskSvc : RiskStateService,
+		private fairService : FairService,
 		private selectedModelSvc : SelectedModelService,
 		private selectedRiskProfilesSvc : SelectedRiskProfilesService,
 		private finalRisk : FinalRiskService,
@@ -58,6 +62,13 @@ export class RiskSelectionComponent implements OnInit {
 	this.models = new ModelState();
 	this.risks = new AllRisksState();
 
+	this.fairService.subscribe(fr => {
+	    console.log(fr.name, fr.kind, this._risk);
+	    if (fr.kind == "summary" && fr.name == this._risk) {
+		this.riskScore = getRiskScoreFromFair(fr.report[fr.name]);
+	    };
+	});
+	
     }
 
     update() {
