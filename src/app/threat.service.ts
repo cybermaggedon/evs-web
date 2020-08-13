@@ -4,9 +4,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 import { Graph, toGraph } from './graph';
 import { ThreatGraphService } from './threat-graph.service';
-import { map } from 'rxjs/operators';
+import { Seed } from './seed';
+import { Window } from './window.service';
 
 // Describes a threat contact.
 export class Contact {
@@ -17,6 +20,33 @@ export class Contact {
 // Threats, threat contacts grouped by kind.
 export class Threats {
     threats : Map<string, Contact[]>;
+
+    refineSeeds(window : Window, kinds : string[]) :
+    {seeds : Seed[], count : number} {
+
+	let thr = [];
+	let count = 0;
+	
+	for (let kind of kinds) {
+	    if (this.threats.has(kind)) {
+		for (let threat of this.threats.get(kind)) {
+		    if (threat.age < window.earliest) continue;
+		    thr.push({
+			kind: kind,
+			id: threat.id,
+			age: threat.age
+		    });
+		    count++;
+		}
+	    }
+	}
+
+	return {seeds: thr, count: count};
+
+    };
+
+
+
 };
 
 @Injectable({

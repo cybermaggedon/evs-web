@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+
 import { ThreatService, Threats } from '../threat.service';
 import { WindowService, Window } from '../window.service';
 import { EventSearchTermsService, SearchTerms } from '../event-search-terms.service';
 import { EventSourceService } from '../event-source.service';
+import { Seed } from '../seed'; 
 
 @Component({
     selector: 'threat-detail',
@@ -32,7 +34,7 @@ export class ThreatDetailComponent implements OnInit {
     allThreats : Threats;
 
     // Summarized threats
-    threats : Object;
+    threats : Seed[];
 
     // Number of threat elements
     threatCount : number;
@@ -50,27 +52,10 @@ export class ThreatDetailComponent implements OnInit {
 	if (this.window == undefined) return;
 	if (this.allThreats == undefined) return;
 
-	let thr = [];
+	let res = this.allThreats.refineSeeds(this.window, this.threatkinds);
+	this.threats = res.seeds;
+	this.threatCount = res.count;
 
-	let count = 0;
-
-	
-	for (let kind of this.threatkinds) {
-	    if (this.allThreats.threats.has(kind)) {
-		for (let threat of this.allThreats.threats.get(kind)) {
-		    if (threat.age < this.window.earliest) continue;
-		    thr.push({
-			kind: kind,
-			id: threat.id,
-			age: threat.age
-		    });
-		    count++;
-		}
-	    }
-	}
-
-	this.threats = thr;
-        this.threatCount = count;
     }
 
     // Stage 1, fetch threat graph elements
