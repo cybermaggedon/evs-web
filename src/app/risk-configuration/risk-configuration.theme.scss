@@ -1,31 +1,21 @@
 
 @import '~@angular/material/theming';
 
-@mixin risk-selection-component-theme($theme) {
+@mixin risk-configuration-component-theme($theme) {
 
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    [risk-selection] {
+    risk-configuration {
 
-	td {
-	}
-
-	.fair {
-
-	    .factor {
-		color: mat-color($primary);
-	    }
-
-	    .fair .value {
-		color: mat-color($foreground);
-	    }
-
+	table {
+	    border-color: mat-color($foreground);
 	}
 
     }
 
 }
+
 

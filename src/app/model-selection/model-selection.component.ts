@@ -41,8 +41,13 @@ export class ModelSelectionComponent implements OnInit {
     _selected : string;
     get selected() { return this._selected; }
     set selected(m : string) {
-	this._selected = m;
-	this.selectedModelSvc.setModel(m);
+	if (this._selected != m) {
+	    // undefined means we're uninitialised
+	    if (this._selected != undefined) {
+		this.selectedModelSvc.setModel(m);
+	    }
+	    this._selected = m;
+	}
     }
 
 }

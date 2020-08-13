@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { RiskService } from './risk.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throttle, debounceTime, merge } from 'rxjs/operators';
 import { interval, Subject, Observable } from 'rxjs';
 
 import { RiskModel } from './risk';
+import { RiskProfile } from './model-types';
 import { ModelStateService } from './model-state.service';
 import { FinalRiskService, FinalRiskChange } from './final-risk.service';
+import { FairReportService } from './fair-report.service';
 
 export interface FairReport {
     key : string;
@@ -39,6 +40,61 @@ function getRiskFactors(params, factor=1.0) : Object {
     return f;
 }
 
+function getModel(name, profile) {
+
+    let fair = profile.fair;
+
+    let model = {
+	"name": name,
+	"parameters": {}
+    };
+
+    if (fair.r != undefined)
+	model.parameters["Risk"] =
+	getFactors(fair.r);
+    
+    if (fair.lef != undefined)
+	model.parameters["Loss Event Frequency"] = getFactors(fair.lef);
+    
+    if (fair.tef != undefined)
+	model.parameters["Threat Event Frequency"] = getFactors(fair.tef);
+    
+    if (fair.c != undefined)
+	model.parameters["Contact Frequency"] = getFactors(fair.c);
+
+    if (fair.a != undefined)
+	model.parameters["Probability of Action"] = getFactors(fair.a);
+
+    if (fair.v != undefined)
+	model.parameters["Vulnerability"] = getFactors(fair.v);
+
+    if (fair.tc != undefined)
+	model.parameters["Threat Capability"] = getFactors(fair.tc);
+
+    if (fair.cs != undefined)
+	model.parameters["Control Strength"] = getFactors(fair.cs);
+
+    if (fair.lm != undefined)
+	model.parameters["Loss Magnitude"] = getFactors(fair.lm);
+
+    if (fair.pl != undefined)
+	model.parameters["Primary Loss"] = getFactors(fair.pl);
+
+    if (fair.sl != undefined)
+	model.parameters["Secondary Loss"] = getFactors(fair.sl);
+
+    if (fair.slef != undefined)
+	model.parameters["Secondary Loss Event Frequency"] =
+	getFactors(fair.slef);
+
+    if (fair.slem != undefined)
+	model.parameters["Secondary Loss Event Magnitude"] =
+	getFactors(fair.slem);
+
+    return model;
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,14 +107,20 @@ export class FairService {
 
     lastValue = {};
 
-    private riskProfiles : Object;
+    private riskProfiles : {
+	[key : string] : RiskProfile;
+    };
+
+    private reports : {
+	[key : string] : any;
+    };
 
     updateCatEvent : Observable<void>;
     updateModelEvent : Observable<void>;
 
     constructor(private http : HttpClient,
-		private riskService : RiskService,
 		private models : ModelStateService,
+		private fairReport : FairReportService,
 		private finalRisk : FinalRiskService
 	       ) {
 
@@ -66,20 +128,42 @@ export class FairService {
 	this.recalcEventSubject = new Subject<string>();
 	this.riskProfiles = {};
 
+	this.finalRisk.subscribe((frc : FinalRiskChange) => {
+
+	    this.riskProfiles[frc.id] = frc.profile;
+
+	    let model = getModel(frc.id, frc.profile);
+
+	    this.fairReport.get("summary", model).subscribe(rep => {
+		if (frc.id == "misdelivery-of-data") {
+		    console.log(rep);
+		}
+	    });
+
+//	    obs.next();
+
+	});
+
+
+/*
 	this.updateCatEvent = new Observable(obs => {
 	    this.finalRisk.subscribe((frc : FinalRiskChange) => {
 		this.riskProfiles[frc.id] = frc.profile;
 		obs.next();
 	    });
 	});
+*/
 
+/*
         this.updateModelEvent = new Observable(obs => {
 	    this.riskService.subscribe(m => {
 		this.riskModel = m;
 		obs.next();
 	    });
 	});
+*/
 
+	/*
 	// Update models, but not more often than every 2 seconds.
 	this.updateCatEvent.pipe(merge(this.updateModelEvent)).
 	    pipe(debounceTime(1000)).
@@ -87,9 +171,11 @@ export class FairService {
 		this.updateFairModels();
 		this.updateCatModels();
 	    });
-
+	*/
+	
     }
 
+    /*
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -112,7 +198,9 @@ export class FairService {
 	});
 
     }
-
+    */
+    
+/*
     updateLossModel(kind : string, model : any) : void {
 	this.updateModel(kind, "loss", model);
     }
@@ -200,74 +288,6 @@ export class FairService {
 
     }
 
-    getCatModel(name, risk) {
-
-	if (this.riskProfiles[name] == undefined)
-	    return;
-
-	let fair = this.riskProfiles[name].fair;
-
-	let model = {
-	    "name": name,
-	    "parameters": {}
-	};
-
-	if (fair.r != undefined)
-	    model.parameters["Risk"] =
-	    getFactors(fair.r, risk);
-
-	if (fair.lef != undefined)
-	    model.parameters["Loss Event Frequency"] =
-	    getFactors(fair.lef, risk);
-
-	if (fair.tef != undefined)
-	    model.parameters["Threat Event Frequency"] =
-	    getFactors(fair.tef, risk);
-
-	if (fair.c != undefined)
-	    model.parameters["Contact Frequency"] =
-	    getFactors(fair.c);
-
-	if (fair.a != undefined)
-	    model.parameters["Probability of Action"] =
-	    getFactors(fair.a, risk);
-
-	if (fair.v != undefined)
-	    model.parameters["Vulnerability"] =
-	    getFactors(fair.v);
-
-	if (fair.tc != undefined)
-	    model.parameters["Threat Capability"] =
-	    getFactors(fair.tc);
-
-	if (fair.cs != undefined)
-	    model.parameters["Control Strength"] =
-	    getFactors(fair.cs);
-
-	if (fair.lm != undefined)
-	    model.parameters["Loss Magnitude"] =
-	    getFactors(fair.lm);
-
-	if (fair.pl != undefined)
-	    model.parameters["Primary Loss"] =
-	    getFactors(fair.pl);
-
-	if (fair.sl != undefined)
-	    model.parameters["Secondary Loss"] =
-	    getFactors(fair.sl);
-
-	if (fair.slef != undefined)
-	    model.parameters["Secondary Loss Event Frequency"] =
-	    getFactors(fair.slef);
-
-	if (fair.slem != undefined)
-	    model.parameters["Secondary Loss Event Magnitude"] =
-	    getFactors(fair.slem);
-
-	return model;
-
-    }
-
     getCatMetaModel() {
 
 	if (this.riskModel == undefined) {
@@ -348,8 +368,10 @@ export class FairService {
 	};
 
     }
-
+*/
+    
     subscribe(key : string, f : any) {
+/*
         this.reportSubject.subscribe(rep => {
 	    if (key == rep.key) {
 		f(rep.report);
@@ -358,14 +380,17 @@ export class FairService {
 	if (key in this.lastValue) {
 	    f(this.lastValue[key]);
 	}
+*/
     }
 
     subscribeRecalcEvent(key : string, f : any) {
+	/*
         this.recalcEventSubject.subscribe(k => {
 	    if (key == k) {
 		f();
 	    }
 	});
+*/
     }
 
 }

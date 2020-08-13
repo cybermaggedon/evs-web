@@ -29,6 +29,9 @@ $evs-app-theme: mat-dark-theme($evs-app-primary, $evs-app-accent,
 @import "app/event-detail/event-detail.theme.scss";
 @include event-detail-component-theme($evs-app-theme);
 
+@import "app/risk-configuration/risk-configuration.theme.scss";
+@include risk-configuration-component-theme($evs-app-theme);
+
 @import "app/risk-selection/risk-selection.theme.scss";
 @include risk-selection-component-theme($evs-app-theme);
 
