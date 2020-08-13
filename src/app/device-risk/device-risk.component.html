@@ -1,4 +1,5 @@
 <div>
+  <spinner *ngIf="loading"></spinner>
   <h2>High-risk devices</h2>
   <risk-portfolio [portfolio]="model.devices">
   </risk-portfolio>

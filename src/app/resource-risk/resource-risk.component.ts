@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RiskService } from '../risk.service';
 import { RiskModel } from '../risk';
+import { FairService } from '../fair.service';
 
 @Component({
     selector: 'resource-risk',
@@ -9,8 +10,10 @@ import { RiskModel } from '../risk';
 })
 export class ResourceRiskComponent implements OnInit {
 
-
-    constructor(private riskSvc : RiskService) {
+    loading = false;
+    
+    constructor(private riskSvc : RiskService,
+		private fairSvc : FairService) {
         // Initialise.
         this.model = new RiskModel();
     }
@@ -22,6 +25,9 @@ export class ResourceRiskComponent implements OnInit {
     model : RiskModel;
 
     ngOnInit(): void {
+	this.fairSvc.subscribeRecalcEvent(n => {
+	    this.loading = (n > 0);
+	});
         this.riskSvc.subscribe(m => {this.model = m});
     }
     
