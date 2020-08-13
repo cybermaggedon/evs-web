@@ -44,34 +44,28 @@ export class FinalRiskService {
 
 	modelStateSvc.subscribe((ms : ModelState) => {
 	    this.models = ms;
-	    console.log("UPDATE A");
 	    this.update();
 	});
 
 	riskStateSvc.subscribe((rs : AllRisksState) => {
 	    this.risks = rs;
-	    console.log("UPDATE B");
 	    this.update();
 
 	});
 
 	selectedModelSvc.subscribe(sm => {
 	    this.selectedModel = sm;
-	    console.log("UPDATE C");
 	    this.update();
 	});
 
 	selectedRisksSvc.subscribe(sr => {
 	    this.selectedRisks[sr.risk] = sr.profile;
-	    console.log("UPDATE D");
 	    this.update();
 	});
 
     }
 
     update() : void {
-
-	console.log("UPDATE");
 
 	let model = this.models.currentModel(this.selectedModel);
 	if (model == undefined) {

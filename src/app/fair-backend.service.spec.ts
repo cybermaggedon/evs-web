@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FairReportService } from './fair-report.service';
+import { FairBackendService } from './fair-report.service';
 
 describe('FairReportService', () => {
   let service: FairReportService;

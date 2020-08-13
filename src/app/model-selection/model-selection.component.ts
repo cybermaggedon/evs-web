@@ -31,8 +31,8 @@ export class ModelSelectionComponent implements OnInit {
 
 	this.selectedModelSvc.subscribe(m => {
 
-	    if (m != this.selected)
-		this.selected = m;
+	    if (m != this._selected)
+		this._selected = m;
 
 	});
 
@@ -42,11 +42,8 @@ export class ModelSelectionComponent implements OnInit {
     get selected() { return this._selected; }
     set selected(m : string) {
 	if (this._selected != m) {
-	    // undefined means we're uninitialised
-	    if (this._selected != undefined) {
-		this.selectedModelSvc.setModel(m);
-	    }
 	    this._selected = m;
+	    this.selectedModelSvc.setModel(m);
 	}
     }
 

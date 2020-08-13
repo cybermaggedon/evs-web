@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
 })
-export class FairReportService {
+export class FairBackendService {
 
     constructor(private http : HttpClient) {
     }

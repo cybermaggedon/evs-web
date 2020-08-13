@@ -3,11 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throttle, debounceTime, merge } from 'rxjs/operators';
 import { interval, Subject, Observable } from 'rxjs';
 
-import { RiskModel } from './risk';
 import { RiskProfile } from './model-types';
 import { ModelStateService } from './model-state.service';
 import { FinalRiskService, FinalRiskChange } from './final-risk.service';
-import { FairReportService } from './fair-report.service';
+import { FairBackendService } from './fair-backend.service';
 
 export interface FairReport {
     key : string;
@@ -103,7 +102,7 @@ export class FairService {
     reportSubject : Subject<FairReport>;
     recalcEventSubject : Subject<string>;
 
-    riskModel : RiskModel;
+//    riskModel : RiskModel;
 
     lastValue = {};
 
@@ -120,7 +119,7 @@ export class FairService {
 
     constructor(private http : HttpClient,
 		private models : ModelStateService,
-		private fairReport : FairReportService,
+		private fairBackend : FairBackendService,
 		private finalRisk : FinalRiskService
 	       ) {
 
@@ -128,22 +127,34 @@ export class FairService {
 	this.recalcEventSubject = new Subject<string>();
 	this.riskProfiles = {};
 
+	this.reports = {};
+
 	this.finalRisk.subscribe((frc : FinalRiskChange) => {
+
+	    if (frc.id == "misdelivery-of-data")
+		console.log("RISK CHANGE FOR ", frc.id);
 
 	    this.riskProfiles[frc.id] = frc.profile;
 
 	    let model = getModel(frc.id, frc.profile);
-
-	    this.fairReport.get("summary", model).subscribe(rep => {
-		if (frc.id == "misdelivery-of-data") {
-		    console.log(rep);
-		}
-	    });
-
-//	    obs.next();
-
+	    this.computeFair(frc.id, "summary", model);
+	    this.computeFair(frc.id, "loss", model);
+	    this.computeFair(frc.id, "pdf", model);
+	    this.computeFair(frc.id, "risk", model);
 	});
 
+    }
+
+    computeFair(name, kind, model) {
+
+	this.fairBackend.get(kind, model).subscribe(rep => {
+	    let key = `${name}-${kind}`;
+	    this.reports[key] = rep;
+	    if (name == "misdelivery-of-data")
+	    console.log(key);
+	});
+
+    }
 
 /*
 	this.updateCatEvent = new Observable(obs => {
@@ -172,8 +183,6 @@ export class FairService {
 		this.updateCatModels();
 	    });
 	*/
-	
-    }
 
     /*
     httpOptions = {
