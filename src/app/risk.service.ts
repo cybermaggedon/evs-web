@@ -8,6 +8,7 @@ import { Graph } from './graph';
 import { toRiskModel, RiskModel } from './risk';
 import { WindowService, Window } from './window.service';
 import { Observable, Subject } from 'rxjs';
+import { debounceTime, merge } from 'rxjs/operators';
 import { FairService } from './fair.service';
 
 @Injectable({
@@ -33,7 +34,7 @@ export class RiskService {
 	this.graph = new Graph([], []);
 
 	this.subject = new Subject<RiskModel>();
-
+/*
         // Subscribe to receive periodic riskGraph updates.
 	this.riskGraph.subscribe(rg => {
 	    this.graph = rg;
@@ -56,6 +57,38 @@ export class RiskService {
 		}
 	    }
 	});
+*/	
+
+	let obs1 = new Observable(obs => {
+	    this.riskGraph.subscribe(rg => {
+		this.graph = rg;
+		obs.next();
+	    });
+	});
+
+	let obs2 = new Observable(obs => {
+	    this.windowService.subscribe(w => {
+		this.window = w;
+		obs.next();
+	    });
+	});
+
+	let obs3 =  new Observable(obs => {
+	    this.fairService.subscribe(fr => {
+		if (fr.kind == "summary") {
+		    this.fairSummary[fr.name] = fr.report[fr.name];
+		    obs.next();
+		};
+	    });
+	});
+
+	obs1.pipe(merge(obs2, obs3)).
+	    pipe(debounceTime(50)).
+	    subscribe(obs => {
+		console.log("UPDATE");
+		this.risks = toRiskModel(this.graph, this.fairSummary);
+		this.updateWindowed();
+	    });
 
     }
 
@@ -93,7 +126,6 @@ export class RiskService {
 	this.windowed = this.risks.applyWindow(this.window.earliest,
 					       this.minRisk);
 
-	console.log("PUSHHHH");
         // Push windowed risks to subscribers.
 	this.subject.next(this.windowed);
 

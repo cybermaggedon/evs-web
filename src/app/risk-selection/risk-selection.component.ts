@@ -175,9 +175,6 @@ export class RiskSelectionComponent implements OnInit {
 	this.finalRisk.subscribe(frc => {
 	    if (frc.id == this.risk) {
 		this.final = frc.profile;
-		if (frc.id == "theft-of-property") {
-		    console.log("theft-of-property risk ", frc.profile.risk);
-		}
 		this.describe();
 	    }
 	});

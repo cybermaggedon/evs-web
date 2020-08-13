@@ -6,11 +6,6 @@ import { Graph } from './graph';
 // Returns risk score, using a default if risk score is not known.
 function getCategoryRiskValue(category : string, fair : any) : number {
 
-    console.log(category);
-    if (category == "theft-of-property") {
-	console.log("THIS MEAN ", category, fair[category]["mean"]);
-    }
-
     let arbitrary = 2000000;
 
     if (category in fair) {
