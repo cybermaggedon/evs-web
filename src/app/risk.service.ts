@@ -8,6 +8,7 @@ import { Graph } from './graph';
 import { toRiskModel, RiskModel } from './risk';
 import { WindowService, Window } from './window.service';
 import { Observable, Subject } from 'rxjs';
+import { FairService } from './fair.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,18 +18,26 @@ export class RiskService {
     // Subject to push out RiskModel.
     private subject : Subject<RiskModel>;
 
+    private fairSummary : {
+	[key : string] : any;
+    } = {};
+
     // Risk service subscribes to the Window service to receive slider
     // updates.
     constructor(private riskGraph : RiskGraphService,
-		private windowService : WindowService) {
+		private windowService : WindowService,
+		private fairService : FairService
+		) {
 
 	this.windowed = new RiskModel();
+	this.graph = new Graph([], []);
 
 	this.subject = new Subject<RiskModel>();
 
         // Subscribe to receive periodic riskGraph updates.
 	this.riskGraph.subscribe(rg => {
-	    this.risks = toRiskModel(rg);
+	    this.graph = rg;
+	    this.risks = toRiskModel(rg, this.fairSummary);
 	    this.updateWindowed();
 	});
 
@@ -38,7 +47,19 @@ export class RiskService {
 	    this.updateWindowed();
 	});
 
+	this.fairService.subscribe(fr => {
+	    if (fr.kind == "summary") {
+		if (this.fairSummary[fr.name] != fr.report[fr.name]) {
+		    this.fairSummary[fr.name] = fr.report[fr.name];
+		    this.risks = toRiskModel(this.graph, this.fairSummary);
+		    this.updateWindowed();
+		}
+	    }
+	});
+
     }
+
+    graph : any;
 
     // Raw risk graph converted to RiskModel.
     risks : RiskModel;
@@ -60,7 +81,7 @@ export class RiskService {
 
     }
 
-    minRisk = 0.05;
+    minRisk = 0.005;
 
     // Called when slider or risk data are updated.
     updateWindowed() : void {
@@ -72,6 +93,7 @@ export class RiskService {
 	this.windowed = this.risks.applyWindow(this.window.earliest,
 					       this.minRisk);
 
+	console.log("PUSHHHH");
         // Push windowed risks to subscribers.
 	this.subject.next(this.windowed);
 

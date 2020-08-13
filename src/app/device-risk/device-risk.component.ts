@@ -20,7 +20,10 @@ export class DeviceRiskComponent implements OnInit {
     model : RiskModel;
 
     ngOnInit(): void {
-        this.riskSvc.subscribe(m => {this.model = m});
+        this.riskSvc.subscribe(m => {
+	    this.model = m;
+	    console.log("RECVD");
+	});
     }
     
 }

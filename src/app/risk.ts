@@ -3,19 +3,24 @@
 
 import { Graph } from './graph';
 
-// Risk table, maps risk category to risk score.
-const risks = {
-    'malware': 0.1,
-    'tor-exit': 0.7
-};
-
 // Returns risk score, using a default if risk score is not known.
-function getCategoryRiskValue(category : string) : number {
+function getCategoryRiskValue(category : string, fair : any) : number {
 
-    if (category in risks) {
-        return risks[category];
+    console.log(category);
+    if (category == "theft-of-property") {
+	console.log("THIS MEAN ", category, fair[category]["mean"]);
     }
-    return 0.3;
+
+    let arbitrary = 2000000;
+
+    if (category in fair) {
+	let prob = fair[category]["mean"] / arbitrary;
+	if (prob > 1) return 1.0;
+	return prob;
+    }
+
+    return 0.0;
+
 }
 
 // Translate a name (risk category / threat type) to a CSS class.
@@ -146,7 +151,7 @@ export class RiskModel {
 	this.resources = [];
     }
 
-    applyWindow(start : Date, minRisk = 0.05) : RiskModel {
+    applyWindow(start : Date, minRisk = 0.0) : RiskModel {
 
         let rm = new RiskModel();
 
@@ -161,7 +166,8 @@ export class RiskModel {
 
 // Convert graph to an array of assets.  edge specifies the graph edges
 // to use.
-export function toAssetArray(graph : Graph, edge : string) : Asset[] {
+export function toAssetArray(graph : Graph, edge : string, fair : any) :
+Asset[] {
 
     let assets = {};
 
@@ -180,7 +186,7 @@ export function toAssetArray(graph : Graph, edge : string) : Asset[] {
 	r.category = e.destination;
 	r.earliest = e.earliest;
 	r.latest = e.latest;
-	r.risk = getCategoryRiskValue(r.category);
+	r.risk = getCategoryRiskValue(r.category, fair);
 	assets[e.source].risks.push(r);
 
     }
@@ -198,11 +204,11 @@ export function toAssetArray(graph : Graph, edge : string) : Asset[] {
 }
 
 // Convert a graph to a risk model.
-export function toRiskModel(graph : Graph) : RiskModel {
+export function toRiskModel(graph : Graph, fair : any) : RiskModel {
 
     let model = new RiskModel();
-    model.devices = toAssetArray(graph, "actorrisk");
-    model.resources = toAssetArray(graph, "resourcerisk");
+    model.devices = toAssetArray(graph, "actorrisk", fair);
+    model.resources = toAssetArray(graph, "resourcerisk", fair);
     return model;
 
 }

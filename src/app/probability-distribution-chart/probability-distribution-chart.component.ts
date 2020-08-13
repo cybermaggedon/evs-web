@@ -112,13 +112,15 @@ export class ProbabilityDistributionChartComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribeRecalcEvent(this.kind + '-pdf', rep => {
-	    this.loading = true;
+	this.fairSvc.subscribeRecalcEvent(n => {
+	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribe(this.kind + '-pdf', rep => {
+	this.fairSvc.subscribe(fr => {
+	    /*
 	    this.loading = false;
 	    this.chart = this.createPdfChart(rep);
+	    */
 	});
 
     }

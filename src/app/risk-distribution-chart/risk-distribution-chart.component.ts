@@ -112,13 +112,15 @@ export class RiskDistributionChartComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribeRecalcEvent(this.kind + '-risk', rep => {
-	    this.loading = true;
+	this.fairSvc.subscribeRecalcEvent(n => {
+	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribe(this.kind + '-risk', rep => {
+	this.fairSvc.subscribe(rep => {
+	    /*
 	    this.loading = false;
 	    this.chart = this.createRiskChart(rep);
+*/
 	});
 
     }

@@ -113,13 +113,15 @@ export class LossExceedenceChartComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribe(this.kind + '-loss', rep => {
-	    this.loading = false;
-	    this.chart = this.createLossChart(rep);
+	this.fairSvc.subscribeRecalcEvent(n => {
+	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribeRecalcEvent(this.kind + '-loss', rep => {
-	    this.loading = true;
+	this.fairSvc.subscribe(fr => {
+	    /*
+	    this.loading = false;
+	    this.chart = this.createLossChart(rep);
+*/
 	});
 
     }

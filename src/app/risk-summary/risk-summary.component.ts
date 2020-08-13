@@ -23,12 +23,12 @@ export class RiskSummaryComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribeRecalcEvent(this.kind + '-summary', rep => {
-	    this.loading = true;
+	this.fairSvc.subscribeRecalcEvent(n => {
+	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribe(this.kind + '-summary', rep => {
-
+	this.fairSvc.subscribe(fr => {
+/*
 	    this.loading = false;
 
 	    let summary = [];
@@ -46,7 +46,7 @@ export class RiskSummaryComponent implements OnInit {
 		    summary.push(rep[v]);
 		}
 	    }
-	    this.summary = summary;
+	    this.summary = summary;*/
 	});
     }
 

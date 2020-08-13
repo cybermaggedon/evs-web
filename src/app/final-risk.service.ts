@@ -28,6 +28,10 @@ export class FinalRiskService {
     private models : ModelState;
     private risks : AllRisksState;
 
+    private fairSummary : {
+	[key : string] : Object;
+    };
+
     private selectedModel : string;
     private selectedRisks : { [key : string] : string };
 

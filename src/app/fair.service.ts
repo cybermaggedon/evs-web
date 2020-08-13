@@ -10,6 +10,8 @@ import { FairBackendService } from './fair-backend.service';
 
 export interface FairReport {
     key : string;
+    name : string;
+    kind : string;
     report : any;
 };
 
@@ -100,7 +102,7 @@ function getModel(name, profile) {
 export class FairService {
 
     reportSubject : Subject<FairReport>;
-    recalcEventSubject : Subject<string>;
+    recalcEventSubject : Subject<number>;
 
 //    riskModel : RiskModel;
 
@@ -117,6 +119,8 @@ export class FairService {
     updateCatEvent : Observable<void>;
     updateModelEvent : Observable<void>;
 
+    recalcOutstanding = 0;
+
     constructor(private http : HttpClient,
 		private models : ModelStateService,
 		private fairBackend : FairBackendService,
@@ -124,15 +128,12 @@ export class FairService {
 	       ) {
 
 	this.reportSubject = new Subject<FairReport>();
-	this.recalcEventSubject = new Subject<string>();
+	this.recalcEventSubject = new Subject<number>();
 	this.riskProfiles = {};
 
 	this.reports = {};
 
 	this.finalRisk.subscribe((frc : FinalRiskChange) => {
-
-	    if (frc.id == "misdelivery-of-data")
-		console.log("RISK CHANGE FOR ", frc.id);
 
 	    this.riskProfiles[frc.id] = frc.profile;
 
@@ -147,11 +148,24 @@ export class FairService {
 
     computeFair(name, kind, model) {
 
-	this.fairBackend.get(kind, model).subscribe(rep => {
+	this.recalcOutstanding ++;
+	this.recalcEventSubject.next(this.recalcOutstanding);
+
+	this.fairBackend.get(kind, model).subscribe(report => {
+
 	    let key = `${name}-${kind}`;
-	    this.reports[key] = rep;
-	    if (name == "misdelivery-of-data")
-	    console.log(key);
+
+	    let fr : FairReport = {
+		key: key, name: name, kind: kind, report: report
+	    };
+
+	    this.reports[key] = fr;
+
+	    this.reportSubject.next(fr);
+
+	    this.recalcOutstanding --;
+	    this.recalcEventSubject.next(this.recalcOutstanding);
+
 	});
 
     }
@@ -379,27 +393,23 @@ export class FairService {
     }
 */
     
-    subscribe(key : string, f : any) {
-/*
+    subscribe(f : any) {
+
         this.reportSubject.subscribe(rep => {
-	    if (key == rep.key) {
-		f(rep.report);
-	    }
+	    f(rep);
 	});
-	if (key in this.lastValue) {
-	    f(this.lastValue[key]);
+
+	for(let key in this.reports) {
+	    f(this.reports[key]);
 	}
-*/
+
     }
 
-    subscribeRecalcEvent(key : string, f : any) {
-	/*
-        this.recalcEventSubject.subscribe(k => {
-	    if (key == k) {
-		f();
-	    }
+    subscribeRecalcEvent(f : any) {
+        this.recalcEventSubject.subscribe(n => {
+	    f(n);
 	});
-*/
+	f(this.recalcOutstanding);
     }
 
 }
