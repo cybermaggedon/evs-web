@@ -62,9 +62,43 @@ export class RiskSelectionComponent implements OnInit {
 	this.models = new ModelState();
 	this.risks = new AllRisksState();
 
+    }
+
+    ngOnInit(): void {
+
+	this.modelSvc.subscribe(ms => {
+	    this.models = ms;
+	    this.update();
+	});
+
+	this.riskSvc.subscribe(rs => {
+	    this.risks = rs;
+	    this.update();
+	});
+
+	this.selectedModelSvc.subscribe(m => {
+	    this.selectedModel = m;
+	    this.update();
+	});
+
+	this.selectedRiskProfilesSvc.subscribe(srp => {
+	    if (srp.risk == this.risk) {
+		this.selectedRiskProfile = srp.profile;
+		this.update();
+	    }
+	});
+
+	this.finalRisk.subscribe(frc => {
+	    if (frc.id == this.risk) {
+		this.final = frc.profile;
+		this.describe();
+	    }
+	});
+
 	this.fairService.subscribe(fr => {
-	    console.log(fr.name, fr.kind, this._risk);
 	    if (fr.kind == "summary" && fr.name == this._risk) {
+		if (fr.name == "loss-of-property")
+		    console.log(fr.name, fr.kind, this._risk);
 		this.riskScore = getRiskScoreFromFair(fr.report[fr.name]);
 	    };
 	});
@@ -157,39 +191,6 @@ export class RiskSelectionComponent implements OnInit {
 	if (f.slem) this.describeFactors("slem", f.slem, output, true);
 
 	this.factors = output;
-    }
-
-    ngOnInit(): void {
-
-	this.modelSvc.subscribe(ms => {
-	    this.models = ms;
-	    this.update();
-	});
-
-	this.riskSvc.subscribe(rs => {
-	    this.risks = rs;
-	    this.update();
-	});
-
-	this.selectedModelSvc.subscribe(m => {
-	    this.selectedModel = m;
-	    this.update();
-	});
-
-	this.selectedRiskProfilesSvc.subscribe(srp => {
-	    if (srp.risk == this.risk) {
-		this.selectedRiskProfile = srp.profile;
-		this.update();
-	    }
-	});
-
-	this.finalRisk.subscribe(frc => {
-	    if (frc.id == this.risk) {
-		this.final = frc.profile;
-		this.describe();
-	    }
-	});
-
     }
 
     onChange() : void {

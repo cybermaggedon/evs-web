@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throttle, debounceTime, merge } from 'rxjs/operators';
 import { interval, Subject, Observable } from 'rxjs';
 
@@ -121,9 +120,7 @@ export class FairService {
 
     recalcOutstanding = 0;
 
-    constructor(private http : HttpClient,
-		private models : ModelStateService,
-		private fairBackend : FairBackendService,
+    constructor(private fairBackend : FairBackendService,
 		private finalRisk : FinalRiskService
 	       ) {
 

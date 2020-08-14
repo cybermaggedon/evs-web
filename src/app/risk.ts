@@ -12,8 +12,6 @@ export function getRiskScoreFromFair(fair : any) : number {
     if (prob > 1) return 1.0;
     return prob;
 
-    return 0.0;
-
 }
 
 // Returns risk score, using a default if risk score is not known.

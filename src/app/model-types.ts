@@ -53,10 +53,6 @@ export interface RiskProfile {
 
     id : string;
 
-    // Risk probability value.
-    // Thinks: Is it possible to work these out from the FAIR model?
-    risk : number;
-
     // FAIR
     fair : FairParameters;
 
@@ -71,7 +67,6 @@ export interface Risk {
 export type RiskSet = Risk[];
 
 // Model
-
 export interface Model {
     id : string;
 
