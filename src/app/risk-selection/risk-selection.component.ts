@@ -97,8 +97,6 @@ export class RiskSelectionComponent implements OnInit {
 
 	this.fairService.subscribe(fr => {
 	    if (fr.kind == "summary" && fr.name == this._risk) {
-		if (fr.name == "loss-of-property")
-		    console.log(fr.name, fr.kind, this._risk);
 		this.riskScore = getRiskScoreFromFair(fr.report[fr.name]);
 	    };
 	});
