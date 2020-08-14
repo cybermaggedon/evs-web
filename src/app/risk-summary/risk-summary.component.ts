@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject, LOCALE_ID } from '@angular/core';
 
-import { FairService } from '../fair.service';
+import { FairReportService } from '../fair-report.service';
 
 @Component({
   selector: 'risk-summary',
@@ -11,7 +11,7 @@ export class RiskSummaryComponent implements OnInit {
 
     loading : boolean;
 
-    constructor(private fairSvc : FairService,
+    constructor(private svc : FairReportService,
                 @Inject(LOCALE_ID) private locale: string) {
 	this.loading = true;
     }
@@ -23,13 +23,11 @@ export class RiskSummaryComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribeRecalcEvent(n => {
+	this.svc.subscribeRecalcEvent(n => {
 	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribe(fr => {
-/*
-	    this.loading = false;
+	this.svc.subscribe(this.kind + "-summary", rep => {
 
 	    let summary = [];
 	    for (let v in rep) {
@@ -39,6 +37,7 @@ export class RiskSummaryComponent implements OnInit {
 		    summary.push(rep[v]);
 		}
 	    }
+
 	    for (let v in rep) {
 		if (v == "All risks") {
 		    rep[v].name = v;
@@ -46,7 +45,9 @@ export class RiskSummaryComponent implements OnInit {
 		    summary.push(rep[v]);
 		}
 	    }
-	    this.summary = summary;*/
+
+	    this.summary = summary;
+
 	});
     }
 

@@ -4,7 +4,7 @@ import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
 import { toxy, currencyTick } from '../charts';
 import { colours, bgColours } from '../chart-colours';
-import { FairService } from '../fair.service';
+import { FairReportService } from '../fair-report.service';
 
 @Component({
   selector: 'risk-distribution-chart',
@@ -15,7 +15,7 @@ export class RiskDistributionChartComponent implements OnInit {
 
     loading = true;
     
-    constructor(private fairSvc : FairService,
+    constructor(private svc : FairReportService,
     		@Inject(LOCALE_ID) private locale: string,
 		@Inject(DEFAULT_CURRENCY_CODE) private currency: string) {
     }
@@ -112,15 +112,13 @@ export class RiskDistributionChartComponent implements OnInit {
 
     ngOnInit(): void {
 
-	this.fairSvc.subscribeRecalcEvent(n => {
+	this.svc.subscribeRecalcEvent(n => {
 	    this.loading = (n > 0);
 	});
 
-	this.fairSvc.subscribe(rep => {
-	    /*
+	this.svc.subscribe(this.kind + "-risk", rep => {
 	    this.loading = false;
 	    this.chart = this.createRiskChart(rep);
-*/
 	});
 
     }
