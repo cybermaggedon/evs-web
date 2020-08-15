@@ -1,179 +1,57 @@
-
-#overview {
-    width: 1052px;
-    height: 744px;
-    background-image: url("/assets/threat-model.png");
-    border-width: 1px;
-    border-style: solid;
-    padding: 0px;
-    position: relative;
+::ng-deep svg {
+    background-color: lightgray;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
-#production {
-    width: 1052px;
-    height: 744px;
-    background-image: url("/assets/threat-model-prod.png");
-    border-width: 1px;
-    border-style: solid;
-    padding: 0px;
-    position: relative;
+::ng-deep svg:not(.active):not(.ctrl) {
+    cursor: crosshair;
 }
 
-#gsuite-threat-email {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 110px;
-    left: 285px;
-    margin: 0px;
+::ng-deep path.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4px;
+    cursor: default;
 }
 
-#internet-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 185px;
-    left: 285px;
-    margin: 0px;
+::ng-deep svg:not(.active):not(.ctrl) path.link {
+    cursor: pointer;
 }
 
-#gsuite-threat-auth {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 30px;
-    left: 290px;
-    margin: 0px;
+::ng-deep path.link.selected {
+    stroke-dasharray: 10,2;
 }
 
-#research-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 73px;
-    left: 480px;
-    margin: 0px;
+::ng-deep path.link.dragline {
+    pointer-events: none;
 }
 
-#office-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 395px;
-    left: 860px;
-    margin: 0px;
+::ng-deep path.link.hidden {
+    stroke-width: 0;
 }
 
-#payment-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 660px;
-    left: 105px;
-    margin: 0px;
+::ng-deep circle.node {
+    stroke-width: 1.5px;
+    cursor: pointer;
 }
 
-#prod-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 600px;
-    left: 310px;
-    margin: 0px;
+::ng-deep circle.node.reflexive {
+    stroke: #000 !important;
+    stroke-width: 2.5px;
 }
 
-#it-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 645px;
-    left: 520px;
-    margin: 0px;
+::ng-deep text {
+    font: 12px sans-serif;
+    pointer-events: none;
 }
 
-#prod-payment-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    top: 660px;
-    left: 105px;
-    margin: 0px;
+::ng-deep text.id {
+    text-anchor: middle;
+    font-weight: bold;
 }
 
-#prod-flyte-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    color: black;
-    top: 115px;
-    left: 765px;
-    margin: 0px;
-}
-
-#prod-accumulo-threat {
-    width: 100px;
-    height: 2em;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    color: black;
-    top: 540px;
-    left: 810px;
-    margin: 0px;
-}
-
-.threat .risks {
-    height: 2.0em;
-    padding: 0px;
-    margin: 0px;
-    display: flex;
-}
-
-.threat .description {
-    font-size: small;
-}
-
-#link-to-prod {
-    position: absolute;
-    top: 420px;
-    left: 290px;
-    width: 220px;
-    height: 140px;
-}
-
-A.risk {
-    white-space: nowrap;
-    height: 2.0em;
-    padding: 0px;
-    overflow: hidden;
-    margin: 0px;
-    display: block;
-    text-decoration: none;
-}
-
-.bottom {
-    padding: 10px;
-    clear: left;
-}

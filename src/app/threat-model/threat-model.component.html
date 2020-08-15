@@ -1,6 +1,21 @@
 
 <h2>Threat Model</h2>
 
+<div id="threat-model">
+
+  Value: <input [value]="id">
+  <button (click)="createActor()">Create actor</button>
+
+<svg id="graphContainer"
+      width="100%"
+      height="100%"
+      class="associations"
+      #graphContainer>
+</svg>
+
+</div>
+
+<!--
 <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex">
 
   <mat-tab label="Overview">
@@ -54,7 +69,13 @@
 
 </mat-tab-group>
 
+-->
+
+<!--
+
 <div class="bottom">
   <button (click)="goBack()">go back</button>
 </div>
+
+-->
 
