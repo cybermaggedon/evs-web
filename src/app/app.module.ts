@@ -51,6 +51,7 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventFilterComponent } from './event-filter/event-filter.component';
 import { RiskPortfolioComponent } from './risk-portfolio/risk-portfolio.component';
 import { SeedsComponent } from './seeds/seeds.component';
+import { ThreatModelEditorComponent } from './threat-model-editor/threat-model-editor.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { SeedsComponent } from './seeds/seeds.component';
 	EventDetailComponent,
 	EventFilterComponent,
 	RiskPortfolioComponent,
-	SeedsComponent
+	SeedsComponent,
+	ThreatModelEditorComponent
     ],
     imports: [
         BrowserModule,
