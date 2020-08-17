@@ -69,13 +69,15 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr("x2", d => d.target.x)
 	    .attr("y2", d => d.target.y);
 	this.node
-	    .attr("transform", d => `translate(${d.x},${d.y})`);
+//	    .attr("cx", d => d.x)
+//	    .attr("cy", d => d.y);
+	    .attr("transform", d => `translate(${d.x},${d.y})`);	
 
     }
 
-
-
     drag(force : any) {
+
+	let t = this;
   
 	function dragstarted(d) {
 	    if (!d3.event.active) {
@@ -88,7 +90,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	function dragged(d) {
 	    d.fx = d3.event.x;
 	    d.fy = d3.event.y;
-	    console.log(d.fx, d3.event.x);
+//	    console.log(t.nodes[0]["x"], t.nodes[0]["y"]);
 	}
   
 	function dragended(d) {
@@ -148,9 +150,9 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.force = d3.forceSimulation(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody().strength(-200).distanceMax(100))
+	    .force("charge", d3.forceManyBody().strength(-20).distanceMax(20))
 	    .force("center", this.centerForce)
-	    .alpha(0.1)
+	    .alpha(0.3)
 	    .on('tick', () => this.tick());
 
 //	this.node.append("title").text("hello");
@@ -196,9 +198,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr("y", "10px")
 	    .attr("dy", "1em");
 
-//	this.labels = this.
-
-	//	this.force
 	this.force.nodes(this.nodes);
 	this.linkForce.links(this.edges);
 
