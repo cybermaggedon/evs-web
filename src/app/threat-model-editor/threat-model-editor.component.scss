@@ -47,12 +47,13 @@
 
 ::ng-deep text {
     font: 12px sans-serif;
+    stroke: none;
+    fill: black;
     pointer-events: none;
 }
 
 ::ng-deep text.id {
     text-anchor: middle;
-    font-weight: bold;
 }
 
 

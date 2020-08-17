@@ -24,6 +24,8 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     linkForce : any;
     link : any;
     node : any;
+    circle : any;
+    label : any;
 
     linkContext : any;
     nodeContext : any;
@@ -44,9 +46,9 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     */
 
     nodes : Object[] = [
-	{ id: 0, reflexive: false },
-	{ id: 1, reflexive: true },
-	{ id: 2, reflexive: false }
+	{ id: 0, reflexive: false, label: "badass" },
+	{ id: 1, reflexive: true, label: "cred theft"},
+	{ id: 2, reflexive: false, label: "$200" }
     ];
     edges = [
 	{ source: this.nodes[0], target: this.nodes[1] },
@@ -60,23 +62,15 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     }
 
     tick() {
-//	console.log(this.nodes);
+
 	this.link
 	    .attr("x1", d => d.source.x)
 	    .attr("y1", d => d.source.y)
 	    .attr("x2", d => d.target.x)
 	    .attr("y2", d => d.target.y);
 	this.node
-	    .attr("cx", d => d.x)
-	    .attr("cy", d => d.y);
+	    .attr("transform", d => `translate(${d.x},${d.y})`);
 
-//	if (this.nodes.length > 3) {
-//	    console.log(JSON.stringify(this.nodes[3]));
-//	}
-
-//	console.log(this.nodes);
-
-//	console.log(this.link, this.node);
     }
 
 
@@ -95,7 +89,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	}
   
 	function dragended(d) {
-	    if (!d3.event.active) force.alphaTarget(0);
+	    if (!d3.event.active) force.alphaTarget(0.3);
 	    d.fx = null;
 	    d.fy = null;
 	}
@@ -110,8 +104,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     ngAfterViewInit() {
 
 	const rect = this.graphContainer.nativeElement.getBoundingClientRect();
-
-	console.log(rect.width, rect.height);
 
 	this.width = rect.width;
 
@@ -149,11 +141,11 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.linkForce = d3.forceLink(this.edges)
 	    .id(d => d.id)
 	    .distance(100)
-	    .strength(3);
+	    .strength(1);
 
 	this.force = d3.forceSimulation(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody().strength(-30))
+	    .force("charge", d3.forceManyBody().strength(-100))
 	    .force("center", this.centerForce)
 	    .alpha(0.1)
 	    .on('tick', () => this.tick());
@@ -161,14 +153,14 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 //	this.node.append("title").text("hello");
 
 	this.linkContext = this.svg.append("g")
+	    .attr("class", "edges")
 	    .attr("stroke", "#999")
 	    .attr("stroke-opacity", 0.6);
 
 	this.nodeContext = this.svg.append("g")
+	    .attr("class", "nodes")
 	    .attr("stroke", "#fff")
 	    .attr("stroke-width", 1.5);
-	
-	console.log("RUNNING");
 
 	this.update();
 
@@ -184,15 +176,23 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .join("line")
 	    .attr("stroke-width", 7)
 	    .style('marker-end', 'url(#end-arrow)');
-	
 
 	this.node = this.nodeContext
-	    .selectAll("circle")
+	    .selectAll("g")
 	    .data(this.nodes)
-	    .join("circle")
+	    .join("g");
+
+	this.circle = this.node.append("circle")
 	    .attr("r", 8)
 	    .attr("fill", (d) => this.colors(d.id))
 	    .call(this.drag(this.force));
+
+	this.label = this.node.append("text")
+	    .text("hello world")
+	    .attr("x", 20)
+	    .attr("y", 3);
+
+//	this.labels = this.
 
 	//	this.force
 	this.force.nodes(this.nodes);
@@ -204,8 +204,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
     
     createActor() {
-	console.log("CREATE ACTOR (inner)");
-	console.log(this.width, this.height);
 
 	const point = [this.width/2, this.height/2];
 
@@ -214,14 +212,11 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	const node = {
 	    id: ++this.lastNodeId, reflexive: false,
-	    x: x, y: y
+	    x: x, y: y,
+	    label: "actor"
 	};
 
-	console.log(node);
-
 	this.nodes.push(node);
-
-	console.log(">>>", this.nodes[3]);
 
 	this.update();
     }
