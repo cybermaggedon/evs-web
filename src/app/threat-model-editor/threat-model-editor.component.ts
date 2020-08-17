@@ -20,8 +20,16 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
     svg : any;
     force : any;
+    centerForce : any;
+    linkForce : any;
     link : any;
     node : any;
+
+    linkContext : any;
+    nodeContext : any;
+
+    lastNodeId = 20;
+    
     /*
     svg : any;
     circle : any;
@@ -35,7 +43,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     path : any;
     */
 
-    nodes = [
+    nodes : Object[] = [
 	{ id: 0, reflexive: false },
 	{ id: 1, reflexive: true },
 	{ id: 2, reflexive: false }
@@ -61,6 +69,13 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.node
 	    .attr("cx", d => d.x)
 	    .attr("cy", d => d.y);
+
+//	if (this.nodes.length > 3) {
+//	    console.log(JSON.stringify(this.nodes[3]));
+//	}
+
+//	console.log(this.nodes);
+
 //	console.log(this.link, this.node);
     }
 
@@ -95,6 +110,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     ngAfterViewInit() {
 
 	const rect = this.graphContainer.nativeElement.getBoundingClientRect();
+
 	console.log(rect.width, rect.height);
 
 	this.width = rect.width;
@@ -127,23 +143,42 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr('d', 'M0,-5L10,0L0,5')
 	    .attr('fill', '#000');
 
-	let centerForce = d3.forceCenter()
+	this.centerForce = d3.forceCenter()
 	    .x(this.width / 2).y(this.height / 2);
-//	    .strength(10);
-//	centerForce.strength(0.05);
-//	console.log(centerForce);
+
+	this.linkForce = d3.forceLink(this.edges)
+	    .id(d => d.id)
+	    .distance(100)
+	    .strength(3);
 
 	this.force = d3.forceSimulation(this.nodes)
-	    .force("link", d3.forceLink(this.edges).id(d => d.id).strength(0.005))
-	    .force("charge", d3.forceManyBody())
-//	    .force("x", d3.forceX().strength(5))
-//	    .force("y", d3.forceY().strength(5))
-	    .force("center", centerForce)
+	    .force("link", this.linkForce)
+	    .force("charge", d3.forceManyBody().strength(-30))
+	    .force("center", this.centerForce)
+	    .alpha(0.1)
 	    .on('tick', () => this.tick());
 
-	this.link = this.svg.append("g")
+//	this.node.append("title").text("hello");
+
+	this.linkContext = this.svg.append("g")
 	    .attr("stroke", "#999")
-	    .attr("stroke-opacity", 0.6)
+	    .attr("stroke-opacity", 0.6);
+
+	this.nodeContext = this.svg.append("g")
+	    .attr("stroke", "#fff")
+	    .attr("stroke-width", 1.5);
+	
+	console.log("RUNNING");
+
+	this.update();
+
+    }
+
+
+    // update graph (called when needed)
+    update() {
+
+	this.link = this.linkContext
 	    .selectAll("line")
 	    .data(this.edges)
 	    .join("line")
@@ -151,9 +186,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .style('marker-end', 'url(#end-arrow)');
 	
 
-	this.node = this.svg.append("g")
-	    .attr("stroke", "#fff")
-	    .attr("stroke-width", 1.5)
+	this.node = this.nodeContext
 	    .selectAll("circle")
 	    .data(this.nodes)
 	    .join("circle")
@@ -161,18 +194,39 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr("fill", (d) => this.colors(d.id))
 	    .call(this.drag(this.force));
 
-	this.node.append("title").text("hello");
+	//	this.force
+	this.force.nodes(this.nodes);
+	this.linkForce.links(this.edges);
 
-	console.log("RUNNING");
-
-//	this.update();
+	this.force.restart();
 
     }
 
+    
+    createActor() {
+	console.log("CREATE ACTOR (inner)");
+	console.log(this.width, this.height);
 
-    // update graph (called when needed)
-    update() {
-/*
+	const point = [this.width/2, this.height/2];
+
+	let x = this.width / 2.5;
+	let y = this.height / 4;
+
+	const node = {
+	    id: ++this.lastNodeId, reflexive: false,
+	    x: x, y: y
+	};
+
+	console.log(node);
+
+	this.nodes.push(node);
+
+	console.log(">>>", this.nodes[3]);
+
+	this.update();
+    }
+
+	/*
 	// path (link) group
 	this.path = this.path.data(this.links);
 
@@ -302,7 +356,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.force.alphaTarget(0.3).update();
 */
-    }
+//    }
 
     /*
     resetMouseVars() {
