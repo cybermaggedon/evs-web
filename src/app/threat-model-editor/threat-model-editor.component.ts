@@ -104,6 +104,29 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr('width', this.width)
 	    .attr('height', this.height);
 
+	// define arrow markers for graph links
+	this.svg.append('svg:defs').append('svg:marker')
+	    .attr('id', 'start-arrow')
+	    .attr('viewBox', '0 -5 10 10')
+	    .attr('refX', 4)
+	    .attr('markerWidth', 3)
+	    .attr('markerHeight', 3)
+	    .attr('orient', 'auto')
+	    .append('svg:path')
+	    .attr('d', 'M10,-5L0,0L10,5')
+	    .attr('fill', '#000');
+
+	this.svg.append('svg:defs').append('svg:marker')
+	    .attr('id', 'end-arrow')
+	    .attr('viewBox', '0 -5 10 10')
+	    .attr('refX', 6)
+	    .attr('markerWidth', 3)
+	    .attr('markerHeight', 3)
+	    .attr('orient', 'auto')
+	    .append('svg:path')
+	    .attr('d', 'M0,-5L10,0L0,5')
+	    .attr('fill', '#000');
+
 	let centerForce = d3.forceCenter()
 	    .x(this.width / 2).y(this.height / 2);
 //	    .strength(10);
@@ -124,7 +147,9 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .selectAll("line")
 	    .data(this.edges)
 	    .join("line")
-	    .attr("stroke-width", d => Math.sqrt(d.value));
+	    .attr("stroke-width", 7)
+	    .style('marker-end', 'url(#end-arrow)');
+	
 
 	this.node = this.svg.append("g")
 	    .attr("stroke", "#fff")
@@ -132,40 +157,16 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .selectAll("circle")
 	    .data(this.nodes)
 	    .join("circle")
-	    .attr("r", 25)
+	    .attr("r", 8)
 	    .attr("fill", (d) => this.colors(d.id))
 	    .call(this.drag(this.force));
 
 	this.node.append("title").text("hello");
 
 	console.log("RUNNING");
-/*
 
-	// define arrow markers for graph links
-	this.svg.append('svg:defs').append('svg:marker')
-	    .attr('id', 'end-arrow')
-	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 6)
-	    .attr('markerWidth', 3)
-	    .attr('markerHeight', 3)
-	    .attr('orient', 'auto')
-	    .append('svg:path')
-	    .attr('d', 'M0,-5L10,0L0,5')
-	    .attr('fill', '#000');
+//	this.update();
 
-	this.svg.append('svg:defs').append('svg:marker')
-	    .attr('id', 'start-arrow')
-	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 4)
-	    .attr('markerWidth', 3)
-	    .attr('markerHeight', 3)
-	    .attr('orient', 'auto')
-	    .append('svg:path')
-	    .attr('d', 'M10,-5L0,0L10,5')
-	    .attr('fill', '#000');
-
-	this.update();
-*/
     }
 
 
