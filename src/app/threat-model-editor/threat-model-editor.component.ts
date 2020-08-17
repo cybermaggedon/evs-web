@@ -46,9 +46,9 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     */
 
     nodes : Object[] = [
-	{ id: 0, reflexive: false, label: "badass" },
-	{ id: 1, reflexive: true, label: "cred theft"},
-	{ id: 2, reflexive: false, label: "$200" }
+	{ id: 0, kind: "actor", label: "badass" },
+	{ id: 1, label: "cred theft"},
+	{ id: 2, label: "$200" }
     ];
     edges = [
 	{ source: this.nodes[0], target: this.nodes[1] },
@@ -78,7 +78,9 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     drag(force : any) {
   
 	function dragstarted(d) {
-	    if (!d3.event.active) force.alphaTarget(0.3).restart();
+	    if (!d3.event.active) {
+		force.alphaTarget(0.3).restart();
+	    }
 	    d.fx = d.x;
 	    d.fy = d.y;
 	}
@@ -86,6 +88,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	function dragged(d) {
 	    d.fx = d3.event.x;
 	    d.fy = d3.event.y;
+	    console.log(d.fx, d3.event.x);
 	}
   
 	function dragended(d) {
@@ -145,7 +148,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.force = d3.forceSimulation(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody().strength(-100))
+	    .force("charge", d3.forceManyBody().strength(-200).distanceMax(100))
 	    .force("center", this.centerForce)
 	    .alpha(0.1)
 	    .on('tick', () => this.tick());
@@ -188,9 +191,10 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .call(this.drag(this.force));
 
 	this.label = this.node.append("text")
-	    .text("hello world")
-	    .attr("x", 20)
-	    .attr("y", 3);
+	    .text(d => d.label)
+	    .attr("text-anchor", "middle")
+	    .attr("y", "10px")
+	    .attr("dy", "1em");
 
 //	this.labels = this.
 
@@ -211,7 +215,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	let y = this.height / 4;
 
 	const node = {
-	    id: ++this.lastNodeId, reflexive: false,
+	    id: ++this.lastNodeId, 
 	    x: x, y: y,
 	    label: "actor"
 	};
