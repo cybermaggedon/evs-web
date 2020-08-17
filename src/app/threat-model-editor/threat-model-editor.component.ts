@@ -12,6 +12,332 @@ import * as d3 from 'd3';
 })
 export class ThreatModelEditorComponent implements OnInit, AfterContentInit, AfterViewInit {
 
+    width = 960;
+    height = 600;
+
+    colors = d3.scaleOrdinal(d3.schemeCategory10);
+    @ViewChild('graphContainer') graphContainer: ElementRef;
+
+    svg : any;
+    force : any;
+    link : any;
+    node : any;
+    /*
+    svg : any;
+    circle : any;
+    selectedNode : any;
+    selectedLink : any;
+    mouseupNode : any;
+    mousedownNode : any;
+    mouseupLink : any;
+    mousedownLink : any;
+    dragLine : any;
+    path : any;
+    */
+
+    nodes = [
+	{ id: 0, reflexive: false },
+	{ id: 1, reflexive: true },
+	{ id: 2, reflexive: false }
+    ];
+    edges = [
+	{ source: this.nodes[0], target: this.nodes[1] },
+	{ source: this.nodes[1], target: this.nodes[2] }
+    ];
+
+    ngOnInit() {
+    }
+
+    ngAfterContentInit() {
+    }
+
+    tick() {
+//	console.log(this.nodes);
+	this.link
+	    .attr("x1", d => d.source.x)
+	    .attr("y1", d => d.source.y)
+	    .attr("x2", d => d.target.x)
+	    .attr("y2", d => d.target.y);
+	this.node
+	    .attr("cx", d => d.x)
+	    .attr("cy", d => d.y);
+//	console.log(this.link, this.node);
+    }
+
+
+
+    drag(force : any) {
+  
+	function dragstarted(d) {
+	    if (!d3.event.active) force.alphaTarget(0.3).restart();
+	    d.fx = d.x;
+	    d.fy = d.y;
+	}
+  
+	function dragged(d) {
+	    d.fx = d3.event.x;
+	    d.fy = d3.event.y;
+	}
+  
+	function dragended(d) {
+	    if (!d3.event.active) force.alphaTarget(0);
+	    d.fx = null;
+	    d.fy = null;
+	}
+  
+	return d3.drag()
+	    .on("start", dragstarted)
+	    .on("drag", dragged)
+	    .on("end", dragended);
+
+    }
+
+    ngAfterViewInit() {
+
+	const rect = this.graphContainer.nativeElement.getBoundingClientRect();
+	console.log(rect.width, rect.height);
+
+	this.width = rect.width;
+
+	this.svg = d3.select('#graphContainer')
+	    .attr('oncontextmenu', 'return false;')
+	    .attr('width', this.width)
+	    .attr('height', this.height);
+
+	let centerForce = d3.forceCenter()
+	    .x(this.width / 2).y(this.height / 2);
+//	    .strength(10);
+//	centerForce.strength(0.05);
+//	console.log(centerForce);
+
+	this.force = d3.forceSimulation(this.nodes)
+	    .force("link", d3.forceLink(this.edges).id(d => d.id).strength(0.005))
+	    .force("charge", d3.forceManyBody())
+//	    .force("x", d3.forceX().strength(5))
+//	    .force("y", d3.forceY().strength(5))
+	    .force("center", centerForce)
+	    .on('tick', () => this.tick());
+
+	this.link = this.svg.append("g")
+	    .attr("stroke", "#999")
+	    .attr("stroke-opacity", 0.6)
+	    .selectAll("line")
+	    .data(this.edges)
+	    .join("line")
+	    .attr("stroke-width", d => Math.sqrt(d.value));
+
+	this.node = this.svg.append("g")
+	    .attr("stroke", "#fff")
+	    .attr("stroke-width", 1.5)
+	    .selectAll("circle")
+	    .data(this.nodes)
+	    .join("circle")
+	    .attr("r", 25)
+	    .attr("fill", (d) => this.colors(d.id))
+	    .call(this.drag(this.force));
+
+	this.node.append("title").text("hello");
+
+	console.log("RUNNING");
+/*
+
+	// define arrow markers for graph links
+	this.svg.append('svg:defs').append('svg:marker')
+	    .attr('id', 'end-arrow')
+	    .attr('viewBox', '0 -5 10 10')
+	    .attr('refX', 6)
+	    .attr('markerWidth', 3)
+	    .attr('markerHeight', 3)
+	    .attr('orient', 'auto')
+	    .append('svg:path')
+	    .attr('d', 'M0,-5L10,0L0,5')
+	    .attr('fill', '#000');
+
+	this.svg.append('svg:defs').append('svg:marker')
+	    .attr('id', 'start-arrow')
+	    .attr('viewBox', '0 -5 10 10')
+	    .attr('refX', 4)
+	    .attr('markerWidth', 3)
+	    .attr('markerHeight', 3)
+	    .attr('orient', 'auto')
+	    .append('svg:path')
+	    .attr('d', 'M10,-5L0,0L10,5')
+	    .attr('fill', '#000');
+
+	this.update();
+*/
+    }
+
+
+    // update graph (called when needed)
+    update() {
+/*
+	// path (link) group
+	this.path = this.path.data(this.links);
+
+	// update existing links
+	this.path.classed('selected', (d) => d === this.selectedLink)
+	    .style('marker-start', (d) => d.left ? 'url(#start-arrow)' : '')
+	    .style('marker-end', (d) => d.right ? 'url(#end-arrow)' : '');
+
+	// remove old links
+	this.path.exit().remove();
+
+	// add new links
+	this.path = this.path.enter().append('svg:path')
+	    .attr('class', 'link')
+	    .classed('selected', (d) => d === this.selectedLink)
+	    .style('marker-start', (d) => d.left ? 'url(#start-arrow)' : '')
+	    .style('marker-end', (d) => d.right ? 'url(#end-arrow)' : '')
+	    .on('mousedown', (d) => {
+		if (d3.event.ctrlKey) return;
+
+		// select link
+		this.mousedownLink = d;
+		this.selectedLink = (this.mousedownLink === this.selectedLink) ? null : this.mousedownLink;
+		this.selectedNode = null;
+		this.update();
+	    })
+	    .merge(this.path);
+
+	// circle (node) group
+	// NB: the function arg is crucial here! nodes are known by id, not by index!
+	this.circle = this.circle.data(this.nodes, (d) => d.id);
+
+	// update existing nodes (reflexive & selected visual states)
+	this.circle.selectAll('circle')
+	    .style('fill', (d) => (d === this.selectedNode) ? d3.rgb(this.colors(d.id)).brighter().toString() : this.colors(d.id))
+	    .classed('reflexive', (d) => d.reflexive);
+
+	// remove old nodes
+	this.circle.exit().remove();
+
+	// add new nodes
+	const g = this.circle.enter().append('svg:g');
+
+	g.append('svg:circle')
+	    .attr('class', 'node')
+	    .attr('r', 12)
+	    .style('fill', (d) => (d === this.selectedNode) ? d3.rgb(this.colors(d.id)).brighter().toString() : this.colors(d.id))
+	    .style('stroke', (d) => d3.rgb(this.colors(d.id)).darker().toString())
+	    .classed('reflexive', (d) => d.reflexive)
+	    .on('mouseover', function (d) {
+		if (!this.mousedownNode || d === this.mousedownNode) return;
+		// enlarge target node
+		d3.select(this).attr('transform', 'scale(1.1)');
+	    })
+	    .on('mouseout', function (d) {
+		if (!this.mousedownNode || d === this.mousedownNode) return;
+		// unenlarge target node
+		d3.select(this).attr('transform', '');
+	    })
+	    .on('mousedown', (d) => {
+		if (d3.event.ctrlKey) return;
+
+		// select node
+		this.mousedownNode = d;
+		this.selectedNode = (this.mousedownNode === this.selectedNode) ? null : this.mousedownNode;
+		this.selectedLink = null;
+
+		// reposition drag line
+		this.dragLine
+		    .style('marker-end', 'url(#end-arrow)')
+		    .classed('hidden', false)
+		    .attr('d', `M${this.mousedownNode.x},${this.mousedownNode.y}L${this.mousedownNode.x},${this.mousedownNode.y}`);
+
+		this.update();
+	    })
+	    .on('mouseup', (dataItem: any) => {
+//		debugger;
+		if (!this.mousedownNode) return;
+
+		// needed by FF
+		this.dragLine
+		    .classed('hidden', true)
+		    .style('marker-end', '');
+
+		// check for drag-to-self
+		this.mouseupNode = dataItem;
+		if (this.mouseupNode === this.mousedownNode) {
+		    this.resetMouseVars();
+		    return;
+		}
+
+		// unenlarge target node
+		d3.select(d3.event.currentTarget).attr('transform', '');
+
+		// add link to graph (update if exists)
+		// NB: links are strictly source < target; arrows separately specified by booleans
+		const isRight = this.mousedownNode.id < this.mouseupNode.id;
+		const source = isRight ? this.mousedownNode : this.mouseupNode;
+		const target = isRight ? this.mouseupNode : this.mousedownNode;
+
+		const link = this.links.filter((l) => l.source === source && l.target === target)[0];
+		if (link) {
+		    link[isRight ? 'right' : 'left'] = true;
+		} else {
+		    this.links.push({ source, target, left: !isRight, right: isRight });
+		}
+
+		// select new link
+		this.selectedLink = link;
+		this.selectedNode = null;
+		this.update();
+	    });
+
+	// show node IDs
+	g.append('svg:text')
+	    .attr('x', 0)
+	    .attr('y', 4)
+	    .attr('class', 'id')
+	    .text((d) => d.id);
+
+	this.circle = g.merge(this.circle);
+
+	// set the graph in motion
+	this.force
+	    .nodes(this.nodes)
+	    .force('link').links(this.links);
+
+	this.force.alphaTarget(0.3).update();
+*/
+    }
+
+    /*
+    resetMouseVars() {
+	this.mousedownNode = null;
+	this.mouseupNode = null;
+	this.mousedownLink = null;
+    }
+*/
+
+    // update force layout (called automatically each iteration)
+//    tick() {
+	/*
+	// draw directed edges with proper padding from node centers
+	this.path.attr('d', (d: any) => {
+	    const deltaX = d.target.x - d.source.x;
+	    const deltaY = d.target.y - d.source.y;
+	    const dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+	    const normX = deltaX / dist;
+	    const normY = deltaY / dist;
+	    const sourcePadding = d.left ? 17 : 12;
+	    const targetPadding = d.right ? 17 : 12;
+	    const sourceX = d.source.x + (sourcePadding * normX);
+	    const sourceY = d.source.y + (sourcePadding * normY);
+	    const targetX = d.target.x - (targetPadding * normX);
+	    const targetY = d.target.y - (targetPadding * normY);
+
+	    return `M${sourceX},${sourceY}L${targetX},${targetY}`;
+	});
+
+	this.circle.attr('transform', (d) => `translate(${d.x},${d.y})`);
+*/
+//    }
+
+
+
+/*
     title = 'ng-d3-graph-editor';
 
     id : string = "n/a";
@@ -64,18 +390,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.width = rect.width;
 
-	this.svg = d3.select('#graphContainer')
-	    .attr('oncontextmenu', 'return false;')
-	    .attr('width', this.width)
-	    .attr('height', this.height);
-
-	this.force = d3.forceSimulation()
-	    .force('link', d3.forceLink().id((d: any) => d.id).distance(150))
-	    .force('charge', d3.forceManyBody().strength(-500))
-	    .force('x', d3.forceX(this.width / 2))
-	    .force('y', d3.forceY(this.height / 2))
-	    .on('tick', () => this.tick());
-
 	// init D3 drag support
 	this.drag = d3.drag()
 	    .on('start', (d: any) => {
@@ -96,29 +410,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    });
 
 
-	// define arrow markers for graph links
-	this.svg.append('svg:defs').append('svg:marker')
-	    .attr('id', 'end-arrow')
-	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 6)
-	    .attr('markerWidth', 3)
-	    .attr('markerHeight', 3)
-	    .attr('orient', 'auto')
-	    .append('svg:path')
-	    .attr('d', 'M0,-5L10,0L0,5')
-	    .attr('fill', '#000');
-
-	this.svg.append('svg:defs').append('svg:marker')
-	    .attr('id', 'start-arrow')
-	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 4)
-	    .attr('markerWidth', 3)
-	    .attr('markerHeight', 3)
-	    .attr('orient', 'auto')
-	    .append('svg:path')
-	    .attr('d', 'M10,-5L0,0L10,5')
-	    .attr('fill', '#000');
-
 
 	// line displayed when dragging new nodes
 	this.dragLine = this.svg.append('svg:path')
@@ -137,29 +428,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .on('keydown', this.keydown)
 	    .on('keyup', this.keyup);
 	this.restart();
-    }
-
-
-    // update force layout (called automatically each iteration)
-    tick() {
-	// draw directed edges with proper padding from node centers
-	this.path.attr('d', (d: any) => {
-	    const deltaX = d.target.x - d.source.x;
-	    const deltaY = d.target.y - d.source.y;
-	    const dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-	    const normX = deltaX / dist;
-	    const normY = deltaY / dist;
-	    const sourcePadding = d.left ? 17 : 12;
-	    const targetPadding = d.right ? 17 : 12;
-	    const sourceX = d.source.x + (sourcePadding * normX);
-	    const sourceY = d.source.y + (sourcePadding * normY);
-	    const targetX = d.target.x - (targetPadding * normX);
-	    const targetY = d.target.y - (targetPadding * normY);
-
-	    return `M${sourceX},${sourceY}L${targetX},${targetY}`;
-	});
-
-	this.circle.attr('transform', (d) => `translate(${d.x},${d.y})`);
     }
 
     resetMouseVars() {
@@ -421,6 +689,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.restart();
     }
-
+*/
 }
 
