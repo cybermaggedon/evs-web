@@ -82,8 +82,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr("x2", d => d.target.x)
 	    .attr("y2", d => d.target.y);
 	this.node
-//	    .attr("cx", d => d.x)
-//	    .attr("cy", d => d.y);
 	    .attr("transform", d => `translate(${d.x},${d.y})`);	
 
     }
@@ -103,13 +101,13 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	function dragged(d) {
 	    d.fx = d3.event.x;
 	    d.fy = d3.event.y;
-//	    console.log(t.nodes[0]["x"], t.nodes[0]["y"]);
 	}
   
 	function dragended(d) {
-	    if (!d3.event.active) force.alphaTarget(0.3);
-	    d.fx = null;
-	    d.fy = null;
+	    if (!d3.event.active) force.alphaTarget(0);
+	    // Stay fixed.
+	    //	    d.fx = null;
+	    //	    d.fy = null;
 	}
   
 	return d3.drag()
@@ -127,14 +125,13 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	let hw = this.width / 2;
 	let hh = this.height / 2;
-	let viewbox = `${-hw} ${-hh} ${hw} ${hh}`;
+	let viewbox = `${-hw} ${-hh} ${this.width} ${this.height}`;
 
 	this.svg = d3.select('#graphContainer')
 	    .attr('oncontextmenu', 'return false;')
-	    .attr("viewBox", viewbox);
-
-//	    .attr('width', this.width)
-//	    .attr('height', this.height);
+	    .attr("viewBox", viewbox)
+	    .attr('width', this.width)
+	    .attr('height', this.height);
 
 	// define arrow markers for graph links
 	this.svg.append('svg:defs').append('svg:marker')
@@ -159,26 +156,17 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr('d', 'M0,-5L10,0L0,5')
 	    .attr('fill', '#000');
 
-//	this.centerForce = d3.forceCenter()
-//	    .x(this.width / 2).y(this.height / 2);
-
 	this.linkForce = d3.forceLink<Node, Edge>(this.edges)
-	.id(d => d.id)
-//	.id(d => d.source.id + "-" + d.target.id)
-//	    .distance(100)
-//	    .strength(1)
-	    ;
+	    .id(d => d.id)
+	    .distance(100)
+	    .strength(0.8);
 
 	this.force = d3.forceSimulation<Node,Edge>(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody())
+	    .force("charge", d3.forceManyBody().strength(-8))
 	    .force("x", d3.forceX())
 	    .force("y", d3.forceY())
-//	    .force("center", this.centerForce)
-//	       .alpha(0.3)
 	    .on('tick', () => this.tick());
-
-//	this.node.append("title").text("hello");
 
 	this.linkContext = this.svg.append("g")
 	    .attr("class", "edges")
@@ -208,12 +196,12 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.node = this.nodeContext
 	    .selectAll("g")
 	    .data(this.nodes)
-	    .join("g");
+	    .join("g")
+	    .call(this.drag(this.force));
 
 	this.circle = this.node.append("circle")
 	    .attr("r", 8)
-	    .attr("fill", (d) => this.colors(d.id))
-	    .call(this.drag(this.force));
+	    .attr("fill", (d) => this.colors(d.kind));
 
 	this.label = this.node.append("text")
 	    .text(d => d.label)
