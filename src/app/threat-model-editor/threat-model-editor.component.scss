@@ -1,60 +1,99 @@
-::ng-deep svg {
-    background-color: lightgray;
-    cursor: default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
+
+::ng-deep DIV.threat-model-editor {
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
 }
 
-::ng-deep svg:not(.active):not(.ctrl) {
-    cursor: crosshair;
+::ng-deep p { 
+     text-align: center; 
+     overflow: overlay;
+     position: relative;
+}
+
+::ng-deep svg {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: rgb(248, 248, 248)
+}
+
+::ng-deep #toolbox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 1em;
+    z-index: 5;
+}
+
+::ng-deep #toolbox input {
+    width: 30px;
+    opacity: 0.4;
+}
+::ng-deep #toolbox input:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+::ng-deep #hidden-file-upload {
+    display: none;
+}
+
+::ng-deep #download-input {
+    margin: 0 0.5em;
+}
+
+::ng-deep .conceptG text {
+    pointer-events: none;
+}
+
+::ng-deep marker {
+    fill: #333;
+}
+
+::ng-deep g.conceptG circle {
+    fill: #F6FBFF;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+::ng-deep g.conceptG:hover circle {
+    fill: rgb(200, 238, 241);
+}
+
+::ng-deep g.selected circle {
+    fill: rgb(250, 232, 255);
+}
+::ng-deep g.selected:hover circle {
+    fill: rgb(250, 232, 255);
 }
 
 ::ng-deep path.link {
     fill: none;
-    stroke: #000;
-    stroke-width: 4px;
+    stroke: #333;
+    stroke-width: 6px;
     cursor: default;
 }
 
-::ng-deep svg:not(.active):not(.ctrl) path.link {
-    cursor: pointer;
+::ng-deep path.link:hover {
+    stroke: rgb(94, 196, 204);
 }
 
-::ng-deep path.link.selected {
-    stroke-dasharray: 10,2;
-}
-
-::ng-deep path.link.dragline {
-    pointer-events: none;
+::ng-deep g.connect-node circle {
+    fill: #BEFFFF;
 }
 
 ::ng-deep path.link.hidden {
     stroke-width: 0;
 }
 
-::ng-deep circle.node {
-    stroke-width: 1.5px;
-    cursor: pointer;
+::ng-deep path.link.selected {
+    stroke: rgb(229, 172, 247);
 }
-
-::ng-deep circle.node.reflexive {
-    stroke: #000 !important;
-    stroke-width: 2.5px;
-}
-
-::ng-deep text {
-    font: 12px sans-serif;
-    stroke: none;
-    fill: black;
-    pointer-events: none;
-}
-
-::ng-deep text.id {
-    text-anchor: middle;
-}
-
-
-
