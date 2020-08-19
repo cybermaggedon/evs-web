@@ -5,6 +5,19 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as d3 from 'd3';
 
+class Node implements d3.SimulationNodeDatum {
+    id : string;
+    x? : number;
+    y? : number;
+    kind : string;
+    label : string;
+};
+
+class Edge implements d3.SimulationLinkDatum<Node> {
+    source : Node;
+    target : Node;
+}
+
 @Component({
     selector: 'threat-model-editor',
     templateUrl: './threat-model-editor.component.html',
@@ -45,12 +58,12 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
     path : any;
     */
 
-    nodes : Object[] = [
-	{ id: 0, kind: "actor", label: "badass" },
-	{ id: 1, label: "cred theft"},
-	{ id: 2, label: "$200" }
+    nodes : Node[] = [
+	{ id: "0", kind: "actor", label: "badass" },
+	{ id: "1", kind: "objective", label: "cred theft"},
+	{ id: "2", kind: "loss", label: "$200" }
     ];
-    edges = [
+    edges : Edge[] = [
 	{ source: this.nodes[0], target: this.nodes[1] },
 	{ source: this.nodes[1], target: this.nodes[2] }
     ];
@@ -112,10 +125,16 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
 	this.width = rect.width;
 
+	let hw = this.width / 2;
+	let hh = this.height / 2;
+	let viewbox = `${-hw} ${-hh} ${hw} ${hh}`;
+
 	this.svg = d3.select('#graphContainer')
 	    .attr('oncontextmenu', 'return false;')
-	    .attr('width', this.width)
-	    .attr('height', this.height);
+	    .attr("viewBox", viewbox);
+
+//	    .attr('width', this.width)
+//	    .attr('height', this.height);
 
 	// define arrow markers for graph links
 	this.svg.append('svg:defs').append('svg:marker')
@@ -140,19 +159,23 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .attr('d', 'M0,-5L10,0L0,5')
 	    .attr('fill', '#000');
 
-	this.centerForce = d3.forceCenter()
-	    .x(this.width / 2).y(this.height / 2);
+//	this.centerForce = d3.forceCenter()
+//	    .x(this.width / 2).y(this.height / 2);
 
-	this.linkForce = d3.forceLink(this.edges)
-	    .id(d => d.id)
-	    .distance(100)
-	    .strength(1);
+	this.linkForce = d3.forceLink<Node, Edge>(this.edges)
+	.id(d => d.id)
+//	.id(d => d.source.id + "-" + d.target.id)
+//	    .distance(100)
+//	    .strength(1)
+	    ;
 
-	this.force = d3.forceSimulation(this.nodes)
+	this.force = d3.forceSimulation<Node,Edge>(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody().strength(-20).distanceMax(20))
-	    .force("center", this.centerForce)
-	    .alpha(0.3)
+	    .force("charge", d3.forceManyBody())
+	    .force("x", d3.forceX())
+	    .force("y", d3.forceY())
+//	    .force("center", this.centerForce)
+//	       .alpha(0.3)
 	    .on('tick', () => this.tick());
 
 //	this.node.append("title").text("hello");
@@ -214,9 +237,10 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	let y = this.height / 4;
 
 	const node = {
-	    id: ++this.lastNodeId, 
+	    id: (++this.lastNodeId) + "", 
 	    x: x, y: y,
-	    label: "actor"
+	    label: "crazy-bears",
+	    kind: "actor"
 	};
 
 	this.nodes.push(node);
