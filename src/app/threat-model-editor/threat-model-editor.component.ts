@@ -45,19 +45,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
     lastNodeId = 20;
     
-    /*
-    svg : any;
-    circle : any;
-    selectedNode : any;
-    selectedLink : any;
-    mouseupNode : any;
-    mousedownNode : any;
-    mouseupLink : any;
-    mousedownLink : any;
-    dragLine : any;
-    path : any;
-    */
-
     nodes : Node[] = [
 	{ id: "0", kind: "actor", label: "badass" },
 	{ id: "1", kind: "objective", label: "cred theft"},
@@ -137,7 +124,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.svg.append('svg:defs').append('svg:marker')
 	    .attr('id', 'start-arrow')
 	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 4)
+	    .attr('refX', 24)
 	    .attr('markerWidth', 3)
 	    .attr('markerHeight', 3)
 	    .attr('orient', 'auto')
@@ -148,7 +135,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.svg.append('svg:defs').append('svg:marker')
 	    .attr('id', 'end-arrow')
 	    .attr('viewBox', '0 -5 10 10')
-	    .attr('refX', 6)
+	    .attr('refX', 16)
 	    .attr('markerWidth', 3)
 	    .attr('markerHeight', 3)
 	    .attr('orient', 'auto')
@@ -159,13 +146,16 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	this.linkForce = d3.forceLink<Node, Edge>(this.edges)
 	    .id(d => d.id)
 	    .distance(100)
-	    .strength(0.8);
+	    .strength(1);
 
 	this.force = d3.forceSimulation<Node,Edge>(this.nodes)
 	    .force("link", this.linkForce)
-	    .force("charge", d3.forceManyBody().strength(-8))
+	    .force("charge", d3.forceManyBody().strength(-100))
 	    .force("x", d3.forceX())
 	    .force("y", d3.forceY())
+	    .alphaDecay(0.023)
+	    .alphaMin(0.001)
+	    .alphaTarget(0.1)
 	    .on('tick', () => this.tick());
 
 	this.linkContext = this.svg.append("g")
@@ -182,7 +172,6 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 
     }
 
-
     // update graph (called when needed)
     update() {
 
@@ -190,7 +179,7 @@ export class ThreatModelEditorComponent implements OnInit, AfterContentInit, Aft
 	    .selectAll("line")
 	    .data(this.edges)
 	    .join("line")
-	    .attr("stroke-width", 7)
+	    .attr("stroke-width", 4)
 	    .style('marker-end', 'url(#end-arrow)');
 
 	this.node = this.nodeContext
